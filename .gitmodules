@@ -34,3 +34,6 @@
 [submodule "vim/bundle/zenconding/git"]
 	path = vim/bundle/zenconding/git
 	url = http://github.com/mattn/zencoding-vim.git
+[submodule "vim/bundle/cocoa"]
+	path = vim/bundle/cocoa
+	url = http://github.com/msanders/cocoa.vim.git
