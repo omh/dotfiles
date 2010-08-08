@@ -18,6 +18,7 @@ set ruler
 set nu
 set spelllang=en_gb
 "set spell
+set nocompatible
 
 set showmatch matchtime=3
 set scrolloff=5
