@@ -19,9 +19,6 @@
 [submodule "vim/bundle/delimitmate"]
 	path = vim/bundle/delimitmate
 	url = http://github.com/Raimondi/delimitMate.git
-[submodule "vim/bundle/zencoding"]
-	path = vim/bundle/zencoding
-	url = http://github.com/mattn/zencoding-vim.git
 [submodule "vim/bundle/matchit"]
 	path = vim/bundle/matchit
 	url = http://github.com/edsono/vim-matchit.git
@@ -31,3 +28,9 @@
 [submodule "vim/bundle/supertab"]
 	path = vim/bundle/supertab
 	url = http://github.com/ervandew/supertab.git
+[submodule "vim/bundle/commandt"]
+	path = vim/bundle/commandt
+	url = http://github.com/wincent/Command-T.git
+[submodule "vim/bundle/zenconding/git"]
+	path = vim/bundle/zenconding/git
+	url = http://github.com/mattn/zencoding-vim.git
