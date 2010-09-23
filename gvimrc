@@ -7,13 +7,13 @@ if has("gui_macvim")
     " Turn on highlighting of current line
     set cursorline
 
-    " Use Monaco size 10px.
-    set gfn=Monaco:h10
+    set gfn=Menlo:h10
+    set linespace=2
 
-    " Turn of anti alias
-    set noanti
+    " Turn on anti alias
+    set anti
 
-    colorscheme zenburn3
+    colorscheme jellybeans2
 
     macmenu &File.New\ Tab key=<nop>
     nmap <D-t> :CommandT <CR>
