@@ -2,7 +2,6 @@ set runtimepath+=$HOME/.vim/bundle/pathogen
 call pathogen#runtime_append_all_bundles()
 
 syn on
-colorscheme zenburn3
 set bg=dark
 
 set hlsearch
@@ -67,7 +66,7 @@ set laststatus=2
 set statusline=
 set statusline+=%f\                          " file name
 set statusline+=%=                           " right align
-set statusline+=%{fugitive#statusline()}   " current git branch
+set statusline+=%{fugitive#statusline()}     " current git branch
 set statusline+=\[%{strlen(&ft)?&ft:'none'}, " filetype
 set statusline+=%{&encoding},                " encoding
 set statusline+=%{&fileformat}]\             " file format
@@ -76,6 +75,24 @@ set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
 " set encoding
 set enc=utf-8                
 set fileformats=unix,dos,mac
+
+" Use system clipboard instead of vim's
+set clipboard=unnamed
+
+" Map leader+space to clear searches
+nnoremap <leader>/ :silent noh<cr> 
+
+" Map leader+w to open new vsplit and switch to it color 
+nnoremap <leader>w <C-w>v<C-w>l
+
+" Mapping for LustyJuggler
+nmap <silent> <Leader>b :LustyJuggler<CR>
+
+" Toggle spelling on/off
+nmap <leader>s :setlocal spell! spelllang=en_gb<CR>
+
+" Quick insertion of a newline
+nmap <CR> o<Esc>
 
 " Turn of matching brackets, etc as it's slow
 let loaded_matchparen = 1
