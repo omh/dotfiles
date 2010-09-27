@@ -37,3 +37,6 @@
 [submodule "vim/bundle/cocoa"]
 	path = vim/bundle/cocoa
 	url = http://github.com/msanders/cocoa.vim.git
+[submodule "vim/bundle/ack"]
+	path = vim/bundle/ack
+	url = http://github.com/mileszs/ack.vim.git
