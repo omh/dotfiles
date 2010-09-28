@@ -86,13 +86,19 @@ nnoremap <leader>/ :silent noh<cr>
 nnoremap <leader>w <C-w>v<C-w>l
 
 " Mapping for LustyJuggler
-nmap <silent> <Leader>b :LustyJuggler<CR>
+nmap <silent> <Leader>m :LustyJuggler<CR>
 
 " Toggle spelling on/off
 nmap <leader>s :setlocal spell! spelllang=en_gb<CR>
 
 " Quick insertion of a newline
 nmap <CR> o<Esc>
+
+" Easy window navigation
+map <C-up> <C-w>h
+map <C-down> <C-w>j
+map <C-left> <C-w>h
+map <C-right> <C-w>l
 
 " Turn of matching brackets, etc as it's slow
 let loaded_matchparen = 1
