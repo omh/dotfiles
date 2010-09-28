@@ -82,7 +82,7 @@ set clipboard=unnamed
 " Map leader+space to clear searches
 nnoremap <leader>/ :silent noh<cr> 
 
-" Map leader+w to open new vsplit and switch to it color 
+" Map leader+w to open new vsplit and switch to it
 nnoremap <leader>w <C-w>v<C-w>l
 
 " Mapping for LustyJuggler
@@ -91,8 +91,8 @@ nmap <silent> <Leader>m :LustyJuggler<CR>
 " Toggle spelling on/off
 nmap <leader>s :setlocal spell! spelllang=en_gb<CR>
 
-" Quick insertion of a newline
-nmap <CR> o<Esc>
+" Ack
+map <leader>a :Ack<space>
 
 " Easy window navigation
 map <C-up> <C-w>h
@@ -108,5 +108,4 @@ let g:user_zen_expandabbr_key = '<D-d>'
 
 " Command-T settings
 let g:CommandTMaxHeight=40
-
 
