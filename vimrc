@@ -95,7 +95,7 @@ nmap <leader>s :setlocal spell! spelllang=en_gb<CR>
 map <leader>a :Ack<space>
 
 " Easy window navigation
-map <C-up> <C-w>h
+map <C-up> <C-w>k
 map <C-down> <C-w>j
 map <C-left> <C-w>h
 map <C-right> <C-w>l
