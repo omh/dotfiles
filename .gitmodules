@@ -37,3 +37,6 @@
 [submodule "vim/bundle/cocoa"]
 	path = vim/bundle/cocoa
 	url = http://github.com/msanders/cocoa.vim.git
+[submodule "vim/bundle/nerdtree"]
+	path = vim/bundle/nerdtree
+	url = http://github.com/scrooloose/nerdtree.git
