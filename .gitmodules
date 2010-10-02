@@ -45,4 +45,4 @@
 	url = http://github.com/mileszs/ack.vim.git
 [submodule "vim/bundle/lusty"]
 	path = vim/bundle/lusty
-	url = http://github.com/sjbach/lusty.git
+	url = git@github.com:omh/lusty.git
