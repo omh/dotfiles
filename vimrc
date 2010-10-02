@@ -109,3 +109,7 @@ let g:user_zen_expandabbr_key = '<D-d>'
 " Command-T settings
 let g:CommandTMaxHeight=40
 
+" Lusty Explorer
+map <leader>f :LustyFilesystemExplorer<CR>
+map <leader>r :LustyFilesystemExplorerFromHere<CR>
+
