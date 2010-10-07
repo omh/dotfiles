@@ -113,3 +113,11 @@ let g:CommandTMaxHeight=40
 map <leader>f :LustyFilesystemExplorer<CR>
 map <leader>r :LustyFilesystemExplorerFromHere<CR>
 
+" Unimpaired
+" Move single lines
+nmap <D-S-Up> [e
+nmap <D-S-Down> ]e
+" Move multiple lines
+vmap <D-S-Up> [egv
+vmap <D-S-Down> ]egv
+ 
