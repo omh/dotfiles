@@ -73,14 +73,14 @@ set statusline+=%{&fileformat}]\             " file format
 set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
 
 " set encoding
-set enc=utf-8                
+set enc=utf-8
 set fileformats=unix,dos,mac
 
 " Use system clipboard instead of vim's
 set clipboard=unnamed
 
 " Map leader+space to clear searches
-nnoremap <leader>/ :silent noh<cr> 
+nnoremap <leader>/ :silent noh<cr>
 
 " Map leader+w to open new vsplit and switch to it
 nnoremap <leader>w <C-w>v<C-w>l
@@ -120,4 +120,33 @@ nmap <D-S-Down> ]e
 " Move multiple lines
 vmap <D-S-Up> [egv
 vmap <D-S-Down> ]egv
- 
+
+" Show syntax highlighting groups for word under cursor
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+" Highlight extra white space when enterning normal mode (not while in insert mode)
+highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+au InsertLeave * match ExtraWhitespace /\s\+$/
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+
+" Strip extra white space
+nmap <leader>h :%s/\s\+$//<CR>
+
+" Format XML
+nmap <leader>x :silent 1,$!xmllint --format --recover - 2>/dev/null<CR>
+
+function! Tab_Or_Complete()
+  if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+    return "\<C-N>"
+  else
+    return "\<Tab>"
+  endif
+endfunction
+inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+
