@@ -207,3 +207,8 @@ hi phpStaticCall        guifg=#EDEDC4
 " CSS Styles 
 hi cssMediaComma        guifg=#905E5E
 
+hi markdownCode guifg=#888888 gui=italic
+hi markdownCodeBlock guifg=#888888 gui=italic
+hi markdownH3 guifg=#99ad6a
+hi markdownH4 guifg=#99ad6a
+

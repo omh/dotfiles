@@ -399,7 +399,12 @@ hi link javaScriptRegexpString rubyRegexp
 " Tag list
 hi link TagListFileName Directory
 
-" delete functions {{{
+" Markdown
+call s:X("markdownCode","888888","","italic","Grey","")
+call s:X("markdownCodeBlock","888888","","italic","Grey","")
+call s:X("markdownH3","99ad6a","","","Green","")
+call s:X("markdownH4","99ad6a","","","Green","")
+
 delf s:X
 delf s:rgb
 delf s:color
