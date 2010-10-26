@@ -3,7 +3,7 @@ if has("gui_macvim")
     set go-=L
     set guioptions-=r
     set guioptions-=T
-    
+
     " Turn on highlighting of current line
     set cursorline
 
@@ -13,10 +13,8 @@ if has("gui_macvim")
     " Turn on anti alias
     set anti
 
-    colorscheme jellybeans2
-
-    macmenu &File.New\ Tab key=<nop>
-    nmap <D-t> :CommandT <CR>
+    "colorscheme jellybeans2
+    colorscheme zenburn3
 
     macmenu &File.Open\ Tab\.\.\. key=<nop>
     map <D-T> :FufFile <CR>
@@ -27,6 +25,7 @@ if has("gui_macvim")
     map <D-R> :FufLine <CR>
 
     set fuopt+=maxhorz                      " grow to maximum horizontal width on entering fullscreen mode
+    highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 
 endif
 
