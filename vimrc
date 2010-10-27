@@ -18,13 +18,14 @@ set nu
 set spelllang=en_gb
 "set spell
 set nocompatible
+colorscheme jellybeans2
 
 set showmatch matchtime=3
 set scrolloff=5
 " Stop VIM asking if you want to write the file before leaving buffer
 set autowrite
 set hidden
-
+set mouse=a " Always enable the mouse
 autocmd FileType php let php_sql_query=1
 autocmd FileType php let php_noShortTags=1
 autocmd FileType php let php_htmlInStrings=1
