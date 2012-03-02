@@ -31,7 +31,7 @@ hi Folded ctermfg=245 ctermbg=235 cterm=NONE guifg=#8b8b8b guibg=#2b2b2b gui=NON
 hi Normal ctermfg=188 ctermbg=235 cterm=NONE guifg=#e6e1dc guibg=#2b2b2b gui=NONE
 hi Boolean ctermfg=74 ctermbg=NONE cterm=NONE guifg=#71bacc guibg=NONE gui=NONE
 hi Character ctermfg=138 ctermbg=59 cterm=NONE guifg=#c29b7a guibg=#393431 gui=NONE
-hi Comment ctermfg=245 ctermbg=NONE cterm=NONE guifg=#8b8b8b guibg=NONE gui=NONE
+hi Comment ctermfg=245 ctermbg=NONE cterm=NONE guifg=#8b8b8b guibg=NONE gui=italic
 hi Conditional ctermfg=143 ctermbg=NONE cterm=NONE guifg=#b6c34d guibg=NONE gui=NONE
 hi Constant ctermfg=138 ctermbg=59 cterm=NONE guifg=#c29b7a guibg=#393431 gui=NONE
 hi Define ctermfg=143 ctermbg=NONE cterm=NONE guifg=#b6c34d guibg=NONE gui=NONE

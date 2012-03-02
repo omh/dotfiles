@@ -83,8 +83,8 @@ nnoremap <leader>/ :silent noh<cr>
 " Map leader+w to open new vsplit and switch to it
 nnoremap <leader>w <C-w>v<C-w>l
 
-" Mapping for LustyJuggler
-nmap <silent> <Leader>m :LustyJuggler<CR>
+" Mapping for CommandTBuffer
+nmap <silent> <Leader>m :CommandTBuffer<CR>
 
 " Toggle spelling on/off
 nmap <leader>s :setlocal spell! spelllang=en_gb<CR>
