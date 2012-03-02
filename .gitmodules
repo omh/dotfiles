@@ -55,3 +55,6 @@
 [submodule "vim/bundle/yard"]
 	path = vim/bundle/yard
 	url = git@github.com:omh/vim-yard.git
+[submodule "vim/bundle/bundler"]
+	path = vim/bundle/bundler
+	url = git://github.com/tpope/vim-bundler.git
