@@ -49,3 +49,9 @@
 [submodule "vim/bundle/vimruby"]
 	path = vim/bundle/vimruby
 	url = git://github.com/vim-ruby/vim-ruby.git
+[submodule "vim/bundle/haml"]
+	path = vim/bundle/haml
+	url = https://github.com/tpope/vim-haml.git
+[submodule "vim/bundle/yard"]
+	path = vim/bundle/yard
+	url = git@github.com:omh/vim-yard.git
