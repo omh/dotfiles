@@ -5,16 +5,18 @@ if has("gui_macvim")
     set guioptions-=T
 
     " Turn on highlighting of current line
-    set cursorline
+    set nocursorline
 
-    set gfn=Menlo:h10
-    set linespace=2
+    set gfn=Monaco:h10
+    "set gfn=Menlo:h10
+    "set linespace=3
 
     " Turn on anti alias
     set anti
 
     "colorscheme jellybeans2
-    colorscheme zenburn3
+    "colorscheme zenburn3
+    colorscheme reseif
 
     macmenu &File.Open\ Tab\.\.\. key=<nop>
     map <D-T> :FufFile <CR>
