@@ -19,14 +19,11 @@ if has("gui_macvim")
     colorscheme reseif
 
     macmenu &File.Open\ Tab\.\.\. key=<nop>
-    map <D-T> :FufFile <CR>
 
     macmenu &File.Close\ Window key=<nop>
     map <D-W> :Kwbd <CR>
-    map <D-r> :FufBuffer <CR>
-    map <D-R> :FufLine <CR>
 
-    set fuopt+=maxhorz                      " grow to maximum horizontal width on entering fullscreen mode
+    set fuopt+=maxhorz " grow to maximum horizontal width on entering fullscreen mode
     highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 
 endif

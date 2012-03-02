@@ -26,10 +26,7 @@ set scrolloff=5
 set autowrite
 set hidden
 set mouse=a " Always enable the mouse
-autocmd FileType php let php_sql_query=1
-autocmd FileType php let php_noShortTags=1
-autocmd FileType php let php_htmlInStrings=1
-autocmd FileType php let php_folding=1
+
 " set "make" command when editing php files
 set makeprg=php\ -l\ %
 set errorformat=%m\ in\ %f\ on\ line\ %l
@@ -101,7 +98,7 @@ map <C-down> <C-w>j
 map <C-left> <C-w>h
 map <C-right> <C-w>l
 
-" Turn of matching brackets, etc as it's slow
+" Turn off matching brackets, etc as it's slow
 let loaded_matchparen = 1
 
 " Mappings for ZenCoding
