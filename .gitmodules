@@ -1,3 +1,6 @@
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
+[submodule "vim/lusty"]
+	path = vim/lusty
+	url = https://github.com/sjbach/lusty.git
