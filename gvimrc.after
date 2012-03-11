@@ -18,13 +18,9 @@ if has("gui_macvim")
     "colorscheme zenburn3
     colorscheme reseif
 
-    macmenu &File.Open\ Tab\.\.\. key=<nop>
-
     macmenu &File.Close\ Window key=<nop>
     map <D-W> :Kwbd <CR>
 
     set fuopt+=maxhorz " grow to maximum horizontal width on entering fullscreen mode
-    highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-
 endif
 
