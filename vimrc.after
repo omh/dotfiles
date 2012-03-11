@@ -5,8 +5,6 @@ set scrolloff=5
 set autowrite
 set hidden
 
-let mapleader = ","
-
 " set better autocomplete for finding files
 set wildmenu
 set wildmode=list:longest,full
