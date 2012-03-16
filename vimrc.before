@@ -1,1 +1,8 @@
 let mapleader = ","
+set hidden
+
+call janus#disable_plugin('tagbar')
+call janus#disable_plugin('narrowregion')
+call janus#disable_plugin('vimwiki')
+call janus#disable_plugin('zoomwin')
+call janus#disable_plugin('arduino')

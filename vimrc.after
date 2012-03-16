@@ -3,7 +3,6 @@ set scrolloff=5
 
 " Stop VIM asking if you want to write the file before leaving buffer
 set autowrite
-set hidden
 
 " set better autocomplete for finding files
 set wildmenu
@@ -60,8 +59,14 @@ map <C-right> <C-w>l
 let g:user_zen_expandabbr_key = '<D-d>'
 
 " Lusty Explorer
-map <leader>f :LustyFilesystemExplorer<CR>
-map <leader>r :LustyFilesystemExplorerFromHere<CR>
+" Get rid of Janus's mappings so that our mapping triggers instantly
+unmap <leader>fc
+unmap <leader>fef
+map <silent> <leader>f :LustyFilesystemExplorer<CR>
+map <silent> <leader>r :LustyFilesystemExplorerFromHere<CR>
+
+" Buffers
+map <silent> <leader>m :CtrlPBuffer<CR>
 
 " Unimpaired
 " Move single lines
@@ -70,6 +75,10 @@ nmap <D-S-Down> ]e
 " Move multiple lines
 vmap <D-S-Up> [egv
 vmap <D-S-Down> ]egv
+
+" CtrlP customisations
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_max_height = 30
 
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<CR>

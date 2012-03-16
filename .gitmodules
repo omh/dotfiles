@@ -3,4 +3,4 @@
 	url = git://github.com/robbyrussell/oh-my-zsh.git
 [submodule "vim/lusty"]
 	path = vim/lusty
-	url = https://github.com/sjbach/lusty.git
+	url = git@github.com:omh/lusty.git
