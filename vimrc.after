@@ -63,15 +63,19 @@ map <C-right> <C-w>l
 " Mappings for ZenCoding
 let g:user_zen_expandabbr_key = '<D-d>'
 
-" Lusty Explorer
 " Get rid of Janus's mappings so that our mapping triggers instantly
 unmap <leader>fc
 unmap <leader>fef
+unmap <leader>tw
+unmap <leader>md
+
+" Lusty Explorer
 map <silent> <leader>f :LustyFilesystemExplorer<CR>
 map <silent> <leader>r :LustyFilesystemExplorerFromHere<CR>
 
-" Buffers
+" CtrlP
 map <silent> <leader>m :CtrlPBuffer<CR>
+map <silent> <leader>t :CtrlP<CR>
 
 " Unimpaired
 " Move single lines
