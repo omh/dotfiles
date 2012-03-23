@@ -6,3 +6,5 @@ call janus#disable_plugin('narrowregion')
 call janus#disable_plugin('vimwiki')
 call janus#disable_plugin('zoomwin')
 call janus#disable_plugin('arduino')
+
+let g:ctrlp_by_filename = 1
