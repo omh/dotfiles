@@ -4,3 +4,6 @@
 [submodule "vim/lusty"]
 	path = vim/lusty
 	url = git@github.com:omh/lusty.git
+[submodule "vim/powerline"]
+	path = vim/powerline
+	url = https://github.com/Lokaltog/vim-powerline.git

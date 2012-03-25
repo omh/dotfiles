@@ -8,3 +8,4 @@ call janus#disable_plugin('zoomwin')
 call janus#disable_plugin('arduino')
 
 let g:ctrlp_by_filename = 1
+let g:Powerline_symbols = 'fancy'

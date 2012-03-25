@@ -77,6 +77,13 @@ map <silent> <leader>r :LustyFilesystemExplorerFromHere<CR>
 map <silent> <leader>m :CtrlPBuffer<CR>
 map <silent> <leader>t :CtrlP<CR>
 
+" NerdTree
+let NERDTreeMinimalUI=1
+
+" Zenburn
+let zenburn_high_Contrast=1
+
+
 " Unimpaired
 " Move single lines
 nmap <D-S-Up> [e
@@ -87,7 +94,10 @@ vmap <D-S-Down> ]egv
 
 " CtrlP customisations
 let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_max_height = 30
+let g:ctrlp_max_height = 20
+
+" Powerline
+let g:Powerline_symbols = 'fancy'
 
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<CR>

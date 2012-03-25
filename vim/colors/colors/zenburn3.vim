@@ -66,14 +66,14 @@ endif
 let g:colors_name="zenburn"
 
 hi Boolean         guifg=#dca3a3
-hi Character       guifg=#dca3a3 gui=bold
+hi Character       guifg=#dca3a3 gui=NONE
 "hi Comment         guifg=#7f9f7f gui=italic
 hi Comment         guifg=#9F9F9F gui=italic
-hi Conditional     guifg=#f0dfaf gui=bold
-hi Constant        guifg=#dca3a3 gui=bold
-hi Cursor          guifg=#000d18 guibg=#8faf9f gui=bold
-hi Debug           guifg=#bca3a3 gui=bold
-hi Define          guifg=#ffcfaf gui=bold
+hi Conditional     guifg=#f0dfaf gui=NONE
+hi Constant        guifg=#dca3a3 gui=NONE
+hi Cursor          guifg=#000d18 guibg=#8faf9f gui=NONE
+hi Debug           guifg=#bca3a3 gui=NONE
+hi Define          guifg=#ffcfaf gui=NONE
 hi Delimiter       guifg=#8f8f8f
 "hi DiffAdd         guifg=#709080 guibg=#313c36 gui=bold
 hi DiffChange      guibg=#333333
@@ -81,9 +81,10 @@ hi DiffChange      guibg=#333333
 hi DiffText        guifg=#ecbcbc guibg=#41363c gui=bold
 hi DiffAdd      guifg=#5DF224 guibg=NONE
 hi DiffDelete   guifg=#E82619 guibg=NONE
-hi Directory       guifg=#f0dfaf gui=bold
-hi ErrorMsg        guifg=#80d4aa guibg=#2f2f2f gui=bold
-hi Exception       guifg=#c3bf9f gui=bold
+"hi Directory       guifg=#f0dfaf gui=NONE
+hi Directory       guifg=#8c8cbc gui=NONE
+hi ErrorMsg        guifg=#80d4aa guibg=#2f2f2f gui=NONE
+hi Exception       guifg=#c3bf9f gui=NONE
 hi Float           guifg=#c0bed1
 hi FoldColumn      guifg=#93b3a3 guibg=#3f4040
 hi Folded          guifg=#93b3a3 guibg=#3f4040
@@ -91,13 +92,13 @@ hi Function        guifg=#efef8f
 hi Function        guifg=#82a282
 hi Identifier      guifg=#efdcbc
 hi IncSearch       guibg=#f8f893 guifg=#385f38
-hi Keyword         guifg=#f0dfaf gui=bold
+hi Keyword         guifg=#f0dfaf gui=NONE
 hi Label           guifg=#dfcfaf gui=underline
 "hi LineNr          guifg=#9fafaf guibg=#262626
-hi LineNr          guifg=#9fafaf guibg=NONE
-hi Macro           guifg=#ffcfaf gui=bold
+hi LineNr          guifg=#333333 guibg=NONE
+hi Macro           guifg=#ffcfaf gui=NONE
 hi ModeMsg         guifg=#ffcfaf gui=none
-hi MoreMsg         guifg=#ffffff gui=bold
+hi MoreMsg         guifg=#ffffff gui=NONE
 hi NonText         guifg=#404040
 hi Number          guifg=#8cd0d3
 hi Operator        guifg=#f0efd0
@@ -119,8 +120,8 @@ hi Structure       guifg=#efefaf gui=bold
 hi Tag             guifg=#e89393 gui=bold
 hi Title           guifg=#efefef gui=bold
 hi Todo            guifg=#dfdfdf guibg=bg gui=bold
-hi Typedef         guifg=#dfe4cf gui=bold
-hi Type            guifg=#dfdfbf gui=bold
+hi Typedef         guifg=#dfe4cf gui=NONE
+hi Type            guifg=#dfdfbf gui=NONE
 hi Underlined      guifg=#dcdccc gui=underline
 hi VertSplit       guifg=#2e3330 guibg=#688060
 hi VisualNOS       guifg=#333333 guibg=#f18c96 gui=bold,underline
@@ -192,6 +193,8 @@ else
 endif
     " TODO check for more obscure syntax groups that they're ok
 
+" Ruby Styles
+hi rubyInstanceVariable guifg=#948369 guibg=NONE    gui=NONE
 
 " PHP Styles
 hi phpQuoteSingle       guifg=#905E5E
@@ -212,3 +215,6 @@ hi markdownCodeBlock guifg=#888888 gui=italic
 hi markdownH3 guifg=#99ad6a
 hi markdownH4 guifg=#99ad6a
 
+
+hi CtrlPMatch guifg=#8c8cbc
+hi LustySelected guifg=#8c8cbc

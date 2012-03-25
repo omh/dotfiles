@@ -7,16 +7,18 @@ if has("gui_macvim")
     " Turn on highlighting of current line
     set nocursorline
 
-    set gfn=Monaco:h10
+    "set gfn=Monaco:h10
     "set gfn=Menlo:h10
-    "set linespace=3
+    set gfn=Monaco\ for\ Powerline:h11
+    "set linespace=1
 
     " Turn on anti alias
     set anti
 
     "colorscheme jellybeans2
-    "colorscheme zenburn3
-    colorscheme reseif
+    colorscheme zenburn3
+    "colorscheme reseif
+    "colorscheme compot
 
     macmenu &File.Close\ Window key=<nop>
     map <D-W> :Kwbd <CR>
