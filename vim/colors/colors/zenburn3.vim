@@ -216,5 +216,5 @@ hi markdownH3 guifg=#99ad6a
 hi markdownH4 guifg=#99ad6a
 
 
-hi CtrlPMatch guifg=#8c8cbc
-hi LustySelected guifg=#8c8cbc
+hi CtrlPMatch guisp=#bc6c4c guifg=#dc8c6c gui=bold,underline
+hi LustySelected guisp=#bc6c4c guifg=#dc8c6c gui=bold
