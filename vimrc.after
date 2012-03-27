@@ -99,6 +99,10 @@ let g:ctrlp_max_height = 20
 " Powerline
 let g:Powerline_symbols = 'fancy'
 
+" Don't yank selected text in visual mode overwriting text by yanking
+vnoremap p "_dP
+vnoremap P "_dP
+
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
