@@ -9,8 +9,8 @@ if has("gui_macvim")
 
     "set gfn=Monaco:h10
     "set gfn=Menlo:h10
-    set gfn=Monaco\ for\ Powerline:h11
-    "set linespace=1
+    set gfn=Menlo\ for\ Powerline:h11
+    set linespace=1
 
     " Turn on anti alias
     set anti
