@@ -1,3 +1,5 @@
+![Config](http://d2-05.twitpicproxy.com/photos/large/546095529.png?key=1027769)
+
 # Requirements #
 
 VIM >= 7.2.
