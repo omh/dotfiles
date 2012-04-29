@@ -37,8 +37,11 @@ plugins=(git rails3 ruby bundler gem brew rvm pow cap zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
+# Disable autocomplete
+unsetopt correct_all
+
 # Customize to your needs...
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/opt/local/bin:/Users/oh/Documents/Development/CL:/www/django/django/bin/:/opt/local/Library/Frameworks/Python.framework/Versions/2.6/bin:/Users/oh/.rvm/bin:/Users/oh/.rvm/bin
+export PATH="/usr/local/bin:/Users/oh/.rvm/bin:$PATH"
 
 bindkey ^r  history-incremental-search-backward
 setopt hist_ignore_all_dups
@@ -47,7 +50,7 @@ bindkey -e
 # Load RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
-LSCOLORS="dxfxcxdxbxegedabagacad"
+LSCOLORS="fxfxcxdxbxegedabagacad"
 
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
@@ -62,3 +65,4 @@ alias mv="mv -iv"
 alias grep="grep --colour"
 alias ls="ls -FG"
 alias r="rails"
+alias tree="tree -AC"
