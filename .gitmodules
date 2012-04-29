@@ -7,3 +7,6 @@
 [submodule "vim/powerline"]
 	path = vim/powerline
 	url = https://github.com/Lokaltog/vim-powerline.git
+[submodule "vim/tomorrow"]
+	path = vim/tomorrow
+	url = https://github.com/chriskempson/vim-tomorrow-theme.git
