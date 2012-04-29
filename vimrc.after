@@ -1,4 +1,4 @@
-colorscheme jellybeans2
+colorscheme Tomorrow-Night
 set scrolloff=5
 
 " Stop VIM asking if you want to write the file before leaving buffer

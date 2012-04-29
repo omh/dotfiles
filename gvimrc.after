@@ -16,7 +16,8 @@ if has("gui_macvim")
     set anti
 
     "colorscheme jellybeans2
-    colorscheme zenburn3
+    "colorscheme zenburn3
+    "colorscheme Tomorrow-Night
     "colorscheme reseif
     "colorscheme compot
 
