@@ -9,5 +9,6 @@ ln -sf `pwd`/vimrc.after ~/.vimrc.after
 ln -sf `pwd`/gvimrc.after ~/.gvimrc.after
 ln -sf `pwd`/zshrc ~/.zshrc
 ln -sf `pwd`/oh-my-zsh ~/.oh-my-zsh
+ln -sf `pwd`/gemrc ~/.gemrc
 
 touch ~/.hushlogin
