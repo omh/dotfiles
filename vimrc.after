@@ -9,6 +9,7 @@ set wildmenu
 set wildmode=list:longest,full
 set wildignore+=*.o,*.obj,.git,*.class,*.pyc,bin,*.log,obj,*.pidb
 set wildignore+=*.aux,*.bbl,*.blg,*.fdb_latexmk,*.bst,*.pdf
+set wildignore+=*.gif,*.png,*.db,*.jpg,*.jpeg
 
 " Ignore eZ Publish storage+cache
 set wildignore+=var/*
