@@ -35,6 +35,10 @@ set fileformats=unix,dos,mac
 " Use system clipboard instead of vim's
 set clipboard=unnamed
 
+set wrap
+set textwidth=79
+set formatoptions=qrn1
+set colorcolumn=85
 nnoremap / /\v
 vnoremap / /\v
 set ignorecase
