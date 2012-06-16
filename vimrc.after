@@ -73,6 +73,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Jump paragraphs with jk
+map <C-j> }
+map <C-k> {
 
 " Faster <Esc>
 imap jj <Esc>
