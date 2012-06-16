@@ -10,6 +10,9 @@
 [submodule "vim/tomorrow"]
 	path = vim/tomorrow
 	url = https://github.com/chriskempson/vim-tomorrow-theme.git
+[submodule "vim/bundler"]
+	path = vim/bundler
+	url = git://github.com/tpope/vim-bundler.git
 [submodule "vim/badwolf"]
 	path = vim/badwolf
 	url = https://github.com/sjl/badwolf/
