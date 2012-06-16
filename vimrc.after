@@ -48,6 +48,9 @@ set incsearch
 set showmatch
 set hlsearch
 
+" Save on losing focus
+au FocusLost * :wa
+
 " Map leader+space to clear searches
 nnoremap <leader>/ :silent noh<cr>
 
