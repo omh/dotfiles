@@ -72,9 +72,6 @@ map <C-right> <C-w>l
 " Faster <Esc>
 imap jj <Esc>
 
-" Mappings for ZenCoding
-let g:user_zen_expandabbr_key = '<D-d>'
-
 " Get rid of Janus's mappings so that our mapping triggers instantly
 unmap <leader>fc
 unmap <leader>fef
