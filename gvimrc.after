@@ -15,12 +15,6 @@ if has("gui_macvim")
     " Turn on anti alias
     set anti
 
-    "colorscheme jellybeans2
-    "colorscheme zenburn3
-    "colorscheme Tomorrow-Night
-    "colorscheme reseif
-    "colorscheme compot
-
     macmenu &File.Close\ Window key=<nop>
     map <D-W> :Kwbd <CR>
 
