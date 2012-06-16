@@ -13,6 +13,7 @@ set wildignore+=*.gif,*.png,*.db,*.jpg,*.jpeg
 
 " Ignore eZ Publish storage+cache
 set wildignore+=var/*
+set wildignore+=*tmp/*
 
 " more history
 set history=1000
