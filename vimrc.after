@@ -1,4 +1,4 @@
-colorscheme Tomorrow-Night
+colorscheme badwolf
 set scrolloff=5
 
 " Stop VIM asking if you want to write the file before leaving buffer
