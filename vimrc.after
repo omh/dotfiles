@@ -102,6 +102,8 @@ map <silent> <leader>r :LustyFilesystemExplorerFromHere<CR>
 " CtrlP
 map <silent> <leader>m :CtrlPBuffer<CR>
 map <silent> <leader>t :CtrlP<CR>
+" Don't manage the current directory
+let g:ctrlp_working_path_mode = 0
 
 " NerdTree
 let NERDTreeMinimalUI=1
