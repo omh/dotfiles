@@ -35,6 +35,15 @@ set fileformats=unix,dos,mac
 " Use system clipboard instead of vim's
 set clipboard=unnamed
 
+nnoremap / /\v
+vnoremap / /\v
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
+
 " Map leader+space to clear searches
 nnoremap <leader>/ :silent noh<cr>
 
