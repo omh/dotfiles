@@ -9,6 +9,7 @@ set wildmenu
 set wildmode=list:longest,full
 set wildignore+=*.o,*.obj,.git,*.class,*.pyc,bin,*.log,obj,*.pidb
 set wildignore+=*.aux,*.bbl,*.blg,*.fdb_latexmk,*.bst,*.pdf
+set wildignore+=*.gif,*.png,*.db,*.jpg,*.jpeg
 
 " Ignore eZ Publish storage+cache
 set wildignore+=var/*
@@ -69,10 +70,10 @@ nnoremap c "_c
 vnoremap c "_c
 nnoremap C "_C
 vnoremap C "_C
-nnoremap d "_d
-vnoremap d "_d
-nnoremap D "_D
-vnoremap D "_D
+"nnoremap d "_d
+"vnoremap d "_d
+"nnoremap D "_D
+"vnoremap D "_D
 vnoremap p "_dP
 vnoremap P "_dP
 nnoremap x "_x
