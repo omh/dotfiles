@@ -67,3 +67,5 @@ alias ls="ls -FG"
 alias r="rails"
 alias tree="tree -AC"
 alias b="bundle exec"
+
+eval "$(rbenv init -)"
