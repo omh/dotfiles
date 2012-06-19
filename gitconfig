@@ -7,6 +7,7 @@
   dc = diff --staged
   tree = log --graph --decorate --pretty=oneline --abbrev-commit
   l = log --pretty=oneline --abbrev-commit
+  lg = log --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(yellow)%d%Creset' --abbrev-commit
   new = log ORIG_HEAD.. --stat --no-merges
 [color]
 	branch = auto
