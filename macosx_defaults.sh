@@ -15,5 +15,8 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 12
 echo "Enable tap to click (Trackpad)"
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 
+echo "Allow text selection in Quick Look window"
+defaults write com.apple.finder QLEnableTextSelection -bool true
+
 echo "Kill affected applications"
 for app in Safari Finder Dock Mail SystemUIServer; do killall "$app" >/dev/null 2>&1; done
