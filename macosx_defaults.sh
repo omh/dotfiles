@@ -18,5 +18,8 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool
 echo "Allow text selection in Quick Look window"
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
+echo "Show ~/Library"
+chflags nohidden ~/Library
+
 echo "Kill affected applications"
 for app in Safari Finder Dock Mail SystemUIServer; do killall "$app" >/dev/null 2>&1; done
