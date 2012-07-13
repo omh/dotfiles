@@ -4,20 +4,29 @@ if has("gui_macvim")
     set guioptions-=r
     set guioptions-=T
 
-    " Turn on highlighting of current line
+    " Make sure highlighting of current line is off
     set nocursorline
 
-    "set gfn=Monaco:h10
-    "set gfn=Menlo:h10
+    " Use special font required by the Powerline extension
     set gfn=Menlo\ for\ Powerline:h11
+
+    " Menlo is more readable with a bit of linespace
     set linespace=1
 
     " Turn on anti alias
     set anti
 
+    " Set Visual Bell, doesn't really work in macvim but it does at
+    " least disable the audio bell
+    set vb
+
+    " Disable Cmd+W as we want to remap it to something else
     macmenu &File.Close\ Window key=<nop>
+
+    " Map Cmd+W to close current window
     map <D-W> :Kwbd <CR>
 
-    set fuopt+=maxhorz " grow to maximum horizontal width on entering fullscreen mode
+    " Grow to maximum horizontal width on entering fullscreen mode
+    set fuopt+=maxhorz 
 endif
 
