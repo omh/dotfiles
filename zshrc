@@ -47,9 +47,6 @@ bindkey ^r  history-incremental-search-backward
 setopt hist_ignore_all_dups
 bindkey -e
 
-# Load RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
 LSCOLORS="fxfxcxdxbxegedabagacad"
 
 export LESS_TERMCAP_mb=$'\E[01;31m'
