@@ -34,7 +34,16 @@ set enc=utf-8
 set fileformats=unix,dos,mac
 
 " Use system clipboard instead of vim's
-set clipboard=unnamed
+set clipboard+=unnamed
+
+" Automatically read a file that has changed on disk
+set autoread
+
+" Syntax coloring lines that are too long just slows down the world
+set synmaxcol=2048
+
+" I don't like it when the matching parens are automatically highlighted
+let loaded_matchparen = 1
 
 set wrap
 set textwidth=79
