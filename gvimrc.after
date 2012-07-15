@@ -20,13 +20,10 @@ if has("gui_macvim")
     " least disable the audio bell
     set vb
 
-    " Disable Cmd+W as we want to remap it to something else
-    macmenu &File.Close\ Window key=<nop>
-
-    " Map Cmd+W to close current window
-    map <D-W> :Kwbd <CR>
-
     " Grow to maximum horizontal width on entering fullscreen mode
     set fuopt+=maxhorz 
+
+    " Allow meta/option key to be mapped to <M-...>
+    set macmeta
 endif
 

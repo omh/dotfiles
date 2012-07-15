@@ -65,18 +65,10 @@ nmap <leader>s :setlocal spell! spelllang=en_gb<CR>
 map <leader>a :Ack<space>
 
 " Easy window navigation
-map <C-up> <C-w>k
-map <C-down> <C-w>j
-map <C-left> <C-w>h
-map <C-right> <C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" Jump paragraphs with jk
-map <C-j> }
-map <C-k> {
+map <M-k> <C-w>k
+map <M-j> <C-w>j
+map <M-h> <C-w>h
+map <M-l> <C-w>l
 
 " Faster <Esc>
 imap jj <Esc>
@@ -99,6 +91,12 @@ vnoremap x "_x
 nnoremap X "_X
 vnoremap X "_X
 
+" Map Leader+q to close current window
+map <leader>q :q<CR>
+
+" Map Leader+k to kill current buffer
+map <leader>k :Kwbd<CR>
+
 " Lusty Explorer
 map <silent> <leader>f :LustyFilesystemExplorer<CR>
 map <silent> <leader>r :LustyFilesystemExplorerFromHere<CR>
@@ -111,6 +109,7 @@ let g:ctrlp_working_path_mode = 0
 
 " NerdTree
 let NERDTreeMinimalUI=1
+map <leader>v :NERDTreeFind<CR>
 
 " CtrlP customisations
 let g:ctrlp_match_window_reversed = 0
@@ -121,11 +120,15 @@ let zenburn_high_Contrast=1
 
 " Unimpaired
 " Move single lines
-nmap <D-S-Up> [e
-nmap <D-S-Down> ]e
+nmap <M-S-k> [e
+nmap <M-S-j> ]e
 " Move multiple lines
-vmap <D-S-Up> [egv
-vmap <D-S-Down> ]egv
+vmap <M-S-k> [egv
+vmap <M-S-j> ]egv
+
+" Jump paragraphs with jk
+map <C-j> }
+map <C-k> {
 
 " Powerline
 let g:Powerline_symbols = 'fancy'
