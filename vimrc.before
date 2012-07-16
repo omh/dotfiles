@@ -1,12 +1,19 @@
 let mapleader = ","
 set hidden
 
+" Disable plugins I don't use
+call janus#disable_plugin('arduino')
+call janus#disable_plugin('buffergator')
 call janus#disable_plugin('css-color')
-call janus#disable_plugin('tagbar')
+call janus#disable_plugin('easymotion')
 call janus#disable_plugin('narrowregion')
+call janus#disable_plugin('gundo')
+call janus#disable_plugin('indent-object')
+call janus#disable_plugin('tagbar')
+call janus#disable_plugin('vimwiki')
+call janus#disable_plugin('vroom')
 call janus#disable_plugin('vimwiki')
 call janus#disable_plugin('zoomwin')
-call janus#disable_plugin('arduino')
 
 let g:ctrlp_by_filename = 1
 let g:Powerline_symbols = 'fancy'
