@@ -41,7 +41,7 @@ source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 
 # Customize to your needs...
-export PATH="/usr/local/bin:/Users/oh/.rvm/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
 
 bindkey ^r  history-incremental-search-backward
 setopt hist_ignore_all_dups
