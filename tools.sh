@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# Create SSH key if one does not exist
+[[ -f ~/.ssh/id_rsa.pub ]] || ssh-keygen -t rsa
+
+# Brew
+/usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)"
+
 # zsh
 brew install zsh
 
@@ -25,9 +31,17 @@ brew install ctags
 # ack 
 brew install ack
 
-# https://github.com/tpope/gem-ctags
-gem install gem-ctags
+# watch
+brew install watch
+
 
 # https://github.com/tpope/gem-ctags
 gem install gem-ctags
 
+# https://github.com/tpope/gem-browse
+gem install gem-browse
+
+gem install rails
+gem install heroku
+gem install pg
+gem install foreman
