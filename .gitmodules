@@ -16,3 +16,6 @@
 [submodule "vim/badwolf"]
 	path = vim/badwolf
 	url = https://github.com/sjl/badwolf/
+[submodule "terminal/iterm2"]
+	path = terminal/iterm2
+	url = https://github.com/baskerville/iTerm-2-Color-Themes/
