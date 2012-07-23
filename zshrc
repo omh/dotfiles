@@ -47,7 +47,7 @@ bindkey ^r  history-incremental-search-backward
 setopt hist_ignore_all_dups
 bindkey -e
 
-LSCOLORS="fxfxcxdxbxegedabagacad"
+LSCOLORS="dxfxcxdxbxegedabagacad"
 
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
