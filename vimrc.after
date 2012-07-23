@@ -1,9 +1,6 @@
 colorscheme badwolf
 set scrolloff=5
 
-" Stop VIM asking if you want to write the file before leaving buffer
-set autowrite
-
 " set better autocomplete for finding files
 set wildmenu
 set wildmode=list:longest,full
