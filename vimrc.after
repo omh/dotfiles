@@ -37,7 +37,7 @@ set clipboard+=unnamed
 set autoread
 
 " Syntax coloring lines that are too long just slows down the world
-set synmaxcol=2048
+set synmaxcol=1000
 
 " I don't like it when the matching parens are automatically highlighted
 let loaded_matchparen = 1
@@ -55,8 +55,11 @@ set incsearch
 set showmatch
 set hlsearch
 
-" Save on losing focus
-au FocusLost * :wa
+set timeout
+" mapped sequences
+set timeoutlen=1000
+" escape sequence delay
+set ttimeoutlen=10
 
 " Map leader+space to clear searches
 nnoremap <leader>/ :silent noh<cr>
@@ -71,10 +74,10 @@ nmap <leader>s :setlocal spell! spelllang=en_gb<CR>
 map <leader>a :Ack<space>
 
 " Easy window navigation
-map <M-k> <C-w>k
-map <M-j> <C-w>j
-map <M-h> <C-w>h
-map <M-l> <C-w>l
+map <C-up> <C-w>k
+map <C-down> <C-w>j
+map <C-left> <C-w>h
+map <C-right> <C-w>l
 
 " Faster <Esc>
 imap jj <Esc>
@@ -132,12 +135,6 @@ nmap <M-S-j> ]e
 vmap <M-S-k> [egv
 vmap <M-S-j> ]egv
 
-" Jump paragraphs with jk
-map <C-j> }
-map <C-k> {
-
-" Powerline
-let g:Powerline_symbols = 'fancy'
 
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<CR>
