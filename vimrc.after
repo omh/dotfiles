@@ -1,4 +1,4 @@
-colorscheme badwolf
+colorscheme oh
 set scrolloff=5
 
 " set better autocomplete for finding files
@@ -115,14 +115,15 @@ map <silent> <leader>m :CtrlPBuffer<CR>
 map <silent> <leader>t :CtrlP<CR>
 " Don't manage the current directory
 let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_max_height = 20
 
 " NerdTree
 let NERDTreeMinimalUI=1
 map <leader>v :NERDTreeFind<CR>
 
-" CtrlP customisations
-let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_max_height = 20
+let g:Powerline_theme = 'skwp'
+let g:Powerline_colorscheme = 'skwp'
 
 " Zenburn
 let zenburn_high_Contrast=1

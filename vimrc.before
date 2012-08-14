@@ -14,5 +14,3 @@ call janus#disable_plugin('vimwiki')
 call janus#disable_plugin('vroom')
 call janus#disable_plugin('vimwiki')
 call janus#disable_plugin('zoomwin')
-
-let g:ctrlp_by_filename = 1
