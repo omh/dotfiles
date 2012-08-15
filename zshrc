@@ -65,6 +65,7 @@ alias r="rails"
 alias tree="tree -AC"
 alias b="bundle exec"
 alias m="mvim --remote"
+alias ff="find . |grep -i "
 
 eval "$(rbenv init -)"
 
