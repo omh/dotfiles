@@ -7,8 +7,8 @@ if has("gui_macvim")
     " Make sure highlighting of current line is off
     set nocursorline
 
-    " Use special font required by the Powerline extension
-    set gfn=Menlo\ for\ Powerline:h11
+    " Set the font
+    set gfn=Menlo:h11
 
     " Menlo is more readable with a bit of linespace
     set linespace=1

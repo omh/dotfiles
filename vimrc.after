@@ -1,4 +1,5 @@
 colorscheme oh
+
 set scrolloff=5
 
 " set better autocomplete for finding files
@@ -20,11 +21,22 @@ set backupdir=/tmp/
 set directory=/tmp/
 
 set laststatus=2
+set textwidth=79
+set formatoptions=qrn1
+"set colorcolumn=85
+set wrap
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
 
-autocmd Filetype html setlocal ts=4 sw=4 expandtab
-autocmd Filetype php setlocal ts=4 sw=4 expandtab
-autocmd Filetype tpl setlocal ts=4 sw=4 expandtab
-autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
+set timeout
+" mapped sequences
+set timeoutlen=1000
+" escape sequence delay
+set ttimeoutlen=10
 
 " set encoding
 set enc=utf-8
@@ -42,24 +54,14 @@ set synmaxcol=1000
 " I don't like it when the matching parens are automatically highlighted
 let loaded_matchparen = 1
 
-set wrap
-set textwidth=79
-set formatoptions=qrn1
-set colorcolumn=85
+autocmd Filetype html setlocal ts=4 sw=4 expandtab
+autocmd Filetype php setlocal ts=4 sw=4 expandtab
+autocmd Filetype tpl setlocal ts=4 sw=4 expandtab
+autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
+
+" Better search - no weird regexp syntax
 nnoremap / /\v
 vnoremap / /\v
-set ignorecase
-set smartcase
-set gdefault
-set incsearch
-set showmatch
-set hlsearch
-
-set timeout
-" mapped sequences
-set timeoutlen=1000
-" escape sequence delay
-set ttimeoutlen=10
 
 " Map leader+space to clear searches
 nnoremap <leader>/ :silent noh<cr>
@@ -71,13 +73,17 @@ nnoremap <leader>w <C-w>v<C-w>l
 nmap <leader>s :setlocal spell! spelllang=en_gb<CR>
 
 " Ack
-map <leader>a :Ack<space>
+nmap <leader>a :Ack<space>
 
 " Easy window navigation
-map <C-up> <C-w>k
-map <C-down> <C-w>j
-map <C-left> <C-w>h
-map <C-right> <C-w>l
+nmap <C-up> <C-w>k
+nmap <C-down> <C-w>j
+nmap <C-left> <C-w>h
+nmap <C-right> <C-w>l
+nmap <C-k> <C-w>k
+nmap <C-j> <C-w>j
+nmap <C-h> <C-w>h
+nmap <C-l> <C-w>l
 
 " Faster <Esc>
 imap jj <Esc>
@@ -111,8 +117,10 @@ map <silent> <leader>f :LustyFilesystemExplorer<CR>
 map <silent> <leader>r :LustyFilesystemExplorerFromHere<CR>
 
 " CtrlP
-map <silent> <leader>m :CtrlPBuffer<CR>
-map <silent> <leader>t :CtrlP<CR>
+nmap <silent> <leader>m :CtrlPBuffer<CR>
+nmap <silent> <leader>b :CtrlPMRUFiles<CR>
+nmap <silent> <leader>t :CtrlP<CR>
+nmap <silent> <leader>ll :CtrlPLine<CR>
 " Don't manage the current directory
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
@@ -120,22 +128,20 @@ let g:ctrlp_max_height = 20
 
 " NerdTree
 let NERDTreeMinimalUI=1
-map <leader>v :NERDTreeFind<CR>
+nmap <leader>v :NERDTreeFind<CR>
 
-let g:Powerline_theme = 'skwp'
-let g:Powerline_colorscheme = 'skwp'
-
-" Zenburn
-let zenburn_high_Contrast=1
-
-" Unimpaired
-" Move single lines
+" Unimpaired Move single lines
 nmap <M-S-k> [e
 nmap <M-S-j> ]e
-" Move multiple lines
+" Unimpaired Move single lines
 vmap <M-S-k> [egv
 vmap <M-S-j> ]egv
 
+" Strip extra white space
+nmap <leader>h :%s/\s\+$//<CR>
+
+" Format XML
+nmap <leader>x :silent 1,$!xmllint --format --recover - 2>/dev/null<CR>
 
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<CR>
@@ -146,8 +152,3 @@ function! <SID>SynStack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
-" Strip extra white space
-nmap <leader>h :%s/\s\+$//<CR>
-
-" Format XML
-nmap <leader>x :silent 1,$!xmllint --format --recover - 2>/dev/null<CR>
