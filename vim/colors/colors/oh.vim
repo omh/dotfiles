@@ -311,6 +311,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	call <SID>X("phpStatement", s:purple, "", "")
 	call <SID>X("phpMemberSelector", s:foreground, "", "")
 	call <SID>X("phpSpecialFunction", s:yellow, "", "")
+	call <SID>X("phpParent", s:comment, "", "")
 
 	" Ruby Highlighting
 	call <SID>X("rubyModule", s:orange, "", "")
@@ -356,13 +357,16 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
   " CtrlP
   call <SID>X("CtrlPMatch", s:blue, "", "")
   call <SID>X("CtrlPPrtText", s:blue, "", "")
-  "call <SID>X("CtrlPPrtCursor", s:red, s:yellow, "")
-  "call <SID>X("CtrlPStats", s:red, s:yellow, "")
-  "call <SID>X("CtrlPMode2", s:red, s:yellow, "")
-  "call <SID>X("CtrlPMode1", s:red, s:yellow, "")
-  "call <SID>X("CtrlPNoEntries", s:red, s:yellow, "")
   call <SID>X("CtrlPLinePre", s:background, s:background, "")
 
+  " Markdown
+  call <SID>X("markdownH1", s:yellow, "", "bold")
+  call <SID>X("markdownH2", s:blue, "", "bold")
+  call <SID>X("markdownH3", s:blue, "", "")
+  call <SID>X("MarkdownItalic", "", "", "italic")
+  call <SID>X("MarkdownBold", "", "", "bold")
+  call <SID>X("markdownListMarker", s:orange, "", "bold")
+  call <SID>X("markdownCode", s:aqua, "", "bold")
 
 	" Delete Functions
 	delf <SID>X
