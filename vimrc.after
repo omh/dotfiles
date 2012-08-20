@@ -134,11 +134,11 @@ let NERDTreeMinimalUI=1
 nmap <leader>v :NERDTreeFind<CR>
 
 " Unimpaired Move single lines
-nmap <M-S-k> [e
-nmap <M-S-j> ]e
+nmap <C-S-up> [e
+nmap <C-S-down> ]e
 " Unimpaired Move single lines
-vmap <M-S-k> [egv
-vmap <M-S-j> ]egv
+vmap <C-S-up> [egv
+vmap <C-S-down> ]egv
 
 " Strip extra white space
 nmap <leader>h :%s/\s\+$//<CR>
