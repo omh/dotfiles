@@ -19,3 +19,6 @@
 [submodule "terminal/iterm2"]
 	path = terminal/iterm2
 	url = https://github.com/baskerville/iTerm-2-Color-Themes/
+[submodule "vim/dwm"]
+	path = vim/dwm
+	url = git://github.com/spolu/dwm.vim.git
