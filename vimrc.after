@@ -131,6 +131,7 @@ let g:ctrlp_max_height = 20
 
 " NerdTree
 let NERDTreeMinimalUI=1
+let NERDTreeChDirMode=2
 nmap <leader>v :NERDTreeFind<CR>
 
 " Unimpaired Move single lines
