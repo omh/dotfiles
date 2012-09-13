@@ -1,16 +1,15 @@
+[push]
+	default = current
+[color]
+	ui = auto
 [alias]
-	st = status
-	ci = commit
+  st = status
+  ci = commit
   ca = commit --all
-	co = checkout
-	br = branch
+  co = caheckout
+  br = branch
   dc = diff --staged
   tree = log --graph --decorate --pretty=oneline --abbrev-commit
-  l = log --pretty=oneline --abbrev-commit
-  lg = log --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %C(yellow)%d%Creset' --abbrev-commit
-  new = log ORIG_HEAD.. --stat --no-merges
-[color]
-	branch = auto
-	diff = auto
-	interactive = auto
-	status = auto
+  l = log --graph --format=format:'%C(yellow)%h%C(reset) %C(blue)%s%C(reset) - %C(red)%an%C(reset)%C(yellow)%d%C(reset) %C(bold white)%C(bold white)(%ar)%C(reset)' --abbrev-commit
+  n = "!git l" ORIG_HEAD..
+  new = "!git l" ORIG_HEAD.. --stat
