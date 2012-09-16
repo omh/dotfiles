@@ -22,3 +22,6 @@
 [submodule "vim/dwm"]
 	path = vim/dwm
 	url = git://github.com/spolu/dwm.vim.git
+[submodule "vim/slim"]
+	path = vim/slim
+	url = https://github.com/bbommarito/vim-slim
