@@ -19,6 +19,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH="/usr/local/bin:$PATH"
+export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
 
 bindkey ^r  history-incremental-search-backward
 setopt hist_ignore_all_dups
