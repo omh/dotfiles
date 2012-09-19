@@ -11,5 +11,6 @@
   dc = diff --staged
   tree = log --graph --decorate --pretty=oneline --abbrev-commit
   l = log --graph --format=format:'%C(yellow)%h%C(reset) %C(blue)%s%C(reset) - %C(red)%an%C(reset)%C(yellow)%d%C(reset) %C(bold white)%C(bold white)(%ar)%C(reset)' --abbrev-commit
+  ln = "!git l" -n10
   n = "!git l" ORIG_HEAD..
   new = "!git l" ORIG_HEAD.. --stat
