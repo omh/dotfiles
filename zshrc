@@ -10,7 +10,7 @@ ZSH_THEME="omh"
 
 COMPLETION_WAITING_DOTS="true"
 
-plugins=(heroku brew)
+plugins=(heroku brew zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -25,7 +25,7 @@ bindkey ^r  history-incremental-search-backward
 setopt hist_ignore_all_dups
 bindkey -e
 
-LSCOLORS="cxfxcxdxbxegedabagacad"
+#LSCOLORS="cxfxcxdxbxegedabagacad"
 
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
