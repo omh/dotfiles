@@ -15,7 +15,7 @@ plugins=(heroku brew zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # Disable autocomplete
-#unsetopt correct_all
+unsetopt correct_all
 
 # Customize to your needs...
 export PATH="/usr/local/bin:$PATH"
