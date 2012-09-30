@@ -8,10 +8,7 @@ if has("gui_macvim")
     set nocursorline
 
     " Set the font
-    set gfn=Menlo:h11
-
-    " Menlo is more readable with a bit of linespace
-    set linespace=1
+    set gfn=Source\ Code\ Pro:h14
 
     " Turn on anti alias
     set anti
