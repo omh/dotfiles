@@ -1,14 +1,19 @@
 #!/bin/bash
 
-git submodule init
-git submodule update
+git submodule update --init --recursive
 
+# Zsh and Prezto
+ln -sf `pwd`/prezto ~/.zprezto
+ln -sf `pwd`/zshrc ~/.zshrc
+ln -sf `pwd`/zpreztorc ~/.zpreztorc
+
+# Vim
 ln -sf `pwd`/vim ~/.janus
 ln -sf `pwd`/vimrc.before ~/.vimrc.before
 ln -sf `pwd`/vimrc.after ~/.vimrc.after
 ln -sf `pwd`/gvimrc.after ~/.gvimrc.after
-ln -sf `pwd`/zshrc ~/.zshrc
-ln -sf `pwd`/oh-my-zsh ~/.oh-my-zsh
+
+# Misc
 ln -sf `pwd`/gemrc ~/.gemrc
 
 touch ~/.hushlogin

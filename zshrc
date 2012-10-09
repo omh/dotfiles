@@ -1,32 +1,24 @@
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-#ZSH_THEME="kennethreitz"
-ZSH_THEME="omh"
+  # Set up theme
+  source ~/.dotfiles/zsh/theme.zsh
+  prompt_omh_setup "$@"
+fi
 
-COMPLETION_WAITING_DOTS="true"
-
-plugins=(heroku brew zsh-syntax-highlighting)
-
-source $ZSH/oh-my-zsh.sh
 
 # Disable autocomplete
 unsetopt correct_all
 
-# Customize to your needs...
+# Customize path
 export PATH="/usr/local/bin:$PATH"
 export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
 
-bindkey ^r  history-incremental-search-backward
-setopt hist_ignore_all_dups
-bindkey -e
+# Set editor
+EDITOR="vim"
 
-#LSCOLORS="cxfxcxdxbxegedabagacad"
-
+# Better colors in less
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
 export LESS_TERMCAP_me=$'\E[0m'
@@ -34,17 +26,13 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
-alias rm="rm -i"
-alias cp="cp -iv"
-alias mv="mv -iv"
-alias grep="grep --colour"
-alias ls="ls -FG"
-alias r="rails"
-alias tree="tree -AC"
-alias b="bundle exec"
+
+# Custom aliases
 alias m="mvim --remote"
 alias ff="find . |grep -i "
+alias grep="grep --color"
 
+# Load rbenv
 eval "$(rbenv init -)"
 
 # Tweak ruby GC to better suite rails apps - makes start up faster.
@@ -53,7 +41,3 @@ export RUBY_HEAP_FREE_MIN=100000
 export RUBY_HEAP_SLOTS_INCREMENT=300000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
 export RUBY_GC_MALLOC_LIMIT=79000000
-
-__git_files () {
-  _wanted files expl 'local files' _files
-}
