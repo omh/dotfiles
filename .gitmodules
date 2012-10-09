@@ -1,6 +1,3 @@
-[submodule "oh-my-zsh"]
-	path = oh-my-zsh
-	url = git://github.com/robbyrussell/oh-my-zsh.git
 [submodule "vim/lusty"]
 	path = vim/lusty
 	url = git@github.com:omh/lusty.git
@@ -25,3 +22,6 @@
 [submodule "vim/slim"]
 	path = vim/slim
 	url = https://github.com/bbommarito/vim-slim
+[submodule "prezto"]
+	path = prezto
+	url = git@github.com:sorin-ionescu/prezto.git
