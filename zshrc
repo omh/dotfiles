@@ -33,7 +33,9 @@ alias ff="find . |grep -i "
 alias grep="grep --color"
 
 # Load rbenv
-eval "$(rbenv init -)"
+if (( $+commands[rbenv] )) ; then
+  eval "$(rbenv init -)"
+fi
 
 # Tweak ruby GC to better suite rails apps - makes start up faster.
 export RUBY_HEAP_MIN_SLOTS=800000
