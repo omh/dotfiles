@@ -6,7 +6,7 @@
   st = status
   ci = commit
   ca = commit --all
-  co = caheckout
+  co = checkout
   br = branch
   dc = diff --staged
   tree = log --graph --decorate --pretty=oneline --abbrev-commit
