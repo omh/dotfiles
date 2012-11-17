@@ -7,18 +7,9 @@
 [submodule "vim/tomorrow"]
 	path = vim/tomorrow
 	url = https://github.com/chriskempson/vim-tomorrow-theme.git
-[submodule "vim/bundler"]
-	path = vim/bundler
-	url = git://github.com/tpope/vim-bundler.git
-[submodule "vim/badwolf"]
-	path = vim/badwolf
-	url = https://github.com/sjl/badwolf/
 [submodule "terminal/iterm2"]
 	path = terminal/iterm2
 	url = https://github.com/baskerville/iTerm-2-Color-Themes/
-[submodule "vim/dwm"]
-	path = vim/dwm
-	url = git://github.com/spolu/dwm.vim.git
 [submodule "vim/slim"]
 	path = vim/slim
 	url = https://github.com/bbommarito/vim-slim
