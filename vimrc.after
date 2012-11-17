@@ -119,7 +119,6 @@ map <silent> <leader>f :LustyFilesystemExplorer<CR>
 map <silent> <leader>r :LustyFilesystemExplorerFromHere<CR>
 
 " CtrlP
-nmap <silent> <leader>m :CtrlPBuffer<CR>
 nmap <silent> <leader>b :CtrlPMRUFiles<CR>
 nmap <silent> <leader>t :CtrlP<CR>
 nmap <silent> <leader>ll :CtrlPLine<CR>
@@ -127,6 +126,9 @@ nmap <silent> <leader>ll :CtrlPLine<CR>
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_max_height = 20
+
+" Buffet
+map <leader>m :Bufferlistsw<CR>
 
 " NerdTree
 let NERDTreeMinimalUI=1
