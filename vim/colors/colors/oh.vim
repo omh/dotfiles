@@ -354,6 +354,10 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
   call <SID>X("ShowMarksHLu", s:yellow, s:background, "none")
   call <SID>X("ShowMarksHLm", s:aqua, s:background, "none")
 
+  " eZ Publish templating syntax
+	call <SID>X("ezpConditional", s:purple, "", "")
+	call <SID>X("ezpKeyword", s:yellow, "", "")
+
   " CtrlP
   call <SID>X("CtrlPMatch", s:blue, "", "")
   call <SID>X("CtrlPPrtText", s:blue, "", "")
