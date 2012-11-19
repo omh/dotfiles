@@ -29,7 +29,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 # Custom aliases
 alias m="mvim --remote"
-alias ff="find . |grep -i "
+alias ff="find . -not -path '*.git*'|grep -i "
 alias grep="grep --color"
 
 # Load rbenv
@@ -43,3 +43,8 @@ export RUBY_HEAP_FREE_MIN=100000
 export RUBY_HEAP_SLOTS_INCREMENT=300000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
 export RUBY_GC_MALLOC_LIMIT=79000000
+
+# Load git helpers if available
+if [ -f ~/.git_helpers/helpers.sh ]; then
+    source ~/.git_helpers/helpers.sh
+fi

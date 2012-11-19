@@ -8,7 +8,7 @@ if has("gui_macvim")
     set nocursorline
 
     " Set the font
-    set gfn=Source\ Code\ Pro\ Light:h14
+    set gfn=Source\ Code\ Pro\ Light:h13
 
     " Turn on anti alias
     set anti
