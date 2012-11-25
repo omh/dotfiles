@@ -1,15 +1,22 @@
 colorscheme oh
 
 set scrolloff=5
+set laststatus=2
+set textwidth=79
+set formatoptions=qrn1
+set wrap
 
 " set better autocomplete for finding files
 set wildmenu
 set wildmode=list:longest,full
-set wildignore+=*.o,*.obj,.git,*.class,*.pyc,bin,*.log,obj,*.pidb
+set wildignore+=*.o,*.obj,*.class,*.pyc,bin,*.log,*.pidb
 set wildignore+=*.aux,*.bbl,*.blg,*.fdb_latexmk,*.bst,*.pdf
 set wildignore+=*.gif,*.png,*.db,*.jpg,*.jpeg
-
-" Ignore eZ Publish storage+cache
+set wildignore+=*/cache/*
+set wildignore+=*/.git/*
+set wildignore+=*/.svn/*
+set wildignore+=TAGS
+set wildignore+=tags
 set wildignore+=var/*
 set wildignore+=*tmp/*
 
@@ -20,27 +27,28 @@ set history=1000
 set backupdir=/tmp/
 set directory=/tmp/
 
-set laststatus=2
-set textwidth=79
-set formatoptions=qrn1
-"set colorcolumn=85
-set wrap
+" Searching
 set ignorecase
-set smartcase
-set gdefault
+set gdefault " global substitue
 set incsearch
 set showmatch
 set hlsearch
 
+" Timeout
 set timeout
-" mapped sequences
 set timeoutlen=1000
-" escape sequence delay
 set ttimeoutlen=10
 
-" set encoding
-set enc=utf-8
+" Encoding
+set encoding=utf-8
+set fileencoding=utf-8
 set fileformats=unix,dos,mac
+
+" Tabs
+set softtabstop=4
+set shiftwidth=4
+set tabstop=4
+set expandtab
 
 " Use system clipboard instead of vim's
 set clipboard+=unnamed
@@ -54,16 +62,19 @@ set synmaxcol=200
 " I don't like it when the matching parens are automatically highlighted
 let loaded_matchparen = 1
 
-au Filetype html setlocal ts=4 sw=4 expandtab
-au Filetype php setlocal ts=4 sw=4 expandtab
-au Filetype tpl setlocal ts=4 sw=4 expandtab
-au Filetype ezp setlocal ts=4 sw=4 expandtab
-au Filetype ini setlocal ts=4 sw=4 expandtab
-au Filetype javascript setlocal ts=4 sw=4 sts=0 expandtab
+" Highlight VCS conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
-" Better search - no weird regexp syntax
-nnoremap / /\v
-vnoremap / /\v
+" Normal/insert mode change cursor in terminal
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+" Disable all blinking
+set gcr=a:blinkon0
+
+" ==============================================================================
+" Keyboard Mappings
+" ==============================================================================
 
 " Map leader+space to clear searches
 nnoremap <leader>/ :silent noh<cr>
@@ -76,6 +87,9 @@ nmap <leader>s :setlocal spell! spelllang=en_gb<CR>
 
 " Ack
 nmap <leader>a :Ack<space>
+" Put current word into Ack
+nmap <leader>za :Ack "<C-r>=expand("<cword>")<CR>"
+vmap <leader>za y:Ack "<C-r>""
 
 " Easy window navigation
 nmap <C-up> <C-w>k
@@ -157,13 +171,3 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
-
-" Highlight VCS conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
-" Normal/insert mode change cursor in terminal
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-
-" Disable all blinking
-set gcr=a:blinkon0
