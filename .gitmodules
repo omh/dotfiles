@@ -1,21 +1,6 @@
-[submodule "vim/lusty"]
-	path = vim/lusty
-	url = git@github.com:omh/lusty.git
-[submodule "vim/powerline"]
-	path = vim/powerline
-	url = https://github.com/Lokaltog/vim-powerline.git
-[submodule "vim/tomorrow"]
-	path = vim/tomorrow
-	url = https://github.com/chriskempson/vim-tomorrow-theme.git
 [submodule "terminal/iterm2"]
 	path = terminal/iterm2
 	url = https://github.com/baskerville/iTerm-2-Color-Themes/
-[submodule "vim/slim"]
-	path = vim/slim
-	url = https://github.com/bbommarito/vim-slim
 [submodule "prezto"]
 	path = prezto
 	url = git@github.com:sorin-ionescu/prezto.git
-[submodule "vim/buffet"]
-	path = vim/buffet
-	url = https://github.com/sandeepcr529/Buffet.vim

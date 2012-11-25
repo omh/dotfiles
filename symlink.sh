@@ -8,10 +8,8 @@ ln -sf `pwd`/zshrc ~/.zshrc
 ln -sf `pwd`/zpreztorc ~/.zpreztorc
 
 # Vim
-ln -sf `pwd`/vim ~/.janus
-ln -sf `pwd`/vimrc.before ~/.vimrc.before
-ln -sf `pwd`/vimrc.after ~/.vimrc.after
-ln -sf `pwd`/gvimrc.after ~/.gvimrc.after
+ln -sf `pwd`/vimrc ~/.vimrc
+ln -sf `pwd`/gvimrc ~/.gvimrc
 
 # Misc
 ln -sf `pwd`/gemrc ~/.gemrc
