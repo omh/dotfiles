@@ -1,5 +1,5 @@
 " ==============================================================================
-" general settings
+" General settings
 " ==============================================================================
 
 set scrolloff=5
@@ -219,6 +219,8 @@ imap jj <Esc>
 " Map Shift-{/Shift-} to Alt-j/Alt-k for easier jumping of paragraphs
 nmap <M-k> <S-{>
 nmap <M-j> <S-}>
+vmap <M-k> <S-{>
+vmap <M-j> <S-}>
 
 " Don't yank selected text in visual mode overwriting text by yanking
 nnoremap c "_c
