@@ -1,8 +1,42 @@
-" =============================================================================:
+" =============================================================================
 " Bundles
 " ==============================================================================
 
-source ~/.bundles.vim
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+" Custom plugins
+Bundle 'bbommarito/vim-slim'
+Bundle 'tpope/vim-markdown'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-surround'
+Bundle 'mileszs/ack.vim'
+Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'omh/vim-colors'
+Bundle 'msanders/snipmate.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'bkad/CamelCaseMotion'
+Bundle 'Shougo/neocomplcache'
+Bundle 'spf13/PIV'
+Bundle 'sandeepcr529/Buffet.vim'
+Bundle 'sjbach/lusty'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'scrooloose/nerdtree'
+Bundle 'omh/Kwbd.vim'
+Bundle 'kien/ctrlp.vim'
+Bundle 'omh/vim-ez'
+
+filetype plugin indent on
 
 " ==============================================================================
 " General settings
@@ -90,6 +124,64 @@ set gcr=a:blinkon0
 " Set leader key
 let mapleader = ","
 
+" =============================================================================:
+" Bundles configs
+" ==============================================================================
+
+nmap <leader>gb :Gblame<CR>
+nmap <leader>gs :Gstatus<CR>
+nmap <leader>gd :Gdiff<CR>
+nmap <leader>gl :Glog<CR>
+nmap <leader>gc :Gcommit<CR>
+nmap <leader>gp :Git push<CR>
+
+map <S-W> <Plug>CamelCaseMotion_w
+map <S-B> <Plug>CamelCaseMotion_b
+map <S-E> <Plug>CamelCaseMotion_e
+
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_min_syntax_length = 5
+
+let g:php_folding = 0
+
+map <leader>m :Bufferlistsw<CR>
+
+map <silent> <leader>f :LustyFilesystemExplorer<CR>
+map <silent> <leader>r :LustyFilesystemExplorerFromHere<CR>
+
+" Single lines
+nmap <M-S-k> [e
+nmap <M-S-j> ]e
+" Move single lines
+vmap <M-S-k> [egv
+vmap <M-S-j> ]egv
+
+nmap <leader>a :Ack<space>
+" Put current word into Ack
+nmap <leader>za :Ack "<C-r>=expand("<cword>")<CR>"
+vmap <leader>za y:Ack "<C-r>""
+
+let NERDTreeMinimalUI=1
+let NERDTreeChDirMode=2
+let NERDTreeShowBookmarks=1
+nmap <leader>n :NERDTreeToggle<CR>
+nmap <leader>v :NERDTreeFind<CR>
+
+" Map Leader+k to kill current buffer
+map <silent> <leader>k :Kwbd<CR>
+
+nmap <silent> <leader>b :CtrlPMRUFiles<CR>
+nmap <silent> <leader>t :CtrlP<CR>
+nmap <silent> <leader>ll :CtrlPLine<CR>
+" Don't manage the current directory
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_max_height = 20
+
+au BufRead,BufNewFile *.tpl  set filetype=ezp
+
+
 " ==============================================================================
 " Keyboard Mappings
 " ==============================================================================
@@ -144,11 +236,10 @@ nmap <leader>h :%s/\s\+$//<CR>
 nmap <leader>x :silent 1,$!xmllint --format --recover - 2>/dev/null<CR>
 
 " Show syntax highlighting groups for word under cursor
-nnoremap <C-S-P> :call <SID>SynStack()<CR>
+nnoremap <M-P> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
   if !exists("*synstack")
     return
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
-
