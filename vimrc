@@ -144,6 +144,10 @@ let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_min_syntax_length = 5
 
 let g:php_folding = 0
+let g:php_html_in_strings = 0
+let g:php_parent_error_close = 0
+let g:php_parent_error_open = 0
+let g:DisableAutoPHPFolding = 1
 
 map <leader>m :Bufferlistsw<CR>
 
