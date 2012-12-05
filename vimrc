@@ -9,7 +9,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle 'gmarik/vundle'
 
 " Custom plugins
@@ -28,20 +28,20 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'bkad/CamelCaseMotion'
 Bundle 'Shougo/neocomplcache'
 Bundle 'spf13/PIV'
-Bundle 'sandeepcr529/Buffet.vim'
 Bundle 'sjbach/lusty'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'scrooloose/nerdtree'
 Bundle 'omh/Kwbd.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'omh/vim-ez'
+Bundle 'vim-scripts/ShowMarks'
 
 filetype plugin indent on
 
 " ==============================================================================
 " General settings
 " ==============================================================================
-colorscheme oh
+colorscheme oh-hemisu
 
 set scrolloff=5
 set laststatus=2
@@ -135,9 +135,12 @@ nmap <leader>gl :Glog<CR>
 nmap <leader>gc :Gcommit<CR>
 nmap <leader>gp :Git push<CR>
 
-map <S-W> <Plug>CamelCaseMotion_w
-map <S-B> <Plug>CamelCaseMotion_b
-map <S-E> <Plug>CamelCaseMotion_e
+map w <Plug>CamelCaseMotion_w
+map b <Plug>CamelCaseMotion_b
+map e <Plug>CamelCaseMotion_e
+sunmap w
+sunmap b
+sunmap e
 
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
@@ -147,12 +150,18 @@ let g:php_folding = 0
 let g:php_html_in_strings = 0
 let g:php_parent_error_close = 0
 let g:php_parent_error_open = 0
+let g:php_sync_method = 3
 let g:DisableAutoPHPFolding = 1
+let g:loaded_phpfolding=1
+let g:loaded_piv=1
+let g:did_indent = 1
 
-map <leader>m :Bufferlistsw<CR>
-
+let g:LustyJugglerShowKeys = 'a'
+let g:LustyJugglerAltTabMode = 1
 map <silent> <leader>f :LustyFilesystemExplorer<CR>
 map <silent> <leader>r :LustyFilesystemExplorerFromHere<CR>
+map <silent> <leader>p :LustyJuggler<CR>
+noremap <silent> <A-s> :LustyJuggler<CR>
 
 " Single lines
 nmap <M-S-k> [e
@@ -183,8 +192,15 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_max_height = 20
 
-au BufRead,BufNewFile *.tpl  set filetype=ezp
+" ShowMarks
+let g:showmarks_enable=0
 
+au BufRead,BufNewFile *.tpl set filetype=ezp
+au BufRead,BufNewFile *.php set foldmethod=indent
+au BufRead,BufNewFile *.php set foldlevelstart=1
+au BufRead,BufNewFile *.php let g:php_html_in_strings=0
+au BufRead,BufNewFile *.php let g:php_folding=0
+au BufRead,BufNewFile *.php let g:php_sql_query=0
 
 " ==============================================================================
 " Keyboard Mappings
