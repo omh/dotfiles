@@ -129,7 +129,7 @@ let mapleader = ","
 " ==============================================================================
 
 nmap <leader>gb :Gblame<CR>
-nmap <leader>gs :Gstatus<CR>
+nmap <leader>gs :Gstatus<CR><C-w>15+
 nmap <leader>gd :Gdiff<CR>
 nmap <leader>gl :Glog<CR>
 nmap <leader>gc :Gcommit<CR>
