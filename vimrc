@@ -188,6 +188,10 @@ map <silent> <leader>k :Kwbd<CR>
 nmap <silent> <leader>b :CtrlPMRUFiles<CR>
 nmap <silent> <leader>t :CtrlP<CR>
 nmap <silent> <leader>ll :CtrlPLine<CR>
+
+nmap <silent> <leader>lw :CtrlP<CR><C-\>w
+vmap <silent> <leader>lw y:CtrlP<CR><C-\>c
+
 " Don't manage the current directory
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
