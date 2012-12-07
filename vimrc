@@ -125,6 +125,13 @@ set gcr=a:blinkon0
 " Set leader key
 let mapleader = ","
 
+" Remember position in file
+set viminfo='10,\"100,:20,%,n~/.viminfo
+if has("autocmd")
+      au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+          \| exe "normal g'\"" | endif
+endif
+
 " =============================================================================:
 " Bundles configs
 " ==============================================================================
