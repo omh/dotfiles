@@ -36,6 +36,8 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'omh/vim-ez'
 Bundle 'vim-scripts/ShowMarks'
 Bundle "xolox/vim-session"
+Bundle 'kana/vim-smartinput'
+Bundle 'omh/vim-islime2'
 
 filetype plugin indent on
 
@@ -119,13 +121,16 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
+" Turn on mouse support
+set mouse=a
+
 " Disable all blinking
 set gcr=a:blinkon0
 
 " Set leader key
 let mapleader = ","
 
-" =============================================================================:
+" ==============================================================================
 " Bundles configs
 " ==============================================================================
 
@@ -196,9 +201,30 @@ vmap <silent> <leader>lw y:CtrlP<CR><C-\>c
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_max_height = 20
+let g:ctrlp_clear_cache_on_exit = 0
 
 " ShowMarks
 let g:showmarks_enable=0
+
+" iSlime2
+
+" Rerun the previous iSlime2 command
+nnoremap <leader>xr :ISlime2Rerun<CR>
+
+" Send up and enter to re-run the previous command
+nnoremap <leader>xp :ISlime2UpEnter<CR>
+
+" Send the current visual selection or paragraph
+inoremap <leader>xc <Esc>vip"ry:ISlime2 <C-r>"<CR>
+vnoremap <leader>xc "ry:ISlime2 <C-r>"<CR>
+nnoremap <leader>xc vip"ry:ISlime2 <C-r>"<CR>
+
+" Send the whole file
+nnoremap <leader>xf gg<S-v><S-g>"ry:ISlime2 <C-r>"<CR>
+
+" Clear ez publish caches
+nnoremap <leader>xee :ISlime2 php bin/php/ezcache.php --clear-all<CR>
+nnoremap <leader>xea :ISlime2 php bin/php/ezpgenerateautoloads.php -e<CR>
 
 au BufRead,BufNewFile *.tpl set filetype=ezp
 au BufRead,BufNewFile *.php set foldmethod=indent
@@ -221,10 +247,6 @@ nnoremap <leader>w <C-w>v<C-w>l
 nmap <leader>s :setlocal spell! spelllang=en_gb<CR>
 
 " Easy window navigation
-nmap <C-up> <C-w>k
-nmap <C-down> <C-w>j
-nmap <C-left> <C-w>h
-nmap <C-right> <C-w>l
 nmap <C-k> <C-w>k
 nmap <C-j> <C-w>j
 nmap <C-h> <C-w>h
@@ -250,6 +272,10 @@ nnoremap x "_x
 vnoremap x "_x
 nnoremap X "_X
 vnoremap X "_X
+
+" Tabs
+map <C-left> :tabprev<CR>
+map <C-right> :tabnext<CR>
 
 " Map Leader+q to close current window
 map <leader>q :q<CR>
