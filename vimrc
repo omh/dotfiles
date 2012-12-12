@@ -38,6 +38,8 @@ Bundle 'vim-scripts/ShowMarks'
 Bundle "xolox/vim-session"
 Bundle 'kana/vim-smartinput'
 Bundle 'omh/vim-islime2'
+Bundle 'ap/vim-css-color'
+Bundle 'pangloss/vim-javascript'
 
 filetype plugin indent on
 
