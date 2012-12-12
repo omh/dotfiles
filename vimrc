@@ -282,6 +282,10 @@ vnoremap x "_x
 nnoremap X "_X
 vnoremap X "_X
 
+" Ctrl+Enter to insert ; at the end of the line
+inoremap <C-Enter> <C-S-o><S-A>;<ESC>
+nnoremap <C-Enter> <S-A>;<ESC>
+
 " Tabs
 map <C-left> :tabprev<CR>
 map <C-right> :tabnext<CR>
