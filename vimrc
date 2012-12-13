@@ -37,6 +37,8 @@ Bundle 'omh/vim-ez'
 Bundle 'vim-scripts/ShowMarks'
 Bundle "xolox/vim-session"
 Bundle 'omh/vim-islime2'
+Bundle 'ap/vim-css-color'
+Bundle 'pangloss/vim-javascript'
 
 filetype plugin indent on
 
