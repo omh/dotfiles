@@ -36,7 +36,6 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'omh/vim-ez'
 Bundle 'vim-scripts/ShowMarks'
 Bundle "xolox/vim-session"
-Bundle 'kana/vim-smartinput'
 Bundle 'omh/vim-islime2'
 
 filetype plugin indent on
