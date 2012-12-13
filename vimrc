@@ -230,8 +230,10 @@ nnoremap <leader>xc vip"ry:ISlime2 <C-r>"<CR>
 nnoremap <leader>xf gg<S-v><S-g>"ry:ISlime2 <C-r>"<CR>
 
 " Clear ez publish caches
-nnoremap <leader>xee :ISlime2 php bin/php/ezcache.php --clear-all<CR>
-nnoremap <leader>xea :ISlime2 php bin/php/ezpgenerateautoloads.php -e<CR>
+nnoremap <silent> <leader>xee :ISlime2 php bin/php/ezcache.php --clear-all<CR>
+nnoremap <silent> <leader>xea :ISlime2 php bin/php/ezpgenerateautoloads.php -e<CR>
+nnoremap <silent> <leader>xei :ISlime2 php tests/runtests.php --dsn mysql://root@localhost/tests extension/klpbrightcove<CR>
+nnoremap <silent> <leader>xeu :ISlime2 phpunit extension/klpbrightcove<CR>
 
 au BufRead,BufNewFile *.tpl set filetype=ezp
 au BufRead,BufNewFile *.php set foldmethod=indent
@@ -291,7 +293,7 @@ map <leader>q :q<CR>
 nmap <leader>h :%s/\s\+$//<CR>
 
 " Format XML
-nmap <leader>x :silent 1,$!xmllint --format --recover - 2>/dev/null<CR>
+nmap <leader>xx :silent 1,$!xmllint --format --recover - 2>/dev/null<CR>
 
 " Show syntax highlighting groups for word under cursor
 nnoremap <M-P> :call <SID>SynStack()<CR>
