@@ -193,15 +193,20 @@ vmap <leader>za y:Ack "<C-r>""
 let NERDTreeMinimalUI=1
 let NERDTreeChDirMode=2
 let NERDTreeShowBookmarks=1
+let NERDTreeIgnore=['__pycache__$', '\~$']
+
 nmap <leader>n :NERDTreeToggle<CR>
 nmap <leader>v :NERDTreeFind<CR>
 
 " Map Leader+k to kill current buffer
 map <silent> <leader>k :Kwbd<CR>
 
-nmap <silent> <leader>b :CtrlPMRUFiles<CR>
-nmap <silent> <leader>t :CtrlP<CR>
-nmap <silent> <leader>ll :CtrlPLine<CR>
+nnoremap <silent> <leader>b :CtrlPMRUFiles<CR>
+nnoremap <silent> <leader>t :CtrlP<CR>
+nnoremap <silent> <leader>ll :CtrlPLine<CR>
+nnoremap <silent> <leader>lb :CtrlPBookmarkDir<CR>
+nnoremap <silent> <leader>la :CtrlPBookmarkDirAdd<CR>
+map <silent> <leader>p :CtrlPBuffer<CR>
 
 nmap <silent> <leader>lw :CtrlP<CR><C-\>w
 vmap <silent> <leader>lw y:CtrlP<CR><C-\>c
@@ -284,7 +289,9 @@ vnoremap X "_X
 
 " Ctrl+Enter to insert ; at the end of the line
 inoremap <C-Enter> <C-S-o><S-A>;<ESC>
+inoremap <C-^M> <C-S-o><S-A>;<ESC>
 nnoremap <C-Enter> <S-A>;<ESC>
+nnoremap <C-^M> <S-A>;<ESC>
 
 " Tabs
 map <C-left> :tabprev<CR>
