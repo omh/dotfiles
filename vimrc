@@ -69,6 +69,7 @@ set wildignore+=TAGS
 set wildignore+=tags
 set wildignore+=var/*
 set wildignore+=*tmp/*
+set wildignore+=*__pycache__*
 
 " more history
 set history=1000
