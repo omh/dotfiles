@@ -31,6 +31,8 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 alias m="mvim --remote"
 alias ff="find . -not -path '*.git*'|grep -i "
 alias grep="grep --color"
+# Grep highlighting color
+export GREP_COLOR='0;35;31'
 
 # Load rbenv
 if (( $+commands[rbenv] )) ; then
