@@ -25,9 +25,7 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'omh/vim-colors'
 Bundle 'msanders/snipmate.vim'
 Bundle 'tpope/vim-fugitive'
-Bundle 'bkad/CamelCaseMotion'
 Bundle 'Shougo/neocomplcache'
-Bundle 'spf13/PIV'
 Bundle 'sjbach/lusty'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'scrooloose/nerdtree'
@@ -69,6 +67,9 @@ set wildignore+=TAGS
 set wildignore+=tags
 set wildignore+=var/*
 set wildignore+=*tmp/*
+
+" Disable folding!
+set nofoldenable 
 
 " more history
 set history=1000
@@ -149,31 +150,14 @@ nmap <leader>gl :Glog<CR>
 nmap <leader>gc :Gcommit<CR>
 nmap <leader>gp :Git push<CR>
 
-map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-sunmap w
-sunmap b
-sunmap e
-
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_min_syntax_length = 5
 
-let g:php_folding = 0
-let g:php_html_in_strings = 0
-let g:php_parent_error_close = 0
-let g:php_parent_error_open = 0
-let g:php_sync_method = 3
-let g:DisableAutoPHPFolding = 1
-let g:loaded_phpfolding=1
-let g:loaded_piv=1
-let g:did_indent = 1
-
 let g:LustyJugglerShowKeys = 'a'
 let g:LustyJugglerAltTabMode = 1
 map <silent> <leader>f :LustyFilesystemExplorer<CR>
-map <silent> <leader>r :LustyFilesystemExplorerFromHere<CR>
+map <silent> <leader>e :LustyFilesystemExplorerFromHere<CR>
 map <silent> <leader>p :LustyJuggler<CR>
 noremap <silent> <A-s> :LustyJuggler<CR>
 
@@ -200,6 +184,8 @@ map <silent> <leader>k :Kwbd<CR>
 
 nmap <silent> <leader>b :CtrlPMRUFiles<CR>
 nmap <silent> <leader>t :CtrlP<CR>
+nmap <silent> <leader>r :CtrlPBufTag<CR>
+nmap ; :CtrlPBuffer<CR>
 nmap <silent> <leader>ll :CtrlPLine<CR>
 
 nmap <silent> <leader>lw :CtrlP<CR><C-\>w
@@ -210,6 +196,10 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_max_height = 20
 let g:ctrlp_clear_cache_on_exit = 0
+
+" Syntastic
+let g:syntastic_auto_loc_list=1
+let g:syntastic_loc_list_height=4
 
 " ShowMarks
 let g:showmarks_enable=0
@@ -255,6 +245,10 @@ nnoremap <leader>w <C-w>v<C-w>l
 
 " Toggle spelling on/off
 nmap <leader>s :setlocal spell! spelllang=en_gb<CR>
+
+" Better movement with wrapped lines
+nmap j gj
+nmap k gk
 
 " Easy window navigation
 nmap <C-k> <C-w>k
