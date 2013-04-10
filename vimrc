@@ -67,6 +67,7 @@ set wildignore+=TAGS
 set wildignore+=tags
 set wildignore+=var/*
 set wildignore+=*tmp/*
+set wildignore+=*__pycache__*
 
 " Disable folding!
 set nofoldenable 
@@ -176,6 +177,8 @@ vmap <leader>za y:Ack "<C-r>""
 let NERDTreeMinimalUI=1
 let NERDTreeChDirMode=2
 let NERDTreeShowBookmarks=1
+let NERDTreeIgnore=['__pycache__$', '\~$']
+
 nmap <leader>n :NERDTreeToggle<CR>
 nmap <leader>v :NERDTreeFind<CR>
 
@@ -187,7 +190,7 @@ nmap <silent> <leader>t :CtrlP<CR>
 nmap <silent> <leader>r :CtrlPBufTag<CR>
 nmap ; :CtrlPBuffer<CR>
 nmap <silent> <leader>ll :CtrlPLine<CR>
-
+" Put current word/current selected line into CtrlP
 nmap <silent> <leader>lw :CtrlP<CR><C-\>w
 vmap <silent> <leader>lw y:CtrlP<CR><C-\>c
 
@@ -279,7 +282,9 @@ vnoremap X "_X
 
 " Ctrl+Enter to insert ; at the end of the line
 inoremap <C-Enter> <C-S-o><S-A>;<ESC>
+inoremap <C-^M> <C-S-o><S-A>;<ESC>
 nnoremap <C-Enter> <S-A>;<ESC>
+nnoremap <C-^M> <S-A>;<ESC>
 
 " Tabs
 map <C-left> :tabprev<CR>
