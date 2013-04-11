@@ -37,6 +37,7 @@ Bundle "xolox/vim-session"
 Bundle 'omh/vim-islime2'
 Bundle 'ap/vim-css-color'
 Bundle 'pangloss/vim-javascript'
+Bundle 'tpope/vim-dispatch'
 
 filetype plugin indent on
 
