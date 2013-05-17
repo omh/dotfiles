@@ -16,7 +16,9 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
 
 # Set editor
-EDITOR="vim"
+alias vim="mvim -v"
+alias vi=vim
+export EDITOR="vim"
 
 # Better colors in less
 export LESS_TERMCAP_mb=$'\E[01;31m'
