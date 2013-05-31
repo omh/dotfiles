@@ -38,6 +38,9 @@ Bundle 'omh/vim-islime2'
 Bundle 'ap/vim-css-color'
 Bundle 'pangloss/vim-javascript'
 Bundle 'tpope/vim-dispatch'
+Bundle 'python.vim'
+Bundle 'jmcantrell/vim-virtualenv'
+Bundle 'Glench/Vim-Jinja2-Syntax'
 
 filetype plugin indent on
 
@@ -61,13 +64,13 @@ set wildmode=list:longest,full
 set wildignore+=*.o,*.obj,*.class,*.pyc,bin,*.log,*.pidb
 set wildignore+=*.aux,*.bbl,*.blg,*.fdb_latexmk,*.bst,*.pdf
 set wildignore+=*.gif,*.png,*.db,*.jpg,*.jpeg
-set wildignore+=*/cache/*
 set wildignore+=*/.git/*
 set wildignore+=*/.svn/*
 set wildignore+=TAGS
 set wildignore+=tags
 set wildignore+=var/*
 set wildignore+=*tmp/*
+set wildignore+=venv/**
 set wildignore+=*__pycache__*
 
 " Disable folding!
@@ -204,6 +207,10 @@ let g:ctrlp_clear_cache_on_exit = 0
 " Syntastic
 let g:syntastic_auto_loc_list=1
 let g:syntastic_loc_list_height=4
+" Disable, let python-mode do this.
+"let g:syntastic_python_checkers=['']
+let python_highlight_all=1
+
 
 " ShowMarks
 let g:showmarks_enable=0
