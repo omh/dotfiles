@@ -36,7 +36,7 @@ Bundle 'omh/vim-islime2'
 Bundle 'ap/vim-css-color'
 Bundle 'pangloss/vim-javascript'
 Bundle 'tpope/vim-dispatch'
-
+Bundle 'sophacles/vim-bundle-mako'
 filetype plugin indent on
 
 " ==============================================================================
