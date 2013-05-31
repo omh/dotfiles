@@ -23,4 +23,3 @@ if has("gui_macvim")
     " Allow meta/option key to be mapped to <M-...>
     set macmeta
 endif
-

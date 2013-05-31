@@ -36,6 +36,7 @@ Bundle 'omh/vim-islime2'
 Bundle 'ap/vim-css-color'
 Bundle 'pangloss/vim-javascript'
 Bundle 'tpope/vim-dispatch'
+Bundle 'szw/vim-tags' 
 Bundle 'sophacles/vim-bundle-mako'
 filetype plugin indent on
 
@@ -111,7 +112,7 @@ set autoread
 syntax on
 
 " Syntax coloring lines that are too long just slows down the world
-set synmaxcol=200
+set synmaxcol=2000 
 
 " I don't like it when the matching parens are automatically highlighted
 let loaded_matchparen = 1
@@ -131,6 +132,9 @@ set gcr=a:blinkon0
 
 " Set leader key
 let mapleader = ","
+
+" Two spaces=tab for ruby
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 
 " Remember position in file
 set viminfo='10,\"100,:20,%,n~/.viminfo
@@ -205,6 +209,11 @@ let g:syntastic_loc_list_height=4
 
 " ShowMarks
 let g:showmarks_enable=0
+
+" Powerline settings
+if has("gui_macvim")
+    let g:Powerline_symbols = 'fancy'
+endif
 
 " iSlime2
 
@@ -299,7 +308,7 @@ nmap <leader>h :%s/\s\+$//<CR>
 nmap <leader>xx :silent 1,$!xmllint --format --recover - 2>/dev/null<CR>
 
 " Show syntax highlighting groups for word under cursor
-nnoremap <M-P> :call <SID>SynStack()<CR>
+nnoremap <C-P> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
   if !exists("*synstack")
     return
