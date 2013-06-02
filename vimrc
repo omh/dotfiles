@@ -104,6 +104,10 @@ set shiftwidth=4
 set tabstop=4
 set expandtab
 
+" Scroll faster in terminal
+set ttyfast
+set ttyscroll=3
+
 " Use system clipboard instead of vim's
 set clipboard+=unnamed
 
@@ -215,11 +219,6 @@ let python_highlight_all=1
 
 " ShowMarks
 let g:showmarks_enable=0
-
-" Powerline settings
-if has("gui_macvim")
-    let g:Powerline_symbols = 'fancy'
-endif
 
 " iSlime2
 
