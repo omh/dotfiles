@@ -14,7 +14,7 @@ Bundle 'gmarik/vundle'
 
 " Custom plugins
 Bundle 'tpope/vim-markdown'
-Bundle 'Lokaltog/vim-powerline'
+Bundle 'bling/vim-airline'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-surround'
@@ -31,7 +31,6 @@ Bundle 'scrooloose/nerdtree'
 Bundle 'omh/Kwbd.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'omh/vim-ez'
-Bundle "xolox/vim-session"
 Bundle 'omh/vim-islime2'
 Bundle 'ap/vim-css-color'
 Bundle 'pangloss/vim-javascript'
@@ -219,6 +218,10 @@ let python_highlight_all=1
 
 " ShowMarks
 let g:showmarks_enable=0
+
+" Airline
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
 
 " iSlime2
 
