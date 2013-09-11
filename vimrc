@@ -30,6 +30,7 @@ Bundle 'tpope/vim-unimpaired'
 Bundle 'scrooloose/nerdtree'
 Bundle 'omh/Kwbd.vim'
 Bundle 'kien/ctrlp.vim'
+Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'omh/vim-ez'
 Bundle 'omh/vim-islime2'
 Bundle 'ap/vim-css-color'
@@ -195,7 +196,6 @@ map <silent> <leader>k :Kwbd<CR>
 
 nmap <silent> <leader>b :CtrlPMRUFiles<CR>
 nmap <silent> <leader>t :CtrlP<CR>
-nmap <silent> <leader>r :CtrlPBufTag<CR>
 nmap ; :CtrlPBuffer<CR>
 nmap <silent> <leader>ll :CtrlPLine<CR>
 " Put current word/current selected line into CtrlP
@@ -207,6 +207,8 @@ let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_max_height = 20
 let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_extensions = ['funky']
+nnoremap <Leader>r :CtrlPFunky<Cr>
 
 " Syntastic
 let g:syntastic_auto_loc_list=1
