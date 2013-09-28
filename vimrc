@@ -68,11 +68,11 @@ set wildignore+=TAGS
 set wildignore+=tags
 set wildignore+=var/*
 set wildignore+=*tmp/*
-set wildignore+=venv/**
+set wildignore+=*/venv/*
 set wildignore+=*__pycache__*
 
 " Disable folding!
-set nofoldenable 
+set nofoldenable
 
 " more history
 set history=1000
@@ -118,7 +118,7 @@ set autoread
 syntax on
 
 " Syntax coloring lines that are too long just slows down the world
-set synmaxcol=2000 
+set synmaxcol=2000
 
 " I don't like it when the matching parens are automatically highlighted
 let loaded_matchparen = 1
