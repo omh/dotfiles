@@ -88,6 +88,9 @@ set incsearch
 set showmatch
 set hlsearch
 
+" Faster redraw
+set lazyredraw
+
 " Timeout
 set timeout
 set timeoutlen=1000
@@ -104,12 +107,8 @@ set shiftwidth=4
 set tabstop=4
 set expandtab
 
-" Scroll faster in terminal
-set ttyfast
-set ttyscroll=3
-
 " Use system clipboard instead of vim's
-set clipboard+=unnamed
+set clipboard=unnamed
 
 " Automatically read a file that has changed on disk
 set autoread
@@ -127,8 +126,13 @@ let loaded_matchparen = 1
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " Normal/insert mode change cursor in terminal
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 
 " Turn on mouse support
 set mouse=a

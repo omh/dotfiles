@@ -7,6 +7,7 @@ ln -sf `pwd`/prezto ~/.zprezto
 ln -sf `pwd`/zshrc ~/.zshrc
 ln -sf `pwd`/zpreztorc ~/.zpreztorc
 ln -sf `pwd`/noserc ~/.noserc
+ln -sf `pwd`/tmux.conf ~/.tmux.conf
 
 # Vim
 ln -sf `pwd`/vimrc ~/.vimrc
