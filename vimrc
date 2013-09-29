@@ -40,6 +40,7 @@ Bundle 'python.vim'
 Bundle 'Glench/Vim-Jinja2-Syntax'
 Bundle 'szw/vim-tags' 
 Bundle 'sophacles/vim-bundle-mako'
+Bundle 'jgdavey/tslime.vim'
 filetype plugin indent on
 
 " ==============================================================================
@@ -245,19 +246,17 @@ nnoremap <leader>xr :ISlime2Rerun<CR>
 " Send up and enter to re-run the previous command
 nnoremap <leader>xp :ISlime2UpEnter<CR>
 
-" Send the current visual selection or paragraph
-inoremap <leader>xc <Esc>vip"ry:ISlime2 <C-r>"<CR>
-vnoremap <leader>xc "ry:ISlime2 <C-r>"<CR>
-nnoremap <leader>xc vip"ry:ISlime2 <C-r>"<CR>
-
-" Send the whole file
-nnoremap <leader>xf gg<S-v><S-g>"ry:ISlime2 <C-r>"<CR>
-
 " Clear ez publish caches
 nnoremap <silent> <leader>xee :ISlime2 php bin/php/ezcache.php --clear-all<CR>
 nnoremap <silent> <leader>xea :ISlime2 php bin/php/ezpgenerateautoloads.php -e<CR>
 nnoremap <silent> <leader>xei :ISlime2 php tests/runtests.php --dsn mysql://root@localhost/tests extension/klpbrightcove<CR>
 nnoremap <silent> <leader>xeu :ISlime2 phpunit extension/klpbrightcove<CR>
+
+" tmux tslime ---------------
+" clear tmux settings
+nnoremap <leader>xc :unlet g:tslime<CR>
+nnoremap <leader>xyt :call Send_to_Tmux("./run_tests.py\n")<CR>
+nnoremap <leader>xyd :call Send_to_Tmux("./run_tests.py --with-db\n")<CR>
 
 au BufRead,BufNewFile *.tpl set filetype=ezp
 au BufRead,BufNewFile *.php set foldmethod=indent
