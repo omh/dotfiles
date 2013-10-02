@@ -16,7 +16,6 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-markdown'
 Bundle 'bling/vim-airline'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-surround'
 Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/syntastic'
@@ -35,10 +34,7 @@ Bundle 'omh/vim-ez'
 Bundle 'omh/vim-islime2'
 Bundle 'ap/vim-css-color'
 Bundle 'pangloss/vim-javascript'
-Bundle 'tpope/vim-dispatch'
-Bundle 'python.vim'
 Bundle 'Glench/Vim-Jinja2-Syntax'
-Bundle 'szw/vim-tags' 
 Bundle 'sophacles/vim-bundle-mako'
 Bundle 'jgdavey/tslime.vim'
 filetype plugin indent on
@@ -107,6 +103,9 @@ set softtabstop=4
 set shiftwidth=4
 set tabstop=4
 set expandtab
+
+" Cursor lie
+set cursorline
 
 " Use system clipboard instead of vim's
 set clipboard=unnamed
@@ -223,12 +222,7 @@ nnoremap <Leader>r :CtrlPFunky<Cr>
 let g:syntastic_auto_loc_list=1
 let g:syntastic_loc_list_height=4
 " Disable, let python-mode do this.
-"let g:syntastic_python_checkers=['']
-let python_highlight_all=1
-
-
-" ShowMarks
-let g:showmarks_enable=0
+let g:syntastic_python_checkers=['']
 
 " Airline
 let g:airline_left_sep = ''
@@ -296,6 +290,9 @@ nmap <M-k> <S-{>
 nmap <M-j> <S-}>
 vmap <M-k> <S-{>
 vmap <M-j> <S-}>
+
+nnoremap <C-n> :bnext<CR>
+nnoremap <C-p> :bprevious<CR>
 
 " Don't yank selected text in visual mode overwriting text by yanking
 nnoremap c "_c
