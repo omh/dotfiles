@@ -4,6 +4,12 @@ function ssh_connection() {
   fi
 }
 
+function virtualenv() {
+  if [[ -n $VIRTUAL_ENV ]]; then
+    echo "%F{178}(venv)%f "
+  fi
+}
+
 function prompt_omh_precmd {
   vcs_info
 }
@@ -29,6 +35,7 @@ function prompt_omh_setup {
   zstyle ':vcs_info:git*+set-message:*' hooks git-status
 
   autoload -U colors && colors
-  PROMPT='$(ssh_connection)%F{238}%3~%f${vcs_info_msg_0_} %F{yellow}%(!.#.❯)%b%f '
+  VIRTUAL_ENV_DISABLE_PROMPT=1
+  PROMPT='$(virtualenv)$(ssh_connection)%F{238}%3~%f${vcs_info_msg_0_} %F{yellow}%(!.#.❯)%b%f '
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
