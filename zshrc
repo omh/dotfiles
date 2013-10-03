@@ -16,9 +16,13 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
 
 # Set editor
-alias vim="mvim -v"
-alias vi=vim
-export EDITOR="mvim -v"
+export EDITOR="vim"
+if [[ -n $SSH_CONNECTION ]]; then
+else
+    export EDITOR="mvim -v"
+    alias vi="mvim -v"
+    alias vim="mvim -v"
+fi
 
 # Better colors in less
 export LESS_TERMCAP_mb=$'\E[01;31m'
