@@ -37,6 +37,7 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'Glench/Vim-Jinja2-Syntax'
 Bundle 'sophacles/vim-bundle-mako'
 Bundle 'jgdavey/tslime.vim'
+Bundle 'kshenoy/vim-signature'
 filetype plugin indent on
 
 " ==============================================================================
@@ -85,9 +86,6 @@ set incsearch
 set showmatch
 set hlsearch
 
-" Faster redraw
-set lazyredraw
-
 " Timeout
 set timeout
 set timeoutlen=1000
@@ -115,6 +113,9 @@ set autoread
 
 " Turn on syntax highlighting
 syntax on
+
+" Treat all numbers as decimal
+set nrformats=
 
 " Syntax coloring lines that are too long just slows down the world
 set synmaxcol=2000
@@ -146,6 +147,7 @@ set gcr=a:blinkon0
 
 " Set leader key
 let mapleader = ","
+noremap \ ,
 
 " Two spaces=tab for ruby
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
@@ -199,16 +201,16 @@ let NERDTreeIgnore=['__pycache__$', '\~$']
 nmap <leader>n :NERDTreeToggle<CR>
 nmap <leader>v :NERDTreeFind<CR>
 
-" Map Leader+k to kill current buffer
-map <silent> <leader>k :Kwbd<CR>
+" Map Leader+wk to kill current buffer
+map <leader>wk :Kwbd<CR>
 
-nmap <silent> <leader>b :CtrlPMRUFiles<CR>
-nmap <silent> <leader>t :CtrlP<CR>
-nmap ; :CtrlPBuffer<CR>
-nmap <silent> <leader>ll :CtrlPLine<CR>
+nmap <leader>pm :CtrlPMRUFiles<CR>
+nmap <leader>t :CtrlP<CR>
+nmap <leader>j :CtrlPBuffer<CR>
+nmap <leader>pl :CtrlPLine<CR>
 " Put current word/current selected line into CtrlP
-nmap <silent> <leader>lw :CtrlP<CR><C-\>w
-vmap <silent> <leader>lw y:CtrlP<CR><C-\>c
+nmap <leader>lw :CtrlP<CR><C-\>w
+vmap <leader>lw y:CtrlP<CR><C-\>c
 
 " Don't manage the current directory
 let g:ctrlp_working_path_mode = 0
@@ -231,6 +233,7 @@ let g:airline_left_alt_sep = ''
 let g:airline_right_alt_sep = ''
 let g:airline_theme='ubaryd'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
 
 " iSlime2
 
@@ -266,8 +269,12 @@ au BufRead,BufNewFile *.php let g:php_sql_query=0
 " Map leader+space to clear searches
 nnoremap <leader>/ :silent noh<cr>
 
-" Map leader+w to open new vsplit and switch to it
-nnoremap <leader>w <C-w>v<C-w>l
+" Map leader+wv to open new vsplit and switch to it
+nnoremap <leader>wv <C-w>v<C-w>l
+" Map leader+ws to open new hsplit and switch to it
+nnoremap <leader>ws <C-w>s<C-w>j
+" Map leader+wt to create new tab
+nnoremap <leader>wt :tabnew<CR>
 
 " Toggle spelling on/off
 nmap <leader>s :setlocal spell! spelllang=en_gb<CR>
@@ -313,8 +320,8 @@ nnoremap <C-Enter> <S-A>;<ESC>
 nnoremap <C-^M> <S-A>;<ESC>
 
 " Tabs
-map <C-left> :tabprev<CR>
-map <C-right> :tabnext<CR>
+nnoremap <leader>[ :tabprev<CR>
+nnoremap <leader>] :tabnext<CR>
 
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
@@ -344,7 +351,7 @@ nmap <leader>h :%s/\s\+$//<CR>
 nmap <leader>xx :silent 1,$!xmllint --format --recover - 2>/dev/null<CR>
 
 " Show syntax highlighting groups for word under cursor
-nnoremap <C-P> :call <SID>SynStack()<CR>
+"nnoremap <C-S-P> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
   if !exists("*synstack")
     return
