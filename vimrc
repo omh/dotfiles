@@ -123,6 +123,9 @@ set synmaxcol=2000
 " I don't like it when the matching parens are automatically highlighted
 let loaded_matchparen = 1
 
+" Set dictionary
+set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
+
 " Normal/insert mode change cursor in terminal
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -268,8 +271,12 @@ au BufRead,BufNewFile *.twig set filetype=jinja
 " Keyboard Mappings
 " ==============================================================================
 
+
+" Default to verbatim search
+nnoremap / /\V
+
 " Map leader+space to clear searches
-nnoremap <leader>/ :silent noh<cr>
+nnoremap <leader>/ :noh<cr>
 
 " Map leader+wv to open new vsplit and switch to it
 nnoremap <leader>wv <C-w>v<C-w>l
