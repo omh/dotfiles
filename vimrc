@@ -32,7 +32,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'omh/vim-ez'
 Bundle 'omh/vim-islime2'
-Bundle 'ap/vim-css-color'
+"Bundle 'ap/vim-css-color'
 Bundle 'pangloss/vim-javascript'
 Bundle 'Glench/Vim-Jinja2-Syntax'
 Bundle 'sophacles/vim-bundle-mako'
@@ -123,9 +123,6 @@ set synmaxcol=2000
 " I don't like it when the matching parens are automatically highlighted
 let loaded_matchparen = 1
 
-" Highlight VCS conflict markers
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-
 " Normal/insert mode change cursor in terminal
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -163,6 +160,7 @@ endif
 " Bundles configs
 " ==============================================================================
 
+" Fugitive
 nmap <leader>gb :Gblame<CR>
 nmap <leader>gs :Gstatus<CR><C-w>15+
 nmap <leader>gd :Gdiff<CR>
@@ -170,29 +168,29 @@ nmap <leader>gl :Glog<CR>
 nmap <leader>gc :Gcommit<CR>
 nmap <leader>gp :Git push<CR>
 
+" Neocomlcache
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_min_syntax_length = 5
 
-let g:LustyJugglerShowKeys = 'a'
-let g:LustyJugglerAltTabMode = 1
+" Lusty Explorer
 map <silent> <leader>f :LustyFilesystemExplorer<CR>
 map <silent> <leader>e :LustyFilesystemExplorerFromHere<CR>
-map <silent> <leader>p :LustyJuggler<CR>
-noremap <silent> <A-s> :LustyJuggler<CR>
 
-" Single lines
-nmap <M-S-k> [e
-nmap <M-S-j> ]e
+" Move Single lines
+nnoremap <M-C-k> [e
+nnoremap <M-C-j> ]e
 " Move single lines
 vmap <M-S-k> [egv
 vmap <M-S-j> ]egv
 
+" Ack
 nmap <leader>a :Ack<space>
 " Put current word into Ack
 nmap <leader>za :Ack "<C-r>=expand("<cword>")<CR>"
 vmap <leader>za y:Ack "<C-r>""
 
+" NERDTree
 let NERDTreeMinimalUI=1
 let NERDTreeChDirMode=2
 let NERDTreeShowBookmarks=1
@@ -215,6 +213,7 @@ vmap <leader>lw y:CtrlP<CR><C-\>c
 " Don't manage the current directory
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_match_window_bottom = 1
 let g:ctrlp_max_height = 20
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_extensions = ['funky']
@@ -225,6 +224,7 @@ let g:syntastic_auto_loc_list=1
 let g:syntastic_loc_list_height=4
 " Disable, let python-mode do this.
 let g:syntastic_python_checkers=['']
+let python_highlight_all=1
 
 " Airline
 let g:airline_left_sep = ''
@@ -236,7 +236,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
 
 " iSlime2
-
 " Rerun the previous iSlime2 command
 nnoremap <leader>xr :ISlime2Rerun<CR>
 
@@ -244,10 +243,10 @@ nnoremap <leader>xr :ISlime2Rerun<CR>
 nnoremap <leader>xp :ISlime2UpEnter<CR>
 
 " Clear ez publish caches
-nnoremap <silent> <leader>xee :ISlime2 php bin/php/ezcache.php --clear-all<CR>
-nnoremap <silent> <leader>xea :ISlime2 php bin/php/ezpgenerateautoloads.php -e<CR>
-nnoremap <silent> <leader>xei :ISlime2 php tests/runtests.php --dsn mysql://root@localhost/tests extension/klpbrightcove<CR>
-nnoremap <silent> <leader>xeu :ISlime2 phpunit extension/klpbrightcove<CR>
+nnoremap <leader>xke :call Send_to_Tmux("cd /var/www/kbase.localhost/htdocs/ezp/ && php ezpublish/console cache:clear\n")<CR>
+nnoremap <leader>xea :ISlime2 php bin/php/ezpgenerateautoloads.php -e<CR>
+nnoremap <leader>xei :ISlime2 php tests/runtests.php --dsn mysql://root@localhost/tests extension/klpbrightcove<CR>
+nnoremap <leader>xeu :ISlime2 phpunit extension/klpbrightcove<CR>
 
 " tmux tslime ---------------
 " clear tmux settings
@@ -255,12 +254,15 @@ nnoremap <leader>xc :unlet g:tslime<CR>
 nnoremap <leader>xyt :call Send_to_Tmux("./run_tests.py\n")<CR>
 nnoremap <leader>xyd :call Send_to_Tmux("./run_tests.py --with-db\n")<CR>
 
+nnoremap <leader>xms :call Send_to_Tmux("./sync.sh\n")<CR>
+
 au BufRead,BufNewFile *.tpl set filetype=ezp
 au BufRead,BufNewFile *.php set foldmethod=indent
 au BufRead,BufNewFile *.php set foldlevelstart=1
 au BufRead,BufNewFile *.php let g:php_html_in_strings=0
 au BufRead,BufNewFile *.php let g:php_folding=0
 au BufRead,BufNewFile *.php let g:php_sql_query=0
+au BufRead,BufNewFile *.twig set filetype=jinja
 
 " ==============================================================================
 " Keyboard Mappings
@@ -277,7 +279,10 @@ nnoremap <leader>ws <C-w>s<C-w>j
 nnoremap <leader>wt :tabnew<CR>
 
 " Toggle spelling on/off
-nmap <leader>s :setlocal spell! spelllang=en_gb<CR>
+nnoremap <leader>d :setlocal spell! spelllang=en_gb<CR>
+
+" Save file
+nnoremap <leader>s :w<CR>
 
 " Better movement with wrapped lines
 nmap j gj
@@ -302,20 +307,20 @@ nnoremap <C-n> :bnext<CR>
 nnoremap <C-p> :bprevious<CR>
 
 " Don't yank selected text in visual mode overwriting text by yanking
-nnoremap c "_c
-vnoremap c "_c
-nnoremap C "_C
-vnoremap C "_C
-vnoremap p "_dP
-vnoremap P "_dP
-nnoremap x "_x
-vnoremap x "_x
-nnoremap X "_X
-vnoremap X "_X
+"nnoremap c "_c
+"vnoremap c "_c
+"nnoremap C "_C
+"vnoremap C "_C
+"vnoremap p "_dP
+"vnoremap P "_dP
+"nnoremap x "_x
+"vnoremap x "_x
+"nnoremap X "_X
+"vnoremap X "_X
 
 " Ctrl+Enter to insert ; at the end of the line
 inoremap <C-Enter> <C-S-o><S-A>;<ESC>
-inoremap <C-^M> <C-S-o><S-A>;<ESC>
+inoremap <C-^M> <C-S-o><S-A>;<ESC>;
 nnoremap <C-Enter> <S-A>;<ESC>
 nnoremap <C-^M> <S-A>;<ESC>
 

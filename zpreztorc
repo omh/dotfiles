@@ -31,11 +31,11 @@ zstyle ':prezto:load' pmodule \
   'directory' \
   'spectrum' \
   'utility' \
-  'completion' \
   'syntax-highlighting' \
   'prompt'
 
 #
+ # 'completion' \
 # Editor
 #
 
