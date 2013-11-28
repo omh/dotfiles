@@ -102,9 +102,6 @@ set shiftwidth=4
 set tabstop=4
 set expandtab
 
-" Cursor lie
-set cursorline
-
 " Use system clipboard instead of vim's
 set clipboard=unnamed
 
@@ -122,6 +119,9 @@ set synmaxcol=2000
 
 " I don't like it when the matching parens are automatically highlighted
 let loaded_matchparen = 1
+
+"
+set lazyredraw
 
 " Normal/insert mode change cursor in terminal
 if exists('$TMUX')
