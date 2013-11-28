@@ -16,15 +16,12 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-markdown'
 "Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-surround'
-Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'omh/vim-colors'
 Bundle 'msanders/snipmate.vim'
 Bundle 'tpope/vim-fugitive'
-"Bundle 'Shougo/neocomplcache'
 Bundle 'sjbach/lusty'
-"Bundle 'tpope/vim-unimpaired'
 Bundle 'scrooloose/nerdtree'
 Bundle 'omh/Kwbd.vim'
 Bundle 'kien/ctrlp.vim'
@@ -101,9 +98,6 @@ set shiftwidth=4
 set tabstop=4
 set expandtab
 
-" Cursor lie
-set cursorline
-
 " Use system clipboard instead of vim's
 set clipboard=unnamed
 
@@ -125,6 +119,9 @@ let g:matchparen_insert_timeout = 10
 
 " Set dictionary
 set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
+
+"
+set lazyredraw
 
 " Normal/insert mode change cursor in terminal
 if exists('$TMUX')
@@ -187,11 +184,6 @@ nnoremap <M-C-j> ]e
 vmap <M-S-k> [egv
 vmap <M-S-j> ]egv
 
-" Ack
-nmap <leader>a :Ack<space>
-" Put current word into Ack
-nmap <leader>za :Ack "<C-r>=expand("<cword>")<CR>"
-vmap <leader>za y:Ack "<C-r>""
 
 " NERDTree
 let NERDTreeMinimalUI=1
@@ -276,6 +268,24 @@ au BufRead,BufNewFile *.php let g:php_folding=0
 au BufRead,BufNewFile *.php let g:php_sql_query=0
 au BufRead,BufNewFile *.twig set filetype=jinja
 
+" Grepping
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap <leader>a :Ag<space>
+" Put current word into Ack
+nnoremap <leader>A :Ag <C-r>=expand("<cword>")<CR>
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
 " ==============================================================================
 " Keyboard Mappings
 " ==============================================================================
@@ -321,18 +331,6 @@ vmap <M-j> <S-}>
 
 nnoremap <C-n> :bnext<CR>
 nnoremap <C-p> :bprevious<CR>
-
-" Don't yank selected text in visual mode overwriting text by yanking
-"nnoremap c "_c
-"vnoremap c "_c
-"nnoremap C "_C
-"vnoremap C "_C
-"vnoremap p "_dP
-"vnoremap P "_dP
-"nnoremap x "_x
-"vnoremap x "_x
-"nnoremap X "_X
-"vnoremap X "_X
 
 " Ctrl+Enter to insert ; at the end of the line
 inoremap <C-Enter> <C-S-o><S-A>;<ESC>
