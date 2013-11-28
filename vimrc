@@ -14,8 +14,7 @@ Bundle 'gmarik/vundle'
 
 " Custom plugins
 Bundle 'tpope/vim-markdown'
-Bundle 'bling/vim-airline'
-Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-surround'
 Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/syntastic'
@@ -23,21 +22,20 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'omh/vim-colors'
 Bundle 'msanders/snipmate.vim'
 Bundle 'tpope/vim-fugitive'
-Bundle 'Shougo/neocomplcache'
+"Bundle 'Shougo/neocomplcache'
 Bundle 'sjbach/lusty'
-Bundle 'tpope/vim-unimpaired'
+"Bundle 'tpope/vim-unimpaired'
 Bundle 'scrooloose/nerdtree'
 Bundle 'omh/Kwbd.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'omh/vim-ez'
-Bundle 'omh/vim-islime2'
-"Bundle 'ap/vim-css-color'
 Bundle 'pangloss/vim-javascript'
 Bundle 'Glench/Vim-Jinja2-Syntax'
 Bundle 'sophacles/vim-bundle-mako'
 Bundle 'jgdavey/tslime.vim'
 Bundle 'kshenoy/vim-signature'
+Bundle 'hdima/python-syntax'
 filetype plugin indent on
 
 " ==============================================================================
@@ -53,6 +51,7 @@ set hidden
 set wrap
 set backspace=2
 set number
+set ruler
 
 " set better autocomplete for finding files
 set wildmenu
@@ -121,7 +120,8 @@ set nrformats=
 set synmaxcol=2000
 
 " I don't like it when the matching parens are automatically highlighted
-let loaded_matchparen = 1
+let g:matchparen_timeout = 10
+let g:matchparen_insert_timeout = 10
 
 " Set dictionary
 set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
@@ -226,7 +226,8 @@ nnoremap <Leader>r :CtrlPFunky<Cr>
 let g:syntastic_auto_loc_list=1
 let g:syntastic_loc_list_height=4
 " Disable, let python-mode do this.
-let g:syntastic_python_checkers=['']
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_checker_args='--ignore=E501'
 let python_highlight_all=1
 
 " Airline
@@ -237,13 +238,6 @@ let g:airline_right_alt_sep = ''
 let g:airline_theme='ubaryd'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 0
-
-" iSlime2
-" Rerun the previous iSlime2 command
-nnoremap <leader>xr :ISlime2Rerun<CR>
-
-" Send up and enter to re-run the previous command
-nnoremap <leader>xp :ISlime2UpEnter<CR>
 
 " Clear ez publish caches
 nnoremap <leader>xke :call Send_to_Tmux("cd /var/www/kbase.localhost/htdocs/ezp/ && php ezpublish/console cache:clear\n")<CR>
@@ -256,8 +250,23 @@ nnoremap <leader>xeu :ISlime2 phpunit extension/klpbrightcove<CR>
 nnoremap <leader>xc :unlet g:tslime<CR>
 nnoremap <leader>xyt :call Send_to_Tmux("./run_tests.py\n")<CR>
 nnoremap <leader>xyd :call Send_to_Tmux("./run_tests.py --with-db\n")<CR>
+nnoremap <leader>xyb :call Send_to_Tmux("cd docs && make html && cd -\n")<CR>
+nnoremap <leader>xyo :call Send_to_Tmux("open docs/_build/html/index.html\n")<CR>
 
 nnoremap <leader>xms :call Send_to_Tmux("./sync.sh\n")<CR>
+
+" pymode
+let g:pymode_doc = 0
+let g:pymode_run_key = ''
+let g:pymode_run_key = '<leader>pr'
+let g:pymode_folding = 0
+let g:pymode_motion = 0
+let g:pymode_breakpoint_key = '<leader>pb'
+let g:pymode_lint_write = 0
+let g:pymode_lint = 0
+
+nnoremap <leader>iD Oimport ipdb; ipdb.set_trace();<ESC>
+nnoremap <leader>id oimport ipdb; ipdb.set_trace();<ESC>
 
 au BufRead,BufNewFile *.tpl set filetype=ezp
 au BufRead,BufNewFile *.php set foldmethod=indent
@@ -331,10 +340,6 @@ inoremap <C-^M> <C-S-o><S-A>;<ESC>;
 nnoremap <C-Enter> <S-A>;<ESC>
 nnoremap <C-^M> <S-A>;<ESC>
 
-" Tabs
-nnoremap <leader>[ :tabprev<CR>
-nnoremap <leader>] :tabnext<CR>
-
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
 nnoremap N Nzzzv
@@ -370,40 +375,3 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
-
-" Interesting words highlight
-nnoremap <silent> <leader>1 :call HiInterestingWord(1)<cr>
-nnoremap <silent> <leader>2 :call HiInterestingWord(2)<cr>
-nnoremap <silent> <leader>3 :call HiInterestingWord(3)<cr>
-nnoremap <silent> <leader>4 :call HiInterestingWord(4)<cr>
-nnoremap <silent> <leader>5 :call HiInterestingWord(5)<cr>
-nnoremap <silent> <leader>6 :call HiInterestingWord(6)<cr>
-hi def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
-hi def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=154
-hi def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=121
-hi def InterestingWord4 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=137
-hi def InterestingWord5 guifg=#000000 ctermfg=16 guibg=#ff9eb8 ctermbg=211
-hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
-
-function! HiInterestingWord(n) " {{{
-    " Save our location.
-    normal! mz
-
-    " Yank the current word into the z register.
-    normal! "zyiw
-
-    " Calculate an arbitrary match ID.  Hopefully nothing else is using it.
-    let mid = 86750 + a:n
-
-    " Clear existing matches, but don't worry if they don't exist.
-    silent! call matchdelete(mid)
-
-    " Construct a literal pattern that has to match at boundaries.
-    let pat = '\V\<' . escape(@z, '\') . '\>'
-
-    " Actually match the words.
-    call matchadd("InterestingWord" . a:n, pat, 1, mid)
-
-    " Move back to our original location.
-    normal! `z
-endfunction " }}}
