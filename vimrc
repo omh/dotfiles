@@ -17,7 +17,6 @@ Bundle 'tpope/vim-markdown'
 Bundle 'bling/vim-airline'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'tpope/vim-surround'
-Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'omh/vim-colors'
@@ -184,11 +183,6 @@ nnoremap <M-C-j> ]e
 vmap <M-S-k> [egv
 vmap <M-S-j> ]egv
 
-" Ack
-nmap <leader>a :Ack<space>
-" Put current word into Ack
-nmap <leader>za :Ack "<C-r>=expand("<cword>")<CR>"
-vmap <leader>za y:Ack "<C-r>""
 
 " NERDTree
 let NERDTreeMinimalUI=1
@@ -263,6 +257,24 @@ au BufRead,BufNewFile *.php let g:php_html_in_strings=0
 au BufRead,BufNewFile *.php let g:php_folding=0
 au BufRead,BufNewFile *.php let g:php_sql_query=0
 au BufRead,BufNewFile *.twig set filetype=jinja
+
+" Grepping
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+nnoremap <leader>a :Ag<space>
+" Put current word into Ack
+nnoremap <leader>A :Ag <C-r>=expand("<cword>")<CR>
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 
 " ==============================================================================
 " Keyboard Mappings
