@@ -33,6 +33,7 @@ Bundle 'sophacles/vim-bundle-mako'
 Bundle 'jgdavey/tslime.vim'
 Bundle 'kshenoy/vim-signature'
 Bundle 'hdima/python-syntax'
+Bundle 'stephpy/vim-yaml'
 filetype plugin indent on
 
 " ==============================================================================
