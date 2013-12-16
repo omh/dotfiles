@@ -39,7 +39,7 @@ filetype plugin indent on
 " ==============================================================================
 " General settings
 " ==============================================================================
-colorscheme oh-hemisu
+colorscheme hybrid
 
 set scrolloff=5
 set laststatus=2
@@ -157,6 +157,37 @@ if has("autocmd")
           \| exe "normal g'\"" | endif
 endif
 
+" Statusline
+
+" filename in purple
+" line number LNNN CNNN
+" <MODE> / I/N
+" Git Branch
+" Filetype
+" <file enc>
+
+set statusline=
+set statusline+=\ ---\ \ %t                       "File+path
+set statusline+=\ \%(L%l\ C%c%)       " Line number
+
+" Puts in the current git status
+set statusline+=\ \ %{strlen(fugitive#head())?'Git:'.fugitive#head():''}\ \ \ 
+
+" Puts in syntastic warnings
+set statusline+=\ %{SyntasticStatuslineFlag()}
+
+set statusline+=\ %r\ %m
+set statusline+=\ (%Y 
+set statusline+=\ %{&ff}                                  "FileType
+set statusline+=\ %{strlen(&fenc)?&fenc:&enc}) " File encoding
+set statusline+=%=\ ---\ 
+"set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
+"set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
+"set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..) 
+"set statusline+=%9*\ col:%03c\                            "Colnr
+"set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
+
+
 " =============================================================================:
 " Bundles configs
 " ==============================================================================
@@ -169,22 +200,9 @@ nmap <leader>gl :Glog<CR>
 nmap <leader>gc :Gcommit<CR>
 nmap <leader>gp :Git push<CR>
 
-" Neocomlcache
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_min_syntax_length = 5
-
 " Lusty Explorer
 map <silent> <leader>f :LustyFilesystemExplorer<CR>
 map <silent> <leader>e :LustyFilesystemExplorerFromHere<CR>
-
-" Move Single lines
-nnoremap <M-C-k> [e
-nnoremap <M-C-j> ]e
-" Move single lines
-vmap <M-S-k> [egv
-vmap <M-S-j> ]egv
-
 
 " NERDTree
 let NERDTreeMinimalUI=1
@@ -216,21 +234,20 @@ let g:ctrlp_extensions = ['funky']
 nnoremap <Leader>r :CtrlPFunky<Cr>
 
 " Syntastic
-let g:syntastic_auto_loc_list=1
+let g:syntastic_auto_loc_list=0
 let g:syntastic_loc_list_height=4
-" Disable, let python-mode do this.
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_python_checker_args='--ignore=E501'
 let python_highlight_all=1
 
+" Lightline
+"let g:lightline = { 'colorscheme': 'hybrid' }
 " Airline
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_theme='ubaryd'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#show_buffers = 0
+" let g:airline_left_sep=''
+" let g:airline_right_sep=''
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline_powerline_fonts = 0
+" let g:airline_theme = 'ubaryd'
 
 " Clear ez publish caches
 nnoremap <leader>xke :call Send_to_Tmux("cd /var/www/kbase.localhost/htdocs/ezp/ && php ezpublish/console cache:clear\n")<CR>
@@ -247,16 +264,6 @@ nnoremap <leader>xyb :call Send_to_Tmux("cd docs && make html && cd -\n")<CR>
 nnoremap <leader>xyo :call Send_to_Tmux("open docs/_build/html/index.html\n")<CR>
 
 nnoremap <leader>xms :call Send_to_Tmux("./sync.sh\n")<CR>
-
-" pymode
-let g:pymode_doc = 0
-let g:pymode_run_key = ''
-let g:pymode_run_key = '<leader>pr'
-let g:pymode_folding = 0
-let g:pymode_motion = 0
-let g:pymode_breakpoint_key = '<leader>pb'
-let g:pymode_lint_write = 0
-let g:pymode_lint = 0
 
 nnoremap <leader>iD Oimport ipdb; ipdb.set_trace();<ESC>
 nnoremap <leader>id oimport ipdb; ipdb.set_trace();<ESC>
@@ -367,7 +374,7 @@ nmap <leader>h :%s/\s\+$//<CR>
 nmap <leader>xx :silent 1,$!xmllint --format --recover - 2>/dev/null<CR>
 
 " Show syntax highlighting groups for word under cursor
-"nnoremap <C-S-P> :call <SID>SynStack()<CR>
+nnoremap <C-S-P> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
   if !exists("*synstack")
     return
