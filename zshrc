@@ -56,3 +56,15 @@ export RUBY_GC_MALLOC_LIMIT=79000000
 if [ -f ~/.git_helpers/helpers.sh ]; then
     source ~/.git_helpers/helpers.sh
 fi
+
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    fg
+    zle redisplay
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
