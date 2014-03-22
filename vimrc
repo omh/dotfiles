@@ -38,6 +38,7 @@ Bundle 'Rykka/riv.vim'
 Bundle 'stephpy/vim-yaml'
 Bundle 'jnurmine/Zenburn'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'christoomey/vim-tmux-navigator'
 filetype plugin indent on
 
 " ==============================================================================
