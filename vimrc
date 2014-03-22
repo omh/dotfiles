@@ -14,11 +14,12 @@ Bundle 'gmarik/vundle'
 
 " Custom plugins
 Bundle 'tpope/vim-markdown'
-"Bundle 'bling/vim-airline'
+Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-surround'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'omh/vim-colors'
+Bundle 'luan/vim-hybrid'
 Bundle 'msanders/snipmate.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'sjbach/lusty'
@@ -33,13 +34,16 @@ Bundle 'sophacles/vim-bundle-mako'
 Bundle 'jgdavey/tslime.vim'
 Bundle 'kshenoy/vim-signature'
 Bundle 'hdima/python-syntax'
+Bundle 'Rykka/riv.vim'
 Bundle 'stephpy/vim-yaml'
+Bundle 'jnurmine/Zenburn'
+Bundle 'airblade/vim-gitgutter'
 filetype plugin indent on
 
 " ==============================================================================
 " General settings
 " ==============================================================================
-colorscheme hybrid
+colorscheme oh-hybrid
 
 set scrolloff=5
 set laststatus=2
@@ -121,9 +125,6 @@ let g:matchparen_insert_timeout = 10
 " Set dictionary
 set dictionary-=/usr/share/dict/words dictionary+=/usr/share/dict/words
 
-"
-set lazyredraw
-
 " Normal/insert mode change cursor in terminal
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -144,7 +145,7 @@ endif
 set gcr=a:blinkon0
 
 " Set leader key
-let mapleader = ","
+let mapleader = " "
 noremap \ ,
 
 " Two spaces=tab for ruby
@@ -171,19 +172,19 @@ set statusline+=\ ---\ \ %t                       "File+path
 set statusline+=\ \%(L%l\ C%c%)       " Line number
 
 " Puts in the current git status
-set statusline+=\ \ %{strlen(fugitive#head())?'Git:'.fugitive#head():''}\ \ \ 
+set statusline+=\ \ %{strlen(fugitive#head())?'Git:'.fugitive#head():''}\ \ \
 
 " Puts in syntastic warnings
 set statusline+=\ %{SyntasticStatuslineFlag()}
 
 set statusline+=\ %r\ %m
-set statusline+=\ (%Y 
+set statusline+=\ (%Y
 set statusline+=\ %{&ff}                                  "FileType
 set statusline+=\ %{strlen(&fenc)?&fenc:&enc}) " File encoding
-set statusline+=%=\ ---\ 
+set statusline+=%=\ ---\
 "set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
 "set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
-"set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..) 
+"set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..)
 "set statusline+=%9*\ col:%03c\                            "Colnr
 "set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
 
@@ -191,6 +192,10 @@ set statusline+=%=\ ---\
 " =============================================================================:
 " Bundles configs
 " ==============================================================================
+" Git Gutter
+
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
 
 " Fugitive
 nmap <leader>gb :Gblame<CR>
@@ -243,11 +248,11 @@ let python_highlight_all=1
 " Lightline
 "let g:lightline = { 'colorscheme': 'hybrid' }
 " Airline
-" let g:airline_left_sep=''
-" let g:airline_right_sep=''
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline_powerline_fonts = 0
-" let g:airline_theme = 'ubaryd'
+ let g:airline_left_sep=''
+ let g:airline_right_sep=''
+ "let g:airline#extensions#tabline#enabled = 1
+ let g:airline_powerline_fonts = 0
+ let g:airline_theme = 'monochrome'
 
 " Clear ez publish caches
 nnoremap <leader>xke :call Send_to_Tmux("cd /var/www/kbase.localhost/htdocs/ezp/ && php ezpublish/console cache:clear\n")<CR>
@@ -277,7 +282,7 @@ au BufRead,BufNewFile *.php let g:php_sql_query=0
 au BufRead,BufNewFile *.twig set filetype=jinja
 
 " Grepping
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+command! -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap <leader>a :Ag<space>
 " Put current word into Ack
 nnoremap <leader>A :Ag <C-r>=expand("<cword>")<CR>
@@ -357,10 +362,6 @@ inoremap <c-e> <esc>A
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
 
-" Space to toggle folds.
-nnoremap <Space> za
-vnoremap <Space> za
-
 " Map Leader+q to close current window
 map <leader>q :q<CR>
 
@@ -371,10 +372,10 @@ nmap <leader>h :%s/\s\+$//<CR>
 nmap <leader>xx :silent 1,$!xmllint --format --recover - 2>/dev/null<CR>
 
 " Show syntax highlighting groups for word under cursor
-nnoremap <C-S-P> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
   if !exists("*synstack")
     return
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+nnoremap <C-o> :call <SID>SynStack()<CR>
