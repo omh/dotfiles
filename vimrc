@@ -16,10 +16,10 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-markdown'
 Bundle 'bling/vim-airline'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
 Bundle 'scrooloose/syntastic'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'omh/vim-colors'
-Bundle 'luan/vim-hybrid'
 Bundle 'msanders/snipmate.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'sjbach/lusty'
@@ -30,15 +30,17 @@ Bundle 'tacahiroy/ctrlp-funky'
 Bundle 'omh/vim-ez'
 Bundle 'pangloss/vim-javascript'
 Bundle 'Glench/Vim-Jinja2-Syntax'
-Bundle 'sophacles/vim-bundle-mako'
 Bundle 'jgdavey/tslime.vim'
 Bundle 'kshenoy/vim-signature'
 Bundle 'hdima/python-syntax'
 Bundle 'Rykka/riv.vim'
 Bundle 'stephpy/vim-yaml'
-Bundle 'jnurmine/Zenburn'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'vim-scripts/gitignore'
+Bundle 'tpope/vim-repeat'
+Bundle 'vim-scripts/YankRing.vim'
+Bundle 'sjl/gundo.vim'
 filetype plugin indent on
 
 " ==============================================================================
@@ -249,11 +251,17 @@ let python_highlight_all=1
 " Lightline
 "let g:lightline = { 'colorscheme': 'hybrid' }
 " Airline
- let g:airline_left_sep=''
- let g:airline_right_sep=''
- "let g:airline#extensions#tabline#enabled = 1
- let g:airline_powerline_fonts = 0
- let g:airline_theme = 'monochrome'
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+"let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 0
+let g:airline_theme = 'monochrome'
+
+" YankRing
+nnoremap <leader>y :YRShow<cr>
+
+" Gundo
+nnoremap <leader>u :GundoToggle<cr>
 
 " Clear ez publish caches
 nnoremap <leader>xke :call Send_to_Tmux("cd /var/www/kbase.localhost/htdocs/ezp/ && php ezpublish/console cache:clear\n")<CR>
@@ -333,15 +341,6 @@ nmap <C-l> <C-w>l
 
 " Faster <Esc>
 imap jj <Esc>
-
-" Map Shift-{/Shift-} to Alt-j/Alt-k for easier jumping of paragraphs
-nmap <M-k> <S-{>
-nmap <M-j> <S-}>
-vmap <M-k> <S-{>
-vmap <M-j> <S-}>
-
-nnoremap <C-n> :bnext<CR>
-nnoremap <C-p> :bprevious<CR>
 
 " Ctrl+Enter to insert ; at the end of the line
 inoremap <C-Enter> <C-S-o><S-A>;<ESC>
