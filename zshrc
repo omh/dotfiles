@@ -11,6 +11,9 @@ fi
 # Disable autocomplete
 unsetopt correct_all
 
+# Auto complete with colors
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
 # Customize path
 export PATH="/usr/local/bin:$PATH"
 export PATH="/Applications/Postgres.app/Contents/MacOS/bin:$PATH"
@@ -102,7 +105,7 @@ export GPG_TTY
 
 # Pass auto completes
 fpath=(~/.dotfiles/zsh/pass.zsh-completion $fpath)
-autoload -U compinit
+autoload -Uz compinit
 compinit
 
 export PASSWORD_STORE_DIR=~/Dropbox/.password-store
