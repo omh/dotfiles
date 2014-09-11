@@ -5,48 +5,55 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
+let g:ycm_server_use_vim_stdout = 1
+let g:ycm_filetype_blacklist = { 'python': 1 }
+let g:ycm_filetype_specific_completion_to_disable = { 'python': 1 }
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
+call plug#begin('~/.vim/plugged')
 
 " Custom plugins
-Bundle 'tpope/vim-markdown'
-Bundle 'bling/vim-airline'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'scrooloose/syntastic'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'omh/vim-colors'
-Bundle 'msanders/snipmate.vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'sjbach/lusty'
-Bundle 'scrooloose/nerdtree'
-Bundle 'omh/Kwbd.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'tacahiroy/ctrlp-funky'
-Bundle 'omh/vim-ez'
-Bundle 'pangloss/vim-javascript'
-Bundle 'Glench/Vim-Jinja2-Syntax'
-Bundle 'jgdavey/tslime.vim'
-Bundle 'kshenoy/vim-signature'
-Bundle 'hdima/python-syntax'
-Bundle 'Rykka/riv.vim'
-Bundle 'stephpy/vim-yaml'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'vim-scripts/gitignore'
-Bundle 'tpope/vim-repeat'
-Bundle 'vim-scripts/YankRing.vim'
-Bundle 'sjl/gundo.vim'
-filetype plugin indent on
+Plug 'ervandew/supertab'
+Plug 'davidhalter/jedi-vim'
+Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+Plug 'bling/vim-airline'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'scrooloose/syntastic'
+Plug 'scrooloose/nerdcommenter'
+Plug 'omh/vim-colors'
+Plug 'tpope/vim-fugitive'
+Plug 'sjbach/lusty'
+Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
+Plug 'omh/Kwbd.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tacahiroy/ctrlp-funky', { 'on': 'CtrlPFunky' }
+Plug 'omh/vim-ez', { 'for': ['tpl', 'ini'] }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja2' }
+Plug 'jgdavey/tslime.vim'
+Plug 'kshenoy/vim-signature'
+Plug 'hdima/python-syntax', { 'for': 'python' }
+Plug 'Rykka/riv.vim'
+Plug 'stephpy/vim-yaml', { 'for': 'yaml' }
+Plug 'airblade/vim-gitgutter'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'vim-scripts/gitignore', { 'for': 'gitignore' }
+Plug 'tpope/vim-repeat'
+Plug 'vim-scripts/YankRing.vim', { 'on': 'YRShow' }
+Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
+Plug 'nathanaelkane/vim-indent-guides', { 'on': 'IndentGuidesToggle' }
+Plug 'Shougo/neocomplcache.vim'
+call plug#end()
 
+filetype plugin indent on
 " ==============================================================================
 " General settings
 " ==============================================================================
-colorscheme oh-hybrid
+let g:seoul256_background = 235
+colorscheme seoul256
 
 set scrolloff=5
 set laststatus=2
@@ -248,8 +255,6 @@ let g:syntastic_python_checkers=['flake8']
 let g:syntastic_python_checker_args='--ignore=E501'
 let python_highlight_all=1
 
-" Lightline
-"let g:lightline = { 'colorscheme': 'hybrid' }
 " Airline
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -259,15 +264,16 @@ let g:airline_theme = 'monochrome'
 
 " YankRing
 nnoremap <leader>y :YRShow<cr>
+let g:yankring_history_dir = '$VIM'
+
+" Youcompleteme
+nnoremap <leader>od :YcmCompleter GoToDeclaration<cr>
 
 " Gundo
 nnoremap <leader>u :GundoToggle<cr>
 
 " Clear ez publish caches
 nnoremap <leader>xke :call Send_to_Tmux("cd /var/www/kbase.localhost/htdocs/ezp/ && php ezpublish/console cache:clear\n")<CR>
-nnoremap <leader>xea :ISlime2 php bin/php/ezpgenerateautoloads.php -e<CR>
-nnoremap <leader>xei :ISlime2 php tests/runtests.php --dsn mysql://root@localhost/tests extension/klpbrightcove<CR>
-nnoremap <leader>xeu :ISlime2 phpunit extension/klpbrightcove<CR>
 
 " tmux tslime ---------------
 " clear tmux settings
@@ -304,6 +310,34 @@ if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
+
+" Vim indent guides
+nnoremap <leader>ig :IndentGuidesToggle<cr>
+
+" neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_min_syntax_length = 3
+let g:jedi#auto_initialization = 1
+if !exists('g:neocomplcache_omni_functions')
+    let g:neocomplcache_omni_functions = {}
+endif
+if !exists('g:neocomplcache_force_omni_patterns')
+      let g:neocomplcache_force_omni_patterns = {}
+  endif
+let g:neocomplcache_omni_functions['python'] = 'jedi#completions'
+let g:neocomplcache_force_omni_patterns.python = '[^. \t]\.\w*'
+set ofu=syntaxcomplete#Complete
+let g:jedi#popup_on_dot = 0
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType python let b:did_ftplugin = 1
+
 
 " ==============================================================================
 " Keyboard Mappings
