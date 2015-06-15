@@ -13,9 +13,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'omh/vim-colors'
-Plug 'morhetz/gruvbox'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'Shougo/unite.vim'
 Plug 'Shougo/neocomplete.vim'
 Plug 'majutsushi/tagbar'
 Plug 'sjbach/lusty'
@@ -25,9 +23,8 @@ Plug 'jgdavey/tslime.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'kshenoy/vim-signature'
 Plug 'mileszs/ack.vim'
-Plug 'mhinz/vim-startify'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'omh/vim-ez'
+Plug 'omh/vim-ez', { 'for': ['tpl', 'ini'] }
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'gregsexton/MatchTag'
 Plug 'sheerun/vim-polyglot'
@@ -117,7 +114,7 @@ set gcr=a:blinkon0
 
 set wildmenu
 set wildmode=list:longest,full
-set wildignore+=*.o,*.obj,*.class,*.pyc,bin,*.log,*.pidb
+set wildignore=*.o,*.obj,*.class,*.pyc,bin,*.log,*.pidb
 set wildignore+=*.aux,*.bbl,*.blg,*.fdb_latexmk,*.bst,*.pdf
 set wildignore+=*.gif,*.png,*.db,*.jpg,*.jpeg
 set wildignore+=*/.git/*
@@ -127,7 +124,7 @@ set wildignore+=tags
 set wildignore+=var/*
 set wildignore+=*tmp/*
 set wildignore+=*/venv/*
-set wildignore+=*__pycache__*,*.pyc
+set wildignore+=*__pycache__*
 
 au FileType jinja,html,eruby,rb,css,js,xml runtime! macros/matchit.vim
 au BufRead, BufNewFile *.tpl set filetype=ezp
@@ -153,6 +150,8 @@ endif
 let g:tagbar_sort = 0
 let g:tagbar_compact = 1
 let g:tagbar_vertical = 30
+let g:tagbar_iconchars = ['▸', '▾']
+
 
 " Syntastic
 let g:syntastic_auto_loc_list=0
@@ -207,80 +206,17 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-" Unite
-let g:unite_source_history_yank_enable = 1
-" Start Insert
-let g:unite_enable_start_insert = 1
-let g:unite_enable_short_source_names = 1
-
-" Enable history yank source
-let g:unite_source_history_yank_enable = 1
-
-" Open in bottom right
-let g:unite_split_rule = "botright"
-
-" Shorten the default update date of 500ms
-let g:unite_update_time = 300
-
-" set up mru limit
-let g:unite_source_file_mru_limit = 100
-
-" highlight like my vim
-let g:unite_cursor_line_highlight = 'CursorLine'
-
-" format mru
-let g:unite_source_file_mru_filename_format = ':~:.'
-let g:unite_source_file_mru_time_format = ''
-
-" set up coolguy arrow prompt
-let g:unite_prompt = '➜ '
-
-" Use the fuzzy matcher for everything
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-
-" Use the rank sorter for everything
-call unite#filters#sorter_default#use(['sorter_rank'])
-
-" Prettier prompt
-call unite#custom#profile('default', 'context', {
-    \   'prompt': '» ',
-    \   'start_insert': 1,
-    \   'update_time': 200,
-    \   'direction': 'botright',
-    \   'prompt_direction': 'top',
-    \ })
-
-" Function that only triggers when unite opens
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-  " exit with esc
-  nmap <buffer> <nowait> <ESC> <Plug>(unite_exit)
-  imap <buffer> <nowait> <ESC> <Plug>(unite_exit)
-
-  " Ctrl jk mappings
-  imap <buffer> <c-j> <Plug>(unite_insert_leave)
-  imap <buffer> <c-k> <Plug>(unite_insert_leave)
-  nmap <buffer> <c-j> <Plug>(unite_loop_cursor_down)
-  nmap <buffer> <c-k> <Plug>(unite_loop_cursor_up)
-
-  " jj becuase you're lazy, and leave insert mode
-  imap <buffer> <nowait> jj <Plug>(unite_insert_leave)
-
-  " qq `` becuase you're lazy, and quit unite
-  imap <buffer> <nowait> qq <Plug>(unite_exit)
-
-  " refresh unite
-  nmap <buffer> <C-r> <Plug>(unite_redraw)
-  imap <buffer> <C-r> <Plug>(unite_redraw)
-endfunction
-
 " CtrlP
 let g:ctrlp_max_height = 20
 let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\(extjs*)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ }
 
 if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'noglob ag %s --ignore=extjs-4.2.1 --ignore=*.pyc -l --nocolor -g ""'
 endif
 
 " Taboo
@@ -339,13 +275,12 @@ nnoremap <leader>fed :<C-u>e ~/.vimrc<cr>
 nnoremap <leader>fer :<C-u>source ~/.vimrc<cr>
 
 " Buffers
-nnoremap <leader>bb :<C-u>Unite -buffer-name=buffer buffer<cr>
+nnoremap <leader>bb :<C-u>CtrlPBuffer<cr>
 nnoremap <leader>bo :<C-u>TagbarOpenAutoClose<cr>
 nnoremap <leader>bd :Kwbd<cr>
 nnoremap <leader>bk :Kwbd<cr>
 
 " Tabs
-nnoremap <leader>tt :<C-u>Unite -buffer-name=tabs tab<cr>
 nnoremap <leader>tn :<C-u>tabnew<cr>
 nnoremap <leader>tc :<C-u>tabclose<cr>
 nnoremap <leader>tj :<C-u>tabmove -1<cr>
@@ -383,6 +318,7 @@ nnoremap <leader>Tp :set paste!<cr>
 nnoremap <leader>Tn :set number!<cr>
 nnoremap <leader>Tl :set cursorline!<cr>
 nnoremap <leader>Ts :setlocal spell! spelllang=en_us<cr>
+nnoremap <leader>Tc :SyntasticToggleMode<cr>
 
 " Strip extra white space
 nnoremap <leader>xdw :%s/\s\+$//<cr>
