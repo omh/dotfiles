@@ -27,7 +27,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'mileszs/ack.vim'
 Plug 'mhinz/vim-startify'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'omh/vim-ez', { 'for': ['tpl', 'ini'] }
+Plug 'omh/vim-ez'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'gregsexton/MatchTag'
 Plug 'sheerun/vim-polyglot'
