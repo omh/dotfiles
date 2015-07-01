@@ -129,6 +129,9 @@ set wildignore+=*__pycache__*
 au FileType jinja,html,eruby,rb,css,js,xml runtime! macros/matchit.vim
 au BufRead, BufNewFile *.tpl set filetype=ezp
 
+let g:php_html_load = 0
+let g:php_folding = 0
+
 " ==============================================================================
 " Plugin settings
 " ==============================================================================
