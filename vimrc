@@ -1,4 +1,3 @@
-" Search s /ag/
 set nocompatible
 filetype off
 
@@ -20,15 +19,16 @@ Plug 'sjbach/lusty'
 Plug 'omh/Kwbd.vim'
 Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'jgdavey/tslime.vim'
-Plug 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim'
 Plug 'kshenoy/vim-signature'
 Plug 'mileszs/ack.vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'omh/vim-ez'
+Plug 'omh/vim-ez', { 'for': ['tpl', 'ini'] }
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'gregsexton/MatchTag'
 Plug 'sheerun/vim-polyglot'
 Plug 'gcmt/taboo.vim'
+Plug 'dkprice/vim-easygrep'
 call plug#end()
 
 filetype plugin indent on
@@ -49,7 +49,7 @@ set hidden
 set wrap
 set backspace=2
 set ruler
-set cursorline
+"set cursorline
 
 " Timeout
 set timeout
@@ -129,9 +129,6 @@ set wildignore+=*__pycache__*
 au FileType jinja,html,eruby,rb,css,js,xml runtime! macros/matchit.vim
 au BufRead, BufNewFile *.tpl set filetype=ezp
 
-let g:php_html_load = 0
-let g:php_folding = 0
-
 " ==============================================================================
 " Plugin settings
 " ==============================================================================
@@ -141,7 +138,8 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline_powerline_fonts = 0
 let g:airline_theme = 'lucius'
-let g:airline#extensions#tagbar#flags = 'f'
+let g:airline#extensions#tagbar#enabled = 0
+"let g:airline_extensions = ['branch', 'ctrlp', 'hunks', 'syntastic', 'virtualenv', 'quickfix', 'tabline', 'whitespace']
 
 " Ack
 if executable('ag')
@@ -155,12 +153,11 @@ let g:tagbar_compact = 1
 let g:tagbar_vertical = 30
 let g:tagbar_iconchars = ['▸', '▾']
 
-
 " Syntastic
 let g:syntastic_auto_loc_list=0
 let g:syntastic_loc_list_height=4
 let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_checker_args='--ignore=E501'
+let g:syntastic_python_flake8_post_args='--ignore=E501'
 
 " Neocomplete
 let g:neocomplete#enable_at_startup = 1
@@ -170,14 +167,14 @@ let g:neocomplete#sources#syntax#min_keyword_length = 3
 if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
 endif
-autocmd FileType python setlocal omnifunc=jedi#completions
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
-if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.python =
-\ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+"autocmd FileType python setlocal omnifunc=jedi#completions
+"let g:jedi#completions_enabled = 0
+"let g:jedi#auto_vim_configuration = 0
+"if !exists('g:neocomplete#force_omni_input_patterns')
+    "let g:neocomplete#force_omni_input_patterns = {}
+"endif
+"let g:neocomplete#force_omni_input_patterns.python =
+"\ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
@@ -212,10 +209,10 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " CtrlP
 let g:ctrlp_max_height = 20
 let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\(extjs*)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ }
+"let g:ctrlp_custom_ignore = {
+  "\ 'dir':  '\v[\/]\(extjs*)$',
+  "\ 'file': '\v\.(exe|so|dll)$',
+  "\ }
 
 if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
@@ -268,6 +265,7 @@ cnoremap <c-e> <end>
 " Files
 nnoremap <leader>fb :LustyFilesystemExplorer<cr>
 nnoremap <leader>fh :LustyFilesystemExplorerFromHere<cr>
+nmap <leader>fw :<C-u>CtrlPCurWD<cr><C-\>w
 nnoremap <leader>ff :<C-u>CtrlPCurWD<cr>
 nnoremap <leader>fs :<C-u>w<cr>
 nnoremap <leader>fr :<C-u>CtrlPMRUFiles<cr>
@@ -279,7 +277,10 @@ nnoremap <leader>fer :<C-u>source ~/.vimrc<cr>
 
 " Buffers
 nnoremap <leader>bb :<C-u>CtrlPBuffer<cr>
-nnoremap <leader>bo :<C-u>TagbarOpenAutoClose<cr>
+nnoremap <leader>bo :<C-u>CtrlPBufTag<CR>
+nmap <leader>bw :CtrlPBufTag<CR><C-\>w
+nnoremap <leader>sl :<C-u>TagbarOpenAutoClose<cr>
+nnoremap <leader>bsf :<C-u>TagbarCurrentTag {'f'}<cr>
 nnoremap <leader>bd :Kwbd<cr>
 nnoremap <leader>bk :Kwbd<cr>
 
@@ -288,7 +289,7 @@ nnoremap <leader>tn :<C-u>tabnew<cr>
 nnoremap <leader>tc :<C-u>tabclose<cr>
 nnoremap <leader>tj :<C-u>tabmove -1<cr>
 nnoremap <leader>tk :<C-u>tabmove +1<cr>
-nnoremap <leader>tr :<C-u>TabooRename 
+nnoremap <leader>tr :<C-u>TabooRename
 nnoremap <leader>tz :<C-u>TabooReset<cr>
 nnoremap tl :<C-u>tabnext<cr>
 nnoremap th :<C-u>tabprev<cr>
@@ -311,7 +312,7 @@ nnoremap <leader>ws :<C-u>split<cr>
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gs :Gstatus<cr><C-w>15+
 nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gl :Glog<cr>
+nnoremap <leader>gl :Git log<cr>
 nnoremap <leader>gc :Gcommit<cr>
 nnoremap <leader>gp :Git push<cr>
 nnoremap <leader>gu :Git pull<cr>
@@ -350,3 +351,6 @@ nnoremap <leader>rfd :call Send_to_Tmux("fab deploy\n")<cr>
 nnoremap <leader>iD Oimport ipdb; ipdb.set_trace();<esc>
 nnoremap <leader>id oimport ipdb; ipdb.set_trace();<esc>
 nnoremap <leader>iu i# -*- coding: utf-8 -*-<esc>
+
+" Misc
+inoremap jk <Esc>
