@@ -3,6 +3,7 @@ filetype off
 
 call plug#begin('~/.vim/plugged')
 Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
@@ -29,6 +30,7 @@ Plug 'gregsexton/MatchTag'
 Plug 'sheerun/vim-polyglot'
 Plug 'gcmt/taboo.vim'
 Plug 'dkprice/vim-easygrep'
+Plug 'AlessandroYorba/Alduin'
 call plug#end()
 
 filetype plugin indent on
@@ -39,7 +41,9 @@ filetype plugin indent on
 
 let g:seoul256_background = 236
 set bg=dark
-colorscheme seoul256
+"colorscheme seoul256
+let g:alduin_Shout_Windhelm = 1
+colorscheme alduin
 
 set laststatus=2  " Always show status line
 set scrolloff=5
