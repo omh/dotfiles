@@ -20,17 +20,11 @@ Plug 'sjbach/lusty'
 Plug 'omh/Kwbd.vim'
 Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'jgdavey/tslime.vim'
-"Plug 'davidhalter/jedi-vim'
 Plug 'kshenoy/vim-signature'
-Plug 'mileszs/ack.vim'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'omh/vim-ez', { 'for': ['tpl', 'ini'] }
-Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'gregsexton/MatchTag'
 Plug 'sheerun/vim-polyglot'
 Plug 'gcmt/taboo.vim'
 Plug 'dkprice/vim-easygrep'
-Plug 'AlessandroYorba/Alduin'
 call plug#end()
 
 filetype plugin indent on
@@ -39,11 +33,10 @@ filetype plugin indent on
 " General settings
 " ==============================================================================
 
-let g:seoul256_background = 236
+
+let g:seoul256_background = 235
 set bg=dark
-"colorscheme seoul256
-let g:alduin_Shout_Windhelm = 1
-colorscheme alduin
+colorscheme seoul256
 
 set laststatus=2  " Always show status line
 set scrolloff=5
@@ -92,10 +85,13 @@ set autoread
 set nrformats=
 
 " Syntax coloring lines that are too long just slows down the world
-set synmaxcol=2000
+set synmaxcol=1000
 
 " Remember tab names
 set sessionoptions+=tabpages,globals
+
+" Disable highlighting of matching parenthesis
+let loaded_matchparen = 1
 
 " Normal/insert mode change cursor in terminal
 if exists('$TMUX')
@@ -145,12 +141,6 @@ let g:airline_theme = 'lucius'
 let g:airline#extensions#tagbar#enabled = 0
 "let g:airline_extensions = ['branch', 'ctrlp', 'hunks', 'syntastic', 'virtualenv', 'quickfix', 'tabline', 'whitespace']
 
-" Ack
-if executable('ag')
-    let g:ackprg = 'ag --column'
-    set grepprg=noglob\ ag\ --nogroup\ --nocolor\ --ignore="*.pyc"
-endif
-
 " Tagbar
 let g:tagbar_sort = 0
 let g:tagbar_compact = 1
@@ -166,19 +156,12 @@ let g:syntastic_python_flake8_post_args='--ignore=E501'
 " Neocomplete
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#auto_completion_start_length = 4
+let g:neocomplete#disable_auto_complete = 1
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
 endif
-"autocmd FileType python setlocal omnifunc=jedi#completions
-"let g:jedi#completions_enabled = 0
-"let g:jedi#auto_vim_configuration = 0
-"if !exists('g:neocomplete#force_omni_input_patterns')
-    "let g:neocomplete#force_omni_input_patterns = {}
-"endif
-"let g:neocomplete#force_omni_input_patterns.python =
-"\ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
@@ -187,20 +170,6 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
 function! s:check_back_space() "{{{
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-" Called once right before you start selecting multiple cursors
-function! Multiple_cursors_before()
-  if exists(':NeoCompleteLock')==2
-    exe 'NeoCompleteLock'
-  endif
-endfunction
-
-" Called once only when the multiple selection is canceled (default <Esc>)
-function! Multiple_cursors_after()
-  if exists(':NeoCompleteUnlock')==2
-    exe 'NeoCompleteUnlock'
-  endif
 endfunction
 
 " Enable omni completion.
@@ -213,10 +182,6 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " CtrlP
 let g:ctrlp_max_height = 20
 let g:ctrlp_clear_cache_on_exit = 0
-"let g:ctrlp_custom_ignore = {
-  "\ 'dir':  '\v[\/]\(extjs*)$',
-  "\ 'file': '\v\.(exe|so|dll)$',
-  "\ }
 
 if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
@@ -226,7 +191,6 @@ endif
 " Taboo
 let g:taboo_tab_format = ' %N %f %m '
 let g:taboo_renamed_tab_format = ' %N %l (%f) %m '
-
 
 " ==============================================================================
 " Keyboard bindings
