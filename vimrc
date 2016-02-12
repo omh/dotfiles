@@ -2,8 +2,6 @@ set nocompatible
 filetype off
 
 call plug#begin('~/.vim/plugged')
-Plug 'bling/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
@@ -25,6 +23,7 @@ Plug 'omh/vim-ez', { 'for': ['tpl', 'ini'] }
 Plug 'sheerun/vim-polyglot'
 Plug 'gcmt/taboo.vim'
 Plug 'dkprice/vim-easygrep'
+Plug 'tpope/vim-endwise'
 call plug#end()
 
 filetype plugin indent on
@@ -34,7 +33,7 @@ filetype plugin indent on
 " ==============================================================================
 
 
-let g:seoul256_background = 235
+let g:seoul256_background = 236
 set bg=dark
 colorscheme seoul256
 
@@ -90,6 +89,10 @@ set synmaxcol=1000
 " Remember tab names
 set sessionoptions+=tabpages,globals
 
+" Fold by indent, syntax is too slow
+set foldmethod=indent
+set foldlevelstart=99
+
 " Disable highlighting of matching parenthesis
 let loaded_matchparen = 1
 
@@ -129,17 +132,110 @@ set wildignore+=*__pycache__*
 au FileType jinja,html,eruby,rb,css,js,xml runtime! macros/matchit.vim
 au BufRead, BufNewFile *.tpl set filetype=ezp
 
+" Status Line: {{{
+
+" Status Function: {{{2
+function! Status(winnr)
+  let stat = ''
+  let active = winnr() == a:winnr
+  let buffer = winbufnr(a:winnr)
+
+  let modified = getbufvar(buffer, '&modified')
+  let readonly = getbufvar(buffer, '&ro')
+  let fname = bufname(buffer)
+
+  function! Color(active, num, content)
+    if a:active
+      return '%' . a:num . '*' . a:content . '%*'
+    else
+      return a:content
+    endif
+  endfunction
+
+  " file
+  let stat .= Color(active, 3, active ? ' »' : ' «')
+  let stat .= ' %<'
+  let stat .= '%f'
+
+  let stat .= ' ' . Color(active, 3, active ? '«' : '»')
+
+  " file modified
+  let stat .= Color(active, 2, modified ? ' +' : '')
+
+  " read only
+  let stat .= Color(active, 2, readonly ? ' RO' : '')
+
+  " paste
+  if active && &paste
+    let stat .= ' %2*' . ' PASTE' . '%*'
+  endif
+
+  if exists("*SyntasticStatuslineFlag")
+      let errors = SyntasticStatuslineFlag()
+      let stat .= Color(active, 2, ' ' . "%{SyntasticStatuslineFlag()}")
+  endif
+
+  " right side
+  let stat .= '%='
+
+  " git branch
+  if exists('*fugitive#head')
+    let head = fugitive#head()
+
+    if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
+      call fugitive#detect(getcwd())
+      let head = fugitive#head()
+    endif
+  endif
+
+  if !empty(head)
+    let stat .= Color(active, 3, ' ← ') . head . ' '
+  endif
+
+  let stat .= Color(active, 5, ' %3l:%-2c ')
+
+  return stat
+endfunction
+" }}}
+
+" Status AutoCMD: {{{
+function! SetStatus()
+  for nr in range(1, winnr('$'))
+    call setwinvar(nr, '&statusline', '%!Status('.nr.')')
+  endfor
+endfunction
+
+augroup status
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter,BufUnload * call SetStatus()
+augroup END
+" }}}
+
+" Status Colors: {{{
+hi User1 ctermfg=33  guifg=#268bd2  ctermbg=237 guibg=#fdf6e3
+hi User2 ctermfg=131 guifg=#d33682  ctermbg=237 guibg=#eee8d5
+hi User3 ctermfg=64  guifg=#719e07  ctermbg=237 guibg=#eee8d5
+hi User4 ctermfg=37  guifg=#2aa198  ctermbg=237 guibg=#eee8d5
+hi User5 ctermfg=101  guifg=#2aa198 ctermbg=237 guibg=#eee8d5
+" }}}
+
+
+
 " ==============================================================================
 " Plugin settings
 " ==============================================================================
 
 " Airline
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline_powerline_fonts = 0
-let g:airline_theme = 'lucius'
-let g:airline#extensions#tagbar#enabled = 0
-"let g:airline_extensions = ['branch', 'ctrlp', 'hunks', 'syntastic', 'virtualenv', 'quickfix', 'tabline', 'whitespace']
+"let g:airline_left_sep=''
+"let g:airline_right_sep=''
+"let g:airline_powerline_fonts = 0
+"let g:airline_theme = 'lucius'
+"let g:airline#extensions#tagbar#enabled = 0
+"let g:airline_extensions = []
+
+" Git Gutter
+let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
 
 " Tagbar
 let g:tagbar_sort = 0
@@ -152,6 +248,7 @@ let g:syntastic_auto_loc_list=0
 let g:syntastic_loc_list_height=4
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_python_flake8_post_args='--ignore=E501'
+let g:syntastic_stl_format='%E{!! err:%fe/%e}%W{warn:%fw/%w}'
 
 " Neocomplete
 let g:neocomplete#enable_at_startup = 1
@@ -187,6 +284,40 @@ if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'noglob ag %s --ignore=extjs-4.2.1 --ignore=*.pyc -l --nocolor -g ""'
 endif
+
+
+fu! CtrlP_main_status(...)
+  let regex = a:3 ? '%2*regex %*' : ''
+  let prv = '%#StatusLineNC# '.a:4.' %*'
+  let item = ' ' . (a:5 == 'mru files' ? 'mru' : a:5) . ' '
+  let nxt = '%#StatusLineNC# '.a:6.' %*'
+  let byfname = '%2* '.a:2.' %*'
+  let dir = '%3* ← %*%#StatusLineNC#' . fnamemodify(getcwd(), ':~') . '%* '
+
+  " only outputs current mode
+  retu ' (ctrlp) %4*»%*' . item . '%4*«%* ' . '%=%<' . dir
+
+  " outputs previous/next modes as well
+  " retu prv . '%4*»%*' . item . '%4*«%*' . nxt . '%=%<' . dir
+endf
+ 
+" Argument: len
+"           a:1
+fu! CtrlP_progress_status(...)
+  let len = '%#Function# '.a:1.' %*'
+  let dir = ' %=%<%#LineNr# '.getcwd().' %*'
+  retu len.dir
+endf
+
+hi CtrlP_Purple  ctermfg=255 guifg=#ffffff  ctermbg=54  guibg=#5f5faf
+hi CtrlP_IPurple ctermfg=54  guifg=#5f5faf  ctermbg=255 guibg=#ffffff
+hi CtrlP_Violet  ctermfg=54  guifg=#5f5faf  ctermbg=104 guibg=#aeaed7
+
+let g:ctrlp_status_func = {
+  \ 'main': 'CtrlP_main_status',
+  \ 'prog': 'CtrlP_progress_status'
+  \}
+
 
 " Taboo
 let g:taboo_tab_format = ' %N %f %m '
