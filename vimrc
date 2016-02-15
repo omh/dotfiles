@@ -157,6 +157,16 @@ function! Status(winnr)
   let stat .= ' %<'
   let stat .= '%f'
 
+  " File type
+  let stat .= Color(active, 5, " (")
+  let stat .= Color(active, 5, "%{strlen(&filetype)?&filetype:'none'}")
+  " File format
+  let stat .= Color(active, 5, ", %{&ff}")
+  " file encoding
+  let stat .= Color(active, 5, ", %{strlen(&fenc)?&fenc:'none'}")
+  let stat .= Color(active, 5, ")")
+
+
   let stat .= ' ' . Color(active, 3, active ? '«' : '»')
 
   " file modified
@@ -169,15 +179,6 @@ function! Status(winnr)
   if active && &paste
     let stat .= ' %2*' . ' PASTE' . '%*'
   endif
-
-  " File type
-  let stat .= Color(active, 5, " (")
-  let stat .= Color(active, 5, "%{strlen(&filetype)?&filetype:'none'}")
-  " File format
-  let stat .= Color(active, 5, ", %{&ff}")
-  " file encoding
-  let stat .= Color(active, 5, ", %{strlen(&fenc)?&fenc:'none'}")
-  let stat .= Color(active, 5, ")")
 
   if exists("*SyntasticStatuslineFlag")
       let errors = SyntasticStatuslineFlag()
