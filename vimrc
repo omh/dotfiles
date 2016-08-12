@@ -371,6 +371,9 @@ inoremap <c-e> <esc>A
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
 
+" Don't override register when pasting
+xnoremap p pgvy
+
 " Files
 nnoremap <leader>fb :LustyFilesystemExplorer<cr>
 nnoremap <leader>fh :LustyFilesystemExplorerFromHere<cr>
