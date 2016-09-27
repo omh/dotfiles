@@ -12,7 +12,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'omh/vim-colors'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'Shougo/neocomplete.vim'
 Plug 'majutsushi/tagbar'
 Plug 'sjbach/lusty'
 Plug 'omh/Kwbd.vim'
@@ -24,6 +23,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'gcmt/taboo.vim'
 Plug 'dkprice/vim-easygrep'
 Plug 'tpope/vim-endwise'
+Plug 'ajh17/VimCompletesMe'
 call plug#end()
 
 filetype plugin indent on
@@ -33,7 +33,7 @@ filetype plugin indent on
 " ==============================================================================
 
 
-let g:seoul256_background = 236
+let g:seoul256_background = 235
 set bg=dark
 colorscheme seoul256
 
@@ -103,6 +103,13 @@ if exists('$TMUX')
 else
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" Enable gui colors
+set termguicolors
+if &term =~# '^screen'
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
 " Turn on mouse support
@@ -222,11 +229,11 @@ augroup END
 " }}}
 
 " Status Colors: {{{
-hi User1 ctermfg=33  guifg=#268bd2  ctermbg=237 guibg=#fdf6e3
-hi User2 ctermfg=131 guifg=#d33682  ctermbg=237 guibg=#eee8d5
-hi User3 ctermfg=64  guifg=#719e07  ctermbg=237 guibg=#eee8d5
-hi User4 ctermfg=37  guifg=#2aa198  ctermbg=237 guibg=#eee8d5
-hi User5 ctermfg=101  guifg=#2aa198 ctermbg=237 guibg=#eee8d5
+hi User1 ctermfg=33  guifg=#268bd2  ctermbg=235 guibg=#3F3F3F
+hi User2 ctermfg=131 guifg=#d33682  ctermbg=235 guibg=#3F3F3F
+hi User3 ctermfg=64  guifg=#719e07  ctermbg=235 guibg=#3F3F3F
+hi User4 ctermfg=37  guifg=#2aa198  ctermbg=235 guibg=#3F3F3F
+hi User5 ctermfg=101  guifg=#989A6D ctermbg=235 guibg=#3F3F3F
 " }}}
 
 
@@ -259,25 +266,6 @@ let g:syntastic_loc_list_height=4
 let g:syntastic_python_checkers=['flake8']
 let g:syntastic_python_flake8_post_args='--ignore=E501'
 let g:syntastic_stl_format='%E{!! err:%fe/%e}%W{warn:%fw/%w}'
-
-" Neocomplete
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#auto_completion_start_length = 4
-let g:neocomplete#disable_auto_complete = 1
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-endif
-
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
-    \ neocomplete#start_manual_complete()
-function! s:check_back_space() "{{{
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
