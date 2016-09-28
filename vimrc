@@ -106,10 +106,12 @@ else
 endif
 
 " Enable gui colors
-set termguicolors
-if &term =~# '^screen'
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+if has("termguicolors")
+    set termguicolors
+    if &term =~# '^screen'
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    endif
 endif
 
 " Turn on mouse support
@@ -229,11 +231,11 @@ augroup END
 " }}}
 
 " Status Colors: {{{
-hi User1 ctermfg=33  guifg=#268bd2  ctermbg=235 guibg=#3F3F3F
-hi User2 ctermfg=131 guifg=#d33682  ctermbg=235 guibg=#3F3F3F
-hi User3 ctermfg=64  guifg=#719e07  ctermbg=235 guibg=#3F3F3F
-hi User4 ctermfg=37  guifg=#2aa198  ctermbg=235 guibg=#3F3F3F
-hi User5 ctermfg=101  guifg=#989A6D ctermbg=235 guibg=#3F3F3F
+hi User1 ctermfg=33  guifg=#268bd2  ctermbg=236 guibg=#3F3F3F
+hi User2 ctermfg=131 guifg=#d33682  ctermbg=236 guibg=#3F3F3F
+hi User3 ctermfg=64  guifg=#719e07  ctermbg=236 guibg=#3F3F3F
+hi User4 ctermfg=37  guifg=#2aa198  ctermbg=236 guibg=#3F3F3F
+hi User5 ctermfg=101  guifg=#989A6D ctermbg=236 guibg=#3F3F3F
 " }}}
 
 
