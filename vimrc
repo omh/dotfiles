@@ -6,7 +6,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
@@ -24,6 +23,11 @@ Plug 'gcmt/taboo.vim'
 Plug 'dkprice/vim-easygrep'
 Plug 'tpope/vim-endwise'
 Plug 'ajh17/VimCompletesMe'
+Plug 'tweekmonster/braceless.vim'
+Plug 'neomake/neomake'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'alvan/vim-closetag'
 call plug#end()
 
 filetype plugin indent on
@@ -46,10 +50,11 @@ set wrap
 set backspace=2
 set ruler
 "set cursorline
+set number
 
 " Timeout
 set timeout
-set timeoutlen=1000
+set timeoutlen=500
 set ttimeoutlen=10
 
 " Encoding
@@ -263,11 +268,24 @@ let g:tagbar_vertical = 30
 let g:tagbar_iconchars = ['▸', '▾']
 
 " Syntastic
-let g:syntastic_auto_loc_list=0
-let g:syntastic_loc_list_height=4
-let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_post_args='--ignore=E501'
-let g:syntastic_stl_format='%E{!! err:%fe/%e}%W{warn:%fw/%w}'
+"let g:syntastic_auto_loc_list=0
+"let g:syntastic_loc_list_height=4
+"let g:syntastic_python_checkers=['flake8']
+"let g:syntastic_python_flake8_post_args='--ignore=E501,C0111,C0301,R0903'
+"let g:syntastic_stl_format='%E{!! err:%fe/%e}%W{warn:%fw/%w}'
+
+" Neomake
+autocmd! BufWritePost * Neomake
+let g:neomake_python_enabled_makers = ['pep8']
+let g:neomake_python_pep8_maker = { 'args': ['--ignore=E501'] }
+let g:neomake_python_flake8_maker = {
+    \ 'args': ['--ignore=E501,C0111,C0301,R0903', '--format=default'],
+    \ 'errorformat':
+        \ '%E%f:%l: could not compile,%-Z%p^,' .
+        \ '%A%f:%l:%c: %t%n %m,' .
+        \ '%A%f:%l: %t%n %m,' .
+        \ '%-G%.%#',
+    \ }
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -275,6 +293,14 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+autocmd FileType html let b:vcm_tab_complete = 'omni'
+autocmd FileType css let b:vcm_tab_complete = 'omni'
+autocmd FileType php let b:vcm_tab_complete = 'omni'
+autocmd FileType python let b:vcm_tab_complete = 'omni'
+
+" Enable braceless
+autocmd FileType python BracelessEnable +indent
 
 " CtrlP
 let g:ctrlp_max_height = 20
@@ -318,10 +344,15 @@ let g:ctrlp_status_func = {
   \ 'prog': 'CtrlP_progress_status'
   \}
 
-
 " Taboo
 let g:taboo_tab_format = ' %N %f %m '
 let g:taboo_renamed_tab_format = ' %N %l (%f) %m '
+
+" Signatures
+let g:SignatureMarkTextHL = "Exception"
+
+" Auto close html
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.tpl,*.hbs"
 
 " ==============================================================================
 " Keyboard bindings
@@ -367,20 +398,21 @@ xnoremap p pgvy
 " Files
 nnoremap <leader>fb :LustyFilesystemExplorer<cr>
 nnoremap <leader>fh :LustyFilesystemExplorerFromHere<cr>
-nmap <leader>fw :<C-u>CtrlPCurWD<cr><C-\>w
-nnoremap <leader>ff :<C-u>CtrlPCurWD<cr>
+nnoremap <leader>fe :GFiles<cr>
+nnoremap <leader>ff :GFiles<cr>
+nnoremap <leader>fw :Files<cr><C-\>w<cr>
+
 nnoremap <leader>fs :<C-u>w<cr>
-nnoremap <leader>fr :<C-u>CtrlPMRUFiles<cr>
+nnoremap <leader>fr :bye<C-u>History<cr><C-r>*
 nnoremap <leader>fc :<C-u>!mkdir -p %:h<cr>:w<cr>
-nnoremap <leader>fI :<C-u>CtrlPClearAllCaches<cr>
-nnoremap <leader>fcf :<C-u>CtrlPCurFile<cr>
 nnoremap <leader>fed :<C-u>e ~/.vimrc<cr>
 nnoremap <leader>fer :<C-u>source ~/.vimrc<cr>
+" Because it's so damn easy to press...
+nnoremap <leader><space> :Buffers<cr>
 
 " Buffers
-nnoremap <leader>bb :<C-u>CtrlPBuffer<cr>
-nnoremap <leader>bo :<C-u>CtrlPBufTag<CR>
-nmap <leader>bw :CtrlPBufTag<CR><C-\>w
+nnoremap <leader>bb :<C-u>Buffers<cr>
+nnoremap <leader>bo :<C-u>BTags<CR>
 nnoremap <leader>sl :<C-u>TagbarOpenAutoClose<cr>
 nnoremap <leader>bsf :<C-u>TagbarCurrentTag {'f'}<cr>
 nnoremap <leader>bd :Kwbd<cr>
