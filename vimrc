@@ -17,7 +17,7 @@ Plug 'omh/Kwbd.vim'
 Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'jgdavey/tslime.vim'
 Plug 'kshenoy/vim-signature'
-Plug 'omh/vim-ez', { 'for': ['tpl', 'ini'] }
+Plug 'omh/vim-ez'
 Plug 'sheerun/vim-polyglot'
 Plug 'gcmt/taboo.vim'
 Plug 'dkprice/vim-easygrep'
