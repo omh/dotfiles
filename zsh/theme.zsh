@@ -36,6 +36,6 @@ function prompt_omh_setup {
 
   autoload -U colors && colors
   VIRTUAL_ENV_DISABLE_PROMPT=1
-  PROMPT='$(virtualenv)$(ssh_connection)%F{238}%3~%f${vcs_info_msg_0_} %F{yellow}%(!.#.❯)%b%f '
+  PROMPT='$(virtualenv)$(ssh_connection)%F{230}%3~%f${vcs_info_msg_0_} %F{yellow}%(!.#.❯)%b%f '
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }

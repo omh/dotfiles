@@ -27,7 +27,7 @@ Plug 'tweekmonster/braceless.vim'
 Plug 'neomake/neomake'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'alvan/vim-closetag'
+Plug 'tpope/vim-characterize'
 call plug#end()
 
 filetype plugin indent on
@@ -276,6 +276,7 @@ let g:tagbar_iconchars = ['▸', '▾']
 
 " Neomake
 autocmd! BufWritePost * Neomake
+let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_python_enabled_makers = ['pep8']
 let g:neomake_python_pep8_maker = { 'args': ['--ignore=E501'] }
 let g:neomake_python_flake8_maker = {
@@ -354,6 +355,12 @@ let g:SignatureMarkTextHL = "Exception"
 " Auto close html
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.tpl,*.hbs"
 
+" FZF
+if executable('ag')
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let $FZF_DEFAULT_COMMAND= 'ag -g ""'
+endif
+
 " ==============================================================================
 " Keyboard bindings
 " ==============================================================================
@@ -395,12 +402,17 @@ cnoremap <c-e> <end>
 " Don't override register when pasting
 xnoremap p pgvy
 
+" Find
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+nnoremap <leader>ss :Find <C-r><C-w>
+nnoremap <leader>sw :call fzf#vim#grep(fzf#wrap({'options': '-q ' . expand('<cword>')}))<cr>
+
 " Files
 nnoremap <leader>fb :LustyFilesystemExplorer<cr>
 nnoremap <leader>fh :LustyFilesystemExplorerFromHere<cr>
 nnoremap <leader>fe :GFiles<cr>
-nnoremap <leader>ff :GFiles<cr>
-nnoremap <leader>fw :Files<cr><C-\>w<cr>
+nnoremap <leader>ff :Files<cr>
+nnoremap <leader>fw :call fzf#run(fzf#wrap({'options': '-q ' . expand('<cword>')}))<cr>
 
 nnoremap <leader>fs :<C-u>w<cr>
 nnoremap <leader>fr :bye<C-u>History<cr><C-r>*
@@ -413,6 +425,7 @@ nnoremap <leader><space> :Buffers<cr>
 " Buffers
 nnoremap <leader>bb :<C-u>Buffers<cr>
 nnoremap <leader>bo :<C-u>BTags<CR>
+nnoremap <leader>bl :BLines<cr>
 nnoremap <leader>sl :<C-u>TagbarOpenAutoClose<cr>
 nnoremap <leader>bsf :<C-u>TagbarCurrentTag {'f'}<cr>
 nnoremap <leader>bd :Kwbd<cr>
@@ -427,6 +440,8 @@ nnoremap <leader>tr :<C-u>TabooRename
 nnoremap <leader>tz :<C-u>TabooReset<cr>
 nnoremap tl :<C-u>tabnext<cr>
 nnoremap th :<C-u>tabprev<cr>
+nnoremap tj :<C-u>tabmove -1<cr>
+nnoremap tk :<C-u>tabmove +1<cr>
 nnoremap t1 1gt
 nnoremap t2 2gt
 nnoremap t3 3gt
@@ -469,12 +484,7 @@ nnoremap <leader>anf :<C-u>NERDTreeFind<cr>
 
 " Run (tslime)
 nnoremap <leader>rc :unlet g:tslime<cr>
-nnoremap <leader>ryt :call Send_to_Tmux("./run_tests.py\n")<cr>
-nnoremap <leader>ryd :call Send_to_Tmux("./run_tests.py --with-db\n")<cr>
-nnoremap <leader>ryb :call Send_to_Tmux("cd docs && make html && cd -\n")<cr>
-nnoremap <leader>ryo :call Send_to_Tmux("open docs/_build/html/index.html\n")<cr>
-nnoremap <leader>rst :call Send_to_Tmux("make test\n")<cr>
-nnoremap <leader>rss :call Send_to_Tmux("make static\n")<cr>
+nnoremap <leader>rec :call Send_to_Tmux("starter clear\n")<cr>
 command! -nargs=+ -bar SyncDB :call Send_to_Tmux("fab sync_db:<args>\n")
 nnoremap <leader>rsy :SyncDB<space>
 
