@@ -28,6 +28,8 @@ Plug 'neomake/neomake'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-characterize'
+Plug 'morhetz/gruvbox'
+Plug 'davidhalter/jedi-vim'
 call plug#end()
 
 filetype plugin indent on
@@ -39,7 +41,10 @@ filetype plugin indent on
 
 let g:seoul256_background = 235
 set bg=dark
-colorscheme seoul256
+"colorscheme seoul256
+let g:gruvbox_contrast_dark = "medium"
+let g:gitgutter_override_sign_column_highlight = 1
+colorscheme gruvbox
 
 set laststatus=2  " Always show status line
 set scrolloff=5
@@ -236,11 +241,17 @@ augroup END
 " }}}
 
 " Status Colors: {{{
-hi User1 ctermfg=33  guifg=#268bd2  ctermbg=236 guibg=#3F3F3F
-hi User2 ctermfg=131 guifg=#d33682  ctermbg=236 guibg=#3F3F3F
-hi User3 ctermfg=64  guifg=#719e07  ctermbg=236 guibg=#3F3F3F
-hi User4 ctermfg=37  guifg=#2aa198  ctermbg=236 guibg=#3F3F3F
-hi User5 ctermfg=101  guifg=#989A6D ctermbg=236 guibg=#3F3F3F
+" hi User1 ctermfg=33  guifg=#268bd2  ctermbg=236 guibg=#3F3F3F
+" hi User2 ctermfg=131 guifg=#d33682  ctermbg=236 guibg=#3F3F3F
+" hi User3 ctermfg=64  guifg=#719e07  ctermbg=236 guibg=#3F3F3F
+" hi User4 ctermfg=37  guifg=#2aa198  ctermbg=236 guibg=#3F3F3F
+" hi User5 ctermfg=101  guifg=#989A6D ctermbg=236 guibg=#3F3F3F
+
+hi User1 ctermfg=33  guifg=#268bd2  ctermbg=236 guibg=#504945
+hi User2 ctermfg=131 guifg=#d33682  ctermbg=236 guibg=#504945
+hi User3 ctermfg=64  guifg=#719e07  ctermbg=236 guibg=#504945
+hi User4 ctermfg=37  guifg=#2aa198  ctermbg=236 guibg=#504945
+hi User5 ctermfg=101  guifg=#989A6D ctermbg=236 guibg=#504945
 " }}}
 
 
