@@ -30,6 +30,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-characterize'
 Plug 'morhetz/gruvbox'
 Plug 'davidhalter/jedi-vim'
+
 call plug#end()
 
 filetype plugin indent on
@@ -39,12 +40,12 @@ filetype plugin indent on
 " ==============================================================================
 
 
-let g:seoul256_background = 235
+"let g:seoul256_background = 235
 set bg=dark
-"colorscheme seoul256
-let g:gruvbox_contrast_dark = "medium"
+"let g:gruvbox_contrast_dark = "medium"
 let g:gitgutter_override_sign_column_highlight = 1
-colorscheme gruvbox
+"colorscheme gruvbox
+colorscheme jellybeans3
 
 set laststatus=2  " Always show status line
 set scrolloff=5
@@ -54,7 +55,7 @@ set hidden
 set wrap
 set backspace=2
 set ruler
-"set cursorline
+set cursorline
 set number
 
 " Timeout
@@ -94,7 +95,13 @@ set autoread
 set nrformats=
 
 " Syntax coloring lines that are too long just slows down the world
-set synmaxcol=1000
+set synmaxcol=200
+
+" Use old regex engine, faster
+set regexpengine=1
+set noshowcmd
+set ttyfast
+"set lazyredraw
 
 " Remember tab names
 set sessionoptions+=tabpages,globals
@@ -241,17 +248,27 @@ augroup END
 " }}}
 
 " Status Colors: {{{
-" hi User1 ctermfg=33  guifg=#268bd2  ctermbg=236 guibg=#3F3F3F
-" hi User2 ctermfg=131 guifg=#d33682  ctermbg=236 guibg=#3F3F3F
-" hi User3 ctermfg=64  guifg=#719e07  ctermbg=236 guibg=#3F3F3F
-" hi User4 ctermfg=37  guifg=#2aa198  ctermbg=236 guibg=#3F3F3F
-" hi User5 ctermfg=101  guifg=#989A6D ctermbg=236 guibg=#3F3F3F
+"hi User1 ctermfg=33  guifg=#268bd2  ctermbg=236 guibg=#3F3F3F
+"hi User2 ctermfg=131 guifg=#d33682  ctermbg=236 guibg=#3F3F3F
+"hi User3 ctermfg=64  guifg=#719e07  ctermbg=236 guibg=#3F3F3F
+"hi User4 ctermfg=37  guifg=#2aa198  ctermbg=236 guibg=#3F3F3F
+"hi User5 ctermfg=101  guifg=#989A6D ctermbg=236 guibg=#3F3F3F
 
-hi User1 ctermfg=33  guifg=#268bd2  ctermbg=236 guibg=#504945
-hi User2 ctermfg=131 guifg=#d33682  ctermbg=236 guibg=#504945
-hi User3 ctermfg=64  guifg=#719e07  ctermbg=236 guibg=#504945
-hi User4 ctermfg=37  guifg=#2aa198  ctermbg=236 guibg=#504945
-hi User5 ctermfg=101  guifg=#989A6D ctermbg=236 guibg=#504945
+ ""gruvbox
+"hi User1 ctermfg=33  guifg=#268bd2  ctermbg=239 guibg=#504945
+"hi User2 ctermfg=131 guifg=#d33682  ctermbg=239 guibg=#504945
+"hi User3 ctermfg=64  guifg=#719e07  ctermbg=239 guibg=#504945
+"hi User4 ctermfg=37  guifg=#2aa198  ctermbg=239 guibg=#504945
+"hi User5 ctermfg=101  guifg=#989A6D ctermbg=239 guibg=#504945
+"" }}}
+
+ "jellybeans
+hi User1 ctermfg=66  guifg=#ffffff  ctermbg=239 guibg=#403c41
+hi User2 ctermfg=66 guifg=#cf6a4c  ctermbg=239 guibg=#403c41
+hi User3 ctermfg=66  guifg=#99ad6a  ctermbg=239 guibg=#403c41
+hi User4 ctermfg=66  guifg=#ffffff  ctermbg=239 guibg=#403c41
+hi User5 ctermfg=66  guifg=#bbbbbb ctermbg=239 guibg=#403c41
+
 " }}}
 
 
@@ -368,9 +385,9 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.tpl,*.hbs"
 
 " FZF
 if executable('ag')
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let $FZF_DEFAULT_COMMAND= 'ag -g ""'
+  let $FZF_DEFAULT_COMMAND= 'ag --ignore safirweb/static/extjs-4.2.1 -g ""'
 endif
+
 
 " ==============================================================================
 " Keyboard bindings
@@ -501,6 +518,14 @@ nnoremap <leader>rsy :SyncDB<space>
 
 nnoremap <leader>rfc :call Send_to_Tmux("fab changes\n")<cr>
 nnoremap <leader>rfd :call Send_to_Tmux("fab deploy\n")<cr>
+nnoremap <leader>rt :call Send_to_Tmux("pytest -x -k 'not functional'\n")<cr>
+function! TestCurrentFile()
+    return "pytest " . expand('%') . "\n"
+endfunction
+nnoremap <leader>rf :call Send_to_Tmux(TestCurrentFile())<cr>
+" Run last command
+nnoremap <leader>rr :call Send_to_Tmux("fc -e : -1\n")<cr>
+
 
 " Inserts
 nnoremap <leader>iD Oimport ipdb; ipdb.set_trace();<esc>
