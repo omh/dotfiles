@@ -30,6 +30,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-characterize'
 Plug 'morhetz/gruvbox'
 Plug 'davidhalter/jedi-vim'
+Plug 'itchyny/lightline.vim'
 
 call plug#end()
 
@@ -158,94 +159,94 @@ set wildignore+=*__pycache__*
 au FileType jinja,html,eruby,rb,css,js,xml runtime! macros/matchit.vim
 au BufRead, BufNewFile *.tpl set filetype=ezp
 
-" Status Line: {{{
+"" Status Line: {{{
 
-" Status Function: {{{2
-function! Status(winnr)
-  let stat = ''
-  let active = winnr() == a:winnr
-  let buffer = winbufnr(a:winnr)
+"" Status Function: {{{2
+"function! Status(winnr)
+  "let stat = ''
+  "let active = winnr() == a:winnr
+  "let buffer = winbufnr(a:winnr)
 
-  let modified = getbufvar(buffer, '&modified')
-  let readonly = getbufvar(buffer, '&ro')
-  let fname = bufname(buffer)
+  "let modified = getbufvar(buffer, '&modified')
+  "let readonly = getbufvar(buffer, '&ro')
+  "let fname = bufname(buffer)
 
-  function! Color(active, num, content)
-    if a:active
-      return '%' . a:num . '*' . a:content . '%*'
-    else
-      return a:content
-    endif
-  endfunction
+  "function! Color(active, num, content)
+    "if a:active
+      "return '%' . a:num . '*' . a:content . '%*'
+    "else
+      "return a:content
+    "endif
+  "endfunction
 
-  " file
-  let stat .= Color(active, 3, active ? ' »' : ' «')
-  let stat .= ' %<'
-  let stat .= '%f'
+  "" file
+  "let stat .= Color(active, 3, active ? ' »' : ' «')
+  "let stat .= ' %<'
+  "let stat .= '%f'
 
-  " File type
-  let stat .= Color(active, 5, " (")
-  let stat .= Color(active, 5, "%{strlen(&filetype)?&filetype:'none'}")
-  " File format
-  let stat .= Color(active, 5, ", %{&ff}")
-  " file encoding
-  let stat .= Color(active, 5, ", %{strlen(&fenc)?&fenc:'none'}")
-  let stat .= Color(active, 5, ")")
+  "" File type
+  "let stat .= Color(active, 5, " (")
+  "let stat .= Color(active, 5, "%{strlen(&filetype)?&filetype:'none'}")
+  "" File format
+  "let stat .= Color(active, 5, ", %{&ff}")
+  "" file encoding
+  "let stat .= Color(active, 5, ", %{strlen(&fenc)?&fenc:'none'}")
+  "let stat .= Color(active, 5, ")")
 
 
-  let stat .= ' ' . Color(active, 3, active ? '«' : '»')
+  "let stat .= ' ' . Color(active, 3, active ? '«' : '»')
 
-  " file modified
-  let stat .= Color(active, 2, modified ? ' +' : '  ')
+  "" file modified
+  "let stat .= Color(active, 2, modified ? ' +' : '  ')
 
-  " read only
-  let stat .= Color(active, 2, readonly ? ' RO' : '')
+  "" read only
+  "let stat .= Color(active, 2, readonly ? ' RO' : '')
 
-  " paste
-  if active && &paste
-    let stat .= ' %2*' . ' PASTE' . '%*'
-  endif
+  "" paste
+  "if active && &paste
+    "let stat .= ' %2*' . ' PASTE' . '%*'
+  "endif
 
-  if exists("*SyntasticStatuslineFlag")
-      let errors = SyntasticStatuslineFlag()
-      let stat .= Color(active, 2, ' ' . "%{SyntasticStatuslineFlag()}")
-  endif
+  "if exists("*SyntasticStatuslineFlag")
+      "let errors = SyntasticStatuslineFlag()
+      "let stat .= Color(active, 2, ' ' . "%{SyntasticStatuslineFlag()}")
+  "endif
 
-  " right side
-  let stat .= '%='
+  "" right side
+  "let stat .= '%='
 
-  " git branch
-  if exists('*fugitive#head')
-    let head = fugitive#head()
+  "" git branch
+  "if exists('*fugitive#head')
+    "let head = fugitive#head()
 
-    if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
-      call fugitive#detect(getcwd())
-      let head = fugitive#head()
-    endif
-  endif
+    "if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
+      "call fugitive#detect(getcwd())
+      "let head = fugitive#head()
+    "endif
+  "endif
 
-  if !empty(head)
-    let stat .= Color(active, 3, ' ← ') . head . ' '
-  endif
+  "if !empty(head)
+    "let stat .= Color(active, 3, ' ← ') . head . ' '
+  "endif
 
-  let stat .= Color(active, 5, ' %3l:%-2c ')
+  "let stat .= Color(active, 5, ' %3l:%-2c ')
 
-  return stat
-endfunction
-" }}}
+  "return stat
+"endfunction
+"" }}}
 
-" Status AutoCMD: {{{
-function! SetStatus()
-  for nr in range(1, winnr('$'))
-    call setwinvar(nr, '&statusline', '%!Status('.nr.')')
-  endfor
-endfunction
+"" Status AutoCMD: {{{
+"function! SetStatus()
+  "for nr in range(1, winnr('$'))
+    "call setwinvar(nr, '&statusline', '%!Status('.nr.')')
+  "endfor
+"endfunction
 
-augroup status
-  autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter,BufUnload * call SetStatus()
-augroup END
-" }}}
+"augroup status
+  "autocmd!
+  "autocmd VimEnter,WinEnter,BufWinEnter,BufUnload * call SetStatus()
+"augroup END
+"" }}}
 
 " Status Colors: {{{
 "hi User1 ctermfg=33  guifg=#268bd2  ctermbg=236 guibg=#3F3F3F
@@ -263,14 +264,24 @@ augroup END
 "" }}}
 
  "jellybeans
-hi User1 ctermfg=66  guifg=#ffffff  ctermbg=239 guibg=#403c41
-hi User2 ctermfg=66 guifg=#cf6a4c  ctermbg=239 guibg=#403c41
-hi User3 ctermfg=66  guifg=#99ad6a  ctermbg=239 guibg=#403c41
-hi User4 ctermfg=66  guifg=#ffffff  ctermbg=239 guibg=#403c41
-hi User5 ctermfg=66  guifg=#bbbbbb ctermbg=239 guibg=#403c41
+"hi User1 ctermfg=66  guifg=#ffffff  ctermbg=239 guibg=#403c41
+"hi User2 ctermfg=66 guifg=#cf6a4c  ctermbg=239 guibg=#403c41
+"hi User3 ctermfg=66  guifg=#99ad6a  ctermbg=239 guibg=#403c41
+"hi User4 ctermfg=66  guifg=#ffffff  ctermbg=239 guibg=#403c41
+"hi User5 ctermfg=66  guifg=#bbbbbb ctermbg=239 guibg=#403c41
 
 " }}}
 
+let g:lightline = {
+  \ 'colorscheme': 'jellybeans',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'fugitive#head'
+  \ },
+\ }
 
 
 " ==============================================================================
@@ -338,6 +349,7 @@ let g:ctrlp_clear_cache_on_exit = 0
 if executable('ag')
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'noglob ag %s --ignore=extjs-4.2.1 --ignore=*.pyc -l --nocolor -g ""'
+  set grepprg=ag\ --nogroup\ --nocolor
 endif
 
 
