@@ -22,15 +22,20 @@ Plug 'sheerun/vim-polyglot'
 Plug 'gcmt/taboo.vim'
 Plug 'dkprice/vim-easygrep'
 Plug 'tpope/vim-endwise'
-Plug 'ajh17/VimCompletesMe'
+"Plug 'ajh17/VimCompletesMe'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'yami-beta/asyncomplete-omni.vim'
+Plug 'prabirshrestha/asyncomplete-buffer.vim'
 Plug 'tweekmonster/braceless.vim'
-Plug 'neomake/neomake'
+Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-characterize'
-Plug 'morhetz/gruvbox'
+"Plug 'morhetz/gruvbox'
 Plug 'davidhalter/jedi-vim'
 Plug 'itchyny/lightline.vim'
+Plug 'jreybert/vimagit'
+Plug 'janko-m/vim-test'
 
 call plug#end()
 
@@ -47,6 +52,7 @@ set bg=dark
 let g:gitgutter_override_sign_column_highlight = 1
 "colorscheme gruvbox
 colorscheme jellybeans3
+"colorscheme solarized8_light
 
 set laststatus=2  " Always show status line
 set scrolloff=5
@@ -57,7 +63,7 @@ set wrap
 set backspace=2
 set ruler
 set cursorline
-set number
+set nonumber
 
 " Timeout
 set timeout
@@ -158,6 +164,13 @@ set wildignore+=*__pycache__*
 
 au FileType jinja,html,eruby,rb,css,js,xml runtime! macros/matchit.vim
 au BufRead, BufNewFile *.tpl set filetype=ezp
+
+" Only cursorline in the active buffer
+augroup CursorLine
+    au!
+    au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+augroup END
 
 "" Status Line: {{{
 
@@ -276,7 +289,7 @@ let g:lightline = {
   \ 'colorscheme': 'jellybeans',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+  \             [ 'gitbranch', 'readonly', 'relativepath', 'modified' ] ]
   \ },
   \ 'component_function': {
   \   'gitbranch': 'fugitive#head'
@@ -287,15 +300,7 @@ let g:lightline = {
 " ==============================================================================
 " Plugin settings
 " ==============================================================================
-
-" Airline
-"let g:airline_left_sep=''
-"let g:airline_right_sep=''
-"let g:airline_powerline_fonts = 0
-"let g:airline_theme = 'lucius'
-"let g:airline#extensions#tagbar#enabled = 0
-"let g:airline_extensions = []
-
+"
 " Git Gutter
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
@@ -306,38 +311,47 @@ let g:tagbar_compact = 1
 let g:tagbar_vertical = 30
 let g:tagbar_iconchars = ['▸', '▾']
 
-" Syntastic
-"let g:syntastic_auto_loc_list=0
-"let g:syntastic_loc_list_height=4
-"let g:syntastic_python_checkers=['flake8']
-"let g:syntastic_python_flake8_post_args='--ignore=E501,C0111,C0301,R0903'
-"let g:syntastic_stl_format='%E{!! err:%fe/%e}%W{warn:%fw/%w}'
+" Ale
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+hi link ALEErrorSign SpellBad
+hi link ALEWarningSign Function
+hi link PythonError SpellBad
+let g:ale_set_highlights = 0
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 1
 
-" Neomake
-autocmd! BufWritePost * Neomake
-let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_python_enabled_makers = ['pep8']
-let g:neomake_python_pep8_maker = { 'args': ['--ignore=E501'] }
-let g:neomake_python_flake8_maker = {
-    \ 'args': ['--ignore=E501,C0111,C0301,R0903', '--format=default'],
-    \ 'errorformat':
-        \ '%E%f:%l: could not compile,%-Z%p^,' .
-        \ '%A%f:%l:%c: %t%n %m,' .
-        \ '%A%f:%l: %t%n %m,' .
-        \ '%-G%.%#',
-    \ }
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 autocmd FileType html let b:vcm_tab_complete = 'omni'
 autocmd FileType css let b:vcm_tab_complete = 'omni'
 autocmd FileType php let b:vcm_tab_complete = 'omni'
 autocmd FileType python let b:vcm_tab_complete = 'omni'
+
+" Jedi
+set completeopt-=preview
+let g:jedi#show_call_signatures = "0"
+
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
+\ 'name': 'omni',
+\ 'whitelist': ['*'],
+\ 'blacklist': ['html'],
+\ 'completor': function('asyncomplete#sources#omni#completor')
+\  }))
+"call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+"\ 'name': 'buffer',
+"\ 'whitelist': ['*'],
+"\ 'blacklist': ['go'],
+"\ 'completor': function('asyncomplete#sources#buffer#completor'),
+"\ }))
+
 
 " Enable braceless
 autocmd FileType python BracelessEnable +indent
@@ -397,8 +411,32 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.tpl,*.hbs"
 
 " FZF
 if executable('ag')
-  let $FZF_DEFAULT_COMMAND= 'ag --ignore safirweb/static/extjs-4.2.1 -g ""'
+  let $FZF_DEFAULT_COMMAND= 'ag --ignore safirweb/static/extjs-4.2.1 --ignore=var --ignore=storage -g ""'
 endif
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+"let g:fzf_layout = { 'window': '30split enew' }
+let g:fzf_layout = { 'down': '~40%' }
+
+" Vim test
+"let test#strategy = "vimterminal"
+let test#strategy = "vimterminal"
+let test#python#runner = 'pytest'
+let test#python#pytest#executable = 'venv/bin/pytest'
+let test#python#pytest#options = '--verbose -x -k "not functional"'
+au BufWinEnter * if &buftype == 'terminal' | set nocursorline | endif
 
 
 " ==============================================================================
@@ -455,7 +493,7 @@ nnoremap <leader>ff :Files<cr>
 nnoremap <leader>fw :call fzf#run(fzf#wrap({'options': '-q ' . expand('<cword>')}))<cr>
 
 nnoremap <leader>fs :<C-u>w<cr>
-nnoremap <leader>fr :bye<C-u>History<cr><C-r>*
+nnoremap <leader>fr :bye<C-u>History<cr><C-r>
 nnoremap <leader>fc :<C-u>!mkdir -p %:h<cr>:w<cr>
 nnoremap <leader>fed :<C-u>e ~/.vimrc<cr>
 nnoremap <leader>fer :<C-u>source ~/.vimrc<cr>
@@ -501,7 +539,7 @@ nnoremap <leader>ws :<C-u>split<cr>
 nnoremap <leader>gb :Gblame<cr>
 nnoremap <leader>gs :Gstatus<cr><C-w>15+
 nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gl :Git log<cr>
+nnoremap <leader>gl :terminal ++close git log<cr>
 nnoremap <leader>gc :Gcommit<cr>
 nnoremap <leader>gp :Git push<cr>
 nnoremap <leader>gu :Git pull<cr>
@@ -530,13 +568,16 @@ nnoremap <leader>rsy :SyncDB<space>
 
 nnoremap <leader>rfc :call Send_to_Tmux("fab changes\n")<cr>
 nnoremap <leader>rfd :call Send_to_Tmux("fab deploy\n")<cr>
-nnoremap <leader>rt :call Send_to_Tmux("pytest -x -k 'not functional'\n")<cr>
-function! TestCurrentFile()
-    return "pytest " . expand('%') . "\n"
-endfunction
-nnoremap <leader>rf :call Send_to_Tmux(TestCurrentFile())<cr>
+"nnoremap <leader>rt :call Send_to_Tmux("pytest -x -k 'not functional'\n")<cr>
+nnoremap <leader>rt :TestSuite<cr>
+"nnoremap <leader>rf :call Send_to_Tmux(TestCurrentFile())<cr>
+nnoremap <leader>rf :TestFile<cr>
+nnoremap <leader>rn :TestNearest<cr>
 " Run last command
-nnoremap <leader>rr :call Send_to_Tmux("fc -e : -1\n")<cr>
+"nnoremap <leader>rr :terminal ++rows=15 fc -e : -1<cr>
+"nnoremap <leader>rr :call Send_to_Tmux("fc -e : -1\n")<cr>
+nnoremap <leader>rr :TestLast<cr>
+"nnoremap <leader>rp :call Send_to_Tmux("fc -e : -2\n")<cr>
 
 
 " Inserts
