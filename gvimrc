@@ -3,12 +3,14 @@ if has("gui_macvim")
     set go-=L
     set guioptions-=r
     set guioptions-=T
+    set guioptions-=e
 
     " Make sure highlighting of current line is off
     set nocursorline
 
     " Set the font
-    set gfn=Source\ Code\ Pro\ Light:h13
+    "set gfn=Source\ Code\ Pro\ Light:h13
+    set guifont=Operator\ Mono:h14
 
     " Turn on anti alias
     set anti

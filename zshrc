@@ -49,23 +49,6 @@ alias grep="grep --color"
 # Grep highlighting color
 export GREP_COLOR='0;35;31'
 
-# Load rbenv
-if (( $+commands[rbenv] )) ; then
-  eval "$(rbenv init -)"
-fi
-
-# Tweak ruby GC to better suite rails apps - makes start up faster.
-export RUBY_HEAP_MIN_SLOTS=800000
-export RUBY_HEAP_FREE_MIN=100000
-export RUBY_HEAP_SLOTS_INCREMENT=300000
-export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-export RUBY_GC_MALLOC_LIMIT=79000000
-
-# Load git helpers if available
-if [ -f ~/.git_helpers/helpers.sh ]; then
-    source ~/.git_helpers/helpers.sh
-fi
-
 fancy-ctrl-z () {
   if [[ $#BUFFER -eq 0 ]]; then
     fg
@@ -82,3 +65,9 @@ if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/oh/dev/kube-django/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/oh/dev/kube-django/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/oh/dev/kube-django/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/oh/dev/kube-django/google-cloud-sdk/completion.zsh.inc'; fi

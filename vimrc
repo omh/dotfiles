@@ -10,7 +10,6 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'omh/vim-colors'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'sjbach/lusty'
 Plug 'omh/Kwbd.vim'
@@ -22,10 +21,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'gcmt/taboo.vim'
 Plug 'dkprice/vim-easygrep'
 Plug 'tpope/vim-endwise'
-"Plug 'ajh17/VimCompletesMe'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'yami-beta/asyncomplete-omni.vim'
-Plug 'prabirshrestha/asyncomplete-buffer.vim'
+Plug 'ajh17/VimCompletesMe'
 Plug 'tweekmonster/braceless.vim'
 Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -34,8 +30,8 @@ Plug 'tpope/vim-characterize'
 "Plug 'morhetz/gruvbox'
 Plug 'davidhalter/jedi-vim'
 Plug 'itchyny/lightline.vim'
-Plug 'jreybert/vimagit'
 Plug 'janko-m/vim-test'
+Plug 'slashmili/alchemist.vim'
 
 call plug#end()
 
@@ -52,7 +48,6 @@ set bg=dark
 let g:gitgutter_override_sign_column_highlight = 1
 "colorscheme gruvbox
 colorscheme jellybeans3
-"colorscheme solarized8_light
 
 set laststatus=2  " Always show status line
 set scrolloff=5
@@ -140,10 +135,6 @@ endif
 
 " Turn on mouse support
 set mouse+=a
-if &term =~ '^screen'
-    " tmux knows the extended mouse mode
-    set ttymouse=xterm2
-endif
 
 " Disable all blinking
 set gcr=a:blinkon0
@@ -312,15 +303,29 @@ let g:tagbar_vertical = 30
 let g:tagbar_iconchars = ['▸', '▾']
 
 " Ale
+let g:ale_sign_error = '>'
+let g:ale_sign_warning = '-'
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
-hi link ALEErrorSign SpellBad
-hi link ALEWarningSign Function
-hi link PythonError SpellBad
+"call s:X("SpellBad","","902020","underline","","DarkRed")
+"call s:X("SpellCap","","0000df","underline","","Blue")
+"hi link ALEErrorSign SpellBad
+"hi link ALEWarningSign Function
+"hi link PythonError SpellBad
 let g:ale_set_highlights = 0
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
-
+hi AleErrorSign guifg=#D65E76 guibg=#D65E76 gui=none
+hi ALEWarningSign guifg=#F6DC69 guibg=#fad07a gui=none
+hi link PythonError ALEErrorSign
+let g:ale_fixers = {
+\   'elixir': ['mix_format'],
+\}
+let g:ale_linters = {
+\   'elixir': ['mix'],
+\}
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_save = 1
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -339,19 +344,6 @@ set completeopt-=preview
 let g:jedi#show_call_signatures = "0"
 
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-call asyncomplete#register_source(asyncomplete#sources#omni#get_source_options({
-\ 'name': 'omni',
-\ 'whitelist': ['*'],
-\ 'blacklist': ['html'],
-\ 'completor': function('asyncomplete#sources#omni#completor')
-\  }))
-"call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-"\ 'name': 'buffer',
-"\ 'whitelist': ['*'],
-"\ 'blacklist': ['go'],
-"\ 'completor': function('asyncomplete#sources#buffer#completor'),
-"\ }))
-
 
 " Enable braceless
 autocmd FileType python BracelessEnable +indent
@@ -431,11 +423,12 @@ let g:fzf_colors =
 let g:fzf_layout = { 'down': '~40%' }
 
 " Vim test
-"let test#strategy = "vimterminal"
-let test#strategy = "vimterminal"
+let test#strategy = "tslime"
 let test#python#runner = 'pytest'
 let test#python#pytest#executable = 'venv/bin/pytest'
-let test#python#pytest#options = '--verbose -x -k "not functional"'
+let test#python#pytest#options = '--verbose -x -k "not functional" --pdb'
+"let test#elixir#exunit#executable = 'iex -S mix test --trace'
+let test#elixir#exunit#executable = 'mix test'
 au BufWinEnter * if &buftype == 'terminal' | set nocursorline | endif
 
 
@@ -446,6 +439,7 @@ let mapleader = " "
 
 nnoremap Q <nop>
 nnoremap <leader>Q :qall<cr>
+nnoremap <leader>q :q<cr>
 
 " Default to verbatim search
 nnoremap / /\V
@@ -490,6 +484,7 @@ nnoremap <leader>fb :LustyFilesystemExplorer<cr>
 nnoremap <leader>fh :LustyFilesystemExplorerFromHere<cr>
 nnoremap <leader>fe :GFiles<cr>
 nnoremap <leader>ff :Files<cr>
+nnoremap <ctrl>p :Files<cr>
 nnoremap <leader>fw :call fzf#run(fzf#wrap({'options': '-q ' . expand('<cword>')}))<cr>
 
 nnoremap <leader>fs :<C-u>w<cr>
@@ -562,7 +557,8 @@ nnoremap <leader>anf :<C-u>NERDTreeFind<cr>
 
 " Run (tslime)
 nnoremap <leader>rc :unlet g:tslime<cr>
-nnoremap <leader>rec :call Send_to_Tmux("starter clear\n")<cr>
+"nnoremap <leader>rec :call Send_to_Tmux("starter clear\n")<cr>
+nnoremap <leader>rec :call Send_to_Tmux("fab clear\n")<cr>
 command! -nargs=+ -bar SyncDB :call Send_to_Tmux("fab sync_db:<args>\n")
 nnoremap <leader>rsy :SyncDB<space>
 
