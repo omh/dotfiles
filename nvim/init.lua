@@ -61,12 +61,12 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- Misc
 vim.o.scrolloff = 8
--- vim.o.cursorline = true
 vim.o.swapfile = false
 vim.o.showcmd = false
 vim.o.showmode = false
 vim.o.splitright = true -- split to the right and move to it
 vim.o.hidden = true
+vim.o.autoindent = true
 
 -- Indenting
 vim.o.expandtab = true
@@ -111,10 +111,7 @@ augroup CursorLine
   au!
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   au WinLeave * setlocal nocursorline
-  au FileType TelescopePrompt* setlocal nocursorline
   au FileType TelescopePrompt setlocal nocursorline
-  au FileType Telescope* setlocal nocursorline
-  au FileType Telescope setlocal nocursorline
 augroup END
 ]]
 
