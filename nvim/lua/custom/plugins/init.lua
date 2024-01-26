@@ -15,6 +15,9 @@ return {
   -- Detect tabstop and shiftwidth automatically
   { 'tpope/vim-sleuth' },
 
+  -- readline keybindings for insert/command mode
+  { 'tpope/vim-rsi',                 event = "VeryLazy" },
+
   { "kylechui/nvim-surround",        event = "VeryLazy",   version = "*",     opts = {} },
 
   -- show marks in signcolumn

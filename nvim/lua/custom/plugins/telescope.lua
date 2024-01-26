@@ -120,19 +120,17 @@ return {
 
     keymap('n', '<leader>sf', function() tb.find_files(config) end, { desc = 'Search Files' })
     keymap('n', '<leader>fw', function()
-      tb.live_grep(
-        require('telescope.themes').get_ivy({})
-      )
+      tb.live_grep(require('telescope.themes').get_ivy({}))
     end, { desc = 'Search for text' })
     keymap('n', '<leader>fW', function()
       local word = vim.fn.expand("<cword>")
-      local opts = vim.tbl_deep_extend("force", config, { search = word })
-      tb.grep_string(config)
+      local opts = { search = word }
+      tb.grep_string(require('telescope.themes').get_ivy(opts))
     end, { desc = 'Search for text' })
     keymap('v', '<leader>fw', function()
       local text = vim.getVisualSelection()
-      local opts = vim.tbl_deep_extend("force", config, { search = text })
-      tb.grep_string(opts)
+      local opts = { search = text }
+      tb.grep_string(require('telescope.themes').get_ivy(opts))
     end, { desc = 'Search for highlighted text' })
     keymap('n', '<leader>fr', function() tb.oldfiles(config) end, { desc = "Find recent files" })
     keymap('n', '<leader>fh', function() tb.help_tags(config) end, { desc = "Search help tags" })
