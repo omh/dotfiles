@@ -118,7 +118,6 @@ augroup CursorLine
 augroup END
 ]]
 
-
 -- Auto resize panes when resizing nvim window
 local autocmd = vim.api.nvim_create_autocmd
 autocmd("VimResized", {
@@ -126,23 +125,17 @@ autocmd("VimResized", {
   command = "tabdo wincmd =",
 })
 
--- autocmd({ "VimEnter", "WinEnter", "BufWinEnter" }, {
---   pattern = "*",
---   callback = function(_ev)
---     local bufnr = vim.api.nvim_get_current_buf()
---     local buftype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
---     print(buftype)
---     if not buftype == "noice" then
---       vim.wo.cursorline = true
---     end
---   end
--- })
--- autocmd({ "WinLeave" }, {
---   pattern = "*",
---   callback = function(_ev)
---     vim.wo.cursorline = false
---   end
--- })
+-- Keymaps for better default experience
+vim.diagnostic.config {
+  signs = true,
+  underline = true,
+  virtual_text = false,
+  virtual_lines = false,
+  float = {
+    border = false,
+    focusable = true,
+  }
+}
 
 -- Keymaps for better default experience
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })

@@ -32,8 +32,9 @@ return {
           WinSeparator                = { fg = colors.mantle },
           Visual                      = { bg = "#304E75", bold = true },
 
-          NormalFloat                 = { bg = "NONE" },
-          FloatBorder                 = { fg = "#999999", bg = "NONE" },
+          NormalFloat                 = { bg = colors.surface0 },
+          -- not normally in use
+          FloatBorder                 = { fg = "#999999" },
 
           CmpFloatBorder              = { bg = "#323232", fg = "#323232" },
           CmpNormal                   = { bg = "#323232" },
@@ -114,7 +115,6 @@ return {
     vim.cmd.colorscheme "catppuccin"
   end
 }
-
 --   {
 --     "rockyzhang24/arctic.nvim",
 --     branch = "v2",
