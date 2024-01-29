@@ -8,8 +8,8 @@ return {
       transparent_background = false,
       color_overrides = {
         mocha = {
-          base = "#1E1E1E",
-          mantle = "#252526",
+          base = "#232323",
+          mantle = "#282829",
           crust = "#454545",
 
           surface0 = "#2E2E2E",
@@ -23,17 +23,16 @@ return {
       },
 
       custom_highlights = function(colors)
-        local bg = "#1D1D1D"
         return {
           Comment                     = { fg = "#6a9955" },
-          CursorLine                  = { bg = "#252526" },
-          CursorLineNr                = { bg = "#252526" },
+          CursorLine                  = { bg = colors.mantle },
+          CursorLineNr                = { fg = colors.peach, bg = colors.mantle },
           Folded                      = { bg = "#181818" },
           WinSeparator                = { fg = colors.mantle },
           Visual                      = { bg = "#304E75" },
 
           NormalFloat                 = { bg = colors.surface0 },
-          FloatBorder                 = { fg = "#999999" },
+          FloatBorder                 = { fg = colors.surface0 },
 
           CmpFloatBorder              = { bg = "#323232", fg = "#323232" },
           CmpNormal                   = { bg = "#323232" },
@@ -68,11 +67,6 @@ return {
         telescope = {
           enabled = true,
           style = 'nvchad'
-        },
-        indent_blankline = {
-          enabled = true,
-          scope_color = "overlay1", -- catppuccin color (eg. `lavender`) Default: text
-          colored_indent_levels = false,
         },
       }
     })
