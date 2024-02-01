@@ -52,7 +52,5 @@ return {
         hl = theme.fill,
       }
     end)
-
-    vim.keymap.set("n", "<leader>tr", ":TabRename ", { desc = "Rename tab" })
   end,
 }

@@ -1,5 +1,5 @@
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.maplocalleader = ','
 vim.o.termguicolors = true
 vim.g.timeoutlen = 500
 
@@ -53,7 +53,7 @@ vim.o.smartcase = true
 vim.wo.signcolumn = 'yes'
 
 -- Decrease update time
-vim.o.updatetime = 250
+vim.o.updatetime = 400
 vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
@@ -122,14 +122,21 @@ autocmd("VimResized", {
   command = "tabdo wincmd =",
 })
 
--- Keymaps for better default experience
+-- Diagnostics
 vim.diagnostic.config {
-  signs = true,
-  underline = true,
-  virtual_text = false,
-  virtual_lines = false,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '',
+      [vim.diagnostic.severity.WARN] = '',
+      [vim.diagnostic.severity.INFO] = '',
+      [vim.diagnostic.severity.HINT] = '',
+    }
+  },
+  underline = {
+    severity = { min = vim.diagnostic.severity.HINT }
+  },
+  virtual_text = true,
   float = {
-    border = false,
     focusable = true,
   }
 }
@@ -168,16 +175,25 @@ vim.keymap.set('n', '<leader>ws', [[<Cmd>wincmd s<CR>]], { noremap = true, silen
 vim.keymap.set('n', '<leader>bd', '<cmd>BD<cr>', { desc = "Delete buffer without closing the window" })
 
 -- Window sizing
-vim.keymap.set('n', "<C-w><", [[<cmd>vertical resize +20<CR>]], { desc = "Grow vertical split" })
-vim.keymap.set('n', "<C-w>-", [[<cmd>resize -10<CR>]], { desc = "Shrink horizontal split" })
-vim.keymap.set('n', "<C-w>+", [[<cmd>resize +10<CR>]], { desc = "Grow horisontal split" })
-vim.keymap.set('n', "<C-w>>", [[<cmd>vertical resize -20<CR>]], { desc = "Shrink vertical split" })
+vim.keymap.set('n', "<M-left>", [[<cmd>vertical resize +10<CR>]], { desc = "Grow vertical split" })
+vim.keymap.set('n', "<M-up>", [[<cmd>resize -5<CR>]], { desc = "Shrink horizontal split" })
+vim.keymap.set('n', "<M-down>", [[<cmd>resize +5<CR>]], { desc = "Grow horisontal split" })
+vim.keymap.set('n', "<M-right>", [[<cmd>vertical resize -10<CR>]], { desc = "Shrink vertical split" })
 
 -- tabs
-vim.keymap.set('n', "<leader>tn", '<CMD>tabnew<CR>', { desc = "Open new tab" })
-vim.keymap.set('n', "<leader>tc", '<CMD>tabclose<CR>', { desc = "Close tab" })
-vim.keymap.set("n", "<tab>", "<cmd>tabnext<CR>", { desc = "Next tab" })
-vim.keymap.set("n", "<s-tab>", "<cmd>tabprev<CR>", { desc = "Previous tab" })
+vim.keymap.set('n', "tn", '<CMD>tabnew<CR>', { desc = "Open new tab" })
+vim.keymap.set('n', "tq", '<CMD>tabclose<CR>', { desc = "Close tab" })
+vim.keymap.set("n", "th", "<cmd>tabprev<CR>", { desc = "Previous tab" })
+vim.keymap.set("n", "tl", "<cmd>tabnext<CR>", { desc = "Next tab" })
+vim.keymap.set("n", "tj", "<cmd>tabm -1<CR>", { desc = "Move tab left" })
+vim.keymap.set("n", "tk", "<cmd>tabm +1<CR>", { desc = "Move tab right" })
+vim.keymap.set("n", "tr", function()
+  local bufname = vim.fn.input("New tab name: ")
+  if bufname ~= "" then
+    local cmd = ":TabRename " .. bufname
+    vim.cmd(cmd)
+  end
+end, { desc = "Rename tab" })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>le', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
@@ -204,6 +220,8 @@ require('which-key').register {
   ['<leader>e'] = { name = '[E]xplorer', _ = 'which_key_ignore' },
   ['<leader>f'] = { name = '[F]ile | [F]ind', _ = 'which_key_ignore' },
   ['<leader>g'] = { name = '[G]it | Commenting | Movements (lsp)', _ = 'which_key_ignore' },
+  ['<leader>gh'] = { name = '[H]unk', _ = 'which_key_ignore' },
+  ['<leader>gg'] = { name = '[G]ithub', _ = 'which_key_ignore' },
   ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
   ['<leader>l'] = { name = '[L]SP', _ = 'which_key_ignore' },
   ['<leader>r'] = { name = '[R]run tests', _ = 'which_key_ignore' },

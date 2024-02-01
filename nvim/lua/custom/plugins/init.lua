@@ -15,6 +15,9 @@ return {
   -- Detect tabstop and shiftwidth automatically
   { 'tpope/vim-sleuth' },
 
+  -- Useful utilities
+  { 'tpope/vim-unimpaired' },
+
   -- readline keybindings for insert/command mode
   { 'tpope/vim-rsi',                 event = "VeryLazy" },
 

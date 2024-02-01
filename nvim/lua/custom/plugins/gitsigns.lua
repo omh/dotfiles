@@ -40,7 +40,6 @@ return {
       end, { expr = true, desc = 'Jump to previous hunk' })
 
       -- Actions
-      -- visual mode
       map('v', '<leader>ghs', function()
         gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
       end, { desc = 'stage git hunk' })

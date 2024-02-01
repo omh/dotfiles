@@ -3,16 +3,11 @@ return {
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
-    'nvim-treesitter/nvim-treesitter-context',
   },
   build = ':TSUpdate',
   config = function()
     -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
     vim.defer_fn(function()
-      require 'treesitter-context'.setup {
-        max_lines = 10,
-        multiline_threshold = 2, -- Maximum number of lines to show for a single context
-      }
       require('nvim-treesitter.configs').setup {
         -- Add languages to be installed here that you want installed for treesitter
         ensure_installed = {

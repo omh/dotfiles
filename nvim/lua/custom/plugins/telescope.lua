@@ -94,7 +94,7 @@ return {
     end
 
     local width_func = function(_, max_columns)
-      local width = 140
+      local width = 180
       if max_columns < width then
         width = math.floor(0.9 * max_columns)
       end
@@ -105,9 +105,9 @@ return {
     local config = {
       layout_config = {
         width = width_func,
-        preview_width = 70,
+        preview_width = 90,
         height = function(_, _, max_lines)
-          local height = 30
+          local height = 35
           if max_lines < height then
             height = math.floor(0.9 * max_lines)
           end

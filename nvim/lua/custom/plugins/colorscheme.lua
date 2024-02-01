@@ -10,7 +10,7 @@ return {
         mocha = {
           base = "#232323",
           mantle = "#282829",
-          crust = "#454545",
+          crust = "#313132",
 
           surface0 = "#2E2E2E",
           surface1 = "#454545",
@@ -24,31 +24,26 @@ return {
 
       custom_highlights = function(colors)
         return {
-          Comment                     = { fg = "#6a9955" },
-          CursorLine                  = { bg = colors.mantle },
-          CursorLineNr                = { fg = colors.peach, bg = colors.mantle },
-          Folded                      = { bg = "#181818" },
-          WinSeparator                = { fg = colors.mantle },
-          Visual                      = { bg = "#304E75" },
+          Comment             = { fg = "#6a9955" },
+          CursorLine          = { bg = colors.mantle },
+          CursorLineNr        = { fg = colors.peach, bg = colors.mantle },
+          Folded              = { bg = "#181818" },
+          WinSeparator        = { fg = colors.mantle },
+          Visual              = { bg = "#304E75" },
 
-          NormalFloat                 = { bg = colors.surface0 },
-          FloatBorder                 = { fg = colors.surface0 },
+          CmpFloatBorder      = { bg = colors.crust, fg = colors.crust },
+          CmpNormal           = { bg = colors.crust },
 
-          CmpFloatBorder              = { bg = "#323232", fg = "#323232" },
-          CmpNormal                   = { bg = "#323232" },
+          IndentBlanklineChar = { fg = colors.mantle },
 
-          IndentBlanklineChar         = { fg = colors.mantle },
+          LocalHighlight      = { underline = true, sp = colors.peach },
 
-          TreesitterContext           = { bg = "#212121" },
-          TreesitterContextLineNumber = { bg = "#212121" },
-          TreesitterContextBottom     = { sp = colors.mantle },
+          TabLineFill         = { fg = colors.surface1, bg = 'NONE', strikethrough = true },
+          TabLine             = { fg = "#999999", bg = 'NONE' },
+          TabLineSel          = { fg = colors.flamingo, bg = 'NONE' },
 
-          TabLineFill                 = { fg = colors.surface1, bg = 'NONE', strikethrough = true },
-          TabLine                     = { fg = "#999999", bg = 'NONE' },
-          TabLineSel                  = { fg = colors.flamingo, bg = 'NONE' },
-
-          TelescopePreviewNormal      = { bg = "#363637" },
-          TelescopePreviewBorder      = { fg = "#363637", bg = "#363637" },
+          -- TelescopePreviewNormal      = { bg = "#363637" },
+          -- TelescopePreviewBorder      = { fg = "#363637", bg = "#363637" },
         }
       end,
       dim_inactive = {
@@ -59,14 +54,12 @@ return {
       integrations = {
         cmp = true,
         gitsigns = true,
-        semantic_tokens = true,
-        treesitter = true,
-        treesitter_context = true,
         neotest = true,
+        noice = true,
         which_key = true,
+        lsp_trouble = true,
         telescope = {
           enabled = true,
-          style = 'nvchad'
         },
       }
     })
