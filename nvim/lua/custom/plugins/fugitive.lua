@@ -14,5 +14,22 @@ return {
     vim.keymap.set("x", "<leader>ggc", ":'<,'>GBrowse!<CR>", { desc = "Copy selection's GitHub URL" })
 
     vim.keymap.set("n", "<leader>gD", "<cmd>Gvdiffsplit!<CR>", { desc = "Diff current file" })
+
+    vim.keymap.set("n", "<leader>gvb", function()
+      local branch = vim.fn.input("Branch: ", vim.g.base_branch)
+      if branch ~= "" then
+        local f = vim.fn.expand('%:p')
+        local cmd = ":Gedit " .. branch .. ":" .. f
+        vim.cmd(cmd)
+      end
+    end, { desc = "View current file on different branch..." })
+
+    vim.keymap.set("n", "<leader>gvd", function()
+      local branch = vim.fn.input("Branch: ", vim.g.base_branch)
+      if branch ~= "" then
+        local cmd = ":Gvdiffsplit " .. branch
+        vim.cmd(cmd)
+      end
+    end, { desc = "Diff current file against a branch..." })
   end
 }

@@ -36,7 +36,7 @@ return {
 
           IndentBlanklineChar = { fg = colors.mantle },
 
-          LocalHighlight      = { underline = true, sp = colors.peach },
+          LocalHighlight      = { underline = true, sp = colors.blue },
 
           TabLineFill         = { fg = colors.surface1, bg = 'NONE', strikethrough = true },
           TabLine             = { fg = "#999999", bg = 'NONE' },

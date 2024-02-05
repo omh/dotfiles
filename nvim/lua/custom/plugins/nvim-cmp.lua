@@ -49,7 +49,18 @@ return {
         ["<C-u>"] = cmp.mapping.scroll_docs(4),
         ["<C-space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
-        ["<tab>"] = cmp.mapping.confirm({ select = true }),
+        -- ["<tab>"] = cmp.mapping.confirm({ select = true }),
+        ['<Tab>'] = cmp.mapping(function(fallback)
+          if luasnip.expandable() then
+            luasnip.expand()
+          elseif cmp.visible() then
+            cmp.confirm({ select = true })
+          elseif luasnip.jumpable(1) then
+            luasnip.jump(1)
+          else
+            fallback()
+          end
+        end, { 'i', 's' }),
         ["<cr>"] = cmp.mapping.confirm({ select = false }),
       }),
       sources = cmp.config.sources({
@@ -64,7 +75,7 @@ return {
             mode = "symbol_text",
             maxwidth = 30,
             ellipsis_char = '...',
-            before = function(_entry, vim_item2)
+            before = function(_, vim_item2)
               if string.sub(vim_item2.abbr, -1) == "~" then
                 vim_item2.abbr = string.sub(vim_item2.abbr, 0, -2)
               end

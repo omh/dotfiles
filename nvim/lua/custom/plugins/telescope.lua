@@ -16,14 +16,9 @@ return {
       end,
     },
 
-    {
-      'nvim-telescope/telescope-live-grep-args.nvim',
-    }
   },
   config = function()
     local ta = require('telescope.actions')
-    local lga_actions = require("telescope-live-grep-args.actions")
-
     require('telescope').setup {
       defaults = {
         mappings = {
@@ -43,10 +38,9 @@ return {
           "--line-number",
           "--column",
           "--smart-case",
-          "--trim",
         },
         winblend = 0,
-        prompt_prefix = "❯ ",
+        prompt_prefix = " ",
         color_devicons = true,
       },
       pickers = {
@@ -58,17 +52,6 @@ return {
         }
       },
       extensions = {
-        live_grep_args = {
-          auto_quoting = true, -- enable/disable auto-quoting
-          -- define mappings, e.g.
-          mappings = {         -- extend mappings
-            i = {
-              ["<C-k>"] = lga_actions.quote_prompt(),
-              ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
-            },
-          },
-        },
-
         fzf = {
           fuzzy = true,
           override_generic_sorter = true,
@@ -93,34 +76,37 @@ return {
       end
     end
 
-    local width_func = function(_, max_columns)
-      local width = 180
-      if max_columns < width then
-        width = math.floor(0.9 * max_columns)
-      end
+    -- local config = {
+    --   layout_config = {
+    --     width = width_func,
+    --     height = function(_, _, max_lines)
+    --       local height = 35
+    --       if max_lines < height then
+    --         height = math.floor(0.9 * max_lines)
+    --       end
+    --       return height
+    --     end
+    --   }
+    -- }
 
-      return width
-    end
-
-    local config = {
+    local drop_config = require('telescope.themes').get_dropdown({
+      winblend = 10,
+      shorten_path = true,
       layout_config = {
-        width = width_func,
-        preview_width = 90,
-        height = function(_, _, max_lines)
-          local height = 35
-          if max_lines < height then
-            height = math.floor(0.9 * max_lines)
-          end
-          return height
-        end
-      }
-    }
+        mirror = true,
+      },
+    })
+
+    local ivy_config = require('telescope.themes').get_ivy({
+      path_display = { truncate = 3 },
+    })
+
     local keymap = vim.keymap.set
     local tb = require('telescope.builtin')
 
-    keymap('n', '<leader>sf', function() tb.find_files(config) end, { desc = 'Search Files' })
+    keymap('n', '<leader>sf', function() tb.find_files(drop_config) end, { desc = 'Search Files' })
     keymap('n', '<leader>fw', function()
-      tb.live_grep(require('telescope.themes').get_ivy({}))
+      tb.live_grep(ivy_config)
     end, { desc = 'Search for text' })
     keymap('n', '<leader>fW', function()
       local word = vim.fn.expand("<cword>")
@@ -132,9 +118,9 @@ return {
       local opts = { search = text }
       tb.grep_string(require('telescope.themes').get_ivy(opts))
     end, { desc = 'Search for highlighted text' })
-    keymap('n', '<leader>fr', function() tb.oldfiles(config) end, { desc = "Find recent files" })
-    keymap('n', '<leader>fh', function() tb.help_tags(config) end, { desc = "Search help tags" })
-    keymap('n', '<leader>gb', function() tb.git_branches(config) end, { desc = "Find buffers" })
-    keymap('n', '<leader>fb', function() tb.buffers(config) end, { desc = "Find buffers" })
+    keymap('n', '<leader>fr', function() tb.oldfiles(drop_config) end, { desc = "Find recent files" })
+    keymap('n', '<leader>fh', function() tb.help_tags(drop_config) end, { desc = "Search help tags" })
+    keymap('n', '<leader>gb', function() tb.git_branches(drop_config) end, { desc = "Find buffers" })
+    keymap('n', '<leader>fb', function() tb.buffers(drop_config) end, { desc = "Find buffers" })
   end
 }

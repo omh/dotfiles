@@ -2,6 +2,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 vim.o.termguicolors = true
 vim.g.timeoutlen = 500
+vim.g.base_branch = 'origin/main'
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then

@@ -40,5 +40,4 @@ return {
 
   -- kill buffers without removing the window
   { 'qpkorr/vim-bufkill',            event = "VeryLazy" },
-
 }
