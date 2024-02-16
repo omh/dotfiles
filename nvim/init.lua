@@ -3,6 +3,7 @@ vim.g.maplocalleader = ','
 vim.o.termguicolors = true
 vim.g.timeoutlen = 500
 vim.g.base_branch = 'origin/main'
+vim.cmd("set background=light")
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -150,6 +151,7 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = "Page up with cursor in the cen
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = "Page down with cursor in the center" })
 
 vim.keymap.set('n', '<leader>Q', ':qa!<CR>', { silent = true, desc = "Quit everything, now!" })
+vim.keymap.set('n', '<leader>fs', ':w<CR>', { silent = true, desc = "Save file" })
 vim.keymap.set('n', '<leader>q', ':q<CR>', { noremap = true, silent = true, desc = "Close window" })
 vim.keymap.set('x', 'p', 'p:let @+=@0<CR>:let @"=@0<CR>', { silent = true, desc = "Dont copy replaced text" })
 
