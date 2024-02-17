@@ -21,19 +21,19 @@ return {
   -- readline keybindings for insert/command mode
   { 'tpope/vim-rsi',                 event = "VeryLazy" },
 
-  { "kylechui/nvim-surround",        event = "VeryLazy",   version = "*",     opts = {} },
+  { "kylechui/nvim-surround",        event = "VeryLazy",   version = "*", },
 
   -- show marks in signcolumn
-  { 'chentoast/marks.nvim',          event = "VeryLazy",   opts = {} },
+  { 'chentoast/marks.nvim',          event = "VeryLazy", },
 
   -- show/browse keybindings
-  { 'folke/which-key.nvim',          opts = {} },
+  { 'folke/which-key.nvim', },
 
   -- buffers are per tab
-  { "tiagovla/scope.nvim",           opts = {} },
+  { "tiagovla/scope.nvim", },
 
   -- slightly nicer ui for inputs
-  { 'stevearc/dressing.nvim',        opts = {},            event = "VeryLazy" },
+  { 'stevearc/dressing.nvim',        event = "VeryLazy" },
 
   -- edit the quickfix list with :EnMasse
   { 'Olical/vim-enmasse',            event = "VeryLazy" },

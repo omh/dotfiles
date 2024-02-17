@@ -19,14 +19,21 @@ return {
       --   globalstatus = false,
       -- },
       options = {
-        theme = 'lualine-omh',
-        globalstatus = false,
+        -- theme = 'lualine-omh',
+        theme = 'rose-pine',
+        globalstatus = true,
         icons_enabled = true,
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
       },
       sections = {
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'diff', 'diagnostics' },
-        lualine_c = { 'filename' },
+        lualine_c = {
+          { 'filename',
+            path = 1,
+          }
+        },
         lualine_x = { 'filetype' },
         lualine_y = {},
         lualine_z = { 'location' }

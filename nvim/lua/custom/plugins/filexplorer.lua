@@ -8,13 +8,6 @@ return {
     'nvim-tree/nvim-web-devicons', -- optional
   },
   config = function()
-    require 'triptych'.setup({
-      options = {
-        line_numbers = {
-          enabled = true,
-          relative = true,
-        },
-      }
-    })
+    require 'triptych'.setup()
   end
 }

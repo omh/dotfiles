@@ -21,6 +21,7 @@ return {
     local ta = require('telescope.actions')
     require('telescope').setup {
       defaults = {
+        prompt_prefix = " ",
         mappings = {
           i = {
             ["<C-h>"] = "which_key",
@@ -39,16 +40,15 @@ return {
           "--column",
           "--smart-case",
         },
-        winblend = 0,
-        prompt_prefix = " ",
+        winblend = 10,
         color_devicons = true,
       },
       pickers = {
         lsp_document_symbols = {
-          symbol_width = 50,
+          symbol_width = 60,
         },
         lsp_workspace_symbols = {
-          symbol_width = 50,
+          symbol_width = 60,
         }
       },
       extensions = {
@@ -93,7 +93,10 @@ return {
       winblend = 10,
       shorten_path = true,
       layout_config = {
+        anchor = 'N',
+        prompt_position = 'top',
         mirror = true,
+        height = 0.5
       },
     })
 
@@ -122,5 +125,11 @@ return {
     keymap('n', '<leader>fh', function() tb.help_tags(drop_config) end, { desc = "Search help tags" })
     keymap('n', '<leader>gb', function() tb.git_branches(drop_config) end, { desc = "Find buffers" })
     keymap('n', '<leader>fb', function() tb.buffers(drop_config) end, { desc = "Find buffers" })
+    keymap('n', '<leader>o', function()
+      require('telescope.builtin').lsp_document_symbols(drop_config)
+    end, { desc = 'Document Symbols' })
+    keymap('n', '<leader>O', function()
+      require('telescope.builtin').lsp_dynamic_workspace_symbols(drop_config)
+    end, { desc = '[W]orkspace [S]ymbols' })
   end
 }

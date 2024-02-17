@@ -66,13 +66,18 @@ return {
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "luasnip" },
-        { name = "buffer" },
+        { name = "buffer",  keyword_length = 5, max_item_count = 5 },
         { name = "path" },
       }),
       formatting = {
+        fields = {
+          cmp.ItemField.Kind,
+          cmp.ItemField.Abbr,
+          cmp.ItemField.Menu,
+        },
         format = function(entry, vim_item)
           local kind = require("lspkind").cmp_format({
-            mode = "symbol_text",
+            mode = "symbol",
             maxwidth = 30,
             ellipsis_char = '...',
             before = function(_, vim_item2)

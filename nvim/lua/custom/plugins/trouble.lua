@@ -7,13 +7,14 @@ return {
     -- refer to the configuration section below
     auto_close = true,
   },
+  keys = {
+    { "<leader>xx", function() require("trouble").toggle() end,                        { desc = "Toggle Trouble" } },
+    { "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end, { desc = "Toggle Trouble Workspace diagnostics" } },
+    { "<leader>xd", function() require("trouble").toggle("document_diagnostics") end,  { desc = "Toggle Trouble Document diagnostics" } },
+    { "<leader>xq", function() require("trouble").toggle("quickfix") end,              { desc = "Toggle Trouble quickfix" } },
+    { "gr",         function() require("trouble").open("lsp_references") end,          { desc = "LSP references in Trouble" } },
+  },
   config = function()
-    vim.keymap.set("n", "<leader>xx", function() require("trouble").toggle() end, { desc = "Toggle Trouble diagnostics" })
-    vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end,
-      { desc = "Toggle Trouble Workspace diagnostics" })
-    vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end,
-      { desc = "Toggle Trouble document_diagnostics" })
-
     vim.keymap.set('n', ']d', function()
       require("trouble").next({ skip_groups = true, jump = true });
     end, { desc = 'Go to previous diagnostic message' })

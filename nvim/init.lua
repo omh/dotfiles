@@ -86,7 +86,7 @@ vim.cmd [[
 vim.o.foldenable = false
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:,diff:.]]
 -- vim.o.foldopen = vim.o.foldopen - "block"
 
 -- function MyFoldtext()

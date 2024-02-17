@@ -25,22 +25,12 @@ return {
         vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
       end
 
-      local dropdown = require('telescope.themes').get_dropdown()
-
       nmap('<leader>lr', vim.lsp.buf.rename, 'Rename')
       nmap('<leader>la', vim.lsp.buf.code_action, 'Code Action')
 
       nmap('gd', '<cmd>lua vim.lsp.buf.definition()<cr>', 'Goto Definition')
-      nmap('gr', '<cmd>lua vim.lsp.buf.references()<cr>', 'Goto References')
       nmap('gI', '<cmd>lua vim.lsp.buf.implementation()<cr>', 'Goto Implementation')
       nmap('<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<cr>', 'Type Definition')
-      nmap('<leader>o', function()
-        require('telescope.builtin').lsp_document_symbols(dropdown)
-      end, 'Document Symbols')
-      nmap('<leader>O', function()
-        require('telescope.builtin').lsp_dynamic_workspace_symbols(dropdown)
-      end, '[W]orkspace [S]ymbols')
-
       -- See `:help K` for why this keymap
       nmap('gh', vim.lsp.buf.hover, 'Hover Documentation')
       nmap('K', vim.lsp.buf.signature_help, 'Signature Documentation')
