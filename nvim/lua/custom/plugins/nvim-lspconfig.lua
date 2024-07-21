@@ -15,7 +15,9 @@ return {
     vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo' })
     vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
 
+
     local lsp = require("lspconfig")
+
     local on_attach = function(_, bufnr)
       local nmap = function(keys, func, desc)
         if desc then
@@ -60,16 +62,12 @@ return {
     lsp["elixirls"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      cmd = { "/opt/elixirls/language_server.sh" },
+      cmd = { "/opt/elixirls/release/language_server.sh" },
       elixirLS = {
-        -- I choose to disable dialyzer for personal reasons, but
-        -- I would suggest you also disable it unless you are well
-        -- acquainted with dialzyer and know how to use it.
         dialyzerEnabled = false,
-        -- I also choose to turn off the auto dep fetching feature.
-        -- It often get's into a weird state that requires deleting
-        -- the .elixir_ls directory and restarting your editor.
-        fetchDeps = false
+        fetchDeps = false,
+        enableTestLenses = false,
+        suggestSpecs = false,
       }
     })
 

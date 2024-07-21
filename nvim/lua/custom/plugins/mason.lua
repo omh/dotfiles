@@ -13,7 +13,7 @@ return {
         "cssls",
         "lua_ls",
         "emmet_ls",
-        "elixirls",
+        -- "elixirls",
       },
       automatic_installation = true,
     })

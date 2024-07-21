@@ -3,7 +3,6 @@ vim.g.maplocalleader = ','
 vim.o.termguicolors = true
 vim.g.timeoutlen = 500
 vim.g.base_branch = 'origin/main'
-vim.cmd("set background=light")
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -23,6 +22,9 @@ require('lazy').setup({
   -- require 'kickstart.plugins.debug',
   { import = 'custom.plugins' },
 }, {
+  rocks = {
+    enabled = false
+  },
   change_detection = {
     notify = false, -- get a notification when changes are found
   },
@@ -185,7 +187,7 @@ vim.keymap.set('n', "<M-right>", [[<cmd>vertical resize -10<CR>]], { desc = "Shr
 
 -- tabs
 vim.keymap.set('n', "tn", '<CMD>tabnew<CR>', { desc = "Open new tab" })
-vim.keymap.set('n', "tq", '<CMD>tabclose<CR>', { desc = "Close tab" })
+vim.keymap.set('n', "tc", '<CMD>tabclose<CR>', { desc = "Close tab" })
 vim.keymap.set("n", "th", "<cmd>tabprev<CR>", { desc = "Previous tab" })
 vim.keymap.set("n", "tl", "<cmd>tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "tj", "<cmd>tabm -1<CR>", { desc = "Move tab left" })

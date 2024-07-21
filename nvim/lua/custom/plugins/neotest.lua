@@ -4,8 +4,10 @@ return {
     "nvim-lua/plenary.nvim",
     "antoinemadec/FixCursorHold.nvim",
     "nvim-treesitter/nvim-treesitter",
+    "nvim-neotest/nvim-nio",
 
     "jfpedroza/neotest-elixir",
+    "nvim-neotest/neotest-go",
   },
   keys = {
     { "<leader>rr", "<cmd>lua require('neotest').run.run_last()<CR>",             { desc = "Run previous test" } },
@@ -17,6 +19,7 @@ return {
     require("neotest").setup {
       adapters = {
         require "neotest-elixir",
+        require "neotest-go",
       },
     }
     -- vim.keymap.set("n", "<leader>rr", function() require("neotest").run.run_last() end, {desc = "Run previous test"})

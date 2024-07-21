@@ -2,25 +2,10 @@ return {
   'nvim-lualine/lualine.nvim',
   config = function()
     require('lualine').setup {
-      -- options = {
-      --   -- theme = "visual_studio_code",
-      --   -- icons_enabled = true,
-      --   component_separators = { left = "", right = "" },
-      --   section_separators = { left = "", right = "" },
-      --   disabled_filetypes = {},
-      --   globalstatus = false,
-      -- },
-      -- options = {
-      --   theme = "lualine-omh-vscode",
-      --   icons_enabled = true,
-      --   component_separators = { left = "", right = "" },
-      --   section_separators = { left = "", right = "" },
-      --   disabled_filetypes = {},
-      --   globalstatus = false,
-      -- },
       options = {
-        -- theme = 'lualine-omh',
-        theme = 'rose-pine',
+        theme = 'lualine-omh',
+        -- theme = "catppuccin",
+        -- theme = 'rose-pine-alt',
         globalstatus = true,
         icons_enabled = true,
         component_separators = { left = "", right = "" },
@@ -28,16 +13,34 @@ return {
       },
       sections = {
         lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diff', 'diagnostics' },
-        lualine_c = {
-          { 'filename',
-            path = 1,
-          }
-        },
-        lualine_x = { 'filetype' },
-        lualine_y = {},
+        lualine_b = { 'branch' },
+        lualine_c = { { 'filename', path = 1 } },
+        lualine_y = { 'progress' },
         lualine_z = { 'location' }
       },
+      inactive_sections = {},
+      winbar = {
+        lualine_c = {
+          { 'filetype', icon_only = true, padding = { left = 0, right = 0 } },
+          { 'filename', path = 4 },
+        },
+        lualine_x = {
+          { 'diff', colored = true },
+        },
+        lualine_z = {
+          'diagnostics'
+        },
+      },
+      inactive_winbar = {
+        lualine_b = {
+          { 'filetype', icon_only = true, colored = false, padding = { left = 0, right = 0 } },
+          { 'filename', path = 4 }
+        },
+        lualine_x = {
+          { 'diff', colored = false },
+        },
+      },
+      extensions = { 'quickfix', 'trouble', 'lazy' }
     }
   end
 

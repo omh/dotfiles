@@ -18,25 +18,29 @@ return {
 
     -- Adds a number of user-friendly snippets
     'rafamadriz/friendly-snippets',
+
+    -- copilot integration
+    -- "zbirenbaum/copilot-cmp",
   },
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
+    -- require("copilot_cmp").setup()
 
     vim.keymap.set({ "i", "s" }, "<C-e>", function() luasnip.jump(1) end, { silent = true })
     vim.keymap.set({ "i", "s" }, "<C-q>", function() luasnip.jump(-1) end, { silent = true })
 
     require("luasnip.loaders.from_vscode").lazy_load()
     cmp.setup({
-      window = {
-        completion = {
-          completeopt = "menu,menuone,noselect",
-          winhighlight = 'Normal:CmpNormal,FloatBorder:CmpFloatBorder,CursorLine:Visual,Search:None',
-        },
-        documentation = {
-          winhighlight = 'Normal:CmpNormal,FloatBorder:CmpFloatBorder,CursorLine:Visual,Search:None',
-        }
-      },
+      -- window = {
+      --   completion = {
+      --     completeopt = "menu,menuone,noselect",
+      --     winhighlight = 'Normal:CmpNormal,FloatBorder:CmpFloatBorder,CursorLine:Visual,Search:None',
+      --   },
+      --   documentation = {
+      --     winhighlight = 'Normal:CmpNormal,FloatBorder:CmpFloatBorder,CursorLine:Visual,Search:None',
+      --   }
+      -- },
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
@@ -64,6 +68,7 @@ return {
         ["<cr>"] = cmp.mapping.confirm({ select = false }),
       }),
       sources = cmp.config.sources({
+        -- { name = "copilot" },
         { name = "nvim_lsp" },
         { name = "luasnip" },
         { name = "buffer",  keyword_length = 5, max_item_count = 5 },
@@ -80,15 +85,16 @@ return {
             mode = "symbol",
             maxwidth = 30,
             ellipsis_char = '...',
-            before = function(_, vim_item2)
-              if string.sub(vim_item2.abbr, -1) == "~" then
-                vim_item2.abbr = string.sub(vim_item2.abbr, 0, -2)
-              end
-              return vim_item
-            end
+            symbol_map = { Copilot = "󰁨" },
+            -- before = function(_, vim_item2)
+            --   if string.sub(vim_item2.abbr, -1) == "~" then
+            --     vim_item2.abbr = string.sub(vim_item2.abbr, 0, -2)
+            --   end
+            --   return vim_item
+            -- end
           })(entry, vim_item)
           -- hide the menu stuff - the preview window shows all the details anyways
-          kind.menu = ""
+          -- kind.menu = ""
           return kind
         end
       }

@@ -1,13 +1,18 @@
 return {
-  'simonmclean/triptych.nvim',
+  'echasnovski/mini.files',
+  version = '*',
   keys = {
-    { "<leader>fe", "<cmd>Triptych<CR>", { desc = "Open file explorer" } },
-  },
-  dependencies = {
-    'nvim-lua/plenary.nvim',       -- required
-    'nvim-tree/nvim-web-devicons', -- optional
+    { "<leader>fe", "<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<CR>", { desc = "Open file explorer" } },
   },
   config = function()
-    require 'triptych'.setup()
-  end
+    require 'mini.files'.setup({
+      mappings = {
+        synchronize = 's',
+      },
+      windows = {
+        width_preview = 50,
+        preview = true,
+      }
+    })
+  end,
 }

@@ -12,19 +12,16 @@ return {
   -- auto insert `end` in ruby/elixir, etc
   { 'tpope/vim-endwise',             event = "InsertEnter" },
 
-  -- Detect tabstop and shiftwidth automatically
-  { 'tpope/vim-sleuth' },
-
   -- Useful utilities
   { 'tpope/vim-unimpaired' },
 
   -- readline keybindings for insert/command mode
   { 'tpope/vim-rsi',                 event = "VeryLazy" },
 
-  { "kylechui/nvim-surround",        event = "VeryLazy",   version = "*", },
+  -- Detect tabstop and shiftwidth automatically
+  { 'NMAC427/guess-indent.nvim' },
 
-  -- show marks in signcolumn
-  { 'chentoast/marks.nvim',          event = "VeryLazy", },
+  { "kylechui/nvim-surround",        event = "VeryLazy",   version = "*", },
 
   -- show/browse keybindings
   { 'folke/which-key.nvim', },
@@ -40,4 +37,48 @@ return {
 
   -- kill buffers without removing the window
   { 'qpkorr/vim-bufkill',            event = "VeryLazy" },
+
+  -- search/replace
+  {
+    'MagicDuck/grug-far.nvim',
+    event = "VeryLazy",
+    config = function()
+      require('grug-far').setup({
+      });
+    end
+  },
+
+  -- {
+  --   'Ramilito/winbar.nvim',
+  --   event = "VimEnter", -- Alternatively, BufReadPre if we don't care about the empty file when starting with 'nvim'
+  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  --   config = function()
+  --     require("winbar").setup({
+  --       -- your configuration comes here, for example:
+  --       icons = true,
+  --       diagnostics = true,
+  --       buf_modified = true,
+  --       buf_modified_symbol = "M",
+  --       -- or use an icon
+  --       -- buf_modified_symbol = "●"
+  --       dim_inactive = {
+  --         enabled = false,
+  --         highlight = "WinbarNC",
+  --         icons = true, -- whether to dim the icons
+  --         name = true,  -- whether to dim the name
+  --       }
+  --     })
+  --   end
+  -- },
+
+  -- dashboard
+  {
+    'goolord/alpha-nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      -- require 'alpha'.setup(require 'alpha.themes.startify'.config)
+      -- require 'alpha'.setup(require 'alpha.themes.dashboard'.config)
+      require 'alpha'.setup(require 'alpha.themes.theta'.config)
+    end
+  },
 }

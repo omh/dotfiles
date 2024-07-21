@@ -19,6 +19,7 @@ return {
   },
   config = function()
     local ta = require('telescope.actions')
+
     require('telescope').setup {
       defaults = {
         prompt_prefix = " ",
@@ -40,7 +41,7 @@ return {
           "--column",
           "--smart-case",
         },
-        winblend = 10,
+        winblend = 8,
         color_devicons = true,
       },
       pickers = {
@@ -76,41 +77,44 @@ return {
       end
     end
 
-    -- local config = {
-    --   layout_config = {
-    --     width = width_func,
-    --     height = function(_, _, max_lines)
-    --       local height = 35
-    --       if max_lines < height then
-    --         height = math.floor(0.9 * max_lines)
-    --       end
-    --       return height
-    --     end
-    --   }
-    -- }
+    -- local dropdown_theme = require('telescope.themes').get_dropdown({
+    --   results_height = 30,
+    --   winblend = 10,
+    --   width = 0.8,
+    --   previewer = false,
+    --   borderchars = {
+    --     prompt = { '▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' },
+    --     results = { ' ', '▐', '▄', '▌', '▌', '▐', '▟', '▙' },
+    --     preview = { '▀', '▐', '▄', '▌', '▛', '▜', '▟', '▙' },
+    --   },
+    -- })
 
-    local drop_config = require('telescope.themes').get_dropdown({
-      winblend = 10,
-      shorten_path = true,
+    local dropdown_theme = require('telescope.themes').get_dropdown({
       layout_config = {
-        anchor = 'N',
-        prompt_position = 'top',
-        mirror = true,
-        height = 0.5
+        height = 26
       },
+      borderchars = {
+        { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
+        prompt = { "─", "│", " ", "│", '┌', '┐', "│", "│" },
+        results = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
+        preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
+      },
+      mirror = true,
+      previewer = true,
     })
 
     local ivy_config = require('telescope.themes').get_ivy({
       path_display = { truncate = 3 },
+      layout_config = {
+        anchor = 'CENTER',
+      },
     })
 
     local keymap = vim.keymap.set
     local tb = require('telescope.builtin')
 
-    keymap('n', '<leader>sf', function() tb.find_files(drop_config) end, { desc = 'Search Files' })
-    keymap('n', '<leader>fw', function()
-      tb.live_grep(ivy_config)
-    end, { desc = 'Search for text' })
+    keymap('n', '<leader>sf', function() tb.find_files(dropdown_theme) end, { desc = 'Search Files' })
+    keymap('n', '<leader>fw', function() tb.live_grep(ivy_config) end, { desc = 'Search for text' })
     keymap('n', '<leader>fW', function()
       local word = vim.fn.expand("<cword>")
       local opts = { search = word }
@@ -121,15 +125,24 @@ return {
       local opts = { search = text }
       tb.grep_string(require('telescope.themes').get_ivy(opts))
     end, { desc = 'Search for highlighted text' })
-    keymap('n', '<leader>fr', function() tb.oldfiles(drop_config) end, { desc = "Find recent files" })
-    keymap('n', '<leader>fh', function() tb.help_tags(drop_config) end, { desc = "Search help tags" })
-    keymap('n', '<leader>gb', function() tb.git_branches(drop_config) end, { desc = "Find buffers" })
-    keymap('n', '<leader>fb', function() tb.buffers(drop_config) end, { desc = "Find buffers" })
+    keymap('n', '<leader>fr', function() tb.oldfiles(dropdown_theme) end, { desc = "Find recent files" })
+    keymap('n', '<leader>fh', function() tb.help_tags(dropdown_theme) end, { desc = "Search help tags" })
+    keymap('n', '<leader>gb', function() tb.git_branches(dropdown_theme) end, { desc = "Find buffers" })
+    keymap('n', '<leader>fb', function() tb.buffers(dropdown_theme) end, { desc = "Find buffers" })
+
     keymap('n', '<leader>o', function()
-      require('telescope.builtin').lsp_document_symbols(drop_config)
+      local cfg = require('telescope.themes').get_cursor({
+        layout_config = {
+          width = 140,
+          height = 20,
+          preview_cutoff = 130,
+          preview_width = 70,
+        }
+      })
+      require('telescope.builtin').lsp_document_symbols(cfg)
     end, { desc = 'Document Symbols' })
     keymap('n', '<leader>O', function()
-      require('telescope.builtin').lsp_dynamic_workspace_symbols(drop_config)
+      require('telescope.builtin').lsp_dynamic_workspace_symbols(dropdown_theme)
     end, { desc = '[W]orkspace [S]ymbols' })
   end
 }

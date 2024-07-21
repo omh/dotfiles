@@ -1,64 +1,61 @@
--- stylua: ignore start
-local u = require("catppuccin.palettes").get_palette "mocha"
+local c = require("visual_studio_code").get_colors()
+local bg = c.__vscode_local_background
+local normal = c.__vscode_statusline_foreground
+local insert = c.__vscode_keyword
+local filename = c.__vscode_strings
 
 local omh = {}
 
 local dim = "#999999"
-local bg = "#292929"
-
-bg = u.base
-dim = u.subtext1
 
 omh.normal = {
-  a = { fg = u.text, bg = u.surface0 },
+  a = { fg = normal, bg = bg },
   b = { fg = dim, bg = bg },
-  c = { fg = u.rosewater, bg = bg },
+  c = { fg = filename, bg = bg },
   x = { fg = dim, bg = bg },
   y = { fg = dim, bg = bg },
   z = { fg = dim, bg = bg },
 }
 omh.insert = {
-  a = { fg = u.crust, bg = u.green },
+  a = { fg = insert, bg = bg },
   b = { fg = dim, bg = bg },
-  c = { fg = u.rosewater, bg = bg },
+  c = { fg = filename, bg = bg },
   x = { fg = dim, bg = bg },
   y = { fg = dim, bg = bg },
   z = { fg = dim, bg = bg },
 }
 omh.visual = {
-  a = { fg = u.crust, bg = u.pink },
+  a = { fg = insert, bg = bg },
   b = { fg = dim, bg = bg },
-  c = { fg = u.rosewater, bg = bg },
+  c = { fg = filename, bg = bg },
   x = { fg = dim, bg = bg },
   y = { fg = dim, bg = bg },
   z = { fg = dim, bg = bg },
 }
 omh.replace = {
-  a = { fg = u.crust, bg = u.red },
+  a = { fg = insert, bg = bg },
   b = { fg = dim, bg = bg },
-  c = { fg = u.rosewater, bg = bg },
+  c = { fg = filename, bg = bg },
   x = { fg = dim, bg = bg },
   y = { fg = dim, bg = bg },
   z = { fg = dim, bg = bg },
 }
 omh.command = {
-  a = { fg = u.crust, bg = u.red },
+  a = { fg = insert, bg = bg },
   b = { fg = dim, bg = bg },
-  c = { fg = u.rosewater, bg = bg },
+  c = { fg = filename, bg = bg },
   x = { fg = dim, bg = bg },
   y = { fg = dim, bg = bg },
   z = { fg = dim, bg = bg },
 }
 omh.inactive = {
-  a = { fg = dim, bg = u.red },
+  a = { fg = dim, bg = bg },
   b = { fg = dim, bg = bg },
   c = { fg = dim, bg = bg },
   x = { fg = dim, bg = bg },
   y = { fg = dim, bg = bg },
   z = { fg = dim, bg = bg },
 }
-
--- stylua: ignore end
 
 if vim.g.newpaper_lualine_bold == nil then
   vim.g.newpaper_lualine_bold = true
