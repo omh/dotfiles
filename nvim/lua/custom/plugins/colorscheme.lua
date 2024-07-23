@@ -26,6 +26,12 @@ return {
 
       custom_highlights = function(u)
         local c = require('catppuccin.utils.colors')
+
+        vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'DapBreakpoint' })
+        vim.fn.sign_define('DapStopped', { text = ' ', texthl = 'DapStopped', linehl = 'DapStoppedLine' })
+
+        local dark_green = c.vary_color({ latte = c.lighten(u.green, 0.70, u.base) }, c.darken(u.green, 0.14, u.base))
+
         return {
           CursorLineNr            = {
             bg = c.vary_color({ latte = c.lighten(u.mantle, 0.70, u.base) }, c.darken(u.surface0, 0.64, u.base)),
@@ -39,8 +45,14 @@ return {
 
           CmpItemAbbr             = { fg = u.text },
           CmpItemAbbrMatch        = { fg = u.red },
+          CmpItemMenu             = { fg = u.blue },
 
           CopilotSuggestion       = { fg = u.overlay0 },
+
+          DapBreakpoint           = { fg = u.red },
+          DapStopped              = { fg = u.green },
+          DapStoppedLine          = { bg = dark_green },
+
           IndentBlanklineChar     = { fg = u.surface0 },
           LocalHighlight          = { underline = true, sp = u.blue },
           TroubleFoldIcon         = { bg = 'NONE', fg = u.peach },

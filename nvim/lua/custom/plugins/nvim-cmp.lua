@@ -31,16 +31,10 @@ return {
     vim.keymap.set({ "i", "s" }, "<C-q>", function() luasnip.jump(-1) end, { silent = true })
 
     require("luasnip.loaders.from_vscode").lazy_load()
+
     cmp.setup({
-      -- window = {
-      --   completion = {
-      --     completeopt = "menu,menuone,noselect",
-      --     winhighlight = 'Normal:CmpNormal,FloatBorder:CmpFloatBorder,CursorLine:Visual,Search:None',
-      --   },
-      --   documentation = {
-      --     winhighlight = 'Normal:CmpNormal,FloatBorder:CmpFloatBorder,CursorLine:Visual,Search:None',
-      --   }
-      -- },
+      preselect = cmp.PreselectMode.None,
+      completion = { completeopt = "menu,menuone" },
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
@@ -53,7 +47,6 @@ return {
         ["<C-u>"] = cmp.mapping.scroll_docs(4),
         ["<C-space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
-        -- ["<tab>"] = cmp.mapping.confirm({ select = true }),
         ['<Tab>'] = cmp.mapping(function(fallback)
           if luasnip.expandable() then
             luasnip.expand()
@@ -69,33 +62,28 @@ return {
       }),
       sources = cmp.config.sources({
         -- { name = "copilot" },
-        { name = "nvim_lsp" },
         { name = "luasnip" },
+        { name = "nvim_lsp" },
         { name = "buffer",  keyword_length = 5, max_item_count = 5 },
         { name = "path" },
       }),
       formatting = {
         fields = {
-          cmp.ItemField.Kind,
           cmp.ItemField.Abbr,
+          cmp.ItemField.Kind,
           cmp.ItemField.Menu,
         },
         format = function(entry, vim_item)
-          local kind = require("lspkind").cmp_format({
-            mode = "symbol",
-            maxwidth = 30,
-            ellipsis_char = '...',
-            symbol_map = { Copilot = "󰁨" },
-            -- before = function(_, vim_item2)
-            --   if string.sub(vim_item2.abbr, -1) == "~" then
-            --     vim_item2.abbr = string.sub(vim_item2.abbr, 0, -2)
-            --   end
-            --   return vim_item
-            -- end
+          return require("lspkind").cmp_format({
+            mode = "symbol_text",
+            maxwidth = 50,
+            before = function(_, vim_item2)
+              if string.sub(vim_item2.abbr, -1) == "~" then
+                vim_item2.abbr = string.sub(vim_item2.abbr, 0, -2)
+              end
+              return vim_item
+            end
           })(entry, vim_item)
-          -- hide the menu stuff - the preview window shows all the details anyways
-          -- kind.menu = ""
-          return kind
         end
       }
     })

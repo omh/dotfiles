@@ -13,7 +13,9 @@ return {
         "cssls",
         "lua_ls",
         "emmet_ls",
-        -- "elixirls",
+        -- golang
+        "gopls",
+        "delve",
       },
       automatic_installation = true,
     })

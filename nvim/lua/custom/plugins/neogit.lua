@@ -26,6 +26,12 @@ return {
         bold = true,
         underline = true
       },
+      signs = {
+        -- { CLOSED, OPENED }
+        hunk = { "", "" },
+        item = { "", "" },
+        section = { "", "" },
+      },
       mappings = {
         popup = {
           ["p"] = "PushPopup",

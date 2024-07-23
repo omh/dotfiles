@@ -57,7 +57,16 @@ return {
     lsp["html"].setup({ capabilities = capabilities, on_attach = on_attach })
     lsp["cssls"].setup({ capabilities = capabilities, on_attach = on_attach })
     lsp["emmet_ls"].setup({ capabilities = capabilities, on_attach = on_attach })
-    lsp["gopls"].setup({ capabilities = capabilities, on_attach = on_attach })
+    lsp["gopls"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = {
+        gopls = {
+          completeUnimported = true,
+          usePlaceholders = true,
+        }
+      }
+    })
 
     lsp["elixirls"].setup({
       capabilities = capabilities,

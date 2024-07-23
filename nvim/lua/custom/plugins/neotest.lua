@@ -22,9 +22,5 @@ return {
         require "neotest-go",
       },
     }
-    -- vim.keymap.set("n", "<leader>rr", function() require("neotest").run.run_last() end, {desc = "Run previous test"})
-    -- vim.keymap.set("n", "<leader>rn", function() require("neotest").run.run() end, {desc = "Run nearest test"})
-    -- vim.keymap.set("n", "<leader>rf", function() require("neotest").run.run(vim.fn.expand "%") end, {desc = "Run current file"})
-    -- vim.keymap.set("n", "<leader>ra", function() require("neotest").output_panel.toggle() end, {desc = "Show output panel"})
   end,
 }
