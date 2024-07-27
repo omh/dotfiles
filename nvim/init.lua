@@ -152,7 +152,7 @@ vim.keymap.set('n', '<esc>', '<CMD> noh <CR>', { desc = "Clear highlights" })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = "Page up with cursor in the center" })
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = "Page down with cursor in the center" })
 
-vim.keymap.set('n', '<leader>Q', ':qa!<CR>', { silent = true, desc = "Quit everything, now!" })
+vim.keymap.set('n', '<leader>Q', ':qa!<CR>', { silent = true, desc = "Quit now!" })
 vim.keymap.set('n', '<leader>fs', ':w<CR>', { silent = true, desc = "Save file" })
 vim.keymap.set('n', '<leader>q', ':q<CR>', { noremap = true, silent = true, desc = "Close window" })
 vim.keymap.set('x', 'p', 'p:let @+=@0<CR>:let @"=@0<CR>', { silent = true, desc = "Dont copy replaced text" })
@@ -204,9 +204,6 @@ end, { desc = "Rename tab" })
 vim.keymap.set('n', '<leader>le', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>lq', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
-vim.keymap.set('n', '<leader>ec', [[<cmd>tabnew<CR><CMD>lcd ~/.config/nvim/<CR><CMD>Telescope find_files<CR>]],
-  { desc = "Open nvim config in new tab" })
-
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -219,29 +216,30 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- document existing key chains
-require('which-key').register {
-  ['<leader>b'] = { name = '[B]uffer', _ = 'which_key_ignore' },
-  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = '[D]diff | [D]ebug', _ = 'which_key_ignore' },
-  ['<leader>e'] = { name = '[E]xplorer', _ = 'which_key_ignore' },
-  ['<leader>f'] = { name = '[F]ile | [Fsind', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it | Cosmenting | Movements (lsp)', _ = 'which_key_ignore' },
-  ['<leader>gh'] = { name = '[H]unk', _ = 'which_key_ignore' },
-  ['<leader>gg'] = { name = '[G]ithub', _ = 'which_key_ignore' },
-  ['<leader>h'] = { name = '[H]arpoon', _ = 'which_key_ignore' },
-  ['<leader>l'] = { name = '[L]SP', _ = 'which_key_ignore' },
-  ['<leader>r'] = { name = '[R]un tests', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>t'] = { name = '[T]abs', _ = 'which_key_ignore' },
-  ['<leader>v'] = { name = '[V]imux', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = '[W]orkspace | [W]indow', _ = 'which_key_ignore' },
+require('which-key').add {
+  { "<leader>b", group = "Buffer" },
+  { "<leader>c", group = "Code" },
+  { "<leader>d", group = "Diff | Debug" },
+  { "<leader>f", group = "File | Find" },
+  { "<leader>g", group = "Git | Commenting | Movements (lsp)" },
+  { "<leader>gg", group = "Github" },
+  { "<leader>gh", group = "Hunk" },
+  { "<leader>h", group = "Harpoon", icon = '󱡅' },
+  { "<leader>l", group = "Language (LSP)", icon = '󰦨' },
+  { "<leader>r", group = "Run tests", icon = '󰙨' },
+  { "<leader>s", group = "Search" },
+  { "<leader>t", group = "Tabs" },
+  { "<leader>v", group = "Vimux", icon = '' },
+  { "<leader>w", group = "Workspace | Window" },
+  { "<leader>x", group = "Trouble", icon = '' },
+  { "<leader>!", group = "", hidden = true },
+  { "<leader>o", group = "Document Symbols", icon = '' },
+  { "<leader>O", group = "Workspace Symbols", icon = '' },
 }
 
--- register which-key VISUAL mode
--- required for visual <leader>hs (hunk stage) to work
-require('which-key').register({
-  ['<leader>'] = { name = 'VISUAL <leader>' },
-  ['<leader>g'] = { '[G]it Hunk' },
-}, { mode = 'v' })
+require('which-key').add({
+  mode = { 'v' },
+  { "<leader>g", group = '[G]it Hunk' },
+})
 
 -- vim: ts=2 sts=2 sw=2 et

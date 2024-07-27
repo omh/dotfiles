@@ -1,20 +1,23 @@
 return {
   'nvim-lualine/lualine.nvim',
   config = function()
+    local diff_symbols = { added = ' ', modified = ' ', removed = ' ' }
     require('lualine').setup {
       options = {
         theme = 'lualine-omh',
-        -- theme = "catppuccin",
-        -- theme = 'rose-pine-alt',
         globalstatus = true,
         icons_enabled = true,
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
+        disabled_filetypes = {
+          winbar = { 'trouble' },
+        },
       },
       sections = {
         lualine_a = { 'mode' },
         lualine_b = { 'branch' },
         lualine_c = { { 'filename', path = 1 } },
+        lualine_x = { { 'filetype', colored = false } },
         lualine_y = { 'progress' },
         lualine_z = { 'location' }
       },
@@ -22,10 +25,10 @@ return {
       winbar = {
         lualine_c = {
           { 'filetype', icon_only = true, padding = { left = 0, right = 0 } },
-          { 'filename', path = 4 },
+          { 'filename', path = 4,         colored = false },
         },
         lualine_x = {
-          { 'diff', colored = true },
+          { 'diff', colored = true, symbols = diff_symbols },
         },
         lualine_z = {
           'diagnostics'
@@ -34,13 +37,13 @@ return {
       inactive_winbar = {
         lualine_b = {
           { 'filetype', icon_only = true, colored = false, padding = { left = 0, right = 0 } },
-          { 'filename', path = 4 }
+          { 'filename', path = 4,         colored = false }
         },
         lualine_x = {
-          { 'diff', colored = false },
+          { 'diff', colored = false, symbols = diff_symbols },
         },
       },
-      extensions = { 'quickfix', 'trouble', 'lazy' }
+      extensions = { 'quickfix', 'trouble', 'lazy', 'nvim-dap-ui', 'oil' }
     }
   end
 

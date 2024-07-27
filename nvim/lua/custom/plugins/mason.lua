@@ -15,7 +15,6 @@ return {
         "emmet_ls",
         -- golang
         "gopls",
-        "delve",
       },
       automatic_installation = true,
     })

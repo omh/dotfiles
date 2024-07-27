@@ -10,7 +10,7 @@ bg = u.base
 dim = u.subtext1
 
 omh.normal = {
-  a = { fg = u.text, bg = u.surface0 },
+  a = { fg = u.text, bg = u.surface0, bold = true },
   b = { fg = dim, bg = bg },
   c = { fg = u.rosewater, bg = bg },
   x = { fg = dim, bg = bg },
@@ -50,24 +50,12 @@ omh.command = {
   z = { fg = dim, bg = bg },
 }
 omh.inactive = {
-  a = { fg = dim, bg = u.red },
+  a = { fg = dim, bg = bg },
   b = { fg = dim, bg = bg },
   c = { fg = dim, bg = bg },
   x = { fg = dim, bg = bg },
   y = { fg = dim, bg = bg },
   z = { fg = dim, bg = bg },
 }
-
--- stylua: ignore end
-
-if vim.g.newpaper_lualine_bold == nil then
-  vim.g.newpaper_lualine_bold = true
-end
-
-if vim.g.newpaper_lualine_bold then
-  for _, mode in pairs(omh) do
-    mode.a.gui = "bold"
-  end
-end
 
 return omh

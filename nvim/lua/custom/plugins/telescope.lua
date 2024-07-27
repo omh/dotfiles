@@ -53,6 +53,7 @@ return {
         }
       },
       extensions = {
+
         fzf = {
           fuzzy = true,
           override_generic_sorter = true,
@@ -63,6 +64,7 @@ return {
     }
     -- Enable telescope fzf native, if installed
     pcall(require('telescope').load_extension, 'fzf')
+    require("telescope").load_extension("git_worktree")
 
     function vim.getVisualSelection()
       vim.cmd('noau normal! "vy"')
@@ -78,6 +80,7 @@ return {
     end
 
     local dropdown_theme = require('telescope.themes').get_dropdown({
+      cwd_only = true,
       layout_config = {
         height = 26
       },
@@ -101,22 +104,27 @@ return {
     local keymap = vim.keymap.set
     local tb = require('telescope.builtin')
 
-    keymap('n', '<leader>ff', function() tb.find_files(dropdown_theme) end, { desc = 'Search Files' })
+    keymap('n', '<leader>ff', function() tb.find_files(dropdown_theme) end, { desc = 'Find Files' })
     keymap('n', '<leader>ss', function() tb.live_grep(ivy_config) end, { desc = 'Search for text' })
     keymap('n', '<leader>sS', function()
       local word = vim.fn.expand("<cword>")
       local opts = { search = word }
       tb.grep_string(require('telescope.themes').get_ivy(opts))
-    end, { desc = 'Search for text' })
+    end, { desc = 'Search for text under cursor' })
     keymap('v', '<leader>ss', function()
       local text = vim.getVisualSelection()
       local opts = { search = text }
       tb.grep_string(require('telescope.themes').get_ivy(opts))
     end, { desc = 'Search for highlighted text' })
     keymap('n', '<leader>fr', function() tb.oldfiles(dropdown_theme) end, { desc = "Recent files" })
-    keymap('n', '<leader>sh', function() tb.help_tags(dropdown_theme) end, { desc = "Search help tags" })
-    keymap('n', '<leader>sb', function() tb.git_branches(dropdown_theme) end, { desc = "Search buffers" })
-    keymap('n', '<leader>fb', function() tb.buffers(dropdown_theme) end, { desc = "Search buffers" })
+    keymap('n', '<leader>sh', function() tb.help_tags(dropdown_theme) end, { desc = "Help tags" })
+    keymap('n', '<leader>gb', function() tb.git_branches(dropdown_theme) end, { desc = "Branches" })
+    keymap('n', '<leader>bb', function() tb.buffers(dropdown_theme) end, { desc = "Find buffers" })
+
+    keymap('n', '<leader>gn', function() require('telescope').extensions.git_worktree.create_git_worktree() end,
+      { desc = "Create new worktree" })
+    keymap('n', '<leader>gw', function() require('telescope').extensions.git_worktree.git_worktrees() end,
+      { desc = "Create new worktree" })
 
     keymap('n', '<leader>o', function()
       local cfg = require('telescope.themes').get_cursor({

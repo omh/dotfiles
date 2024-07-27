@@ -14,8 +14,5 @@ return {
 
     { "<localleader>gmt", "<cmd>GoMod tidy<cr>", { desc = "go mod tidy" } },
   },
-
-  ---@type gopher.Config
   opts = {},
-
 }
