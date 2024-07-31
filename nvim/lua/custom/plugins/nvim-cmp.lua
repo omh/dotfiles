@@ -34,7 +34,7 @@ return {
 
     cmp.setup({
       preselect = cmp.PreselectMode.None,
-      completion = { completeopt = "menu,menuone" },
+      completion = { completeopt = "menu,menuone,noselect" },
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
