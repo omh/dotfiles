@@ -4,7 +4,8 @@ return {
     local diff_symbols = { added = ' ', modified = ' ', removed = ' ' }
     require('lualine').setup {
       options = {
-        theme = 'lualine-omh',
+        -- theme = 'lualine-omh',
+        theme = 'lualine-omh-kanagawa',
         globalstatus = true,
         icons_enabled = true,
         component_separators = { left = "", right = "" },
@@ -24,10 +25,10 @@ return {
       inactive_sections = {},
       winbar = {
         lualine_c = {
-          { 'filetype', icon_only = true, padding = { left = 0, right = 0 } },
+          { 'filetype', icon_only = true, padding = { left = 1, right = 0 } },
           { 'filename', path = 4,         colored = false },
         },
-        lualine_x = {
+        lualine_y = {
           { 'diff', colored = true, symbols = diff_symbols },
         },
         lualine_z = {
@@ -36,15 +37,23 @@ return {
       },
       inactive_winbar = {
         lualine_b = {
-          { 'filetype', icon_only = true, colored = false, padding = { left = 0, right = 0 } },
+          { 'filetype', icon_only = true, colored = false, padding = { left = 1, right = 0 } },
           { 'filename', path = 4,         colored = false }
         },
-        lualine_x = {
+        lualine_y = {
           { 'diff', colored = false, symbols = diff_symbols },
+        },
+        lualine_z = {
+          { 'diagnostics', colored = false },
         },
       },
       extensions = { 'quickfix', 'trouble', 'lazy', 'nvim-dap-ui', 'oil' }
     }
+
+    require('lualine').hide({
+      place = { 'statusline' }, -- The segment this change applies to.
+      unhide = false,           -- whether to re-enable lualine again/
+    })
   end
 
 }

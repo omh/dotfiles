@@ -4,6 +4,19 @@ vim.o.termguicolors = true
 vim.g.timeoutlen = 500
 vim.g.base_branch = 'origin/main'
 
+-- hide statusline/commandline
+vim.cmd [[
+  set noshowmode
+  set noruler
+  set laststatus=1
+  set noshowcmd
+  set cmdheight=0
+
+  set statusline=\         " hide file name in statusline
+  set fillchars=stl:\      " fill active window's statusline with empty space
+  set fillchars+=stlnc:\   " also fill inactive windows
+]]
+
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -88,7 +101,7 @@ vim.cmd [[
 vim.o.foldenable = false
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:,diff:.]]
+-- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:,diff:.]]
 -- vim.o.foldopen = vim.o.foldopen - "block"
 
 -- function MyFoldtext()
