@@ -8,6 +8,7 @@ return {
 
     "jfpedroza/neotest-elixir",
     "nvim-neotest/neotest-go",
+    "nvim-extensions/nvim-ginkgo",
   },
   keys = {
     { "<leader>rr", "<cmd>lua require('neotest').run.run_last()<CR>",             { desc = "Run previous test" } },
@@ -20,6 +21,7 @@ return {
       adapters = {
         require "neotest-elixir",
         require "neotest-go",
+        require "nvim-ginkgo",
       },
     }
   end,

@@ -1,14 +1,14 @@
-local c = require("visual_studio_code").get_colors()
-local bg = c.__vscode_local_background
-local normal = c.__vscode_statusline_foreground
-local insert = c.__vscode_keyword
-local filename = c.__vscode_strings
+local c = require('vscode.colors').get_colors()
+local bg = c.vscBack
+local normal = c.vscFront
+local insert = c.vscGitAdded
+local filename = c.vscGitModified
 
-local omh = {}
+local vscode = {}
 
 local dim = "#999999"
 
-omh.normal = {
+vscode.normal = {
   a = { fg = normal, bg = bg },
   b = { fg = dim, bg = bg },
   c = { fg = filename, bg = bg },
@@ -16,7 +16,7 @@ omh.normal = {
   y = { fg = dim, bg = bg },
   z = { fg = dim, bg = bg },
 }
-omh.insert = {
+vscode.insert = {
   a = { fg = insert, bg = bg },
   b = { fg = dim, bg = bg },
   c = { fg = filename, bg = bg },
@@ -24,7 +24,7 @@ omh.insert = {
   y = { fg = dim, bg = bg },
   z = { fg = dim, bg = bg },
 }
-omh.visual = {
+vscode.visual = {
   a = { fg = insert, bg = bg },
   b = { fg = dim, bg = bg },
   c = { fg = filename, bg = bg },
@@ -32,7 +32,7 @@ omh.visual = {
   y = { fg = dim, bg = bg },
   z = { fg = dim, bg = bg },
 }
-omh.replace = {
+vscode.replace = {
   a = { fg = insert, bg = bg },
   b = { fg = dim, bg = bg },
   c = { fg = filename, bg = bg },
@@ -40,7 +40,7 @@ omh.replace = {
   y = { fg = dim, bg = bg },
   z = { fg = dim, bg = bg },
 }
-omh.command = {
+vscode.command = {
   a = { fg = insert, bg = bg },
   b = { fg = dim, bg = bg },
   c = { fg = filename, bg = bg },
@@ -48,7 +48,7 @@ omh.command = {
   y = { fg = dim, bg = bg },
   z = { fg = dim, bg = bg },
 }
-omh.inactive = {
+vscode.inactive = {
   a = { fg = dim, bg = bg },
   b = { fg = dim, bg = bg },
   c = { fg = dim, bg = bg },
@@ -57,14 +57,4 @@ omh.inactive = {
   z = { fg = dim, bg = bg },
 }
 
-if vim.g.newpaper_lualine_bold == nil then
-  vim.g.newpaper_lualine_bold = true
-end
-
-if vim.g.newpaper_lualine_bold then
-  for _, mode in pairs(omh) do
-    mode.a.gui = "bold"
-  end
-end
-
-return omh
+return vscode

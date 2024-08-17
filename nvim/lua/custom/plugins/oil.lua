@@ -18,8 +18,8 @@ return {
       },
       float = {
         padding = 4,
-        max_width = 120,
-        max_height = 80,
+        max_width = 80,
+        max_height = 30,
       },
       win_options = {
         winblend = 10,

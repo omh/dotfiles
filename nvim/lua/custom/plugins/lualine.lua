@@ -5,7 +5,9 @@ return {
     require('lualine').setup {
       options = {
         -- theme = 'lualine-omh',
-        theme = 'lualine-omh-kanagawa',
+        -- theme = 'lualine-omh-kanagawa',
+        -- theme = 'lualine-omh-vscode',
+        theme = 'lualine-omh-vscode',
         globalstatus = true,
         icons_enabled = true,
         component_separators = { left = "", right = "" },
@@ -14,10 +16,18 @@ return {
           winbar = { 'trouble' },
         },
       },
+      -- sections = {
+      --   lualine_a = { 'mode' },
+      --   lualine_b = { 'branch' },
+      --   lualine_c = { { 'filename', path = 1 } },
+      --   lualine_x = { { 'filetype', colored = false } },
+      --   lualine_y = { 'progress' },
+      --   lualine_z = { 'location' }
+      -- },
       sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'branch' },
-        lualine_c = { { 'filename', path = 1 } },
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {},
         lualine_x = { { 'filetype', colored = false } },
         lualine_y = { 'progress' },
         lualine_z = { 'location' }
@@ -50,10 +60,10 @@ return {
       extensions = { 'quickfix', 'trouble', 'lazy', 'nvim-dap-ui', 'oil' }
     }
 
-    require('lualine').hide({
-      place = { 'statusline' }, -- The segment this change applies to.
-      unhide = false,           -- whether to re-enable lualine again/
-    })
+    -- require('lualine').hide({
+    --   place = { 'statusline' }, -- The segment this change applies to.
+    --   unhide = false,           -- whether to re-enable lualine again/
+    -- })
   end
 
 }

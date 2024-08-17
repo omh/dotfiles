@@ -91,7 +91,7 @@ return {
         preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
       },
       mirror = true,
-      previewer = true,
+      previewer = false,
     })
 
     local ivy_config = require('telescope.themes').get_ivy({

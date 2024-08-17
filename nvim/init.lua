@@ -12,9 +12,9 @@ vim.cmd [[
   set noshowcmd
   set cmdheight=0
 
-  set statusline=\         " hide file name in statusline
-  set fillchars=stl:\      " fill active window's statusline with empty space
-  set fillchars+=stlnc:\   " also fill inactive windows
+  " set statusline=\         " hide file name in statusline
+  " set fillchars=stl:\      " fill active window's statusline with empty space
+  " set fillchars+=stlnc:\   " also fill inactive windows
 ]]
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -132,11 +132,16 @@ augroup CursorLine
 augroup END
 ]]
 
--- Auto resize panes when resizing nvim window
 local autocmd = vim.api.nvim_create_autocmd
 autocmd("VimResized", {
   pattern = "*",
-  command = "tabdo wincmd =",
+  callback = function()
+    vim.cmd [[
+      let savetab = tabpagenr()
+      tabdo wincmd =
+      execute 'tabnext' savetab
+    ]]
+  end
 })
 
 -- Diagnostics
