@@ -41,7 +41,7 @@ return {
           "--column",
           "--smart-case",
         },
-        winblend = 8,
+        winblend = 5,
         color_devicons = true,
       },
       pickers = {

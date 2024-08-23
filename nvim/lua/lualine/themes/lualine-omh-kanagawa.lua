@@ -1,7 +1,7 @@
 local theme = require("kanagawa.colors").setup().theme
 local palette = require("kanagawa.colors").setup().palette
 
-local bg = theme.ui.bg_m3
+local bg = '#282828'
 local kanagawa = {}
 
 kanagawa.normal = {

@@ -15,6 +15,7 @@ return {
           winbar = { 'trouble' },
         },
       },
+      extensions = { 'quickfix', 'trouble', 'lazy', 'nvim-dap-ui', 'oil' },
       sections = {
         lualine_a = {
           { 'filetype', icon_only = true, padding = { left = 1, right = 0 } },
@@ -49,7 +50,6 @@ return {
           { 'location' },
         },
       },
-      extensions = { 'quickfix', 'trouble', 'lazy', 'nvim-dap-ui', 'oil' }
     }
 
     -- require('lualine').hide({

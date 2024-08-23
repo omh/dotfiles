@@ -2,7 +2,7 @@ return {
   "catppuccin/nvim",
   name = "catppuccin",
   priority = 5000,
-  disabled = true,
+  enabled = false,
   config = function()
     require("catppuccin").setup({
       term_colors = true,

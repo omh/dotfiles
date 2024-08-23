@@ -18,37 +18,17 @@ return {
   -- readline keybindings for insert/command mode
   { 'tpope/vim-rsi',                 event = "VeryLazy" },
 
-  -- Detect tabstop and shiftwidth automatically
-  { 'NMAC427/guess-indent.nvim' },
-
   { "kylechui/nvim-surround",        event = "VeryLazy",   version = "*", },
 
   -- show/browse keybindings
   { 'folke/which-key.nvim', },
 
-  -- buffers are per tab
-  { "tiagovla/scope.nvim", },
-
   -- slightly nicer ui for inputs
   { 'stevearc/dressing.nvim',        event = "VeryLazy" },
-
-  -- edit the quickfix list with :EnMasse
-  { 'Olical/vim-enmasse',            event = "VeryLazy" },
 
   -- kill buffers without removing the window
   { 'qpkorr/vim-bufkill',            event = "VeryLazy" },
 
   -- git worktrees
   { 'ThePrimeagen/git-worktree.nvim' },
-
-  -- dashboard
-  {
-    'goolord/alpha-nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-      -- require 'alpha'.setup(require 'alpha.themes.startify'.config)
-      -- require 'alpha'.setup(require 'alpha.themes.dashboard'.config)
-      require 'alpha'.setup(require 'alpha.themes.theta'.config)
-    end
-  },
 }
