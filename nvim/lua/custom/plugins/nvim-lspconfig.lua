@@ -101,7 +101,7 @@ return {
 
     -- Switch for controlling whether you want autoformatting.
     --  Use :KickstartFormatToggle to toggle autoformatting on or off
-    local format_is_enabled = false
+    local format_is_enabled = true
     vim.api.nvim_create_user_command('KickstartFormatToggle', function()
       format_is_enabled = not format_is_enabled
       print('Setting autoformatting to: ' .. tostring(format_is_enabled))
@@ -142,25 +142,6 @@ return {
         if client.name == 'tsserver' then
           return
         end
-
-        -- Create an autocmd that will run *before* we save the buffer.
-        --  Run the formatting command for the LSP that has just attached.
-        vim.api.nvim_create_autocmd('BufWritePre', {
-          group = get_augroup(client),
-          buffer = bufnr,
-          callback = function()
-            if not format_is_enabled then
-              return
-            end
-
-            vim.lsp.buf.format {
-              async = false,
-              filter = function(c)
-                return c.id == client.id
-              end,
-            }
-          end,
-        })
       end,
     })
   end

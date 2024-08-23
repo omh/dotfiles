@@ -8,13 +8,13 @@ vim.g.base_branch = 'origin/main'
 vim.cmd [[
   set noshowmode
   set noruler
-  set laststatus=1
+  set laststatus=0
   set noshowcmd
   set cmdheight=0
 
-  " set statusline=\         " hide file name in statusline
-  " set fillchars=stl:\      " fill active window's statusline with empty space
-  " set fillchars+=stlnc:\   " also fill inactive windows
+  set statusline=\         " hide file name in statusline
+  set fillchars=stl:\      " fill active window's statusline with empty space
+  set fillchars+=stlnc:\   " also fill inactive windows
 ]]
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -128,6 +128,8 @@ augroup CursorLine
   au!
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   au WinLeave * setlocal nocursorline
+  au FocusLost * setlocal nocursorline
+  au FocusGained * setlocal cursorline
   au FileType TelescopePrompt setlocal nocursorline
 augroup END
 ]]
@@ -186,10 +188,6 @@ vim.keymap.set('n', 'P', 'P`[v`]=', { desc = "Paste and format" })
 vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
 vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
 
--- Move selected line / block of text in visual mode
-vim.keymap.set('x', 'K', ':move \'<-2<CR>gv-gv', { noremap = true, silent = true })
-vim.keymap.set('x', 'J', ':move \'>+1<CR>gv-gv', { noremap = true, silent = true })
-
 -- Window navigation
 vim.keymap.set('n', '<leader>wv', [[<Cmd>wincmd v<CR>]], { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>ws', [[<Cmd>wincmd s<CR>]], { noremap = true, silent = true })
@@ -207,6 +205,8 @@ vim.keymap.set('n', "<M-right>", [[<cmd>vertical resize -10<CR>]], { desc = "Shr
 vim.keymap.set('n', "tn", '<CMD>tabnew<CR>', { desc = "Open new tab" })
 vim.keymap.set('n', "tc", '<CMD>tabclose<CR>', { desc = "Close tab" })
 vim.keymap.set("n", "th", "<cmd>tabprev<CR>", { desc = "Previous tab" })
+vim.keymap.set("n", "<tab>", "<cmd>tabnext<CR>", { desc = "Next tab" })
+vim.keymap.set("n", "<s-tab>", "<cmd>tabprev<CR>", { desc = "Previous tab" })
 vim.keymap.set("n", "tl", "<cmd>tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "tj", "<cmd>tabm -1<CR>", { desc = "Move tab left" })
 vim.keymap.set("n", "tk", "<cmd>tabm +1<CR>", { desc = "Move tab right" })
@@ -221,6 +221,15 @@ end, { desc = "Rename tab" })
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>le', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>lq', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+-- show file info
+
+vim.keymap.set('n', '<leader>ti', function()
+  vim.cmd [[
+    set filetype
+    set fileformat
+  ]]
+end, { desc = 'Show current file info' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
