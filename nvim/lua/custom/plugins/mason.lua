@@ -10,10 +10,7 @@ return {
     mason_lspconfig.setup({
       ensure_installed = {
         "html",
-        "cssls",
         "lua_ls",
-        "emmet_ls",
-        -- golang
         "gopls",
       },
       automatic_installation = true,

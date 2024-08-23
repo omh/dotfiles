@@ -4,13 +4,12 @@ return {
     "MunifTanjim/nui.nvim",
   },
   event = 'VeryLazy',
-  enabled = true,
   opts = {
     messages = {
-      enabled = true,
+      enabled = false,
     },
     notify = {
-      enabled = true,
+      enabled = false,
     },
     lsp = {
       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**

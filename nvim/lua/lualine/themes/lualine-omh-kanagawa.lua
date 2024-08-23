@@ -1,41 +1,25 @@
 local theme = require("kanagawa.colors").setup().theme
 local palette = require("kanagawa.colors").setup().palette
 
+local bg = theme.ui.bg_m3
 local kanagawa = {}
 
 kanagawa.normal = {
-  a = { bg = 'none', fg = theme.ui.fg, strikethrough = true },
-  b = { bg = 'none', fg = theme.syn.fu, strikethrough = true },
-  c = { bg = 'none', fg = palette.carpYellow, bold = true },
-  x = { bg = 'none', fg = theme.ui.fg },
-  y = { bg = 'none', fg = theme.ui.fg },
-  z = { bg = 'none', fg = theme.ui.fg },
+  a = { bg = bg, fg = palette.carpYellow },
+  b = { bg = bg, fg = theme.ui.fg },
+  c = { bg = bg, fg = palette.carpYellow},
+  x = { bg = bg, fg = theme.ui.fg },
+  y = { bg = theme.ui.bg, fg = theme.ui.fg },
+  z = { bg = bg, fg = theme.ui.fg_dim },
 }
 
--- kanagawa.insert = {
---   a = { bg = theme.diag.ok, fg = theme.ui.bg },
---   b = { bg = theme.ui.bg, fg = theme.diag.ok },
--- }
---
--- kanagawa.command = {
---   a = { bg = theme.syn.operator, fg = theme.ui.bg },
---   b = { bg = theme.ui.bg, fg = theme.syn.operator },
--- }
---
--- kanagawa.visual = {
---   a = { bg = theme.syn.keyword, fg = theme.ui.bg },
---   b = { bg = theme.ui.bg, fg = theme.syn.keyword },
--- }
---
--- kanagawa.replace = {
---   a = { bg = theme.syn.constant, fg = theme.ui.bg },
---   b = { bg = theme.ui.bg, fg = theme.syn.constant },
--- }
-
 kanagawa.inactive = {
-  a = { bg = 'none', fg = theme.syn.comment },
-  b = { bg = 'none', fg = theme.syn.comment },
-  c = { bg = 'none', fg = theme.syn.comment },
+  a = { bg=bg, fg = theme.syn.comment },
+  b = { bg=bg, fg = theme.syn.comment },
+  c = { bg = bg, fg = theme.syn.comment },
+  x = { bg=bg, fg = theme.syn.comment },
+  y = { bg=bg, fg = theme.syn.comment },
+  z = { bg=bg, fg = theme.syn.comment },
 }
 
 if vim.g.kanagawa_lualine_bold then

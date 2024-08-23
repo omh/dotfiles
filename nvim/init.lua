@@ -8,13 +8,13 @@ vim.g.base_branch = 'origin/main'
 vim.cmd [[
   set noshowmode
   set noruler
-  set laststatus=0
+  set laststatus=2
   set noshowcmd
   set cmdheight=0
 
-  set statusline=\         " hide file name in statusline
-  set fillchars=stl:\      " fill active window's statusline with empty space
-  set fillchars+=stlnc:\   " also fill inactive windows
+  " set statusline=\         " hide file name in statusline
+  " set fillchars=stl:\      " fill active window's statusline with empty space
+  " set fillchars+=stlnc:\   " also fill inactive windows
 ]]
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'

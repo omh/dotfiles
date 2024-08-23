@@ -16,11 +16,11 @@ return {
       theme = 'wave',
       colors = {
         palette = {
-          sumiInk0 = '#313131',
+          sumiInk0 = '#282828',
           sumiInk1 = '#FF0000',
           sumiInk2 = '#777777', -- scrollbar pmenu
           sumiInk3 = '#1F1F1F', -- bg
-          sumiInk4 = '#313131', -- indent lines
+          sumiInk4 = '#262626', -- indent lines
           sumiInk5 = '#414141', -- cursor line, winseprator
           sumiInk6 = '#414141', -- original numbers
         },
@@ -36,20 +36,20 @@ return {
         local theme = colors.theme
         local palette = colors.palette
         return {
-          WinSeparator                = { fg = theme.ui.bg_p2 },
-          CursorLine                  = { bg = '#2a2a2a' },
-          CursorLineNr                = { bg = '#2a2a2a', bold = false },
+          -- WinSeparator                = { fg = '#262626' },
+          CursorLine                  = { bg = '#242424' },
+          CursorLineNr                = { bg = '#242424', bold = false },
 
           -- CursorLine = { bg = '#292935' },
           -- CursorLineNr = { bg = '#292935', bold = false },
           -- LineNr = { fg = theme.ui.bg_p2 },
 
           TabLine                     = { fg = palette.fujiGray, bg = 'NONE' },
-          TabLineSel                  = { fg = '#c9c9c9', bg = 'NONE' },
-          TabLineFill                 = { fg = theme.ui.bg_p2, bg = 'NONE', strikethrough = true },
+          TabLineSel                  = { fg = theme.ui.fg, bg = 'NONE' },
+          TabLineFill                 = { fg = theme.ui.bg_m3, bg = 'NONE', strikethrough = true },
 
-          StatusLine                  = { fg = theme.ui.bg_p2, bg = 'none', strikethrough = true },
-          StatusLineNC                = { fg = theme.ui.bg_p2, bg = 'none', strikethrough = true },
+          StatusLine                  = { fg = theme.ui.bg_p2, bg = theme.ui.bg_m3 },
+          StatusLineNC                = { fg = theme.ui.bg_p2, bg = theme.ui.bg_m3 },
 
           Pmenu                       = { fg = theme.ui.shade0, bg = theme.ui.bg_p1, blend = 5 }, -- add `blend = vim.o.pumblend` to enable transparency
           PmenuSel                    = { fg = 'NONE', bg = theme.ui.bg_p2 },

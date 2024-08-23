@@ -21,11 +21,6 @@ return {
     local neogit = require("neogit")
     neogit.setup {
       graph_style = "unicode",
-      highlight = {
-        italic = false,
-        bold = true,
-        underline = true
-      },
       signs = {
         -- { CLOSED, OPENED }
         hunk = { "", "" },
@@ -36,7 +31,7 @@ return {
         popup = {
           ["p"] = "PushPopup",
           ["P"] = "PullPopup",
-        }, }
+      } },
     }
 
     local diffview = require("diffview")
