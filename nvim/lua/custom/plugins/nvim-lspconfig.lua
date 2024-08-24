@@ -70,10 +70,12 @@ return {
         gopls = {
           analyses = {
             unusedparams = true,
-            shadow = true
+            shadow = true,
+            unreachable = true
           },
           completeUnimported = true,
-          usePlaceholders = true,
+          usePlaceholders = false,
+          staticcheck = true,
           gofumpt = true,
         }
       }
