@@ -3,12 +3,15 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-telescope/telescope.nvim',
-    -- OR 'ibhagwan/fzf-lua',
     'nvim-tree/nvim-web-devicons',
   },
+  event = 'VeryLazy',
   config = function()
     require "octo".setup({
-      enable_builtin = true
+      enable_builtin = true,
+      suppress_missing_scope = {
+        projects_v2 = true,
+      }
     })
   end
 }

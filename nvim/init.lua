@@ -146,25 +146,6 @@ autocmd("VimResized", {
   end
 })
 
--- Diagnostics
-vim.diagnostic.config {
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = '',
-      [vim.diagnostic.severity.WARN] = '',
-      [vim.diagnostic.severity.INFO] = '',
-      [vim.diagnostic.severity.HINT] = '',
-    }
-  },
-  underline = {
-    severity = { min = vim.diagnostic.severity.HINT }
-  },
-  virtual_text = true,
-  float = {
-    focusable = true,
-  }
-}
-
 -- Keymaps for better default experience
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<esc>', '<CMD> noh <CR>', { desc = "Clear highlights" })

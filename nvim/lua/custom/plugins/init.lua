@@ -3,9 +3,6 @@ return {
   -- hjkl navigation with tmux
   { 'christoomey/vim-tmux-navigator' },
 
-  -- doesn't play nice with quicklist preview :(
-  -- { 'stefandtw/quickfix-reflector.vim', event = "VeryLazy" },
-
   -- Gbrowse - open stuff in github
   { 'tpope/vim-rhubarb',             event = "VeryLazy" },
 
@@ -19,9 +16,6 @@ return {
   { 'tpope/vim-rsi',                 event = "VeryLazy" },
 
   { "kylechui/nvim-surround",        event = "VeryLazy",   version = "*", },
-
-  -- show/browse keybindings
-  { 'folke/which-key.nvim', },
 
   -- slightly nicer ui for inputs
   { 'stevearc/dressing.nvim',        event = "VeryLazy" },

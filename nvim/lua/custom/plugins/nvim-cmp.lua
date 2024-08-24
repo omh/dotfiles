@@ -41,12 +41,10 @@ return {
         end
       },
       window = {
-        completion = {
+        completion = cmp.config.window.bordered({
           winblend = 3,
-        },
+        }),
         documentation = cmp.config.window.bordered({
-          border = { '', '', '', '', '', '', '', '' },
-          winhighlight = 'Normal:CmpDoc,FloatBorder:CmpDocBorder,CursorLine:Visual,Search:None',
           winblend = 3,
         })
       },
@@ -99,6 +97,17 @@ return {
         { name = "buffer",  keyword_length = 5, max_item_count = 5 },
         { name = "path" },
       }),
+      sorting = {
+        comparators = {
+          cmp.config.compare.offset,
+          cmp.config.compare.exact,
+          cmp.config.compare.score,
+          cmp.config.compare.kind,
+          cmp.config.compare.sort_text,
+          -- cmp.config.compare.length,
+          -- cmp.config.compare.order,
+        }
+      },
       formatting = {
         fields = {
           cmp.ItemField.Abbr,
