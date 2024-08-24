@@ -7,19 +7,19 @@ local kanagawa = {}
 kanagawa.normal = {
   a = { bg = bg, fg = palette.carpYellow },
   b = { bg = bg, fg = theme.ui.fg },
-  c = { bg = bg, fg = palette.carpYellow},
+  c = { bg = bg, fg = palette.carpYellow },
   x = { bg = bg, fg = theme.ui.fg },
   y = { bg = theme.ui.bg, fg = theme.ui.fg },
   z = { bg = bg, fg = theme.ui.fg_dim },
 }
 
 kanagawa.inactive = {
-  a = { bg=bg, fg = theme.syn.comment },
-  b = { bg=bg, fg = theme.syn.comment },
+  a = { bg = bg, fg = theme.syn.comment },
+  b = { bg = bg, fg = theme.syn.comment },
   c = { bg = bg, fg = theme.syn.comment },
-  x = { bg=bg, fg = theme.syn.comment },
-  y = { bg=bg, fg = theme.syn.comment },
-  z = { bg=bg, fg = theme.syn.comment },
+  x = { bg = bg, fg = theme.syn.comment },
+  y = { bg = bg, fg = theme.syn.comment },
+  z = { bg = bg, fg = theme.syn.comment },
 }
 
 if vim.g.kanagawa_lualine_bold then
