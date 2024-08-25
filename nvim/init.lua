@@ -100,7 +100,7 @@ vim.cmd [[
 vim.o.foldenable = false
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.o.foldcolumn = 'auto:5'
+vim.o.foldcolumn = '0'
 vim.o.foldtext = ''
 vim.o.fillchars = 'fold: '
 
