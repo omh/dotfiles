@@ -172,6 +172,8 @@ return {
         })
 
         vim.api.nvim_create_autocmd("BufWritePre", {
+          group = get_augroup(client),
+          buffer = bufnr,
           callback = function()
             if not format_is_enabled then
               return
