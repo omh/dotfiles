@@ -3,10 +3,15 @@ return {
   'folke/which-key.nvim',
   event = "VeryLazy",
   opts = {
-    preset = 'helix',
+    preset = 'modern',
     delay = function(ctx)
       return ctx.plugin and 0 or 400
     end,
+    win = {
+      wo = {
+        winblend = 3,
+      }
+    },
   },
   keys = {
     {

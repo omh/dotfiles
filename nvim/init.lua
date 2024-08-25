@@ -10,7 +10,6 @@ vim.cmd [[
   set noruler
   set laststatus=2
   set noshowcmd
-  set cmdheight=0
 
   " set statusline=\         " hide file name in statusline
   " set fillchars=stl:\      " fill active window's statusline with empty space
@@ -100,27 +99,10 @@ vim.cmd [[
 -- Folding
 vim.o.foldenable = false
 vim.o.foldmethod = "expr"
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
--- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:,diff:.]]
--- vim.o.foldopen = vim.o.foldopen - "block"
-
--- function MyFoldtext()
---   local text = vim.treesitter.foldtext()
---
---   local n_lines = vim.v.foldend - vim.v.foldstart
---   local text_lines = " lines"
---
---   if n_lines == 1 then
---     text_lines = " line"
---   end
---
---   table.insert(text, { " - " .. n_lines .. text_lines, { "Folded" } })
---   table.insert(text, 1, { vim.fn.getline(vim.v.folddashes) .. " ⏵ ", { "Folded" } })
---
---   return text
--- end
-
--- vim.opt.foldtext = "v:lua.MyFoldtext()"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldcolumn = 'auto:5'
+vim.o.foldtext = ''
+vim.o.fillchars = 'fold: '
 
 -- cursorline only in the current window
 vim.cmd [[

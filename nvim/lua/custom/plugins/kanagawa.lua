@@ -57,7 +57,7 @@ return {
           IblIndent                   = { fg = theme.ui.bg_p1 },
           LocalHighlight              = { underline = true },
 
-          MsgArea                     = { bg = theme.ui.bg_p1, strikethrough = false, blend = 5 },
+          MsgArea                     = { bg = 'none', blend = 5 },
         }
       end,
     }
