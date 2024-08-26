@@ -1,10 +1,10 @@
 return {
   "dnlhc/glance.nvim",
   keys = {
-    { "gr", "<cmd>Glance references<cr>",       { desc = "Show references" } },
-    { "gi", "<cmd>Glance implementations<cr>",  { desc = "Show implementations" } },
-    { "gd", "<cmd>Glance definitions<cr>",      { desc = "Show definitions" } },
-    { "gy", "<cmd>Glance type_definitions<cr>", { desc = "Show type definitions" } },
+    { "gr", "<cmd>Glance references<cr>",       desc = "Show references" },
+    { "gi", "<cmd>Glance implementations<cr>",  desc = "Show implementations" },
+    { "gd", "<cmd>Glance definitions<cr>",      desc = "Show definitions" },
+    { "gy", "<cmd>Glance type_definitions<cr>", desc = "Show type definitions" },
   },
   config = function()
     require('glance').setup({

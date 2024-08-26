@@ -33,6 +33,10 @@ return {
     require("luasnip.loaders.from_vscode").lazy_load()
 
     cmp.setup({
+      performance = {
+        debounce = 0, -- default is 60ms
+        throttle = 0, -- default is 30ms
+      },
       preselect = cmp.PreselectMode.None,
       completion = { completeopt = "menu,menuone,noselect" },
       snippet = {

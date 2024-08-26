@@ -3,12 +3,12 @@ return {
   ft = 'go',
   dependencies = { "mfussenegger/nvim-dap", "rcarriga/nvim-dap-ui" },
   keys = {
-    { "<leader>db", "<cmd>DapToggleBreakpoint<cr>", { desc = "Toggle breakpoint at line" } },
-    { "<leader>dj", "<cmd>DapStepOver<cr>",         { desc = "Step over" } },
-    { "<leader>dk", "<cmd>DapStepOut<cr>",          { desc = "Step out" } },
-    { "<leader>dl", "<cmd>DapStepInto<cr>",         { desc = "Step into" } },
-    { "<leader>dc", "<cmd>DapContinue<cr>",         { desc = "Continue" } },
-    { "<leader>dS", "<cmd>DapTerminate<cr>",        { desc = "Stop session" } },
+    { "<leader>db", "<cmd>DapToggleBreakpoint<cr>", desc = "Toggle breakpoint at line" },
+    { "<leader>dj", "<cmd>DapStepOver<cr>",         desc = "Step over" },
+    { "<leader>dk", "<cmd>DapStepOut<cr>",          desc = "Step out" },
+    { "<leader>dl", "<cmd>DapStepInto<cr>",         desc = "Step into" },
+    { "<leader>dc", "<cmd>DapContinue<cr>",         desc = "Continue" },
+    { "<leader>dS", "<cmd>DapTerminate<cr>",        desc = "Stop session" },
     { "<leader>ds", function()
       -- local widgets = require('dap.ui.widgets');
       -- local sidebar = widgets.sidebar(widgets.scopes);

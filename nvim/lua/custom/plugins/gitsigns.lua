@@ -1,5 +1,6 @@
 return {
   'lewis6991/gitsigns.nvim',
+  event = 'VeryLazy',
   opts = {
     -- See `:help gitsigns.txt`
     signs = {
@@ -9,6 +10,10 @@ return {
       topdelete    = { text = '‾' },
       changedelete = { text = '~' },
       untracked    = { text = '┆' },
+    },
+    preview_config = {
+      -- Options passed to nvim_open_win
+      border = 'rounded',
     },
     on_attach = function(bufnr)
       local gs = package.loaded.gitsigns

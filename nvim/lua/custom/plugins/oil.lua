@@ -1,7 +1,7 @@
 return {
   'stevearc/oil.nvim',
   keys = {
-    { "-", "<cmd>Oil --float<cr>", { desc = "Open file explorer" } },
+    { "-", "<cmd>Oil --float<cr>", desc = "Open file explorer" },
   },
   -- Optional dependencies
   dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
@@ -16,6 +16,7 @@ return {
       columns = {
         "icon",
       },
+      preview_split = "below",
       float = {
         padding = 4,
         max_width = 80,
