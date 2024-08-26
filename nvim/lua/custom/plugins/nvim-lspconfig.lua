@@ -36,15 +36,11 @@ return {
       nmap('<leader>lr', vim.lsp.buf.rename, 'Rename')
       nmap('<leader>la', vim.lsp.buf.code_action, 'Code Action')
 
-      nmap('gd', '<cmd>lua vim.lsp.buf.definition()<cr>', 'Goto Definition')
-      nmap('gI', '<cmd>lua vim.lsp.buf.implementation()<cr>', 'Goto Implementation')
-      nmap('<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<cr>', 'Type Definition')
       -- See `:help K` for why this keymap
       nmap('gh', vim.lsp.buf.hover, 'Hover Documentation')
       nmap('K', vim.lsp.buf.signature_help, 'Signature Documentation')
 
       -- Lesser used LSP functionality
-      nmap('gD', vim.lsp.buf.declaration, 'Goto Declaration')
       nmap('<leader>lwa', vim.lsp.buf.add_workspace_folder, 'Workspace Add Folder')
       nmap('<leader>lwr', vim.lsp.buf.remove_workspace_folder, 'Workspace Remove Folder')
       nmap('<leader>lwl', function()

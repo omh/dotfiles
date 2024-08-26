@@ -1,8 +1,7 @@
 return {
   'nvim-lualine/lualine.nvim',
   config = function()
-
-  local diff_symbols = { added = ' ', modified = ' ', removed = ' ' }
+    local diff_symbols = { added = ' ', modified = ' ', removed = ' ' }
 
     require('lualine').setup {
       options = {
@@ -24,7 +23,7 @@ return {
         lualine_b = {},
         lualine_c = {},
         lualine_x = {
-          { 'diff', colored = true, symbols = diff_symbols },
+          { 'diff',       colored = true, symbols = diff_symbols },
           { 'diagnostics' },
         },
         lualine_y = {
@@ -41,7 +40,7 @@ return {
         lualine_b = {},
         lualine_c = {},
         lualine_x = {
-          { 'diff', colored = false, symbols = diff_symbols },
+          { 'diff',        colored = false, symbols = diff_symbols },
           { 'diagnostics', colored = false },
         },
         lualine_y = {
@@ -50,12 +49,27 @@ return {
           { 'location' },
         },
       },
+      -- winbar = {
+      --   lualine_c = {
+      --     { 'filetype', color = win_color, icon_only = true, padding = { left = 1, right = 0 } },
+      --     { 'filename', color = win_color, path = 4, },
+      --   },
+      --   lualine_z = {
+      --     { 'diff',        color = win_color, colored = true, symbols = diff_symbols },
+      --     { 'diagnostics', color = win_color, colored = true },
+      --   }
+      -- },
+      -- inactive_winbar = {
+      --   lualine_c = {
+      --     { 'filetype', color = win_color, icon_only = true, padding = { left = 1, right = 0 } },
+      --     { 'filename', color = win_color, path = 4, },
+      --   },
+      --   lualine_z = {
+      --     { 'diff',        color = win_color, colored = false, symbols = diff_symbols },
+      --     { 'diagnostics', color = win_color, colored = false },
+      --   }
+      -- }
     }
-
-    -- require('lualine').hide({
-    --   place = { 'statusline' }, -- The segment this change applies to.
-    --   unhide = false,           -- whether to re-enable lualine again/
-    -- })
   end
 
 }

@@ -12,7 +12,6 @@ kanagawa.normal = {
   y = { bg = theme.ui.bg, fg = theme.ui.fg },
   z = { bg = bg, fg = theme.ui.fg_dim },
 }
-
 kanagawa.inactive = {
   a = { bg = bg, fg = theme.syn.comment },
   b = { bg = bg, fg = theme.syn.comment },
