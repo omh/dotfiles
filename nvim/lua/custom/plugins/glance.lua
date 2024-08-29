@@ -11,6 +11,9 @@ return {
       detached = function(winid)
         return vim.api.nvim_win_get_width(winid) < 120
       end,
+      folds = {
+        folded = false,
+      },
       hooks = {
         before_open = function(results, open, jump, _)
           if #results == 1 then

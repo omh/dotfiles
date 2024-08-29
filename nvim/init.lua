@@ -66,7 +66,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Keep signcolumn on by default
-vim.wo.signcolumn = 'auto:1-2'
+vim.wo.signcolumn = 'yes'
 
 -- Decrease update time
 vim.o.updatetime = 400
@@ -137,7 +137,7 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = "Page down with cursor in the c
 
 vim.keymap.set('n', '<leader>Q', ':qa!<CR>', { silent = true, desc = "Quit now!" })
 vim.keymap.set('n', '<leader>fs', ':w<CR>', { silent = true, desc = "Save file" })
-vim.keymap.set('n', '<leader>qq', ':q<CR>', { noremap = true, silent = true, desc = "Close window" })
+vim.keymap.set('n', '<leader>q', ':q<CR>', { noremap = true, silent = true, desc = "Close window" })
 vim.keymap.set('x', 'p', 'p:let @+=@0<CR>:let @"=@0<CR>', { silent = true, desc = "Dont copy replaced text" })
 
 -- Remap for dealing with word wrap
@@ -217,7 +217,7 @@ require('which-key').add {
   { "<leader>h", group = "Harpoon", icon = '󱡅' },
   { "<leader>l", group = "Language (LSP)", icon = '󰦨' },
   { "<leader>r", group = "Run tests", icon = '󰙨' },
-  { "<leader>s", group = "Search" },
+  { "<leader>s", group = "Search| Sessions" },
   { "<leader>t", group = "Tabs" },
   { "<leader>v", group = "Vimux", icon = '' },
   { "<leader>w", group = "Workspace | Window" },
@@ -225,7 +225,7 @@ require('which-key').add {
   { "<leader>!", group = "", hidden = true },
   { "<leader>o", group = "Document Symbols", icon = '' },
   { "<leader>O", group = "Workspace Symbols", icon = '' },
-  { "<leader>q", group = "Persistence / quit" },
+  { "<leader>q", group = "Quit" },
 }
 
 require('which-key').add({

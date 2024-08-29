@@ -10,12 +10,12 @@ return {
   },
 
   config = function()
+    local lsp = require("lspconfig")
     vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError' })
     vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticSignWarn' })
     vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo' })
     vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
 
-    local lsp = require("lspconfig")
 
     local on_attach = function(_, bufnr)
       vim.diagnostic.config({
@@ -72,7 +72,7 @@ return {
           completeUnimported = true,
           usePlaceholders = false,
           staticcheck = true,
-          gofumpt = true,
+          -- gofumpt = true,
         }
       }
     })

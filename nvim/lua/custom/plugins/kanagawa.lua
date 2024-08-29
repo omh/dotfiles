@@ -1,6 +1,3 @@
--- @TODO:
--- diagnostic/error popups have same bg has bg
--- tabs should be white/black with the filename highlighted instead
 return {
   'rebelot/kanagawa.nvim',
   priority = 4999,
@@ -9,9 +6,9 @@ return {
     require('kanagawa').setup {
       undercurl = true,
       compile = true,
-      commentStyle = { italic = false },
-      keywordStyle = { italic = false },
-      statementStyle = { bold = false },
+      commentStyle = { italic = true },
+      keywordStyle = { italic = true },
+      statementStyle = { bold = true },
       transparent = false,
       theme = 'wave',
       colors = {
@@ -56,6 +53,7 @@ return {
           TreesitterContextLineNumber = { fg = theme.ui.bg_p2, bg = 'none' },
           IblIndent                   = { fg = theme.ui.bg_p1 },
           LocalHighlight              = { underline = true },
+          DiffviewFilePanelSelected   = { fg = '#FF0000', bg = '#FF0000', bold = true, force = true },
 
           MsgArea                     = { bg = 'none', blend = 5 },
         }
