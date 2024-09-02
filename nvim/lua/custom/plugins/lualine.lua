@@ -7,7 +7,7 @@ return {
       options = {
         theme = 'lualine-omh-kanagawa',
         icons_enabled = true,
-        always_divide_middle = true,
+        always_divide_middle = false,
         component_separators = { left = "", right = "" },
         section_separators = { left = '', right = '' },
         disabled_filetypes = {

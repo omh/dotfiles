@@ -5,7 +5,7 @@ return {
   config = function()
     require('kanagawa').setup {
       undercurl = true,
-      compile = true,
+      compile = false,
       commentStyle = { italic = true },
       keywordStyle = { italic = true },
       statementStyle = { bold = true },
@@ -32,6 +32,15 @@ return {
       overrides = function(colors)
         local theme = colors.theme
         local palette = colors.palette
+
+        local sign = vim.fn.sign_define
+        sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+        sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
+        sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
+        sign('DapStopped', { text = ' ', texthl = 'DapStopped', linehl = 'DapStoppedLine' })
+
+        local dark_orange = '#655145'
+
         return {
           CursorLine                  = { bg = '#262626' },
           CursorLineNr                = { bg = '#262626', bold = false },
@@ -49,6 +58,10 @@ return {
           PmenuSbar                   = { bg = theme.ui.bg_m1 },
 
           -- Plugins
+          DapBreakpoint               = { fg = palette.waveRed },
+          DapStopped                  = { fg = palette.springGreen },
+          DapStoppedLine              = { bg = dark_orange },
+
           TreesitterContextSeparator  = { fg = theme.ui.bg_p2, bg = 'none', strikethrough = true },
           TreesitterContextLineNumber = { fg = theme.ui.bg_p2, bg = 'none' },
           IblIndent                   = { fg = theme.ui.bg_p1 },
