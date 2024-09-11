@@ -65,6 +65,7 @@ return {
           TreesitterContextSeparator  = { fg = theme.ui.bg_p2, bg = 'none', strikethrough = true },
           TreesitterContextLineNumber = { fg = theme.ui.bg_p2, bg = 'none' },
           IblIndent                   = { fg = theme.ui.bg_p1 },
+          IblScope                    = { fg = theme.ui.bg_m1, bold = true },
           LocalHighlight              = { underline = true },
           DiffviewFilePanelSelected   = { fg = '#FF0000', bg = '#FF0000', bold = true, force = true },
 

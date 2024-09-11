@@ -4,8 +4,12 @@ return {
   main = "ibl",
   config = function()
     require("ibl").setup({
-      scope = { enabled = false },
-      indent = { char = "┊" },
+      scope = {
+        enabled = true,
+        show_start = false,
+        show_end = false,
+      },
+      indent = { char = "│" },
     })
   end
 }
