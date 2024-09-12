@@ -45,9 +45,9 @@ require('lazy').setup({
 -- Set highlight on search
 vim.o.hlsearch = true
 
--- Make line numbers default
-vim.wo.number = true
-vim.wo.relativenumber = true
+-- line numbers
+vim.wo.number = false
+vim.wo.relativenumber = false
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -193,6 +193,8 @@ vim.keymap.set('n', '<leader>ti', function()
     set fileformat
   ]]
 end, { desc = 'Show current file info' })
+
+vim.keymap.set('n', '<leader>tn', '<cmd>set number! relativenumber!<cr>', { desc = 'Toggle line numbers' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
