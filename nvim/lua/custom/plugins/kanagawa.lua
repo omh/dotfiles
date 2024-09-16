@@ -49,8 +49,11 @@ return {
           TabLineSel                  = { fg = theme.ui.fg, bg = 'NONE' },
           TabLineFill                 = { fg = theme.ui.bg_p2, bg = 'NONE', strikethrough = true },
 
-          StatusLine                  = { fg = theme.ui.bg_p2, bg = '#282828' },
-          StatusLineNC                = { fg = theme.ui.bg_p2, bg = '#282828' },
+          StatusLine                  = { fg = theme.ui.bg_p2, bg = theme.ui.bg, strikethrough = true },
+          StatusLineNC                = { fg = theme.ui.bg_p2, bg = theme.ui.bg, strikethrough = true },
+
+          -- StatusLine                  = { fg = theme.ui.bg_p2, bg = '#282828' },
+          -- StatusLineNC                = { fg = theme.ui.bg_p2, bg = '#282828' },
 
           NormalFloat                 = { bg = theme.ui.bg, fg = theme.ui.fg, blend = 10 },
           FloatBorder                 = { bg = 'none', fg = palette.sumiInk6 },
@@ -64,8 +67,8 @@ return {
 
           TreesitterContextSeparator  = { fg = theme.ui.bg_p2, bg = 'none', strikethrough = true },
           TreesitterContextLineNumber = { fg = theme.ui.bg_p2, bg = 'none' },
-          IblIndent                   = { fg = theme.ui.bg_p1 },
-          IblScope                    = { fg = theme.ui.bg_m1, bold = true },
+          IblIndent                   = { fg = theme.ui.bg_p2 },
+          -- IblScope                    = { fg = theme.ui.bg_m1, bold = true },
           LocalHighlight              = { underline = true },
           DiffviewFilePanelSelected   = { fg = '#FF0000', bg = '#FF0000', bold = true, force = true },
 
