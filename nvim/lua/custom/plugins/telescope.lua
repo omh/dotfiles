@@ -15,7 +15,6 @@ return {
         return vim.fn.executable 'make' == 1
       end,
     },
-
   },
   config = function()
     local ta = require('telescope.actions')
@@ -106,6 +105,7 @@ return {
 
     keymap('n', '<leader>ff', function() tb.find_files(dropdown_theme) end, { desc = 'Find Files' })
     keymap('n', '<leader>ss', function() tb.live_grep(ivy_config) end, { desc = 'Search for text' })
+    keymap('n', '<leader>se', "<cmd>Telescope resume<cr>", { desc = 'Resume telescope' })
     keymap('n', '<leader>sS', function()
       local word = vim.fn.expand("<cword>")
       local opts = { search = word }

@@ -55,6 +55,7 @@
   "octo.nvim": { "branch": "master", "commit": "0134169886958f3874f16eed7fe73d906a3e7e17" },
   "oil.nvim": { "branch": "master", "commit": "4f3c6780ff272d8facab69a658cf8693582b7a54" },
   "plenary.nvim": { "branch": "master", "commit": "ec289423a1693aeae6cd0d503bac2856af74edaa" },
+  "quicker.nvim": { "branch": "master", "commit": "183041a46d6c908eefb1c23ea02cce9c8f41256e" },
   "refactoring.nvim": { "branch": "master", "commit": "c406fc5fb4d7ba5fce7b668637075fad6e75e9f8" },
   "tabby.nvim": { "branch": "main", "commit": "43d61e7418c062c18b67b2136fcc564426f08db2" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "cf48d4dfce44e0b9a2e19a008d6ec6ea6f01a83b" },

@@ -1,5 +1,11 @@
--- nice quicklist preview
 return {
+  {
+    'stevearc/quicker.nvim',
+    event = "FileType qf",
+    opts = {},
+  },
+
+  -- nice quicklist preview
   "kevinhwang91/nvim-bqf",
   config = function()
     require("bqf").setup {
