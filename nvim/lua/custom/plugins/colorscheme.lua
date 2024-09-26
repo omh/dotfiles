@@ -7,9 +7,9 @@ return {
       require('kanagawa').setup {
         undercurl = true,
         compile = false,
-        commentStyle = { italic = true },
-        keywordStyle = { italic = true },
-        statementStyle = { bold = true },
+        commentStyle = { italic = false },
+        keywordStyle = { italic = false },
+        statementStyle = { bold = false },
         transparent = false,
         theme = 'wave',
         colors = {
