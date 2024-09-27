@@ -2,9 +2,9 @@ return {
   {
     "NeogitOrg/neogit",
     keys = {
-      -- { "<leader>gs", "<cmd>Neogit<cr>",                                        desc = "Neogit status" },
-      -- { "<leader>gp", "<cmd>Neogit push<cr>",                                   desc = "Git push" },
-      -- { "<leader>gP", "<cmd>Neogit push --force-with-lease<cr>",                desc = "Git push forcw" },
+      { "<leader>gs", "<cmd>Neogit<cr>",                                        desc = "Neogit status" },
+      { "<leader>gp", "<cmd>Neogit push<cr>",                                   desc = "Git push" },
+      { "<leader>gP", "<cmd>Neogit push --force-with-lease<cr>",                desc = "Git push forcw" },
       { "<leader>dd", "<cmd>DiffviewOpen<cr>",                                  desc = "Open diff view against current branch" },
       { "<leader>dc", "<cmd>DiffviewClose<cr>",                                 desc = "Close diff view" },
       { "<leader>gl", "<cmd>DiffviewFileHistory %<CR>",                         desc = "Git log for current file" },
@@ -54,9 +54,9 @@ return {
   {
     'tpope/vim-fugitive',
     config = function()
-      vim.keymap.set("n", "<leader>gs", "<cmd>vertical Git<CR>", { desc = "Git status" })
-      vim.keymap.set("n", "<leader>gp", "<cmd>Git push<CR>", { desc = "Git push" })
-      vim.keymap.set("n", "<leader>gP", "<cmd>Git push --force<CR>", { desc = "Git push force" })
+      -- vim.keymap.set("n", "<leader>gs", "<cmd>vertical Git<CR>", { desc = "Git status" })
+      -- vim.keymap.set("n", "<leader>gp", "<cmd>Git push<CR>", { desc = "Git push" })
+      -- vim.keymap.set("n", "<leader>gP", "<cmd>Git push --force<CR>", { desc = "Git push force" })
       vim.keymap.set("n", "<leader>ggo", "<cmd>GBrowse<CR>", { desc = "Open file on github" })
       vim.keymap.set("n", "<leader>ggc", "<cmd>GBrowse!<CR>", { desc = "Copy file's GitHub URL" })
       vim.keymap.set("x", "<leader>ggo", ":'<,'>GBrowse<CR>", { desc = "Open selection on github" })
