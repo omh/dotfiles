@@ -12,7 +12,7 @@ return {
         return vim.api.nvim_win_get_width(winid) < 120
       end,
       folds = {
-        folded = false,
+        folded = true,
       },
       hooks = {
         before_open = function(results, open, jump, _)

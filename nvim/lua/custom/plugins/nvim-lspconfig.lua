@@ -17,7 +17,7 @@ return {
     vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
 
 
-    local on_attach = function(_, bufnr)
+    local on_attach = function(client, bufnr)
       vim.diagnostic.config({
         virtual_text = false,
         float = {
@@ -35,6 +35,10 @@ return {
 
       nmap('<leader>lr', vim.lsp.buf.rename, 'Rename')
       nmap('<leader>la', vim.lsp.buf.code_action, 'Code Action')
+
+      nmap('<leader>ti', function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+      end, 'Toggle inline hints')
 
       -- See `:help K` for why this keymap
       nmap('gh', vim.lsp.buf.hover, 'Hover Documentation')
@@ -69,6 +73,15 @@ return {
             shadow = true,
             unreachable = true
           },
+          hints = {
+            parameterNames = true,
+            -- functionTypeParameters
+            -- constantValues
+            -- compositeLiteralTypes
+            -- compositeLiteralFields
+            -- assignVariableTypes
+            -- rangeVariableTypes
+          },
           completeUnimported = true,
           usePlaceholders = false,
           staticcheck = true,
@@ -96,6 +109,7 @@ return {
         Lua = {
           workspace = { checkThirdParty = false },
           telemetry = { enable = false },
+          hint = { enable = true },
           diagnostics = {
             -- Get the language server to recognize the `vim` global
             globals = { 'vim' },

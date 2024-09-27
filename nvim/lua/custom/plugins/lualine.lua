@@ -59,7 +59,7 @@ return {
       winbar = {
         lualine_c = {
           { 'filetype', icon_only = true, padding = { left = 2, right = 0 } },
-          { 'filename', path = 4, },
+          { 'filename', path = 1, },
         },
         lualine_x = {
           'fancy_macro',
@@ -72,7 +72,7 @@ return {
       inactive_winbar = {
         lualine_c = {
           { 'filetype', icon_only = true, padding = { left = 2, right = 0 } },
-          { 'filename', path = 4, },
+          { 'filename', path = 1, },
         },
         lualine_z = {
           { 'diff',        colored = false, symbols = diff_symbols },
