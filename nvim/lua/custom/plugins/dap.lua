@@ -3,13 +3,22 @@ return {
   ft = 'go',
   dependencies = { "mfussenegger/nvim-dap", "rcarriga/nvim-dap-ui" },
   keys = {
-    { "<leader>ds", "<cmd>DapNew<cr>",              desc = "New debug session..." },
-    { "<leader>db", "<cmd>DapToggleBreakpoint<cr>", desc = "Toggle breakpoint at line" },
-    { "<leader>dj", "<cmd>DapStepOver<cr>",         desc = "Step over" },
-    { "<leader>dk", "<cmd>DapStepOut<cr>",          desc = "Step out" },
-    { "<leader>dl", "<cmd>DapStepInto<cr>",         desc = "Step into" },
-    { "<leader>dc", "<cmd>DapContinue<cr>",         desc = "Continue" },
-    { "<leader>dS", "<cmd>DapTerminate<cr>",        desc = "Stop session" },
+    { "<leader>ds", "<cmd>DapNew<cr>",              desc = "Debug: New Session..." },
+    { "<leader>dc", "<cmd>DapContinue<cr>",         desc = "Debug: Continue" },
+    { "<leader>db", "<cmd>DapToggleBreakpoint<cr>", desc = "Debug: Toggle Breakpoint at Line" },
+    { "<leader>dj", "<cmd>DapStepOver<cr>",         desc = "Debug: Step Over" },
+    { "<leader>dk", "<cmd>DapStepOut<cr>",          desc = "Debug: Step Out" },
+    { "<leader>dl", "<cmd>DapStepInto<cr>",         desc = "Debug: Step Into" },
+    { "<leader>dc", "<cmd>DapContinue<cr>",         desc = "Debug: Continue" },
+    { "<leader>de", "<cmd>DapTerminate<cr>",        desc = "Debug: End Session" },
+    { "<leader>dr", "<cmd>DapReRun<cr>",            desc = "Debug: Re-run Last Session" },
+
+    {
+      "<leader>dB", function()
+      require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
+    end
+    },
+
     {
       "<leader>du",
       function()
@@ -21,14 +30,14 @@ return {
       desc = "Open debug sidebar"
     },
     {
-      "<leader>dt",
+      "<leader>rdd",
       function()
         require('dap-go').debug_test()
       end,
-      desc = "Add breakpoint at line"
+      desc = "Test: debug current test"
     },
     {
-      "<leader>dr",
+      "<leader>rdl",
       function()
         require('dap-go').debug_last()
       end,
@@ -42,29 +51,59 @@ return {
       desc = "Show variable info in float"
     },
   },
-  config = function(_, opts)
-    require('dap-go').setup(opts)
-    require("dapui").setup({
-      controls = {
-        element = "scopes",
+  config = function(_, _)
+    require('dap-go').setup({
+      dap_configurations = {
+        -- {
+        --   type = "go",
+        --   name = "Attach remote",
+        --   mode = "remote",
+        --   request = "attach",
+        --   port = "38697",
+        --   host = "127.0.0.1",
+        -- },
       },
+    })
+
+    local dap, dapui = require("dap"), require("dapui")
+    dap.listeners.before.attach.dapui_config = function()
+      -- @TODO: check if a tab called Debug Session exists already.
+      vim.cmd("tabnew")
+      vim.cmd("TabRename Debug Session")
+      dapui.open()
+    end
+    dap.listeners.before.launch.dapui_config = function()
+      -- @TODO: check if a tab called Debug Session exists already.
+      vim.cmd("tabnew")
+      vim.cmd("TabRename Debug Session")
+      dapui.open()
+    end
+    dap.listeners.before.event_terminated.dapui_config = function()
+      -- @TODO: check if a tab called Debug Session is current tab. Don't close if it's not
+      dapui.close()
+      vim.cmd("tabclose")
+    end
+    dap.listeners.before.event_exited.dapui_config = function()
+      dapui.close()
+      vim.cmd("tabclose")
+    end
+
+    require("dapui").setup({
+      expand_lines = true,
       mappings = {
         expand = { "<tab>", "<2-LeftMouse>" },
       },
       floating = {
         border = "rounded",
       },
-
       layouts = { {
-        elements = {
-          {
-            id = "repl",
-            size = 0.25
-          },
-          {
-            id = "breakpoints",
-            size = 0.25
-          }, {
+        elements = { {
+          id = "scopes",
+          size = 0.25
+        }, {
+          id = "breakpoints",
+          size = 0.25
+        }, {
           id = "stacks",
           size = 0.25
         }, {
@@ -72,20 +111,18 @@ return {
           size = 0.25
         } },
         position = "left",
-        size = 40
+        size = 80
       }, {
-        elements = {
-          {
-            id = "scopes",
-            size = 0.50
-          }, {
+        elements = { {
+          id = "repl",
+          size = 0.5
+        }, {
           id = "console",
-          size = 0.25
+          size = 0.5
         } },
         position = "bottom",
-        size = 10
+        size = 15
       } },
-
     })
   end
 }

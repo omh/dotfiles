@@ -2,11 +2,10 @@ return {
   {
     "NeogitOrg/neogit",
     keys = {
-      { "<leader>gs", "<cmd>Neogit<cr>",                                        desc = "Neogit status" },
-      { "<leader>gp", "<cmd>Neogit push<cr>",                                   desc = "Git push" },
-      { "<leader>gP", "<cmd>Neogit push --force-with-lease<cr>",                desc = "Git push forcw" },
+      -- { "<leader>gs", "<cmd>Neogit<cr>",                                        desc = "Neogit status" },
+      -- { "<leader>gp", "<cmd>Neogit push<cr>",                                   desc = "Git push" },
+      -- { "<leader>gP", "<cmd>Neogit push --force-with-lease<cr>",                desc = "Git push forcw" },
       { "<leader>dd", "<cmd>DiffviewOpen<cr>",                                  desc = "Open diff view against current branch" },
-      { "<leader>dc", "<cmd>DiffviewClose<cr>",                                 desc = "Close diff view" },
       { "<leader>gl", "<cmd>DiffviewFileHistory %<CR>",                         desc = "Git log for current file" },
       { "<leader>gL", "<cmd>DiffviewFileHistory<CR>",                           desc = "Git log for repo" },
       { "<leader>dm", "<cmd>DiffviewOpen origin/HEAD...HEAD --imply-local<cr>", desc = "Open diff view for branch" },
@@ -54,9 +53,9 @@ return {
   {
     'tpope/vim-fugitive',
     config = function()
-      -- vim.keymap.set("n", "<leader>gs", "<cmd>vertical Git<CR>", { desc = "Git status" })
-      -- vim.keymap.set("n", "<leader>gp", "<cmd>Git push<CR>", { desc = "Git push" })
-      -- vim.keymap.set("n", "<leader>gP", "<cmd>Git push --force<CR>", { desc = "Git push force" })
+      vim.keymap.set("n", "<leader>gs", "<cmd>vertical Git<CR>", { desc = "Git status" })
+      vim.keymap.set("n", "<leader>gp", "<cmd>Git push<CR>", { desc = "Git push" })
+      vim.keymap.set("n", "<leader>gP", "<cmd>Git push --force<CR>", { desc = "Git push force" })
       vim.keymap.set("n", "<leader>ggo", "<cmd>GBrowse<CR>", { desc = "Open file on github" })
       vim.keymap.set("n", "<leader>ggc", "<cmd>GBrowse!<CR>", { desc = "Copy file's GitHub URL" })
       vim.keymap.set("x", "<leader>ggo", ":'<,'>GBrowse<CR>", { desc = "Open selection on github" })
@@ -79,7 +78,17 @@ return {
           vim.cmd(cmd)
         end
       end, { desc = "Diff current file against a branch..." })
+
+      -- remap some keys to make it more intuitive
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "fugitiveblame", "fugitive" },
+        callback = function()
+          vim.api.nvim_buf_set_keymap(0, 'n', 'q', 'gq', { silent = true })
+          vim.api.nvim_buf_set_keymap(0, 'n', '<tab>', '=', { silent = true })
+        end
+      })
     end
+
   },
   {
     'lewis6991/gitsigns.nvim',
@@ -129,24 +138,24 @@ return {
         end, { expr = true, desc = 'Jump to previous hunk' })
 
         -- Actions
-        map('v', '<leader>ghs', function()
+        map('v', '<leader>hs', function()
           gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end, { desc = 'stage git hunk' })
-        map('v', '<leader>ghr', function()
+        map('v', '<leader>hr', function()
           gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end, { desc = 'reset git hunk' })
         -- normal mode
-        map('n', '<leader>ghs', gs.stage_hunk, { desc = 'git stage hunk' })
-        map('n', '<leader>ghr', gs.reset_hunk, { desc = 'git reset hunk' })
-        map('n', '<leader>ghS', gs.stage_buffer, { desc = 'git Stage buffer' })
-        map('n', '<leader>ghu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
-        map('n', '<leader>ghR', gs.reset_buffer, { desc = 'git Reset buffer' })
-        map('n', '<leader>ghp', gs.preview_hunk, { desc = 'preview git hunk' })
-        map('n', '<leader>ghb', function()
+        map('n', '<leader>hs', gs.stage_hunk, { desc = 'git stage hunk' })
+        map('n', '<leader>hr', gs.reset_hunk, { desc = 'git reset hunk' })
+        map('n', '<leader>hS', gs.stage_buffer, { desc = 'git Stage buffer' })
+        map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
+        map('n', '<leader>hR', gs.reset_buffer, { desc = 'git Reset buffer' })
+        map('n', '<leader>hp', gs.preview_hunk, { desc = 'preview git hunk' })
+        map('n', '<leader>hb', function()
           gs.blame_line { full = false }
         end, { desc = 'git blame line' })
-        map('n', '<leader>ghd', gs.diffthis, { desc = 'git diff against index' })
-        map('n', '<leader>ghD', function()
+        map('n', '<leader>hd', gs.diffthis, { desc = 'git diff against index' })
+        map('n', '<leader>hD', function()
           gs.diffthis '~'
         end, { desc = 'git diff against last commit' })
 

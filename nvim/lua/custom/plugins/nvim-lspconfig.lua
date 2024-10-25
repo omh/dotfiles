@@ -2,26 +2,41 @@ return {
   'neovim/nvim-lspconfig',
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    { 'hrsh7th/nvim-cmp' },
+    -- { 'hrsh7th/nvim-cmp' },
+    { "iguanacucumber/magazine.nvim" },
     -- Useful status updates for LSP
-    { 'j-hui/fidget.nvim', opts = {} },
+    { 'j-hui/fidget.nvim',           opts = {} },
     -- Additional lua configuration, makes nvim stuff amazing!
     'folke/neodev.nvim',
   },
 
   config = function()
     local lsp = require("lspconfig")
+    -- local configs = require("lspconfig/configs")
+
+    -- if not configs.golangcilsp then
+    --   configs.golangcilsp = {
+    --     default_config = {
+    --       cmd = { 'golangci-lint-langserver' },
+    --       root_dir = lsp.util.root_pattern('.git', 'go.mod'),
+    --       init_options = {
+    --         command = { "golangci-lint", "run", "--enable-all", "--disable", "lll", "--out-format", "json", "--issues-exit-code=1" },
+    --       }
+    --     },
+    --   }
+    -- end
+
     vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError' })
     vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticSignWarn' })
     vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo' })
     vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
 
-
-    local on_attach = function(client, bufnr)
+    local on_attach = function(_, bufnr)
       vim.diagnostic.config({
         virtual_text = false,
         float = {
           border = 'rounded',
+          source = 'always',
         }
       })
 
@@ -35,6 +50,7 @@ return {
 
       nmap('<leader>lr', vim.lsp.buf.rename, 'Rename')
       nmap('<leader>la', vim.lsp.buf.code_action, 'Code Action')
+      nmap('<leader>li', "<cmd>LspInfo<cr>", 'LSP Info')
 
       nmap('<leader>ti', function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
@@ -43,6 +59,20 @@ return {
       -- See `:help K` for why this keymap
       nmap('gh', vim.lsp.buf.hover, 'Hover Documentation')
       nmap('K', vim.lsp.buf.signature_help, 'Signature Documentation')
+
+      nmap('[d', function()
+        vim.diagnostic.goto_prev()
+        vim.diagnostic.open_float()
+      end, 'Go to previous diagnostic')
+
+      nmap(']d', function()
+        vim.diagnostic.goto_next()
+        vim.diagnostic.open_float()
+      end, 'Go to next diagnostic')
+
+      -- Diagnostic keymaps
+      vim.keymap.set('n', '<leader>le', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+      vim.keymap.set('n', '<leader>lq', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
       -- Lesser used LSP functionality
       nmap('<leader>lwa', vim.lsp.buf.add_workspace_folder, 'Workspace Add Folder')
@@ -120,6 +150,10 @@ return {
       }
     })
 
+    lsp["golangci_lint_ls"].setup({
+      filetypes = { 'go', 'gomod' }
+    })
+
     -- auto config
 
     -- Switch for controlling whether you want autoformatting.
@@ -166,20 +200,20 @@ return {
           return
         end
 
-        vim.api.nvim_create_autocmd("CursorHold", {
-          buffer = bufnr,
-          callback = function()
-            local opts = {
-              focusable = false,
-              close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-              border = 'rounded',
-              source = 'always',
-              prefix = ' ',
-              scope = 'cursor',
-            }
-            vim.diagnostic.open_float(nil, opts)
-          end
-        })
+        -- vim.api.nvim_create_autocmd("CursorHold", {
+        --   buffer = bufnr,
+        --   callback = function()
+        --     local opts = {
+        --       focusable = false,
+        --       close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+        --       border = 'rounded',
+        --       source = 'always',
+        --       prefix = ' ',
+        --       scope = 'cursor',
+        --     }
+        --     vim.diagnostic.open_float(nil, opts)
+        --   end
+        -- })
 
         vim.api.nvim_create_autocmd("BufWritePre", {
           group = get_augroup(client),

@@ -2,6 +2,7 @@ return {
   {
     'rebelot/kanagawa.nvim',
     priority = 4999,
+    lazy = false,
     enabled = true,
     config = function()
       require('kanagawa').setup {
@@ -38,9 +39,7 @@ return {
           sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
           sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
           sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
-          sign('DapStopped', { text = ' ', texthl = 'DapStopped', linehl = 'DapStoppedLine' })
-
-          local dark_orange = '#655145'
+          sign('DapStopped', { text = '󰐊', texthl = 'DapStopped', linehl = 'DapStoppedLine' })
 
           return {
             CursorLine                  = { bg = '#262626' },
@@ -64,8 +63,11 @@ return {
 
             -- Plugins
             DapBreakpoint               = { fg = palette.waveRed },
-            DapStopped                  = { fg = palette.springGreen },
-            DapStoppedLine              = { bg = dark_orange },
+            DapStopped                  = { fg = palette.surimiOrange, bg = '#2C3522' },
+            DapStoppedLine              = { bg = '#2C3522' },
+
+            TelescopeSelection          = { bg = theme.ui.bg_p2, fg = 'none', bold = true, blend = 5 },
+            TelescopeSelectionCaret     = { bg = theme.ui.bg_p2, fg = 'none', bold = true, blend = 5 },
 
             TreesitterContextSeparator  = { fg = theme.ui.bg_p2, bg = 'none', strikethrough = true },
             TreesitterContextLineNumber = { fg = theme.ui.bg_p2, bg = 'none' },

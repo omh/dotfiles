@@ -1,5 +1,6 @@
 return {
   'nvim-treesitter/nvim-treesitter-context',
+  commit = '2e5aef3d3013482ace17306b1fd1183c6e6c9eb1',
   event = "BufRead",
   config = function()
     require 'treesitter-context'.setup {

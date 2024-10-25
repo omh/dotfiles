@@ -9,10 +9,11 @@ return {
   config = function()
     require('glance').setup({
       detached = function(winid)
-        return vim.api.nvim_win_get_width(winid) < 120
+        return vim.api.nvim_win_get_width(winid) < 160
       end,
-      folds = {
-        folded = true,
+      height = 25,
+      winbar = {
+        enable = true, -- Available strating from nvim-0.8+
       },
       hooks = {
         before_open = function(results, open, jump, _)

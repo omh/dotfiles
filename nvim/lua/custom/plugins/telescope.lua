@@ -63,7 +63,6 @@ return {
     }
     -- Enable telescope fzf native, if installed
     pcall(require('telescope').load_extension, 'fzf')
-    require("telescope").load_extension("git_worktree")
 
     function vim.getVisualSelection()
       vim.cmd('noau normal! "vy"')
@@ -120,11 +119,6 @@ return {
     keymap('n', '<leader>sh', function() tb.help_tags(dropdown_theme) end, { desc = "Help tags" })
     keymap('n', '<leader>gb', function() tb.git_branches(dropdown_theme) end, { desc = "Branches" })
     keymap('n', '<leader>bb', function() tb.buffers(dropdown_theme) end, { desc = "Find buffers" })
-
-    keymap('n', '<leader>gn', function() require('telescope').extensions.git_worktree.create_git_worktree() end,
-      { desc = "Create new worktree" })
-    keymap('n', '<leader>gw', function() require('telescope').extensions.git_worktree.git_worktrees() end,
-      { desc = "Create new worktree" })
 
     keymap('n', '<leader>o', function()
       local cfg = require('telescope.themes').get_cursor({

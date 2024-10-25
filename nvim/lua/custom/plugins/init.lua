@@ -15,14 +15,32 @@ return {
   -- readline keybindings for insert/command mode
   { 'tpope/vim-rsi',                 event = "VeryLazy" },
 
-  { "kylechui/nvim-surround",        event = "VeryLazy",   version = "*", },
+  {
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    version = "*",
+    config = function()
+      require('nvim-surround').setup {}
+    end
+  },
 
   -- slightly nicer ui for inputs
-  { 'stevearc/dressing.nvim',        event = "VeryLazy" },
+  { 'stevearc/dressing.nvim', opt = {},          event = "VeryLazy" },
 
   -- kill buffers without removing the window
-  { 'qpkorr/vim-bufkill',            event = "VeryLazy" },
+  { 'qpkorr/vim-bufkill',     event = "VeryLazy" },
 
-  -- git worktrees
-  { 'ThePrimeagen/git-worktree.nvim' },
+  {
+    "OXY2DEV/markview.nvim",
+    ft = "markdown", -- If you decide to lazy-load anyway
+
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
+    },
+    keys = {
+      { "<leader>mv", "MarkView splitToggle" },
+    },
+
+  }
 }

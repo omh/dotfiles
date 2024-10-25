@@ -1,12 +1,11 @@
 return {
   'nvim-lualine/lualine.nvim',
+  enabled = true,
   dependencies = {
     "nvim-tree/nvim-web-devicons",
     "meuter/lualine-so-fancy.nvim",
   },
   config = function()
-    local diff_symbols = { added = ' ', modified = ' ', removed = ' ' }
-
     require('lualine').setup {
       options = {
         theme = 'lualine-omh-kanagawa',
@@ -15,11 +14,11 @@ return {
         component_separators = { left = "", right = "" },
         section_separators = { left = '', right = '' },
         disabled_filetypes = {
-          winbar = { 'trouble' },
+          winbar = { 'trouble', 'dap-repl' },
         },
-        refresh = {
-          winbar = 200,
-        }
+        -- refresh = {
+        --   winbar = 200,
+        -- }
       },
       extensions = { 'quickfix', 'trouble', 'lazy', 'nvim-dap-ui', 'oil' },
       sections = {
@@ -65,8 +64,8 @@ return {
           'fancy_macro',
         },
         lualine_z = {
-          { 'diff',        colored = true, symbols = diff_symbols },
-          { 'diagnostics', colored = true },
+          { 'fancy_diff',        colored = true },
+          { 'fancy_diagnostics', colored = true },
         }
       },
       inactive_winbar = {
@@ -74,9 +73,12 @@ return {
           { 'filetype', icon_only = true, padding = { left = 2, right = 0 } },
           { 'filename', path = 1, },
         },
+        lualine_x = {
+          'fancy_macro',
+        },
         lualine_z = {
-          { 'diff',        colored = false, symbols = diff_symbols },
-          { 'diagnostics', colored = false },
+          { 'fancy_diff',        colored = true },
+          { 'fancy_diagnostics', colored = true },
         }
       }
     }

@@ -1,6 +1,7 @@
 -- Autocompletion
 return {
-  "hrsh7th/nvim-cmp",
+  -- "hrsh7th/nvim-cmp",
+  "iguanacucumber/magazine.nvim",
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source
@@ -20,25 +21,29 @@ return {
     'rafamadriz/friendly-snippets',
 
     -- copilot integration
-    -- "zbirenbaum/copilot-cmp",
+    "zbirenbaum/copilot-cmp",
   },
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
-    -- require("copilot_cmp").setup()
+    require("copilot_cmp").setup()
 
     vim.keymap.set({ "i", "s" }, "<C-e>", function() luasnip.jump(1) end, { silent = true })
     vim.keymap.set({ "i", "s" }, "<C-q>", function() luasnip.jump(-1) end, { silent = true })
 
+    vim.o.pumheight = 15
+
     require("luasnip.loaders.from_vscode").lazy_load()
+    local types = require("cmp.types")
 
     cmp.setup({
-      performance = {
-        debounce = 0, -- default is 60ms
-        throttle = 0, -- default is 30ms
-      },
+      -- performance = {
+      --   debounce = 0, -- default is 60ms
+      --   throttle = 0, -- default is 30ms
+      -- },
       preselect = cmp.PreselectMode.None,
       completion = { completeopt = "menu,menuone,noselect" },
+      experimental = { ghost_text = true },
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
@@ -46,13 +51,12 @@ return {
       },
       window = {
         completion = cmp.config.window.bordered({
-          winblend = 3,
+          winblend = 5,
         }),
         documentation = cmp.config.window.bordered({
-          winblend = 3,
+          winblend = 5,
         })
       },
-
       mapping = cmp.mapping.preset.insert({
         ["<C-j>"] = cmp.mapping.select_next_item(),
         ["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -62,10 +66,12 @@ return {
         ["<C-e>"] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            if luasnip.expandable() then
-              luasnip.expand()
+            -- if luasnip.expandable() then
+            --   luasnip.expand()
+            if cmp.get_active_entry() then
+              cmp.confirm({ select = false })
             else
-              cmp.confirm({ select = true })
+              fallback()
             end
           else
             fallback()
@@ -95,21 +101,21 @@ return {
         end, { "i", "s" }),
       }),
       sources = cmp.config.sources({
-        -- { name = "copilot" },
-        { name = "luasnip" },
-        { name = "nvim_lsp" },
-        { name = "buffer",  keyword_length = 5, max_item_count = 5 },
-        { name = "path" },
+        { name = "nvim_lsp", group_index = 1 },
+        { name = "luasnip",  group_index = 2 },
+        { name = "buffer",   group_index = 2, keyword_length = 5, max_item_count = 5 },
+        { name = "path",     group_index = 3 },
+        { name = "copilot",  group_index = 4 },
       }),
       sorting = {
         comparators = {
+          cmp.config.compare.score,
+          cmp.config.compare.order,
           cmp.config.compare.offset,
           cmp.config.compare.exact,
-          cmp.config.compare.score,
           cmp.config.compare.kind,
           cmp.config.compare.sort_text,
           -- cmp.config.compare.length,
-          -- cmp.config.compare.order,
         }
       },
       formatting = {
@@ -121,12 +127,13 @@ return {
         format = function(entry, vim_item)
           return require("lspkind").cmp_format({
             mode = "symbol_text",
-            maxwidth = 50,
+            maxwidth = 60,
+            symbol_map = { Copilot = "" },
             before = function(_, vim_item2)
               if string.sub(vim_item2.abbr, -1) == "~" then
                 vim_item2.abbr = string.sub(vim_item2.abbr, 0, -2)
               end
-              return vim_item
+              return vim_item2
             end
           })(entry, vim_item)
         end

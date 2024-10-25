@@ -4,17 +4,20 @@ vim.o.termguicolors = true
 vim.g.timeoutlen = 500
 vim.g.base_branch = 'origin/main'
 
+
 -- hide statusline/commandline
 vim.cmd [[
   set noshowmode
   set noruler
   set laststatus=3
   set noshowcmd
-  set cmdheight=0
+  set cmdheight=1
 
    set statusline=\         " hide file name in statusline
    set fillchars=stl:\      " fill active window's statusline with empty space
    set fillchars+=stlnc:\   " also fill inactive windows
+
+  set bg=dark
 ]]
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -74,7 +77,7 @@ vim.o.updatetime = 400
 vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = 'menu,menuone,noselect'
 
 -- Misc
 vim.o.scrolloff = 8
@@ -182,19 +185,6 @@ vim.keymap.set("n", "tr", function()
   end
 end, { desc = "Rename tab" })
 
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>le', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>lq', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-
--- show file info
-
-vim.keymap.set('n', '<leader>ti', function()
-  vim.cmd [[
-    set filetype
-    set fileformat
-  ]]
-end, { desc = 'Show current file info' })
-
 vim.keymap.set('n', '<leader>tn', '<cmd>set number! relativenumber!<cr>', { desc = 'Toggle line numbers' })
 
 -- [[ Highlight on yank ]]
@@ -214,10 +204,9 @@ require('which-key').add {
   { "<leader>c", group = "Code" },
   { "<leader>d", group = "Diff | Debug" },
   { "<leader>f", group = "File | Find" },
-  { "<leader>g", group = "Git | Commenting | Movements (lsp)" },
+  { "<leader>g", group = "Git | Commenting" },
   { "<leader>gg", group = "Github" },
-  { "<leader>gh", group = "Hunk" },
-  { "<leader>h", group = "Harpoon", icon = '󱡅' },
+  { "<leader>h", group = "Hunks" },
   { "<leader>l", group = "Language (LSP)", icon = '󰦨' },
   { "<leader>r", group = "Run tests", icon = '󰙨' },
   { "<leader>s", group = "Search | Sessions" },
@@ -235,5 +224,6 @@ require('which-key').add({
   mode = { 'v' },
   { "<leader>g", group = '[G]it Hunk' },
 })
+
 
 -- vim: ts=2 sts=2 sw=2 et
