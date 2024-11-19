@@ -30,6 +30,8 @@ return {
   -- kill buffers without removing the window
   { 'qpkorr/vim-bufkill',     event = "VeryLazy" },
 
+  { 'SmiteshP/nvim-navic',    event = "VeryLazy" },
+
   {
     "OXY2DEV/markview.nvim",
     ft = "markdown", -- If you decide to lazy-load anyway

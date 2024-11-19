@@ -11,6 +11,7 @@ return {
   },
 
   config = function()
+    require("CopilotChat.integrations.cmp").setup()
     local lsp = require("lspconfig")
     -- local configs = require("lspconfig/configs")
 
@@ -31,7 +32,9 @@ return {
     vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo' })
     vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
 
-    local on_attach = function(_, bufnr)
+    local navic = require("nvim-navic")
+
+    local on_attach = function(client, bufnr)
       vim.diagnostic.config({
         virtual_text = false,
         float = {
@@ -39,6 +42,10 @@ return {
           source = 'always',
         }
       })
+
+      if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+      end
 
       local nmap = function(keys, func, desc)
         if desc then
@@ -100,7 +107,7 @@ return {
         gopls = {
           analyses = {
             unusedparams = true,
-            shadow = true,
+            shadow = false,
             unreachable = true
           },
           hints = {
@@ -113,7 +120,7 @@ return {
             -- rangeVariableTypes
           },
           completeUnimported = true,
-          usePlaceholders = false,
+          usePlaceholders = true,
           staticcheck = true,
           -- gofumpt = true,
         }

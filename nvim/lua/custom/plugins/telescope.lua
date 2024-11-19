@@ -49,6 +49,18 @@ return {
         },
         lsp_workspace_symbols = {
           symbol_width = 60,
+        },
+        buffers = {
+          show_all_buffers = true,
+          sort_lastused = true,
+          theme = "ivy",
+          initial_mode = 'normal',
+          previewer = true,
+          mappings = {
+            n = {
+              ["d"] = "delete_buffer",
+            }
+          }
         }
       },
       extensions = {
@@ -118,7 +130,7 @@ return {
     keymap('n', '<leader>fr', function() tb.oldfiles(dropdown_theme) end, { desc = "Recent files" })
     keymap('n', '<leader>sh', function() tb.help_tags(dropdown_theme) end, { desc = "Help tags" })
     keymap('n', '<leader>gb', function() tb.git_branches(dropdown_theme) end, { desc = "Branches" })
-    keymap('n', '<leader>bb', function() tb.buffers(dropdown_theme) end, { desc = "Find buffers" })
+    keymap('n', 'H', function() tb.buffers() end, { desc = "List open buffers" })
 
     keymap('n', '<leader>o', function()
       local cfg = require('telescope.themes').get_cursor({

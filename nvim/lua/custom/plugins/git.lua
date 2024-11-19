@@ -53,7 +53,7 @@ return {
   {
     'tpope/vim-fugitive',
     config = function()
-      vim.keymap.set("n", "<leader>gs", "<cmd>vertical Git<CR>", { desc = "Git status" })
+      vim.keymap.set("n", "<leader>gs", "<cmd>Git<CR>", { desc = "Git status" })
       vim.keymap.set("n", "<leader>gp", "<cmd>Git push<CR>", { desc = "Git push" })
       vim.keymap.set("n", "<leader>gP", "<cmd>Git push --force<CR>", { desc = "Git push force" })
       vim.keymap.set("n", "<leader>ggo", "<cmd>GBrowse<CR>", { desc = "Open file on github" })

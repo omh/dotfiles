@@ -13,6 +13,7 @@ return {
   },
   keys = {
     { "<leader>rr", "<cmd>lua require('neotest').run.run_last()<CR>",             desc = "Run previous test" },
+    { "<leader>ra", "<cmd>lua require('neotest').run.attach()<CR>",               desc = "Attach to running test" },
     { "<leader>rn", "<cmd>lua require('neotest').run.run()<CR>",                  desc = "Run nearest test" },
     { "<leader>rf", "<cmd>lua require('neotest').run.run(vim.fn.expand '%')<CR>", desc = "Run current file" },
     { "<leader>ro", "<cmd>lua require('neotest').output_panel.toggle()<CR>",      desc = "Show output panel" },
@@ -20,8 +21,9 @@ return {
   },
   config = function()
     local go_cfg = {
-      go_test_args = { "-p=1" }
+      go_test_args = { "" }
     }
+
     require("neotest").setup {
       discovery = {
         -- Drastically improve performance in ginormous projects by
@@ -31,6 +33,12 @@ return {
         -- A value of 0 automatically assigns number based on CPU.
         -- Set to 1 if experiencing lag.
         concurrent = 2,
+      },
+      floating = {
+        border = "rounded",
+        max_height = 0.6,
+        max_width = 0.9,
+        options = {}
       },
       adapters = {
         -- require "neotest-elixir",

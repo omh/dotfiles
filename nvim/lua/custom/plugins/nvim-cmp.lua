@@ -21,28 +21,60 @@ return {
     'rafamadriz/friendly-snippets',
 
     -- copilot integration
-    "zbirenbaum/copilot-cmp",
+    -- "zbirenbaum/copilot-cmp",
   },
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
-    require("copilot_cmp").setup()
+    -- require("copilot_cmp").setup()
 
     vim.keymap.set({ "i", "s" }, "<C-e>", function() luasnip.jump(1) end, { silent = true })
     vim.keymap.set({ "i", "s" }, "<C-q>", function() luasnip.jump(-1) end, { silent = true })
 
     vim.o.pumheight = 15
 
-    require("luasnip.loaders.from_vscode").lazy_load()
-    local types = require("cmp.types")
+    vim.cmd [[
+      command! LuaSnipEdit :lua require("luasnip.loaders").edit_snippet_files()
+    ]]
 
+    require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
+    require("luasnip.loaders.from_vscode").lazy_load()
+
+    local cmp_kinds = {
+      Text = ' ',
+      Method = ' ',
+      Function = ' ',
+      Constructor = ' ',
+      Field = ' ',
+      Variable = ' ',
+      Class = ' ',
+      Interface = ' ',
+      Module = ' ',
+      Property = ' ',
+      Unit = ' ',
+      Value = ' ',
+      Enum = ' ',
+      Keyword = ' ',
+      -- Snippet = ' ',
+      Snippet = ' ',
+      Color = ' ',
+      File = ' ',
+      Reference = ' ',
+      Folder = ' ',
+      EnumMember = ' ',
+      Constant = ' ',
+      Struct = ' ',
+      Event = ' ',
+      Operator = ' ',
+      TypeParameter = ' ',
+    }
     cmp.setup({
-      -- performance = {
-      --   debounce = 0, -- default is 60ms
-      --   throttle = 0, -- default is 30ms
-      -- },
+      performance = {
+        debounce = 100, -- default is 60ms
+        throttle = 0,   -- default is 30ms
+      },
       preselect = cmp.PreselectMode.None,
-      completion = { completeopt = "menu,menuone,noselect" },
+      completion = { completeopt = "menu,menuone,noselect,noinsert,popup" },
       experimental = { ghost_text = true },
       snippet = {
         expand = function(args)
@@ -50,12 +82,17 @@ return {
         end
       },
       window = {
-        completion = cmp.config.window.bordered({
-          winblend = 5,
-        }),
-        documentation = cmp.config.window.bordered({
-          winblend = 5,
-        })
+        completion = {
+          border = 'rounded',
+          winblend = 3,
+          winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
+        },
+        documentation = {
+          border = 'rounded',
+          winblend = 3,
+          winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None',
+          side_padding = 5,
+        }
       },
       mapping = cmp.mapping.preset.insert({
         ["<C-j>"] = cmp.mapping.select_next_item(),
@@ -66,9 +103,9 @@ return {
         ["<C-e>"] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            -- if luasnip.expandable() then
-            --   luasnip.expand()
-            if cmp.get_active_entry() then
+            if luasnip.expandable() then
+              luasnip.expand()
+            elseif cmp.get_active_entry() then
               cmp.confirm({ select = false })
             else
               fallback()
@@ -105,7 +142,7 @@ return {
         { name = "luasnip",  group_index = 2 },
         { name = "buffer",   group_index = 2, keyword_length = 5, max_item_count = 5 },
         { name = "path",     group_index = 3 },
-        { name = "copilot",  group_index = 4 },
+        -- { name = "copilot",  group_index = 4 },
       }),
       sorting = {
         comparators = {
@@ -120,23 +157,46 @@ return {
       },
       formatting = {
         fields = {
-          cmp.ItemField.Abbr,
           cmp.ItemField.Kind,
+          cmp.ItemField.Abbr,
           cmp.ItemField.Menu,
         },
-        format = function(entry, vim_item)
-          return require("lspkind").cmp_format({
-            mode = "symbol_text",
-            maxwidth = 60,
-            symbol_map = { Copilot = "" },
-            before = function(_, vim_item2)
-              if string.sub(vim_item2.abbr, -1) == "~" then
-                vim_item2.abbr = string.sub(vim_item2.abbr, 0, -2)
-              end
-              return vim_item2
-            end
-          })(entry, vim_item)
+        format = function(entry, item)
+          local kind = item.kind
+          item.kind = (" %s │ "):format(cmp_kinds[kind])
+
+          item.menu = ("%s "):format(kind)
+          item.menu_hl_group = "Comment"
+
+          local source = entry.source.name
+          if source == "buffer" then
+            item.menu_hl_group = nil
+            item.menu = nil
+          end
+
+          if string.sub(item.abbr, -1) == "~" then
+            item.abbr = string.sub(item.abbr, 0, -2)
+          end
+
+          if item.menu then -- Add exta space to visually differentiate `abbr` and `menu`
+            item.abbr = ("%s "):format(item.abbr)
+          end
+
+          return item
         end
+        -- format = function(entry, vim_item)
+        --   return require("lspkind").cmp_format({
+        --     mode = "symbol",
+        --     maxwidth = 60,
+        --     symbol_map = { Copilot = "" },
+        --     before = function(_, vim_item2)
+        --       if string.sub(vim_item2.abbr, -1) == "~" then
+        --         vim_item2.abbr = string.sub(vim_item2.abbr, 0, -2)
+        --       end
+        --       return vim_item2
+        --     end
+        --   })(entry, vim_item)
+        -- end
       }
     })
     -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).

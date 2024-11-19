@@ -79,13 +79,10 @@ return {
       dapui.open()
     end
     dap.listeners.before.event_terminated.dapui_config = function()
-      -- @TODO: check if a tab called Debug Session is current tab. Don't close if it's not
       dapui.close()
-      vim.cmd("tabclose")
     end
     dap.listeners.before.event_exited.dapui_config = function()
       dapui.close()
-      vim.cmd("tabclose")
     end
 
     require("dapui").setup({

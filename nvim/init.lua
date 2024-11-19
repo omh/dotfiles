@@ -9,7 +9,7 @@ vim.g.base_branch = 'origin/main'
 vim.cmd [[
   set noshowmode
   set noruler
-  set laststatus=3
+  set laststatus=0
   set noshowcmd
   set cmdheight=1
 
@@ -70,7 +70,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
+vim.o.signcolumn = 'auto:2-3'
 
 -- Decrease update time
 vim.o.updatetime = 400

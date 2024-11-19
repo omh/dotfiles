@@ -6,6 +6,11 @@ return {
     "meuter/lualine-so-fancy.nvim",
   },
   config = function()
+    local file_path = function()
+      local path = vim.fn.expand("%:~:.:h")
+      if path == "" then return " " else return path .. "/" end
+    end
+
     require('lualine').setup {
       options = {
         theme = 'lualine-omh-kanagawa',
@@ -16,70 +21,52 @@ return {
         disabled_filetypes = {
           winbar = { 'trouble', 'dap-repl' },
         },
-        -- refresh = {
-        --   winbar = 200,
-        -- }
+        refresh = {
+          winbar = 100,
+        }
       },
       extensions = { 'quickfix', 'trouble', 'lazy', 'nvim-dap-ui', 'oil' },
-      sections = {
-        -- lualine_a = {
-        --   { 'filetype', icon_only = true, padding = { left = 1, right = 0 } },
-        --   { 'filename', path = 1,         colored = false },
-        -- },
-        -- lualine_b = {},
-        -- lualine_c = {},
-        -- lualine_x = {
-        --   { 'diff',       colored = true, symbols = diff_symbols },
-        --   { 'diagnostics' },
-        -- },
-        -- lualine_y = {
-        -- },
-        -- lualine_z = {
-        --   { 'location' },
-        -- },
-      },
-      inactive_sections = {
-        -- lualine_a = {
-        --   { 'filetype', icon_only = true, padding = { left = 1, right = 0 }, colored = false },
-        --   { 'filename', path = 1,         colored = false },
-        -- },
-        -- lualine_b = {},
-        -- lualine_c = {},
-        -- lualine_x = {
-        --   { 'diff',        colored = false, symbols = diff_symbols },
-        --   { 'diagnostics', colored = false },
-        -- },
-        -- lualine_y = {
-        -- },
-        -- lualine_z = {
-        --   { 'location' },
-        -- },
-      },
+      sections = {},
       winbar = {
+        lualine_a = {
+          { 'filetype', icon_only = true,                 padding = { left = 1, right = 0 } },
+          { file_path,  padding = { left = 1, right = 0 } },
+        },
+        lualine_b = {
+          { 'filename', padding = 0, path = 0, },
+        },
         lualine_c = {
-          { 'filetype', icon_only = true, padding = { left = 2, right = 0 } },
-          { 'filename', path = 1, },
+          {
+            "navic",
+            color_correction = 'static',
+            navic_opts = {
+              depth_limit = 2,
+              highlight = true,
+              lazy_update_context = true,
+            },
+            padding = { left = 2 },
+          }
         },
-        lualine_x = {
-          'fancy_macro',
-        },
+        lualine_x = {},
         lualine_z = {
-          { 'fancy_diff',        colored = true },
-          { 'fancy_diagnostics', colored = true },
-        }
+          { 'diff',        separator = '|', icons_enabled = false, colored = true },
+          { 'diagnostics', separator = '|', icons_enabled = false, colored = true },
+        },
       },
       inactive_winbar = {
-        lualine_c = {
-          { 'filetype', icon_only = true, padding = { left = 2, right = 0 } },
-          { 'filename', path = 1, },
+        lualine_a = {
+          { 'filetype', icon_only = true, colored = false, padding = { left = 1, right = 1 } },
+          { file_path,  padding = 0 },
         },
-        lualine_x = {
-          'fancy_macro',
+        lualine_b = {
+          { 'filename', padding = 0, path = 0, },
+        },
+        lualine_c = {
         },
         lualine_z = {
-          { 'fancy_diff',        colored = true },
-          { 'fancy_diagnostics', colored = true },
-        }
+          { 'diff',        separator = '|', icons_enabled = false, colored = false },
+          { 'diagnostics', separator = '|', icons_enabled = false, colored = false },
+        },
       }
     }
     require('lualine').hide({

@@ -8,18 +8,17 @@ return {
       -- I don't find the panel useful.
       panel = { enabled = false },
       suggestion = {
-        enabled = false,
+        enabled = true,
+        debounce = 500,
         auto_trigger = false,
-        -- Use alt to interact with Copilot.
-        -- keymap = {
-        --   -- Disable the built-in mapping, we'll configure it in nvim-cmp.
-        --   accept = false,
-        --   accept_word = '<C-w>',
-        --   accept_line = '<C-l>',
-        --   next = '<C-]>',
-        --   prev = '<C-[>',
-        --   dismiss = '/',
-        -- },
+        keymap = {
+          accept = '<C-y>',
+          accept_word = false,
+          accept_line = false,
+          next = '<C-]>',
+          prev = '<C-[>',
+          dismiss = '<esc>',
+        },
       },
       -- filetypes = { markdown = true },
     },
@@ -27,6 +26,10 @@ return {
       local cmp = require 'cmp'
       local copilot = require 'copilot.suggestion'
       local luasnip = require 'luasnip'
+
+      if luasnip == nil then
+        error('copilot.nvim requires luasnip')
+      end
 
       require('copilot').setup(opts)
 
@@ -62,11 +65,22 @@ return {
       { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
       { "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
     },
-    build = "make tiktoken",        -- Only on MacOS or Linux
-    opts = {
-      debug = false,                -- Enable debugging
-      -- See Configuration section for rest
+    keys = {
+      { "<leader>cc", "<cmd>CopilotChatToggle<cr>", mode = "n", desc = "Toggle Copilot Chat" },
+      { "<leader>cc", "<cmd>CopilotChatToggle<cr>", mode = "v", desc = "Toggle Copilot Chat" },
     },
-    -- See Commands section for default commands if you want to lazy load on them
+    build = "make tiktoken", -- Only on MacOS or Linux
+    opts = {
+      debug = false,         -- Enable debugging
+      mappings = {
+        complete = {
+          insert = '',
+        },
+      },
+      window = {
+        layout = 'float',   -- 'vertical', 'horizontal', 'float', 'replace'
+        border = 'rounded', -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
+      },
+    },
   },
 }
