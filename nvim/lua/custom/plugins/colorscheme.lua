@@ -74,6 +74,8 @@ return {
             LocalHighlight              = { underline = true },
             DiffviewFilePanelSelected   = { fg = '#FF0000', bg = '#FF0000', bold = true, force = true },
 
+            FzfLuaFzfBorder             = { fg = palette.sumiInk6, bold = true },
+
             -- quicker
             QuickFixLineNr              = { fg = theme.ui.fg, bg = 'NONE' },
             Delimiter                   = { fg = theme.ui.bg_p2, bg = 'NONE' }

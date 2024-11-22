@@ -11,7 +11,7 @@ return {
     { "<leader>dl", "<cmd>DapStepInto<cr>",         desc = "Debug: Step Into" },
     { "<leader>dc", "<cmd>DapContinue<cr>",         desc = "Debug: Continue" },
     { "<leader>de", "<cmd>DapTerminate<cr>",        desc = "Debug: End Session" },
-    { "<leader>dr", "<cmd>DapReRun<cr>",            desc = "Debug: Re-run Last Session" },
+    { "<leader>dr", "<cmd>DapRerun<cr>",            desc = "Debug: Re-run Last Session" },
 
     {
       "<leader>dB", function()

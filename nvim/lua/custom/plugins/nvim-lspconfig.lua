@@ -11,7 +11,6 @@ return {
   },
 
   config = function()
-    require("CopilotChat.integrations.cmp").setup()
     local lsp = require("lspconfig")
     -- local configs = require("lspconfig/configs")
 

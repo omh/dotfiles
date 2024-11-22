@@ -44,5 +44,6 @@ return {
       { "<leader>mv", "MarkView splitToggle" },
     },
 
-  }
+  },
+
 }
