@@ -11,6 +11,15 @@ return {
       if path == "" then return " " else return path .. "/" end
     end
 
+    local http_env = function()
+      if vim.bo.filetype == "http" then
+        local env = require('kulala').get_selected_env()
+        return "  %#function#  %#normal#" .. env
+      else
+        return ""
+      end
+    end
+
     require('lualine').setup {
       options = {
         theme = 'lualine-omh-kanagawa',
@@ -45,7 +54,8 @@ return {
               lazy_update_context = true,
             },
             padding = { left = 2 },
-          }
+          },
+          { http_env }
         },
         lualine_x = {},
         lualine_z = {
@@ -62,6 +72,7 @@ return {
           { 'filename', padding = 0, path = 0, },
         },
         lualine_c = {
+          { http_env }
         },
         lualine_z = {
           { 'diff',        separator = '|', icons_enabled = false, colored = false },

@@ -225,5 +225,6 @@ require('which-key').add({
   { "<leader>g", group = '[G]it Hunk' },
 })
 
+vim.filetype.add({ extension = { http = 'http' } })
 
 -- vim: ts=2 sts=2 sw=2 et
