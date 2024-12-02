@@ -8,7 +8,7 @@ return {
     config = function()
       require('kanagawa').setup {
         undercurl = true,
-        compile = false,
+        compile = true,
         commentStyle = { italic = false },
         keywordStyle = { italic = false },
         statementStyle = { bold = false },
@@ -44,7 +44,7 @@ return {
 
           return {
             CursorLine                  = { bg = '#262626' },
-            CursorLineNr                = { bg = '#262626', bold = false },
+            CursorLineNr                = { fg = theme.ui.fg, bg = '#262626', bold = false },
 
             TabLine                     = { fg = palette.fujiGray, bg = 'none' },
             TabLineHead                 = { fg = palette.springViolet1, bg = 'none' },

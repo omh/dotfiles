@@ -26,20 +26,20 @@ return {
     --   }
     -- end
 
-    vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError' })
-    vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticSignWarn' })
-    vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo' })
-    vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
+    vim.fn.sign_define('DiagnosticSignError', { text = '', texthl = 'DiagnosticSignError' })
+    vim.fn.sign_define('DiagnosticSignWarn', { text = '', texthl = 'DiagnosticSignWarn' })
+    vim.fn.sign_define('DiagnosticSignInfo', { text = '', texthl = 'DiagnosticSignInfo' })
+    vim.fn.sign_define('DiagnosticSignHint', { text = '', texthl = 'DiagnosticSignHint' })
 
     local navic = require("nvim-navic")
 
     local on_attach = function(client, bufnr)
       vim.diagnostic.config({
         virtual_text = false,
-        float = {
-          border = 'rounded',
-          source = 'always',
-        }
+        -- float = {
+        --   border = 'rounded',
+        --   source = 'always',
+        -- }
       })
 
       if client.server_capabilities.documentSymbolProvider then
@@ -66,15 +66,15 @@ return {
       nmap('gh', vim.lsp.buf.hover, 'Hover Documentation')
       nmap('K', vim.lsp.buf.signature_help, 'Signature Documentation')
 
-      nmap('[d', function()
-        vim.diagnostic.goto_prev()
-        vim.diagnostic.open_float()
-      end, 'Go to previous diagnostic')
-
-      nmap(']d', function()
-        vim.diagnostic.goto_next()
-        vim.diagnostic.open_float()
-      end, 'Go to next diagnostic')
+      -- nmap('[d', function()
+      --   vim.diagnostic.goto_prev()
+      --   vim.diagnostic.open_float()
+      -- end, 'Go to previous diagnostic')
+      --
+      -- nmap(']d', function()
+      --   vim.diagnostic.goto_next()
+      --   vim.diagnostic.open_float()
+      -- end, 'Go to next diagnostic')
 
       -- Diagnostic keymaps
       vim.keymap.set('n', '<leader>le', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })

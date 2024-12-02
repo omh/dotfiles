@@ -106,7 +106,7 @@ vim.o.foldmethod = "expr"
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldcolumn = '0'
 vim.o.foldtext = ''
-vim.o.fillchars = 'fold: '
+vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldsep: ,foldclose:'
 
 -- cursorline only in the current window
 vim.cmd [[
