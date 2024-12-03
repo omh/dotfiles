@@ -49,7 +49,7 @@ return {
             TabLine                     = { fg = palette.fujiGray, bg = 'none' },
             TabLineHead                 = { fg = palette.springViolet1, bg = 'none' },
             TabLineSel                  = { bold = true, bg = 'none' },
-            TabLineFill                 = { fg = theme.ui.bg_p1, bg = 'NONE' },
+            TabLineFill                 = { fg = palette.fujiGray, bg = 'NONE', strikethrough = true },
 
             StatusLine                  = { fg = theme.ui.bg_p2, bg = theme.ui.bg, strikethrough = true },
             StatusLineNC                = { fg = theme.ui.bg_p2, bg = theme.ui.bg, strikethrough = true },

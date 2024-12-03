@@ -15,9 +15,9 @@ return {
           accept = '<C-y>',
           accept_word = false,
           accept_line = false,
-          next = '<C-]>',
-          prev = '<C-[>',
-          dismiss = '<esc>',
+          next = "<M-]>",
+          prev = "<M-[>",
+          dismiss = "<C-]>",
         },
       },
       -- filetypes = { markdown = true },
@@ -26,10 +26,6 @@ return {
       local cmp = require 'cmp'
       local copilot = require 'copilot.suggestion'
       local luasnip = require 'luasnip'
-
-      if luasnip == nil then
-        error('copilot.nvim requires luasnip')
-      end
 
       require('copilot').setup(opts)
 
