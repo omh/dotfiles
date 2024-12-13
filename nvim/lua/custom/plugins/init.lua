@@ -24,13 +24,7 @@ return {
     end
   },
 
-  -- slightly nicer ui for inputs
-  { 'stevearc/dressing.nvim', opt = {},          event = "VeryLazy" },
-
-  -- kill buffers without removing the window
-  { 'qpkorr/vim-bufkill',     event = "VeryLazy" },
-
-  { 'SmiteshP/nvim-navic',    event = "VeryLazy" },
+  { 'SmiteshP/nvim-navic', event = "VeryLazy" },
 
   {
     "OXY2DEV/markview.nvim",
@@ -42,6 +36,60 @@ return {
     },
     keys = {
       { "<leader>mv", "MarkView splitToggle" },
+    },
+  },
+
+  {
+    "fredrikaverpil/pr.nvim",
+    lazy = true,
+    version = "*",
+    ---@type PR.Config
+    opts = {
+    },
+    keys = {
+      {
+        "<leader>gv",
+        function()
+          require("pr").view()
+        end,
+        desc = "View PR in browser",
+      },
+    },
+    cmd = { "PRView" },
+  },
+
+  {
+    'folke/snacks.nvim',
+    lazy = false,
+    priority = 5001,
+    opts = {
+      quickfile = { enabled = false },
+      gitbrowse = { enabled = false },
+      dashboard = { enabled = false },
+      input = { enabled = true },
+      indent = {
+        enabled = true,
+        indent = {
+          enabled = true, -- enable indent guides
+          only_current = true,
+          hl = 'SnacksIndent',
+        },
+        animate = {
+          duration = {
+            step = 20,   -- ms per step
+            total = 100, -- maximum duration
+          },
+        },
+        chunk = {
+          enabled = true,
+          only_current = true,
+        },
+      },
+      notifier = {
+        enabled = true,
+      },
+      statuscolumn = { enabled = false },
+      words = { enabled = false },
     },
   },
 

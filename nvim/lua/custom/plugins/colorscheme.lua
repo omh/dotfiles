@@ -8,7 +8,7 @@ return {
     config = function()
       require('kanagawa').setup {
         undercurl = true,
-        compile = true,
+        compile = false,
         commentStyle = { italic = false },
         keywordStyle = { italic = false },
         statementStyle = { bold = false },
@@ -70,7 +70,10 @@ return {
 
             TreesitterContextSeparator  = { fg = theme.ui.bg_p2, bg = 'none', strikethrough = true },
             TreesitterContextLineNumber = { fg = theme.ui.bg_p2, bg = 'none' },
-            IblIndent                   = { fg = '#262626' },
+
+            SnacksIndent                = { fg = '#282828' },
+            SnacksIndentScope           = { fg = palette.sumiInk6 },
+            SnacksIndentChunk           = { fg = palette.sumiInk6 },
             LocalHighlight              = { underline = true },
             DiffviewFilePanelSelected   = { fg = '#FF0000', bg = '#FF0000', bold = true, force = true },
 

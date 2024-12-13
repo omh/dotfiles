@@ -12,12 +12,13 @@ return {
     -- "nvim-extensions/nvim-ginkgo",
   },
   keys = {
-    { "<leader>rr", "<cmd>lua require('neotest').run.run_last()<CR>",             desc = "Run previous test" },
-    { "<leader>ra", "<cmd>lua require('neotest').run.attach()<CR>",               desc = "Attach to running test" },
-    { "<leader>rn", "<cmd>lua require('neotest').run.run()<CR>",                  desc = "Run nearest test" },
-    { "<leader>rf", "<cmd>lua require('neotest').run.run(vim.fn.expand '%')<CR>", desc = "Run current file" },
-    { "<leader>ro", "<cmd>lua require('neotest').output_panel.toggle()<CR>",      desc = "Show output panel" },
-    { "<leader>rc", "<cmd>lua require('neotest').output_panel.clear()<CR>",       desc = "Clear output panel" },
+    { "<leader>rr", "<cmd>lua require('neotest').run.run_last()<CR>",                desc = "Run previous test" },
+    { "<leader>ra", "<cmd>lua require('neotest').run.attach()<CR>",                  desc = "Attach to running test" },
+    { "<leader>rn", "<cmd>lua require('neotest').run.run()<CR>",                     desc = "Run nearest test" },
+    { "<leader>rf", "<cmd>lua require('neotest').run.run(vim.fn.expand '%')<CR>",    desc = "Run current file" },
+    { "<leader>ru", "<cmd>lua require('neotest').output.open({ enter = true })<CR>", desc = "Floating output window" },
+    { "<leader>ro", "<cmd>lua require('neotest').output_panel.toggle()<CR>",         desc = "Show output panel" },
+    { "<leader>rc", "<cmd>lua require('neotest').output_panel.clear()<CR>",          desc = "Clear output panel" },
   },
   config = function()
     local go_cfg = {

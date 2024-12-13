@@ -1,6 +1,6 @@
 return {
   "ibhagwan/fzf-lua",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  dependencies = { "echasnovski/mini.icons" },
   keys = {
     { "<leader>ff", "<cmd>FzfLua files<CR>",                      desc = "Find Files" },
     { "<leader>ss", "<cmd>FzfLua live_grep<CR>",                  desc = "Search for text" },
@@ -14,6 +14,16 @@ return {
   },
   config = function()
     -- calling `setup` is optional for customization
+    local big_window_cfg = {
+      preview    = {
+        layout = 'horizontal',
+      },
+      win_height = 0.4,
+      win_width  = 1,
+      win_row    = 1,
+      win_col    = 0,
+    }
+
     require("fzf-lua").setup({
       "telescope",
       fzf_colors = true,
@@ -21,24 +31,22 @@ return {
         ["--layout"] = "reverse",
       },
       grep = {
-        winopts = {
-          preview    = {
-            layout = 'horizontal',
-          },
-          win_height = 0.5,
-          win_width  = 1,
-          win_row    = 1,
-          win_col    = 0,
-        },
+        winopts = big_window_cfg,
       },
       lsp = {
+        finder = {
+          separator = " │  ", -- separator after provider prefix, `false` to disable
+          winopts   = big_window_cfg,
+        },
         symbols = {
-          symbol_style = 2, -- icon only
+          symbol_style = 1, -- icon only
           symbol_fmt   = function(s, _) return " " .. s .. " " end,
-        }
+          winopts      = big_window_cfg,
+        },
       },
       files = {
         formatter = { "path.filename_first", 2 },
+        git_icons = true,
       },
       oldfiles = {
         cwd_only                = true,

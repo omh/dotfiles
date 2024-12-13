@@ -160,7 +160,10 @@ vim.keymap.set('n', '<leader>wv', [[<Cmd>wincmd v<CR>]], { noremap = true, silen
 vim.keymap.set('n', '<leader>ws', [[<Cmd>wincmd s<CR>]], { noremap = true, silent = true })
 
 -- Kill buffers
-vim.keymap.set('n', '<leader>bd', '<cmd>BD<cr>', { desc = "Delete buffer without closing the window" })
+vim.keymap.set('n', '<leader>bd', require("snacks").bufdelete.delete,
+  { desc = "Delete buffer without closing the window" })
+vim.keymap.set('n', '<leader>bD', require("snacks").bufdelete.other,
+  { desc = "Delete other bufferswithout closing the window" })
 
 -- Window sizing
 vim.keymap.set('n', "<M-left>", [[<cmd>vertical resize +10<CR>]], { desc = "Grow vertical split" })

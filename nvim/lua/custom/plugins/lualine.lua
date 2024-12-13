@@ -49,7 +49,7 @@ return {
             "navic",
             color_correction = 'static',
             navic_opts = {
-              depth_limit = 2,
+              depth_limit = 5,
               highlight = true,
               lazy_update_context = true,
             },

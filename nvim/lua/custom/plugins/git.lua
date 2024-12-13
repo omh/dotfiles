@@ -1,6 +1,7 @@
 return {
   {
     "NeogitOrg/neogit",
+    lazy = false,
     keys = {
       -- { "<leader>gs", "<cmd>Neogit<cr>",                                        desc = "Neogit status" },
       -- { "<leader>gp", "<cmd>Neogit push<cr>",                                   desc = "Git push" },
@@ -103,6 +104,9 @@ return {
         topdelete    = { text = '‾' },
         changedelete = { text = '~' },
         untracked    = { text = '┆' },
+      },
+      current_line_blame_opts = {
+        virt_text_pos = 'right_align', -- 'eol' | 'overlay' | 'right_align'
       },
       preview_config = {
         -- Options passed to nvim_open_win
