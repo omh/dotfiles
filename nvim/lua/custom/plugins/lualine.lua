@@ -6,9 +6,33 @@ return {
     "meuter/lualine-so-fancy.nvim",
   },
   config = function()
-    local file_path = function()
+    local custom_fname = require('lualine.components.filename'):extend()
+
+    function custom_fname:init(options)
+      local default_options = {
+        colored = true,
+      }
+      custom_fname.super.init(self, options)
+      self.options = vim.tbl_deep_extend('keep', self.options or {}, default_options)
+    end
+
+    function custom_fname:update_status()
       local path = vim.fn.expand("%:~:.:h")
-      if path == "" then return " " else return path .. "/" end
+      local elements = {}
+      for element in string.gmatch(path, "[^/]+") do
+        table.insert(elements, element)
+      end
+
+      if path == "" then
+        return " "
+      end
+
+      if self.options.colored then
+        return "%#directory# %#normal#" ..
+            table.concat(elements, "%#comment# > %#directory# %#normal#") .. "%#comment# > "
+      else
+        return " " .. table.concat(elements, " >  ") .. " > "
+      end
     end
 
     local http_env = function()
@@ -38,20 +62,21 @@ return {
       sections = {},
       winbar = {
         lualine_a = {
-          { 'filetype', icon_only = true,                 padding = { left = 1, right = 0 } },
-          { file_path,  padding = { left = 1, right = 0 } },
+          { custom_fname, padding = { left = 1, right = 0 } },
+          -- { file_path,   padding = { left = 1, right = 0 } },
         },
         lualine_b = {
-          { 'filename', padding = 0, path = 0, },
+          { 'filetype', icon_only = true, padding = { left = 0, right = 0 } },
+          { 'filename', padding = 0,      path = 0, },
         },
         lualine_c = {
           {
             "navic",
             color_correction = 'static',
             navic_opts = {
-              depth_limit = 5,
+              depth_limit = 3,
               highlight = true,
-              lazy_update_context = true,
+              -- lazy_update_context = true,
             },
             padding = { left = 2 },
           },
@@ -65,11 +90,11 @@ return {
       },
       inactive_winbar = {
         lualine_a = {
-          { 'filetype', icon_only = true, colored = false, padding = { left = 1, right = 1 } },
-          { file_path,  padding = 0 },
+          { custom_fname, padding = { left = 1, right = 0 }, colored = false },
         },
         lualine_b = {
-          { 'filename', padding = 0, path = 0, },
+          { 'filetype', colored = false, icon_only = true, padding = { left = 0, right = 0 } },
+          { 'filename', colored = false, padding = 0,      path = 0, },
         },
         lualine_c = {
           { http_env }

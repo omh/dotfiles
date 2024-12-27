@@ -3,9 +3,10 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
     -- { 'hrsh7th/nvim-cmp' },
-    { "iguanacucumber/magazine.nvim" },
+    -- { "iguanacucumber/magazine.nvim" },
+    { 'saghen/blink.cmp' },
     -- Useful status updates for LSP
-    { 'j-hui/fidget.nvim',           opts = {} },
+    { 'j-hui/fidget.nvim', opts = {} },
     -- Additional lua configuration, makes nvim stuff amazing!
     'folke/neodev.nvim',
   },
@@ -93,8 +94,11 @@ return {
       end, { desc = 'Format current buffer with LSP' })
     end
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+    -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+    -- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+    -- capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
+    local capabilities = require('blink.cmp').get_lsp_capabilities()
+
 
     lsp["html"].setup({ capabilities = capabilities, on_attach = on_attach })
     lsp["cssls"].setup({ capabilities = capabilities, on_attach = on_attach })

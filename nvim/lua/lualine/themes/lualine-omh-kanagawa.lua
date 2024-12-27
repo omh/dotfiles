@@ -7,7 +7,7 @@ local kanagawa = {}
 
 kanagawa.normal = {
   a = { bg = bg, fg = theme.ui.fg_dim },
-  b = { bg = bg, fg = palette.carpYellow, gui = "bold" },
+  b = { bg = bg, fg = palette.carpYellow },
   c = { bg = bg, fg = theme.ui.fg },
   x = { bg = bg, fg = theme.ui.fg },
   y = { bg = theme.ui.bg, fg = theme.syn.comment },

@@ -8,6 +8,7 @@ return {
       -- { "<leader>gP", "<cmd>Neogit push --force-with-lease<cr>",                desc = "Git push forcw" },
       { "<leader>dd", "<cmd>DiffviewOpen<cr>",                                  desc = "Open diff view against current branch" },
       { "<leader>gl", "<cmd>DiffviewFileHistory %<CR>",                         desc = "Git log for current file" },
+      { "<leader>gb", require("snacks").git.blame_line,                         desc = "Git blame for current line" },
       { "<leader>gL", "<cmd>DiffviewFileHistory<CR>",                           desc = "Git log for repo" },
       { "<leader>dm", "<cmd>DiffviewOpen origin/HEAD...HEAD --imply-local<cr>", desc = "Open diff view for branch" },
     },

@@ -1,6 +1,7 @@
 return {
   {
     "zbirenbaum/copilot.lua",
+
     cmd = "Copilot",
     enabled = true,
     event = "InsertEnter",
@@ -8,13 +9,13 @@ return {
       -- I don't find the panel useful.
       panel = { enabled = false },
       suggestion = {
-        enabled = true,
-        debounce = 500,
-        auto_trigger = false,
+        enabled = false,
+        debounce = 300,
+        auto_trigger = true,
         keymap = {
           accept = '<C-y>',
           accept_word = false,
-          accept_line = false,
+          accept_line = '<C-y>',
           next = "<M-]>",
           prev = "<M-[>",
           dismiss = "<C-]>",
@@ -22,12 +23,13 @@ return {
       },
       -- filetypes = { markdown = true },
     },
-    config = function(_, _)
+    config = function(_, opts)
       -- local cmp = require 'cmp'
       -- local copilot = require 'copilot.suggestion'
       -- local luasnip = require 'luasnip'
       --
-      -- require('copilot').setup(opts)
+      require('copilot').setup(opts)
+      -- require('copilot').setup()
       --
       -- local function set_trigger(trigger)
       --   vim.b.copilot_suggestion_auto_trigger = trigger

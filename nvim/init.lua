@@ -11,7 +11,7 @@ vim.cmd [[
   set noruler
   set laststatus=0
   set noshowcmd
-  set cmdheight=1
+  set cmdheight=0
 
    set statusline=\         " hide file name in statusline
    set fillchars=stl:\      " fill active window's statusline with empty space
@@ -70,7 +70,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Keep signcolumn on by default
-vim.o.signcolumn = 'auto:2-3'
+vim.o.signcolumn = 'auto:1-3'
 
 -- Decrease update time
 vim.o.updatetime = 400

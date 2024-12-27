@@ -24,7 +24,10 @@ return {
       win_col    = 0,
     }
 
-    require("fzf-lua").setup({
+    local fzflua = require("fzf-lua")
+    fzflua.register_ui_select()
+
+    fzflua.setup({
       "telescope",
       fzf_colors = true,
       fzf_opts = {
@@ -55,15 +58,15 @@ return {
         formatter               = { "path.filename_first", 2 },
       },
       winopts = {
-        backdrop   = 100,
-        winblend   = 90,
-        border     = 'rounded',
-        preview    = {
+        backdrop = 100,
+        winblend = 90,
+        border   = 'rounded',
+        preview  = {
           vertical = 'down:35%',
           layout = 'vertical',
         },
-        win_height = 0.7,
-        win_width  = 0.30,
+        height   = 0.7,
+        width    = 0.35,
         --   win_row = 0.30,
         --   win_col = 0.50,
       },

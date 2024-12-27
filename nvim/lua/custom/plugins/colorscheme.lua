@@ -48,17 +48,31 @@ return {
 
             TabLine                     = { fg = palette.fujiGray, bg = 'none' },
             TabLineHead                 = { fg = palette.springViolet1, bg = 'none' },
-            TabLineSel                  = { bold = true, bg = 'none' },
-            TabLineFill                 = { fg = palette.fujiGray, bg = 'NONE', strikethrough = true },
+            TabLineSel                  = { bg = 'none' },
+            TabLineFill                 = { fg = theme.ui.bg_p2, bg = 'NONE' },
 
             StatusLine                  = { fg = theme.ui.bg_p2, bg = theme.ui.bg, strikethrough = true },
             StatusLineNC                = { fg = theme.ui.bg_p2, bg = theme.ui.bg, strikethrough = true },
+
+            NormalDim                   = { fg = theme.ui.fg_dim },
 
             NormalFloat                 = { bg = theme.ui.bg, fg = theme.ui.fg, blend = 10 },
             FloatBorder                 = { bg = 'none', fg = palette.sumiInk6 },
             FloatTitle                  = { bg = 'none', fg = palette.springViolet1 },
 
             MsgArea                     = { bg = 'none', blend = 5 },
+
+            Pmenu                       = { fg = theme.ui.shade0, bg = "NONE" }, -- add `blend = vim.o.pumblend` to enable transparency
+            PmenuSel                    = { fg = "NONE", bg = theme.ui.bg_p2 },
+            PmenuSbar                   = { bg = theme.ui.bg_m1 },
+            PmenuThumb                  = { bg = theme.ui.bg_p2 },
+
+            BlinkCmpMenu                = { bg = "NONE" },
+            BlinkCmpMenuBorder          = { fg = palette.sumiInk6, bold = true },
+            BlinkCmpMenuSelection       = { bg = palette.waveBlue2 },
+            BlinkCmpDoc                 = { bg = "NONE" },
+            BlinkCmpDocBorder           = { fg = palette.sumiInk6, bold = true },
+            BlinkCmpDocSeparator        = { fg = palette.sumiInk6, bold = true },
 
             -- Plugins
             DapBreakpoint               = { fg = palette.waveRed },
@@ -71,9 +85,9 @@ return {
             TreesitterContextSeparator  = { fg = theme.ui.bg_p2, bg = 'none', strikethrough = true },
             TreesitterContextLineNumber = { fg = theme.ui.bg_p2, bg = 'none' },
 
-            SnacksIndent                = { fg = '#282828' },
-            SnacksIndentScope           = { fg = palette.sumiInk6 },
-            SnacksIndentChunk           = { fg = palette.sumiInk6 },
+            SnacksIndent                = { fg = '#313131' },
+            SnacksIndentScope           = { fg = '#313131' },
+            SnacksIndentChunk           = { fg = '#313131' },
             LocalHighlight              = { underline = true },
             DiffviewFilePanelSelected   = { fg = '#FF0000', bg = '#FF0000', bold = true, force = true },
 

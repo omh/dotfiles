@@ -73,6 +73,7 @@ return {
           enabled = true, -- enable indent guides
           only_current = true,
           hl = 'SnacksIndent',
+          char = "︙",
         },
         animate = {
           duration = {
@@ -86,7 +87,7 @@ return {
         },
       },
       notifier = {
-        enabled = true,
+        enabled = false,
       },
       statuscolumn = { enabled = false },
       words = { enabled = false },
@@ -94,13 +95,22 @@ return {
   },
 
   {
+    -- something
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "LspAttach", -- Or `LspAttach`
     priority = 1000,     -- needs to be loaded in first
     config = function()
       require('tiny-inline-diagnostic').setup({
         throttle = 80,
+        show_source = true,
       })
+    end
+  },
+
+  {
+    'preservim/nerdcommenter',
+    config = function()
+      vim.g.NERDSpaceDelims = 1
     end
   },
 }
