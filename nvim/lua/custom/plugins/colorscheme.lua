@@ -54,8 +54,6 @@ return {
             StatusLine                  = { fg = theme.ui.bg_p2, bg = theme.ui.bg, strikethrough = true },
             StatusLineNC                = { fg = theme.ui.bg_p2, bg = theme.ui.bg, strikethrough = true },
 
-            NormalDim                   = { fg = theme.ui.fg_dim },
-
             NormalFloat                 = { bg = theme.ui.bg, fg = theme.ui.fg, blend = 10 },
             FloatBorder                 = { bg = 'none', fg = palette.sumiInk6 },
             FloatTitle                  = { bg = 'none', fg = palette.springViolet1 },
