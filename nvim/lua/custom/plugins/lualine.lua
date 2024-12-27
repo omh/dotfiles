@@ -28,10 +28,10 @@ return {
       end
 
       if self.options.colored then
-        return "%#directory# %#normal#" ..
-            table.concat(elements, "%#comment# > %#directory# %#normal#") .. "%#comment# > "
+        return "%#directory#  %#normal#" ..
+            table.concat(elements, "%#comment# > %#normal#") .. "%#comment# > "
       else
-        return " " .. table.concat(elements, " >  ") .. " > "
+        return "  " .. table.concat(elements, " > ") .. " > "
       end
     end
 
@@ -76,9 +76,16 @@ return {
             navic_opts = {
               depth_limit = 3,
               highlight = true,
+              separator = "%#comment# > ",
               -- lazy_update_context = true,
             },
-            padding = { left = 2 },
+            padding = { left = 1 },
+            fmt = function(str, _)
+              if str == "" then
+                return str
+              end
+              return "%#comment#>%#normal# " .. str
+            end,
           },
           { http_env }
         },

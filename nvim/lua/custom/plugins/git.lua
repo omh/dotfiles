@@ -23,7 +23,7 @@ return {
     config = function()
       local neogit = require("neogit")
       neogit.setup {
-        graph_style = "unicode",
+        graph_style = "kitty",
         signs = {
           -- { CLOSED, OPENED }
           hunk = { "", "" },

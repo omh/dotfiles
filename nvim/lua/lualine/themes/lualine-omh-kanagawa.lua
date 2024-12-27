@@ -15,7 +15,7 @@ kanagawa.normal = {
 }
 kanagawa.inactive = {
   a = { bg = bg, fg = theme.syn.comment },
-  b = { bg = bg, fg = theme.syn.comment, gui = "bold" },
+  b = { bg = bg, fg = theme.syn.comment },
   c = { bg = bg, fg = theme.syn.comment },
   x = { bg = bg, fg = theme.syn.comment },
   y = { bg = bg, fg = theme.syn.comment },
