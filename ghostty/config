@@ -1,19 +1,19 @@
 theme = "Kanagawa"
-# theme = "Kanagawa Dragon"
-background = 1f1f1f
 
-#adjust-cell-width=-1
-adjust-cell-height=1
+# adjust-cell-width=-1
+# adjust-cell-height=1
 
+# font-family = "JetBrains Mono"
 font-family = "Victor Mono"
 font-size = 13
-font-thicken = true
+# font-thicken = false
 
 macos-titlebar-style = hidden
 macos-titlebar-proxy-icon = hidden
 
 window-padding-x = 6
-window-padding-y = 8
+window-padding-y = 4
 window-padding-balance = true
 
 window-colorspace = "display-p3"
+#window-title-font-family = "Menlo"

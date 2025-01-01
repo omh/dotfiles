@@ -34,6 +34,8 @@ return {
 
     local navic = require("nvim-navic")
 
+
+
     local on_attach = function(client, bufnr)
       vim.diagnostic.config({
         virtual_text = false,
@@ -123,7 +125,7 @@ return {
             -- rangeVariableTypes
           },
           completeUnimported = true,
-          usePlaceholders = true,
+          usePlaceholders = false,
           staticcheck = true,
           -- gofumpt = true,
         }

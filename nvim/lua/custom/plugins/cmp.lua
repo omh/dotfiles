@@ -43,6 +43,7 @@ return {
               border = 'rounded',
             },
           },
+          ghost_text = { enabled = true },
         },
         appearance = {
           use_nvim_cmp_as_default = false,

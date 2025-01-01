@@ -29,7 +29,7 @@ return {
 
       if self.options.colored then
         return "%#directory#  %#normal#" ..
-            table.concat(elements, "%#comment# > %#normal#") .. "%#comment# > "
+            table.concat(elements, "%#Comment# > %#normal#") .. "%#Comment# > "
       else
         return "  " .. table.concat(elements, " > ") .. " > "
       end
@@ -47,8 +47,6 @@ return {
     require('lualine').setup {
       options = {
         theme = 'lualine-omh-kanagawa',
-        icons_enabled = true,
-        always_divide_middle = false,
         component_separators = { left = "", right = "" },
         section_separators = { left = '', right = '' },
         disabled_filetypes = {
@@ -67,16 +65,16 @@ return {
         },
         lualine_b = {
           { 'filetype', icon_only = true, padding = { left = 0, right = 0 } },
-          { 'filename', padding = 0,      path = 0, },
+          { 'filename', padding = 0,      path = 0 },
         },
         lualine_c = {
           {
             "navic",
             color_correction = 'static',
             navic_opts = {
-              depth_limit = 3,
+              depth_limit = 2,
               highlight = true,
-              separator = "%#comment# > ",
+              separator = "%#Comment# > ",
               -- lazy_update_context = true,
             },
             padding = { left = 1 },
@@ -84,15 +82,16 @@ return {
               if str == "" then
                 return str
               end
-              return "%#comment#>%#normal# " .. str
+              return "%#Comment#->%#normal# " .. str
             end,
           },
           { http_env }
         },
         lualine_x = {},
         lualine_z = {
-          { 'diff',        separator = '|', icons_enabled = false, colored = true },
-          { 'diagnostics', separator = '|', icons_enabled = false, colored = true },
+          { 'diff',        separator = '|', },
+          { 'diagnostics', separator = '|' },
+
         },
       },
       inactive_winbar = {

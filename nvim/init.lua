@@ -13,9 +13,11 @@ vim.cmd [[
   set noshowcmd
   set cmdheight=0
 
-   set statusline=\         " hide file name in statusline
-   set fillchars=stl:\      " fill active window's statusline with empty space
-   set fillchars+=stlnc:\   " also fill inactive windows
+  set statusline=\         " hide file name in statusline
+  set fillchars=stl:\      " fill active window's statusline with empty space
+  set fillchars+=stlnc:\   " also fill inactive windows
+
+  set formatoptions-=a
 
   set bg=dark
 ]]
@@ -228,6 +230,15 @@ require('which-key').add({
   { "<leader>g", group = '[G]it Hunk' },
 })
 
+-- vim.opt.titlestring = "[[%f %h%m%r%w %{v:progname} (%{tabpagenr()} of %{tabpagenr('$')})]]"
+vim.opt.titlestring = "%{v:progname} :: %f %h%m%r%w"
+vim.cmd [[
+  if &term == "tmux"
+    set t_ts=^[k
+    set t_fs=^[\
+  endif
+]]
+vim.cmd("set title")
 vim.filetype.add({ extension = { http = 'http' } })
 
 -- vim: ts=2 sts=2 sw=2 et

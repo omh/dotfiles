@@ -54,7 +54,7 @@ return {
             StatusLine                  = { fg = theme.ui.bg_p2, bg = theme.ui.bg, strikethrough = true },
             StatusLineNC                = { fg = theme.ui.bg_p2, bg = theme.ui.bg, strikethrough = true },
 
-            NormalFloat                 = { bg = theme.ui.bg, fg = theme.ui.fg, blend = 10 },
+            NormalFloat                 = { bg = 'none', fg = theme.ui.fg, blend = 10 },
             FloatBorder                 = { bg = 'none', fg = palette.sumiInk6 },
             FloatTitle                  = { bg = 'none', fg = palette.springViolet1 },
 
@@ -66,11 +66,11 @@ return {
             PmenuThumb                  = { bg = theme.ui.bg_p2 },
 
             BlinkCmpMenu                = { bg = "NONE" },
-            BlinkCmpMenuBorder          = { fg = palette.sumiInk6, bold = true },
+            BlinkCmpMenuBorder          = { bg = "NONE", fg = palette.sumiInk6, bold = true },
             BlinkCmpMenuSelection       = { bg = palette.waveBlue2 },
             BlinkCmpDoc                 = { bg = "NONE" },
-            BlinkCmpDocBorder           = { fg = palette.sumiInk6, bold = true },
-            BlinkCmpDocSeparator        = { fg = palette.sumiInk6, bold = true },
+            BlinkCmpDocBorder           = { bg = "NONE", fg = palette.sumiInk6, bold = true },
+            BlinkCmpDocSeparator        = { bg = "NONE", fg = palette.sumiInk6, bold = true },
 
             -- Plugins
             DapBreakpoint               = { fg = palette.waveRed },
