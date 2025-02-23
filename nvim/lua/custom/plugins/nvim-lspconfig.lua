@@ -39,6 +39,9 @@ return {
     local on_attach = function(client, bufnr)
       vim.diagnostic.config({
         virtual_text = false,
+        underline = true,
+        signs = false,
+        update_in_insert = false,
         -- float = {
         --   border = 'rounded',
         --   source = 'always',

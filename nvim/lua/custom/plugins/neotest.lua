@@ -22,7 +22,8 @@ return {
   },
   config = function()
     local go_cfg = {
-      go_test_args = { "" }
+      -- go_test_args = { "" },
+      -- runner = "gotestsum"
     }
 
     require("neotest").setup {
@@ -34,6 +35,10 @@ return {
         -- A value of 0 automatically assigns number based on CPU.
         -- Set to 1 if experiencing lag.
         concurrent = 2,
+      },
+      quickfix = {
+        enabled = false,
+        open = false
       },
       floating = {
         border = "rounded",

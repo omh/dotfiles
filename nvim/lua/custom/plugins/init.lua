@@ -27,17 +27,27 @@ return {
   { 'SmiteshP/nvim-navic', event = "VeryLazy" },
 
   {
-    "OXY2DEV/markview.nvim",
-    ft = "markdown", -- If you decide to lazy-load anyway
-
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons"
-    },
-    keys = {
-      { "<leader>mv", "MarkView splitToggle" },
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {
+      file_types = { 'markdown', 'copilot-chat' },
     },
   },
+
+  -- {
+  --   "OXY2DEV/markview.nvim",
+  --   ft = "markdown", -- If you decide to lazy-load anyway
+  --
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "nvim-tree/nvim-web-devicons"
+  --   },
+  --   keys = {
+  --     { "<leader>mv", "MarkView splitToggle" },
+  --   },
+  -- },
 
   {
     "fredrikaverpil/pr.nvim",
@@ -48,7 +58,7 @@ return {
     },
     keys = {
       {
-        "<leader>gv",
+        "<leader>ggv",
         function()
           require("pr").view()
         end,
@@ -59,43 +69,6 @@ return {
   },
 
   {
-    'folke/snacks.nvim',
-    lazy = false,
-    priority = 5001,
-    opts = {
-      quickfile = { enabled = false },
-      gitbrowse = { enabled = false },
-      dashboard = { enabled = false },
-      input = { enabled = true },
-      indent = {
-        enabled = true,
-        indent = {
-          enabled = true, -- enable indent guides
-          only_current = true,
-          hl = 'SnacksIndent',
-          char = "︙",
-        },
-        animate = {
-          duration = {
-            step = 20,   -- ms per step
-            total = 100, -- maximum duration
-          },
-        },
-        chunk = {
-          enabled = true,
-          only_current = true,
-        },
-      },
-      notifier = {
-        enabled = false,
-      },
-      statuscolumn = { enabled = false },
-      words = { enabled = false },
-    },
-  },
-
-  {
-    -- something
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "LspAttach", -- Or `LspAttach`
     priority = 1000,     -- needs to be loaded in first
@@ -103,14 +76,33 @@ return {
       require('tiny-inline-diagnostic').setup({
         throttle = 80,
         show_source = true,
+        enable_on_insert = false,
       })
     end
   },
 
   {
     'preservim/nerdcommenter',
+    keys = {
+      { "<leader>ci", "<cmd>NERDCommenterInvert", mode = 'n', desc = "Invert comment" },
+      { "<leader>ci", "<cmd>NERDCommenterInvert", mode = 'v', desc = "Invert comment" },
+    },
     config = function()
       vim.g.NERDSpaceDelims = 1
+      vim.g.NERDCreateDefaultMappings = 0
     end
   },
+
+  -- {
+  --   'DaikyXendo/nvim-material-icon',
+  --   config = function()
+  --     require 'nvim-web-devicons'.setup {}
+  --     require("nvim-web-devicons").set_icon {
+  --       go = {
+  --         icon = "",
+  --         name = "Go"
+  --       }
+  --     }
+  --   end
+  -- }
 }

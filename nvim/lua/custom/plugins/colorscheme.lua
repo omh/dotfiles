@@ -1,14 +1,138 @@
 return {
+  {
+    "Mofiqul/vscode.nvim",
+    priority = 5000,
+    enabled = true,
+    config = function()
+      local c = require('vscode.colors').get_colors()
+
+      local sign = vim.fn.sign_define
+      sign("DapBreakpoint", { text = "", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+      sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
+      sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
+      sign('DapStopped', { text = '󰐊', texthl = 'DapStopped', linehl = 'DapStoppedLine' })
+
+      require('vscode').setup {
+        italic_comments = false,
+
+        group_overrides = {
+          ['@type.builtin']           = { fg = c.vscBlueGreen, bg = 'NONE' },
+
+          CursorLine                  = { bg = '#282828' },
+          DimText                     = { fg = c.vscPopupFront },
+
+          DiffChange                  = { bg = c.vscPopupHighlightBlue },
+          DiffText                    = { bg = c.vscDiffGreenLight },
+          DiffDelete                  = { fg = c.vscSplitDark, bg = 'none' },
+          GitSignsDeletePreview       = { bg = c.vscDiffRedLight },
+          diffAdded                   = { fg = c.vscGreen, bg = 'none' },
+          diffChanged                 = { fg = c.vscBlue, bg = 'none' },
+          diffRemoved                 = { fg = c.vscRed, bg = 'none' },
+          NeogitDiffAddHighlight      = { fg = 'none', bg = c.vscDiffGreenLight },
+          NeogitDiffDeleteHighlight   = { fg = 'none', bg = c.vscDiffRedLight },
+
+          DiffviewFilePanelSelected   = { fg = "#FFFFFF", bg = c.vscPopupHighlightBlue, bold = true },
+
+          TabLine                     = { fg = c.vscGitIgnored, bg = 'NONE' },
+          TabLineSel                  = { fg = '#FFFFFF', bg = 'NONE' },
+          TabLineFill                 = { fg = c.vscSplitDark, bg = 'NONE' },
+
+          StatusLine                  = { fg = c.vscSplitDark, bg = 'none', strikethrough = true },
+          StatusLineNC                = { fg = c.vscSplitDark, bg = 'none', strikethrough = true },
+
+          DiagnosticUnnecessary       = { undercurl = true, sp = c.vscYellow },
+
+          DapBreakpoint               = { fg = c.vscPink },
+          DapStopped                  = { bg = c.vscPopupHighlightBlue },
+          DapStoppedLine              = { bg = c.vscPopupHighlightBlue },
+
+          SnacksIndent                = { fg = c.vscSplitDark },
+          SnacksIndentScope           = { fg = '#777777' },
+          SnacksIndentChunk           = { fg = c.vscSplitDark },
+
+          SnacksPickerInputCursorLine = { fg = 'NONE', bg = c.vscBack },
+          SnacksPickerListCursorLine  = { fg = '#ffffff', bg = c.vscPopupHighlightBlue },
+          SnacksPickerDir             = { fg = c.vscLineNumber },
+          SnacksPickerCol             = { fg = c.vscLineNumber, bg = 'NONE' },
+          SnacksPickerRow             = { fg = c.vscLineNumber, bg = 'NONE' },
+          SnacksPickerTitle           = { fg = c.vscBlue },
+          SnacksPickerInputSearch     = { fg = c.vscBlue },
+          SnacksPickerInput           = { fg = c.vscBlue },
+          SnacksPickerMatch           = { fg = c.vscBlue },
+
+          RainbowDelimiterRed         = { fg = c.vscYellow },
+          RainbowDelimiterYellow      = { fg = c.vscPink },
+          RainbowDelimiterBlue        = { fg = c.vscBlue },
+          RainbowDelimiterOrange      = { fg = c.vscYellow },
+          RainbowDelimiterGreen       = { fg = c.vscPink },
+          RainbowDelimiterViolet      = { fg = c.vscBlue },
+          RainbowDelimiterCyan        = { fg = c.vscYellow },
+
+          MiniCursorword              = { bg = c.vscDimHighlight },
+
+          Directory                   = { fg = c.vscBlue, bg = 'none' },
+          Float                       = { bg = 'none' },
+          NormalFloat                 = { bg = 'none' },
+          FloatBorder                 = { fg = c.vscSplitDark },
+
+          -- FzfLuaBorder                = { link = 'FloatBorder' },
+          -- FzfLuaCursorLine            = { link = 'PmenuSel' },
+          -- FzfLuaDirPart               = { fg = c.vscGitIgnored },
+          -- FzfLuaTitle                 = { fg = c.vscGitModified },
+
+          Pmenu                       = { fg = c.vscFront, bg = c.vscBack },
+          PmenuSel                    = { fg = '#ffffff', bg = c.vscPopupHighlightBlue },
+          BlinkCmpMenuBorder          = { link = 'FloatBorder' },
+          BlinkCmpDocBorder           = { link = 'FloatBorder' },
+          BlinkCmpDocSeparator        = { link = 'FloatBorder' },
+          BlinkCmpKindCopilot         = { link = 'BlinkCmpKindFunction' },
+
+          GitSignsChange              = { fg = c.vscBlue },
+
+          NavicIconsFile              = { link = "Directory" },
+          NavicIconsModule            = { link = "@module" },
+          NavicIconsNamespace         = { link = "@module" },
+          NavicIconsPackage           = { link = "@module" },
+          NavicIconsClass             = { link = "Type" },
+          NavicIconsMethod            = { link = "Keyword" },
+          NavicIconsProperty          = { link = "@property" },
+          NavicIconsField             = { link = "@variable.member" },
+          NavicIconsConstructor       = { link = "@constructor" },
+          NavicIconsEnum              = { link = "Type" },
+          NavicIconsInterface         = { link = "Type" },
+          NavicIconsFunction          = { link = "Keyword" },
+          NavicIconsVariable          = { link = "@variable" },
+          NavicIconsConstant          = { link = "Constant" },
+          NavicIconsString            = { link = "String" },
+          NavicIconsNumber            = { link = "Number" },
+          NavicIconsBoolean           = { link = "Boolean" },
+          NavicIconsArray             = { link = "Type" },
+          NavicIconsObject            = { link = "Type" },
+          NavicIconsKey               = { link = "Identifier" },
+          NavicIconsNull              = { link = "Type" },
+          NavicIconsEnumMember        = { link = "Constant" },
+          NavicIconsStruct            = { link = "Structure" },
+          NavicIconsEvent             = { link = "Structure" },
+          NavicIconsOperator          = { link = "Operator" },
+          NavicIconsTypeParameter     = { link = "Type" },
+          NavicText                   = { fg = c.vscFront },
+          NavicSeparator              = { link = "Comment" },
+
+        },
+      }
+      vim.cmd("colorscheme vscode")
+    end
+  },
   -- kanagawa gray
   {
     'rebelot/kanagawa.nvim',
     priority = 4999,
     lazy = false,
-    enabled = true,
+    enabled = false,
     config = function()
       require('kanagawa').setup {
         undercurl = true,
-        compile = false,
+        compile = true,
         commentStyle = { italic = false },
         keywordStyle = { italic = false },
         statementStyle = { bold = false },
@@ -43,62 +167,159 @@ return {
           sign('DapStopped', { text = '󰐊', texthl = 'DapStopped', linehl = 'DapStoppedLine' })
 
           return {
-            CursorLine                  = { bg = '#262626' },
-            CursorLineNr                = { fg = theme.ui.fg, bg = '#262626', bold = false },
+            CursorLine                 = { bg = '#262626' },
+            CursorLineNr               = { fg = theme.ui.fg, bg = '#262626', bold = false },
 
-            TabLine                     = { fg = palette.fujiGray, bg = 'none' },
-            TabLineHead                 = { fg = palette.springViolet1, bg = 'none' },
-            TabLineSel                  = { bg = 'none' },
-            TabLineFill                 = { fg = theme.ui.bg_p2, bg = 'NONE' },
+            TabLine                    = { fg = palette.fujiGray, bg = 'none' },
+            TabLineHead                = { fg = palette.springViolet1, bg = 'none' },
+            TabLineSel                 = { bg = 'none' },
+            TabLineFill                = { fg = theme.ui.bg_p2, bg = 'NONE' },
 
-            StatusLine                  = { fg = theme.ui.bg_p2, bg = theme.ui.bg, strikethrough = true },
-            StatusLineNC                = { fg = theme.ui.bg_p2, bg = theme.ui.bg, strikethrough = true },
+            StatusLine                 = { fg = theme.ui.bg_p2, bg = theme.ui.bg, strikethrough = true },
+            StatusLineNC               = { fg = theme.ui.bg_p2, bg = theme.ui.bg, strikethrough = true },
 
-            NormalFloat                 = { bg = 'none', fg = theme.ui.fg, blend = 10 },
-            FloatBorder                 = { bg = 'none', fg = palette.sumiInk6 },
-            FloatTitle                  = { bg = 'none', fg = palette.springViolet1 },
+            NormalFloat                = { bg = 'none', fg = theme.ui.fg, blend = 10 },
+            FloatBorder                = { bg = 'none', fg = palette.sumiInk6 },
+            FloatTitle                 = { bg = 'none', fg = palette.springViolet1 },
 
-            MsgArea                     = { bg = 'none', blend = 5 },
+            MsgArea                    = { bg = 'none', blend = 5 },
 
-            Pmenu                       = { fg = theme.ui.shade0, bg = "NONE" }, -- add `blend = vim.o.pumblend` to enable transparency
-            PmenuSel                    = { fg = "NONE", bg = theme.ui.bg_p2 },
-            PmenuSbar                   = { bg = theme.ui.bg_m1 },
-            PmenuThumb                  = { bg = theme.ui.bg_p2 },
+            Pmenu                      = { fg = theme.ui.shade0, bg = "NONE" }, -- add `blend = vim.o.pumblend` to enable transparency
+            PmenuSel                   = { bg = theme.ui.pmenu.bg_sel },
+            PmenuSbar                  = { bg = theme.ui.bg_m1 },
+            PmenuThumb                 = { bg = theme.ui.bg_p2 },
 
-            BlinkCmpMenu                = { bg = "NONE" },
-            BlinkCmpMenuBorder          = { bg = "NONE", fg = palette.sumiInk6, bold = true },
-            BlinkCmpMenuSelection       = { bg = palette.waveBlue2 },
-            BlinkCmpDoc                 = { bg = "NONE" },
-            BlinkCmpDocBorder           = { bg = "NONE", fg = palette.sumiInk6, bold = true },
-            BlinkCmpDocSeparator        = { bg = "NONE", fg = palette.sumiInk6, bold = true },
+            -- BlinkCmpMenu                = { bg = "NONE" },
+            BlinkCmpMenuBorder         = { bg = "NONE", fg = palette.sumiInk6, bold = true },
+            -- BlinkCmpMenuSelection       = { bg = '#363636', bold = true },
+            -- BlinkCmpDoc                 = { bg = "NONE" },
+            BlinkCmpDocBorder          = { bg = "NONE", fg = palette.sumiInk6, bold = true },
+            BlinkCmpDocSeparator       = { bg = "NONE", fg = palette.sumiInk6, bold = true },
+
+            FzfLuaCursorLine           = { bg = theme.ui.pmenu.bg_sel, bold = true },
+            FzfLuaBorder               = { fg = theme.ui.bg_p2 },
+            FzfLuaTitle                = { fg = palette.surimiOrange, bold = true },
 
             -- Plugins
-            DapBreakpoint               = { fg = palette.waveRed },
-            DapStopped                  = { fg = palette.surimiOrange, bg = '#2C3522' },
-            DapStoppedLine              = { bg = '#2C3522' },
+            DapBreakpoint              = { fg = palette.waveRed },
+            DapStopped                 = { fg = palette.surimiOrange, bg = '#2C3522' },
+            DapStoppedLine             = { bg = '#2C3522' },
 
-            TelescopeSelection          = { bg = theme.ui.bg_p2, fg = 'none', bold = true, blend = 5 },
-            TelescopeSelectionCaret     = { bg = theme.ui.bg_p2, fg = 'none', bold = true, blend = 5 },
+            SnacksPickerCursorLine     = { bg = theme.ui.bg },
+            SnacksPickerListCursorLine = { bg = theme.ui.bg_p2, bold = true },
 
-            TreesitterContextSeparator  = { fg = theme.ui.bg_p2, bg = 'none', strikethrough = true },
-            TreesitterContextLineNumber = { fg = theme.ui.bg_p2, bg = 'none' },
-
-            SnacksIndent                = { fg = '#313131' },
-            SnacksIndentScope           = { fg = '#313131' },
-            SnacksIndentChunk           = { fg = '#313131' },
-            LocalHighlight              = { underline = true },
-            DiffviewFilePanelSelected   = { fg = '#FF0000', bg = '#FF0000', bold = true, force = true },
-
-            FzfLuaFzfBorder             = { fg = palette.sumiInk6, bold = true },
+            SnacksIndent               = { fg = '#313131' },
+            SnacksIndentScope          = { fg = '#313131' },
+            SnacksIndentChunk          = { fg = '#313131' },
+            LocalHighlight             = { underline = true, bold = true },
 
             -- quicker
-            QuickFixLineNr              = { fg = theme.ui.fg, bg = 'NONE' },
-            Delimiter                   = { fg = theme.ui.bg_p2, bg = 'NONE' }
+            QuickFixLineNr             = { fg = theme.ui.fg, bg = 'NONE' },
+            Delimiter                  = { fg = theme.ui.bg_p2, bg = 'NONE' }
           }
         end,
       }
       vim.cmd 'colorscheme kanagawa-wave'
     end,
+  },
+
+  {
+    "vague2k/vague.nvim",
+    priority = 4999,
+    lazy = false,
+    enabled = false,
+    config = function()
+      require("vague").setup({
+        style = {
+          -- strings = "none",
+          -- comments = "none",
+          -- keywords = "none",
+          -- keyword_return = "none",
+        },
+        colors = {
+          floatBorder = "#373737",
+        },
+      })
+      vim.cmd "colorscheme vague"
+
+      local conf = require("vague.config.internal").current
+      local bg2 = "#212122"
+
+      vim.api.nvim_set_hl(0, 'TabLine', { fg = conf.colors.comment, bg = "none" })
+      vim.api.nvim_set_hl(0, 'TabLineFill', { fg = conf.colors.comment, bg = "none" })
+      vim.api.nvim_set_hl(0, 'TabLineSel', { fg = conf.colors.fg, bg = "none" })
+
+      vim.api.nvim_set_hl(0, 'StatusLine', { fg = conf.colors.floatBorder, bg = "none", strikethrough = true })
+      vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = conf.colors.floatBorder, bg = "none", strikethrough = true })
+      vim.api.nvim_set_hl(0, 'WinBar', { fg = conf.colors.fg, bg = "none" })
+
+      vim.api.nvim_set_hl(0, 'DiffAdd', { bg = "#2A3621" })
+      vim.api.nvim_set_hl(0, 'DiffAdded', { bg = "#2A3621" })
+      vim.api.nvim_set_hl(0, 'DiffChange', { bg = "#5B4830" })
+      vim.api.nvim_set_hl(0, 'DiffText', { bg = "#5B4830" })
+      vim.api.nvim_set_hl(0, 'DiffDelete', { bg = "#4F252F" })
+      vim.api.nvim_set_hl(0, 'DiffRemoved', { bg = "#4F252F" })
+
+      -- plugins
+      vim.api.nvim_set_hl(0, 'DiffviewFilePanelSelected', { fg = conf.colors.warning, bold = true })
+
+      -- DiffAdd          = { fg = c.plus },
+      -- DiffChange       = { fg = c.delta },
+      -- DiffDelete       = { fg = c.error },
+      -- DiffText         = { fg = c.fg },
+      -- DiffAdded        = { fg = c.plus },
+      -- DiffRemoved      = { fg = c.error },
+      -- DiffFile         = { fg = c.keyword },
+
+
+      vim.api.nvim_set_hl(0, 'SnacksPicker', { bg = bg2 })
+      vim.api.nvim_set_hl(0, 'SnacksPickerBorder', { fg = bg2, bg = bg2 })
+      vim.api.nvim_set_hl(0, 'SnacksPickerList', { bg = bg2 })
+      vim.api.nvim_set_hl(0, 'SnacksPickerPreview', { bg = bg2 })
+      vim.api.nvim_set_hl(0, 'SnacksPickerPreviewBorder', { fg = conf.colors.line, bg = bg2 })
+      vim.api.nvim_set_hl(0, 'SnacksPickerTitle', { fg = conf.colors.bg, bg = conf.colors.func, bold = true })
+      vim.api.nvim_set_hl(0, 'SnacksPickerPrompt', { fg = conf.colors.warning, bg = bg2, bold = true })
+      vim.api.nvim_set_hl(0, 'SnacksPickerTotals', { fg = conf.colors.comment, bg = bg2 })
+
+      vim.api.nvim_set_hl(0, 'SnacksPickerMatch', { fg = conf.colors.warning, bg = "none" })
+      vim.api.nvim_set_hl(0, 'SnacksPickerCursorLine', { bg = bg2 })
+      vim.api.nvim_set_hl(0, 'SnacksPickerListCursorLine', { bg = conf.colors.line })
+      vim.api.nvim_set_hl(0, 'SnacksPickerCol', { fg = conf.colors.operator, bg = "none" })
+      vim.api.nvim_set_hl(0, 'SnacksPickerRow', { fg = conf.colors.operator, bg = "none" })
+
+      vim.api.nvim_set_hl(0, 'SnacksIndent', { fg = "#282828", bg = "none" })
+      vim.api.nvim_set_hl(0, 'SnacksIndentScope', { fg = "#303030", bg = "none" })
+      vim.api.nvim_set_hl(0, 'LocalHighlight', { underline = true, bold = true })
+
+      vim.api.nvim_set_hl(0, "NavicIconsFile", { default = true, bg = "none", fg = conf.colors.builtin })
+      vim.api.nvim_set_hl(0, "NavicIconsModule", { default = true, bg = "none", fg = conf.colors.builtin })
+      vim.api.nvim_set_hl(0, "NavicIconsNamespace", { default = true, bg = "none", fg = conf.colors.builtin })
+      vim.api.nvim_set_hl(0, "NavicIconsPackage", { default = true, bg = "none", fg = conf.colors.builtin })
+      vim.api.nvim_set_hl(0, "NavicIconsClass", { default = true, bg = "none", fg = conf.colors.builtin })
+      vim.api.nvim_set_hl(0, "NavicIconsMethod", { default = true, bg = "none", fg = conf.colors.func })
+      vim.api.nvim_set_hl(0, "NavicIconsProperty", { default = true, bg = "none", fg = conf.colors.property })
+      vim.api.nvim_set_hl(0, "NavicIconsField", { default = true, bg = "none", fg = conf.colors.property })
+      vim.api.nvim_set_hl(0, "NavicIconsConstructor", { default = true, bg = "none", fg = conf.colors.func })
+      vim.api.nvim_set_hl(0, "NavicIconsEnum", { default = true, bg = "none", fg = conf.colors.func })
+      vim.api.nvim_set_hl(0, "NavicIconsInterface", { default = true, bg = "none", fg = conf.colors.func })
+      vim.api.nvim_set_hl(0, "NavicIconsFunction", { default = true, bg = "none", fg = conf.colors.func })
+      vim.api.nvim_set_hl(0, "NavicIconsVariable", { default = true, bg = "none", fg = conf.colors.parameter })
+      vim.api.nvim_set_hl(0, "NavicIconsConstant", { default = true, bg = "none", fg = conf.colors.constant })
+      vim.api.nvim_set_hl(0, "NavicIconsString", { default = true, bg = "none", fg = conf.colors.string })
+      vim.api.nvim_set_hl(0, "NavicIconsNumber", { default = true, bg = "none", fg = conf.colors.number })
+      vim.api.nvim_set_hl(0, "NavicIconsBoolean", { default = true, bg = "none", fg = conf.colors.constant })
+      vim.api.nvim_set_hl(0, "NavicIconsArray", { default = true, bg = "none", fg = conf.colors.keyword })
+      vim.api.nvim_set_hl(0, "NavicIconsObject", { default = true, bg = "none", fg = conf.colors.keyword })
+      vim.api.nvim_set_hl(0, "NavicIconsKey", { default = true, bg = "none", fg = conf.colors.keyword })
+      vim.api.nvim_set_hl(0, "NavicIconsNull", { default = true, bg = "none", fg = conf.colors.constant })
+      vim.api.nvim_set_hl(0, "NavicIconsEnumMember", { default = true, bg = "none", fg = conf.colors.property })
+      vim.api.nvim_set_hl(0, "NavicIconsStruct", { default = true, bg = "none", fg = conf.colors.keyword })
+      vim.api.nvim_set_hl(0, "NavicIconsEvent", { default = true, bg = "none", fg = conf.colors.keyword })
+      vim.api.nvim_set_hl(0, "NavicIconsOperator", { default = true, bg = "none", fg = conf.colors.operator })
+      vim.api.nvim_set_hl(0, "NavicIconsTypeParameter", { default = true, bg = "none", fg = conf.colors.parameter })
+      vim.api.nvim_set_hl(0, "NavicText", { default = true, bg = "none", fg = conf.colors.fg })
+      vim.api.nvim_set_hl(0, "NavicSeparator", { default = true, bg = "none", fg = conf.colors.fg })
+    end
   },
 
   -- kanagawa original

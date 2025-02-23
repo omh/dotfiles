@@ -11,10 +11,11 @@ return {
     },
     setup = function()
       require('diffview').setup({
+        enhanced_diff_hl = true,
         file_panel = {
           win_config = { -- See |diffview-config-win_config|
             position = "left",
-            width = 55,
+            width = 15,
             win_opts = {},
           },
         },
@@ -31,10 +32,9 @@ return {
     lazy = true,
     cmd = "Neogit",
     keys = {
-      { "<leader>gs", "<cmd>Neogit<cr>",                desc = "Neogit status" },
-      { "<leader>gp", "<cmd>Neogit push<cr>",           desc = "Git push" },
-      { "<leader>gP", "<cmd>Neogit push --force<cr>",   desc = "Git push forc" },
-      { "<leader>gb", require("snacks").git.blame_line, desc = "Git blame for current line" },
+      { "<leader>gs", "<cmd>Neogit kind=floating<cr>", desc = "Neogit status" },
+      { "<leader>gp", "<cmd>Neogit push<cr>",          desc = "Git push" },
+      { "<leader>gP", "<cmd>Neogit push --force<cr>",  desc = "Git push forc" },
     },
     dependencies = {
       "nvim-lua/plenary.nvim",  -- required
@@ -65,7 +65,7 @@ return {
   {
     'tpope/vim-fugitive',
     config = function()
-      -- vim.keymap.set("n", "<leader>gs", "<cmd>Git<CR>", { desc = "Git status" })
+      -- vim.keymap.set("n", "<leader>gs", "<cmd>vertical Git<CR>", { desc = "Git status" })
       -- vim.keymap.set("n", "<leader>gp", "<cmd>Git push<CR>", { desc = "Git push" })
       -- vim.keymap.set("n", "<leader>gP", "<cmd>Git push --force<CR>", { desc = "Git push force" })
       vim.keymap.set("n", "<leader>ggo", "<cmd>GBrowse<CR>", { desc = "Open file on github" })

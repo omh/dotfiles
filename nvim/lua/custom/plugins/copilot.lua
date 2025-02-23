@@ -66,9 +66,28 @@ return {
     keys = {
       { "<leader>cc", "<cmd>CopilotChatToggle<cr>", mode = "n", desc = "Toggle Copilot Chat" },
       { "<leader>cc", "<cmd>CopilotChatToggle<cr>", mode = "v", desc = "Toggle Copilot Chat" },
+      {
+        "<leader>cq",
+        function()
+          require("CopilotChat").open({
+            window = {
+              layout = 'float',
+              relative = 'cursor',
+              width = 0.8,
+              height = 0.4,
+              row = 1,
+              col = 0
+            }
+          })
+        end,
+        desc = "Copilot Quick Chat"
+      },
     },
     build = "make tiktoken", -- Only on MacOS or Linux
     opts = {
+      highlight_headers = false,
+      separator = '---',
+      error_header = '> [!ERROR] Error',
       chat_autocomplete = true,
       debug = false, -- Enable debugging
       mappings = {
@@ -77,41 +96,9 @@ return {
         },
       },
       window = {
-        layout = 'float',   -- 'vertical', 'horizontal', 'float', 'replace'
-        border = 'rounded', -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
+        layout = 'vertical', -- 'vertical', 'horizontal', 'float', 'replace'
+        border = 'rounded',  -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
       },
     },
   },
-  -- {
-  --   "yetone/avante.nvim",
-  --   event = "VeryLazy",
-  --   lazy = false,
-  --   version = false, -- set this if you want to always pull the latest change
-  --   opts = {
-  --     -- add any opts here
-  --     provider = "copilot", -- Recommend using Claude
-  --     auto_suggestions_provider = "copilot",
-  --     hints = { enabled = false },
-  --   },
-  --   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-  --   build = "make",
-  --   -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-  --   dependencies = {
-  --     "stevearc/dressing.nvim",
-  --     "nvim-lua/plenary.nvim",
-  --     "MunifTanjim/nui.nvim",
-  --     --- The below dependencies are optional,
-  --     "iguanacucumber/magazine.nvim", -- autocompletion for avante commands and mentions
-  --     "nvim-tree/nvim-web-devicons",  -- or echasnovski/mini.icons
-  --     "zbirenbaum/copilot.lua",       -- for providers='copilot'
-  --     {
-  --       -- Make sure to set this up properly if you have lazy=true
-  --       'MeanderingProgrammer/render-markdown.nvim',
-  --       opts = {
-  --         file_types = { "markdown", "Avante" },
-  --       },
-  --       ft = { "markdown", "Avante" },
-  --     },
-  --   },
-  -- }
 }

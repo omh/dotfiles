@@ -5,19 +5,23 @@ vim.g.timeoutlen = 500
 vim.g.base_branch = 'origin/main'
 
 
--- hide statusline/commandline
 vim.cmd [[
   set noshowmode
   set noruler
   set laststatus=0
   set noshowcmd
-  set cmdheight=0
+  set cmdheight=1
 
   set statusline=\         " hide file name in statusline
   set fillchars=stl:\      " fill active window's statusline with empty space
   set fillchars+=stlnc:\   " also fill inactive windows
+  set fillchars+=diff:\
 
   set formatoptions-=a
+  set diffopt+=linematch:50,algorithm:histogram
+
+  let &stc='%s%=%{v:relnum?v:relnum:v:lnum} '
+
 
   set bg=dark
 ]]
@@ -52,8 +56,8 @@ require('lazy').setup({
 vim.o.hlsearch = true
 
 -- line numbers
-vim.wo.number = false
-vim.wo.relativenumber = false
+vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -72,7 +76,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Keep signcolumn on by default
-vim.o.signcolumn = 'auto:1-3'
+vim.o.signcolumn = 'auto:1-4'
 
 -- Decrease update time
 vim.o.updatetime = 400
@@ -82,10 +86,10 @@ vim.o.timeoutlen = 300
 vim.o.completeopt = 'menu,menuone,noselect'
 
 -- Misc
-vim.o.scrolloff = 8
+vim.o.scrolloff = 20
 vim.o.swapfile = false
 vim.o.showcmd = false
-vim.o.showmode = false
+vim.o.showmode = true
 vim.o.splitright = true -- split to the right and move to it
 vim.o.hidden = true
 vim.o.autoindent = true
@@ -108,22 +112,23 @@ vim.o.foldmethod = "expr"
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldcolumn = '0'
 vim.o.foldtext = ''
-vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldsep: ,foldclose:'
+vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldclose:,diff:╱'
 
 -- cursorline only in the current window
 vim.cmd [[
 augroup CursorLine
   au!
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  "au VimEnter,WinEnter,BufWinEnter * echo &filetype
   au WinLeave * setlocal nocursorline
   au FocusLost * setlocal nocursorline
   au FocusGained * setlocal cursorline
-  au FileType TelescopePrompt setlocal nocursorline
+  "au FileType TelescopePrompt setlocal nocursorline
+  au FileType snacks_picker_input set nocursorline
 augroup END
 ]]
 
-local autocmd = vim.api.nvim_create_autocmd
-autocmd("VimResized", {
+vim.api.nvim_create_autocmd("VimResized", {
   pattern = "*",
   callback = function()
     vim.cmd [[
@@ -133,7 +138,41 @@ autocmd("VimResized", {
     ]]
   end
 })
-
+--
+-- close some filetypes with <q>
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("close_with_q", { clear = true }),
+  pattern = {
+    "PlenaryTestPopup",
+    "checkhealth",
+    "dbout",
+    "gitsigns-blame",
+    "grug-far",
+    "help",
+    "lspinfo",
+    "neotest-output",
+    "neotest-output-panel",
+    "neotest-summary",
+    "notify",
+    "qf",
+    "spectre_panel",
+    "startuptime",
+    "tsplayground",
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.schedule(function()
+      vim.keymap.set("n", "q", function()
+        vim.cmd("close")
+        pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
+      end, {
+        buffer = event.buf,
+        silent = true,
+        desc = "Quit buffer",
+      })
+    end)
+  end,
+})
 -- Keymaps for better default experience
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<esc>', '<CMD> noh <CR>', { desc = "Clear highlights" })
@@ -172,6 +211,36 @@ vim.keymap.set('n', "<M-left>", [[<cmd>vertical resize +10<CR>]], { desc = "Grow
 vim.keymap.set('n', "<M-up>", [[<cmd>resize -5<CR>]], { desc = "Shrink horizontal split" })
 vim.keymap.set('n', "<M-down>", [[<cmd>resize +5<CR>]], { desc = "Grow horisontal split" })
 vim.keymap.set('n', "<M-right>", [[<cmd>vertical resize -10<CR>]], { desc = "Shrink vertical split" })
+
+
+local function decode_base64()
+  -- Get the selected text from the visual selection
+  local start_pos = vim.fn.getpos("'<")
+  local end_pos = vim.fn.getpos("'>")
+  local lines = vim.fn.getline(start_pos[2], end_pos[2])
+
+  -- Adjust the start and end columns for the first and last lines
+  lines[1] = string.sub(lines[1], start_pos[3])
+  lines[#lines] = string.sub(lines[#lines], 1, end_pos[3])
+
+  -- Join the lines into a single string
+  local selected_text = table.concat(lines, "\n")
+
+  -- Decode the base64 string
+  local decoded = vim.fn.system('echo ' .. vim.fn.shellescape(selected_text) .. ' | base64 --decode')
+
+  -- Check if the decoding was successful
+  if vim.v.shell_error ~= 0 then
+    print("Decoding failed!")
+    return
+  end
+
+  -- Replace the visual selection with the decoded text
+  vim.fn.setreg('z', decoded)
+  vim.cmd('normal! gv"zp')
+end
+
+vim.keymap.set('x', ']6', decode_base64, { noremap = true, silent = true })
 
 -- tabs
 vim.keymap.set('n', "tn", '<CMD>tabnew<CR>', { desc = "Open new tab" })

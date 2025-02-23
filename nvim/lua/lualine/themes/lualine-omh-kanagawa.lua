@@ -2,7 +2,7 @@ local theme = require("kanagawa.colors").setup().theme
 local palette = require("kanagawa.colors").setup().palette
 
 local bg = theme.ui.bg
--- local bg = '#242424'
+-- local bg = '#262626'
 local kanagawa = {}
 
 kanagawa.normal = {
@@ -10,7 +10,7 @@ kanagawa.normal = {
   b = { bg = bg, fg = palette.carpYellow },
   c = { bg = bg, fg = theme.ui.fg },
   x = { bg = bg, fg = theme.ui.fg },
-  y = { bg = theme.ui.bg, fg = theme.syn.comment },
+  y = { bg = bg, fg = theme.syn.comment },
   z = { bg = bg, fg = theme.syn.comment },
 }
 kanagawa.inactive = {

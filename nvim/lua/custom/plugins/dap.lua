@@ -66,18 +66,18 @@ return {
     })
 
     local dap, dapui = require("dap"), require("dapui")
-    dap.listeners.before.attach.dapui_config = function()
-      -- @TODO: check if a tab called Debug Session exists already.
-      vim.cmd("tabnew")
-      vim.cmd("TabRename Debug Session")
-      dapui.open()
-    end
-    dap.listeners.before.launch.dapui_config = function()
-      -- @TODO: check if a tab called Debug Session exists already.
-      vim.cmd("tabnew")
-      vim.cmd("TabRename Debug Session")
-      dapui.open()
-    end
+    -- dap.listeners.before.attach.dapui_config = function()
+    --   -- @TODO: check if a tab called Debug Session exists already.
+    --   vim.cmd("tabnew")
+    --   vim.cmd("TabRename Debug Session")
+    --   dapui.open()
+    -- end
+    -- dap.listeners.before.launch.dapui_config = function()
+    --   -- @TODO: check if a tab called Debug Session exists already.
+    --   vim.cmd("tabnew")
+    --   vim.cmd("TabRename Debug Session")
+    --   dapui.open()
+    -- end
     dap.listeners.before.event_terminated.dapui_config = function()
       dapui.close()
     end

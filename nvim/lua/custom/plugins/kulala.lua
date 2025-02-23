@@ -23,5 +23,8 @@ return {
       "<leader>kq", "<CMD>lua require('kulala').close()<CR>", desc = "Close Kulala"
     }
   },
-  opts = {}
+  opts = {
+    winbar = true,
+    default_view = 'headers_body',
+  }
 }

@@ -1,19 +1,39 @@
-theme = "Kanagawa"
+#theme = "Kanagawa"
+#theme = "Kanagawa Wave"
+theme = "vscode"
+#theme = "GitHub-Light-Default"
 
-# adjust-cell-width=-1
-# adjust-cell-height=1
+#background=#141415
 
-# font-family = "JetBrains Mono"
+#command="/opt/homebrew/bin/tmux attach || /opt/homebrew/bin/tmux"
+#command=/opt/homebrew/bin/tmux new -As0
+
+#adjust-cell-width=0
+#adjust-cell-height=-1
+
+#font-family = "Iosevka Term"
+#font-size = 15
 font-family = "Victor Mono"
 font-size = 13
-# font-thicken = false
+#font-family = "Cascadia Mono"
+#font-family = "Berkeley Mono Trial"
+#font-size = 13
 
-macos-titlebar-style = hidden
+font-thicken = false
+
 macos-titlebar-proxy-icon = hidden
+macos-titlebar-style = hidden
 
-window-padding-x = 6
-window-padding-y = 4
+#window-padding-x = 10
+#window-padding-y = 6
+window-padding-x = 10
+window-padding-y = 6
 window-padding-balance = true
+window-padding-color = "extend"
 
 window-colorspace = "display-p3"
 #window-title-font-family = "Menlo"
+
+macos-icon = custom-style
+macos-icon-screen-color = #000000,#333333
+macos-icon-ghost-color = #ffffff

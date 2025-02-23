@@ -3,7 +3,6 @@ return {
   enabled = true,
   dependencies = {
     "nvim-tree/nvim-web-devicons",
-    "meuter/lualine-so-fancy.nvim",
   },
   config = function()
     local custom_fname = require('lualine.components.filename'):extend()
@@ -18,27 +17,34 @@ return {
 
     function custom_fname:update_status()
       local path = vim.fn.expand("%:~:.:h")
-      local elements = {}
-      for element in string.gmatch(path, "[^/]+") do
-        table.insert(elements, element)
-      end
-
       if path == "" then
         return " "
       end
 
+      if path == "." then
+        return " "
+      end
+
+      local elements = {}
+      for element in string.gmatch(path, "[^/]+") do
+        if element == "~" then
+          element = "󰜥 "
+        end
+
+        table.insert(elements, element)
+      end
+
       if self.options.colored then
-        return "%#directory#  %#normal#" ..
-            table.concat(elements, "%#Comment# > %#normal#") .. "%#Comment# > "
+        return "%#DimText#" .. table.concat(elements, "%#Comment# > %#DimText#") .. "%#Comment# > "
       else
-        return "  " .. table.concat(elements, " > ") .. " > "
+        return table.concat(elements, " > ") .. " > "
       end
     end
 
     local http_env = function()
       if vim.bo.filetype == "http" then
         local env = require('kulala').get_selected_env()
-        return "  %#function#  %#normal#" .. env
+        return "%#Comment#-> %#function# %#DimText#" .. env
       else
         return ""
       end
@@ -46,11 +52,13 @@ return {
 
     require('lualine').setup {
       options = {
-        theme = 'lualine-omh-kanagawa',
+        -- theme = 'lualine-omh-kanagawa',
+        theme = 'lualine-omh-vscode',
+        -- theme = 'vscode',
         component_separators = { left = "", right = "" },
         section_separators = { left = '', right = '' },
         disabled_filetypes = {
-          winbar = { 'trouble', 'dap-repl' },
+          winbar = { 'trouble', 'dap-repl', 'kulala', 'json' },
         },
         refresh = {
           winbar = 100,
@@ -70,12 +78,12 @@ return {
         lualine_c = {
           {
             "navic",
-            color_correction = 'static',
+            -- color_correction = "dynamic",
             navic_opts = {
               depth_limit = 2,
               highlight = true,
               separator = "%#Comment# > ",
-              -- lazy_update_context = true,
+              lazy_update_context = true,
             },
             padding = { left = 1 },
             fmt = function(str, _)
@@ -106,8 +114,8 @@ return {
           { http_env }
         },
         lualine_z = {
-          { 'diff',        separator = '|', icons_enabled = false, colored = false },
-          { 'diagnostics', separator = '|', icons_enabled = false, colored = false },
+          { 'diff',        separator = '|', colored = false },
+          { 'diagnostics', separator = '|', colored = false },
         },
       }
     }

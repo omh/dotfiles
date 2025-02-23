@@ -7,7 +7,8 @@ return {
       -- optional: provides snippets for the snippet source
       dependencies = {
         'rafamadriz/friendly-snippets',
-        "giuxtaposition/blink-cmp-copilot",
+        'giuxtaposition/blink-cmp-copilot',
+        'L3MON4D3/LuaSnip',
       },
 
       -- use a release tag to download pre-built binaries
@@ -16,72 +17,82 @@ return {
       ---@type blink.cmp.Config
       opts = {
         keymap = {
-          preset = 'default',
+          preset = 'super-tab',
           ['<C-j>'] = { 'select_next', 'fallback' },
           ['<C-k>'] = { 'select_prev', 'fallback' },
+
+        },
+        cmdline = {
+          keymap = {
+            preset = 'super-tab',
+            ['<C-j>'] = { 'select_next', 'fallback' },
+            ['<C-k>'] = { 'select_prev', 'fallback' },
+          },
         },
         completion = {
+          list = {
+            selection = {
+              preselect = function(ctx) return ctx.mode ~= 'cmdline' end,
+              auto_insert = function(ctx) return ctx.mode ~= 'cmdline' end
+            }
+          },
           menu = {
-            min_width = 20,
-            max_height = 15,
             border = "rounded",
-            winblend = 5,
             draw = {
-              padding = 2,
-              treesitter = { 'lsp' },
+              treesitter = { 'lsp', 'copilot' },
               columns = {
-                { "kind_icon", "label", gap = 2 },
-                { "kind" },
+                { "kind_icon", gap = 2 },
+                { "label",     "label_description", gap = 2, width = { max = 10 } },
               },
+              components = {
+                label = {
+                  width = { max = 40 },
+                },
+                label_description = {
+                  width = { max = 40 },
+                }
+              }
             },
           },
           documentation = {
             auto_show = true,
-            auto_show_delay_ms = 50,
+            auto_show_delay_ms = 100,
             window = {
-              winblend = 5,
               border = 'rounded',
             },
           },
-          ghost_text = { enabled = true },
+          --   -- ghost_text = { enabled = true },
         },
+        snippets = { preset = 'luasnip' },
         appearance = {
-          use_nvim_cmp_as_default = false,
-          -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-          -- Adjusts spacing to ensure icons are aligned
-          nerd_font_variant = 'nerd',
+          use_nvim_cmp_as_default = true,
           kind_icons = {
-            Copilot = "",
-            Text = '󰉿',
-            Method = '󰊕',
-            Function = '󰊕',
-            Constructor = '󰒓',
-
-            Field = '󰜢',
-            Variable = '󰆦',
-            Property = '󰖷',
-
-            Class = '󱡠',
-            Interface = '󱡠',
-            Struct = '󱡠',
-            Module = '󰅩',
-
-            Unit = '󰪚',
-            Value = '󰦨',
-            Enum = '󰦨',
-            EnumMember = '󰦨',
-
-            Keyword = '󰻾',
-            Constant = '󰏿',
-
-            Snippet = ' ',
-            Color = '󰏘',
-            File = '󰈔',
-            Reference = '󰬲',
-            Folder = '󰉋',
-            Event = '󱐋',
-            Operator = '󰪚',
-            TypeParameter = '󰬛',
+            Copilot = " ",
+            Text = "",
+            Method = "",
+            Function = "",
+            Constructor = "",
+            Field = "",
+            Variable = "",
+            Class = "",
+            Interface = "",
+            Module = "",
+            Property = "",
+            Unit = "",
+            Value = "",
+            Enum = "",
+            Keyword = "",
+            Snippet = "",
+            Color = "",
+            File = "",
+            Reference = "",
+            Folder = "",
+            EnumMember = "",
+            Constant = "",
+            Struct = "",
+            Event = "",
+            Operator = "",
+            TypeParameter = "",
           },
         },
 
