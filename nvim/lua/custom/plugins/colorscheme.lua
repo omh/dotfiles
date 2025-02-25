@@ -19,6 +19,7 @@ return {
           ['@type.builtin']           = { fg = c.vscBlueGreen, bg = 'NONE' },
 
           CursorLine                  = { bg = '#282828' },
+          CursorLineNr                = { fg = c.vscYellow, bg = '#282828' },
           DimText                     = { fg = c.vscPopupFront },
 
           DiffChange                  = { bg = c.vscPopupHighlightBlue },
@@ -46,9 +47,9 @@ return {
           DapStopped                  = { bg = c.vscPopupHighlightBlue },
           DapStoppedLine              = { bg = c.vscPopupHighlightBlue },
 
-          SnacksIndent                = { fg = c.vscSplitDark },
-          SnacksIndentScope           = { fg = '#777777' },
-          SnacksIndentChunk           = { fg = c.vscSplitDark },
+          SnacksIndent                = { fg = "#424242" },
+          SnacksIndentScope           = { fg = '#787878' },
+          SnacksIndentChunk           = { fg = "#424242" },
 
           SnacksPickerInputCursorLine = { fg = 'NONE', bg = c.vscBack },
           SnacksPickerListCursorLine  = { fg = '#ffffff', bg = c.vscPopupHighlightBlue },
@@ -75,11 +76,6 @@ return {
           NormalFloat                 = { bg = 'none' },
           FloatBorder                 = { fg = c.vscSplitDark },
 
-          -- FzfLuaBorder                = { link = 'FloatBorder' },
-          -- FzfLuaCursorLine            = { link = 'PmenuSel' },
-          -- FzfLuaDirPart               = { fg = c.vscGitIgnored },
-          -- FzfLuaTitle                 = { fg = c.vscGitModified },
-
           Pmenu                       = { fg = c.vscFront, bg = c.vscBack },
           PmenuSel                    = { fg = '#ffffff', bg = c.vscPopupHighlightBlue },
           BlinkCmpMenuBorder          = { link = 'FloatBorder' },
@@ -88,6 +84,8 @@ return {
           BlinkCmpKindCopilot         = { link = 'BlinkCmpKindFunction' },
 
           GitSignsChange              = { fg = c.vscBlue },
+
+          MarkSignHL                  = { fg = c.vscYellow, bold = true, italic = true },
 
           NavicIconsFile              = { link = "Directory" },
           NavicIconsModule            = { link = "@module" },

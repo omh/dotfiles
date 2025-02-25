@@ -12,6 +12,11 @@ return {
     setup = function()
       require('diffview').setup({
         enhanced_diff_hl = true,
+        view = {
+          default = {
+            layout = 'diff3_mixed'
+          }
+        },
         file_panel = {
           win_config = { -- See |diffview-config-win_config|
             position = "left",

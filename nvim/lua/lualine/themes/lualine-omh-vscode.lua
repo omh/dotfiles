@@ -1,7 +1,7 @@
 local c = require('vscode.colors').get_colors()
 local bg = c.vscBack
 local normal = c.vscFront
-local filename = c.vscFront
+local filename = "#FFFFFF"
 
 local vscode = {}
 
@@ -9,7 +9,7 @@ local dim = "#666666"
 
 vscode.normal = {
   a = { fg = normal, bg = bg },
-  b = { fg = filename, bg = bg, gui = 'bold' },
+  b = { fg = filename, bg = bg },
   c = { fg = dim, bg = bg },
   x = { fg = dim, bg = bg },
   y = { fg = dim, bg = bg },

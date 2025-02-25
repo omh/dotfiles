@@ -143,8 +143,8 @@ return {
       },
       animate = {
         duration = {
-          step = 20,   -- ms per step
-          total = 100, -- maximum duration
+          step = 25,   -- ms per step
+          total = 200, -- maximum duration
         },
       },
       scope = {

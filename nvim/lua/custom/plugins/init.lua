@@ -6,9 +6,6 @@ return {
   -- Gbrowse - open stuff in github
   { 'tpope/vim-rhubarb',             event = "VeryLazy" },
 
-  -- auto insert `end` in ruby/elixir, etc
-  { 'tpope/vim-endwise',             event = "InsertEnter" },
-
   -- Useful utilities
   { 'tpope/vim-unimpaired' },
 
@@ -93,16 +90,22 @@ return {
     end
   },
 
-  -- {
-  --   'DaikyXendo/nvim-material-icon',
-  --   config = function()
-  --     require 'nvim-web-devicons'.setup {}
-  --     require("nvim-web-devicons").set_icon {
-  --       go = {
-  --         icon = "",
-  --         name = "Go"
-  --       }
-  --     }
-  --   end
-  -- }
+  {
+    "chentoast/marks.nvim",
+    event = "VeryLazy",
+    opts = {},
+  },
+
+  {
+    'DaikyXendo/nvim-material-icon',
+    config = function()
+      require 'nvim-web-devicons'.setup {}
+      require("nvim-web-devicons").set_icon {
+        go = {
+          icon = "",
+          name = "Go"
+        }
+      }
+    end
+  }
 }

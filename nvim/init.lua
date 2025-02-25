@@ -20,7 +20,8 @@ vim.cmd [[
   set formatoptions-=a
   set diffopt+=linematch:50,algorithm:histogram
 
-  let &stc='%s%=%{v:relnum?v:relnum:v:lnum} '
+  set mousemoveevent
+  "let &stc='%s%=%{v:relnum?v:relnum:v:lnum} '
 
 
   set bg=dark
@@ -56,8 +57,8 @@ require('lazy').setup({
 vim.o.hlsearch = true
 
 -- line numbers
-vim.wo.number = true
-vim.wo.relativenumber = true
+vim.wo.number = false
+vim.wo.relativenumber = false
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
