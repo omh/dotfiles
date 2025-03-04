@@ -22,9 +22,9 @@ local vscode_med = {
   layout = {
     backdrop = false,
     row = 0.15,
-    width = 0.50,
+    width = 0.40,
     min_width = 100,
-    height = 0.55,
+    height = 0.35,
     min_height = 30,
     border = "rounded",
     box = "vertical",
@@ -32,7 +32,7 @@ local vscode_med = {
 
     { win = "input",   height = 1,          border = "bottom" },
     { win = "list",    border = "none" },
-    { win = "preview", title = "{preview}", border = "top",   height = 0.45 },
+    { win = "preview", title = "{preview}", border = "none",  height = 0.45 },
   },
 }
 
@@ -48,8 +48,8 @@ local wide = {
     title = "{title} {live} {flags}",
     title_pos = "center",
     { win = "input",   height = 1,          border = "bottom" },
-    { win = "list",    border = "none" },
-    { win = "preview", title = "{preview}", height = 0.4,     border = "top" },
+    { win = "list",    border = "bottom" },
+    { win = "preview", title = "{preview}", height = 0.4,     border = "none" },
   },
 }
 
@@ -158,7 +158,7 @@ return {
     notifier = {
       enabled = false,
     },
-    statuscolumn = { enabled = false },
+    statuscolumn = { enabled = true },
     words = { enabled = false },
   },
 }

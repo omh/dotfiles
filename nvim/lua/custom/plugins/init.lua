@@ -107,5 +107,12 @@ return {
         }
       }
     end
-  }
+  },
+
+  {
+    "ovk/endec.nvim",
+    event = "VeryLazy",
+    opts = {}
+  },
+
 }

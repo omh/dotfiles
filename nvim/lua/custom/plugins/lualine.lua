@@ -52,9 +52,7 @@ return {
 
     require('lualine').setup {
       options = {
-        -- theme = 'lualine-omh-kanagawa',
         theme = 'lualine-omh-vscode',
-        -- theme = 'vscode',
         component_separators = { left = "", right = "" },
         section_separators = { left = '', right = '' },
         disabled_filetypes = {
@@ -62,10 +60,15 @@ return {
         },
         refresh = {
           winbar = 100,
-        }
+        },
+        always_show_tabline = false,
       },
       extensions = { 'quickfix', 'trouble', 'lazy', 'nvim-dap-ui', 'oil' },
       sections = {},
+      tabline = {
+        lualine_b = { { 'tabs', mode = 1, path = 0, use_mode_colors = true } },
+        lualine_z = { 'windows' },
+      },
       winbar = {
         lualine_a = {
           { custom_fname, padding = { left = 1, right = 0 } },
@@ -126,7 +129,7 @@ return {
         lualine_z = {
           { 'diff',        separator = '|', },
           { 'diagnostics', separator = '|' },
-
+          { 'location',    separator = '|' },
         },
       },
       inactive_winbar = {
@@ -143,6 +146,7 @@ return {
         lualine_z = {
           { 'diff',        separator = '|', colored = false },
           { 'diagnostics', separator = '|', colored = false },
+          { 'location',    separator = '|', colored = false },
         },
       }
     }

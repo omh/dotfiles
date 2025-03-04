@@ -10,9 +10,14 @@ return {
       multiline_threshold = 2, -- Maximum number of lines to show for a single context
     }
 
+    local c = "#050505"
+    if vim.o.background == 'light' then
+      c = "#ececec"
+    end
+
     vim.api.nvim_set_hl(0, 'TreesitterContext', { bg = "none" })
     vim.api.nvim_set_hl(0, 'TreesitterContextBottom', { bg = "none" })
     vim.api.nvim_set_hl(0, 'TreesitterContextSeparator',
-      { fg = "#050505", bg = "none", strikethrough = true, bold = true })
+      { fg = c, bg = "none", strikethrough = true, bold = true })
   end,
 }

@@ -62,7 +62,6 @@ return {
           max_height = 30,
         },
         win_options = {
-          winblend = 10,
           signcolumn = "yes:2",
         },
       })

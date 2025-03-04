@@ -52,6 +52,29 @@ return {
         navic.attach(client, bufnr)
       end
 
+      if client.server_capabilities.documentHighlightProvider then
+        local group = vim.api.nvim_create_augroup("LSPDocumentHighlight", { clear = false })
+        vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
+
+        vim.opt.updatetime = 200
+
+        vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+          buffer = bufnr,
+          group = group,
+          callback = function()
+            vim.lsp.buf.document_highlight()
+          end,
+        })
+        vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+          buffer = bufnr,
+          group = group,
+          callback = function()
+            vim.lsp.buf.clear_references()
+          end,
+        })
+      end
+
+
       local nmap = function(keys, func, desc)
         if desc then
           desc = 'LSP: ' .. desc
@@ -130,6 +153,11 @@ return {
           completeUnimported = true,
           usePlaceholders = false,
           staticcheck = true,
+          semanticTokens = false,
+          semanticTokenTypes = {
+            namespace = false,
+            type = false,
+          },
           -- gofumpt = true,
         }
       }

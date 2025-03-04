@@ -15,7 +15,7 @@ theme = "vscode"
 #font-size = 15
 font-family = "Victor Mono"
 font-size = 13
-#font-family = "Cascadia Mono"
+#font-family = "Fira Code"
 #font-family = "Berkeley Mono Trial"
 #font-size = 13
 
@@ -27,7 +27,7 @@ macos-titlebar-style = hidden
 #window-padding-x = 10
 #window-padding-y = 6
 window-padding-x = 10
-window-padding-y = 6,0
+window-padding-y = 4
 window-padding-balance = true
 window-padding-color = "extend"
 
@@ -40,3 +40,4 @@ macos-icon-ghost-color = #ffffff
 
 
 adjust-underline-position = 4
+adjust-strikethrough-thickness = 1

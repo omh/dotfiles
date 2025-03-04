@@ -4,6 +4,7 @@ return {
     priority = 5000,
     enabled = true,
     config = function()
+      vim.o.background = 'dark'
       local c = require('vscode.colors').get_colors()
 
       local sign = vim.fn.sign_define
@@ -17,9 +18,17 @@ return {
 
         group_overrides = {
           ['@type.builtin']           = { fg = c.vscBlueGreen, bg = 'NONE' },
+          ['@lsp.mod.format.go']      = { fg = c.vscLightBlue },
+          -- ['@lsp.type.namespace.go']  = { fg = c.vscOrange, underline = true },
+          -- @lsp.type.namespace.go
+          -- @lsp.type.namespace.go
+          LspReferenceText            = { bg = c.vscDimHighlight },
+          LspReferenceRead            = { bg = c.vscDimHighlight },
+          LspReferenceWrite           = { link = 'PmenuSel' },
 
-          CursorLine                  = { bg = '#282828' },
-          CursorLineNr                = { fg = c.vscYellow, bg = '#282828' },
+          -- CursorLine                  = { bg = '#282828' },
+          -- CursorLineNr                = { link = 'CursorLine' },
+          -- WinBar                      = { bold = false },
           DimText                     = { fg = c.vscPopupFront },
 
           DiffChange                  = { bg = c.vscPopupHighlightBlue },
@@ -51,15 +60,16 @@ return {
           SnacksIndentScope           = { fg = '#787878' },
           SnacksIndentChunk           = { fg = "#424242" },
 
+          SnacksPickerBorder          = { fg = c.vscSplitDark },
           SnacksPickerInputCursorLine = { fg = 'NONE', bg = c.vscBack },
           SnacksPickerListCursorLine  = { fg = '#ffffff', bg = c.vscPopupHighlightBlue },
-          SnacksPickerDir             = { fg = c.vscLineNumber },
-          SnacksPickerCol             = { fg = c.vscLineNumber, bg = 'NONE' },
-          SnacksPickerRow             = { fg = c.vscLineNumber, bg = 'NONE' },
+          SnacksPickerDir             = { fg = c.vscGray },
+          SnacksPickerCol             = { fg = c.vscGray, bg = 'NONE' },
+          -- SnacksPickerRow             = { fg = c.vscLineNumber, bg = 'NONE' },
           SnacksPickerTitle           = { fg = c.vscBlue },
           SnacksPickerInputSearch     = { fg = c.vscBlue },
           SnacksPickerInput           = { fg = c.vscBlue },
-          SnacksPickerMatch           = { fg = c.vscBlue },
+          SnacksPickerMatch           = { fg = c.vscBlue, bold = true },
 
           RainbowDelimiterRed         = { fg = c.vscYellow },
           RainbowDelimiterYellow      = { fg = c.vscPink },
@@ -77,7 +87,7 @@ return {
           FloatBorder                 = { fg = c.vscSplitDark },
 
           Pmenu                       = { fg = c.vscFront, bg = c.vscBack },
-          PmenuSel                    = { fg = '#ffffff', bg = c.vscPopupHighlightBlue },
+          -- PmenuSel                    = { fg = '#ffffff', bg = c.vscPopupHighlightBlue },
           BlinkCmpMenuBorder          = { link = 'FloatBorder' },
           BlinkCmpDocBorder           = { link = 'FloatBorder' },
           BlinkCmpDocSeparator        = { link = 'FloatBorder' },
@@ -85,7 +95,7 @@ return {
 
           GitSignsChange              = { fg = c.vscBlue },
 
-          MarkSignHL                  = { fg = c.vscYellow, bold = true, italic = true },
+          MarkSignHL                  = { fg = c.vscYellow, italic = true },
 
           NavicIconsFile              = { link = "Directory" },
           NavicIconsModule            = { link = "@module" },

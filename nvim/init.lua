@@ -213,36 +213,6 @@ vim.keymap.set('n', "<M-up>", [[<cmd>resize -5<CR>]], { desc = "Shrink horizonta
 vim.keymap.set('n', "<M-down>", [[<cmd>resize +5<CR>]], { desc = "Grow horisontal split" })
 vim.keymap.set('n', "<M-right>", [[<cmd>vertical resize -10<CR>]], { desc = "Shrink vertical split" })
 
-
-local function decode_base64()
-  -- Get the selected text from the visual selection
-  local start_pos = vim.fn.getpos("'<")
-  local end_pos = vim.fn.getpos("'>")
-  local lines = vim.fn.getline(start_pos[2], end_pos[2])
-
-  -- Adjust the start and end columns for the first and last lines
-  lines[1] = string.sub(lines[1], start_pos[3])
-  lines[#lines] = string.sub(lines[#lines], 1, end_pos[3])
-
-  -- Join the lines into a single string
-  local selected_text = table.concat(lines, "\n")
-
-  -- Decode the base64 string
-  local decoded = vim.fn.system('echo ' .. vim.fn.shellescape(selected_text) .. ' | base64 --decode')
-
-  -- Check if the decoding was successful
-  if vim.v.shell_error ~= 0 then
-    print("Decoding failed!")
-    return
-  end
-
-  -- Replace the visual selection with the decoded text
-  vim.fn.setreg('z', decoded)
-  vim.cmd('normal! gv"zp')
-end
-
-vim.keymap.set('x', ']6', decode_base64, { noremap = true, silent = true })
-
 -- tabs
 vim.keymap.set('n', "tn", '<CMD>tabnew<CR>', { desc = "Open new tab" })
 vim.keymap.set('n', "tc", '<CMD>tabclose<CR>', { desc = "Close tab" })
