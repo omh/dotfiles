@@ -28,6 +28,7 @@ return {
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
+    ft = 'markdown',
     opts = {
       file_types = { 'markdown', 'copilot-chat' },
     },
@@ -96,23 +97,10 @@ return {
     opts = {},
   },
 
-  {
-    'DaikyXendo/nvim-material-icon',
-    config = function()
-      require 'nvim-web-devicons'.setup {}
-      require("nvim-web-devicons").set_icon {
-        go = {
-          icon = "",
-          name = "Go"
-        }
-      }
-    end
-  },
-
+  -- base64 encode/decode
   {
     "ovk/endec.nvim",
     event = "VeryLazy",
     opts = {}
   },
-
 }

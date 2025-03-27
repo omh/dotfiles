@@ -59,7 +59,7 @@ return {
           winbar = { 'trouble', 'dap-repl', 'kulala', 'json' },
         },
         refresh = {
-          winbar = 100,
+          winbar = 300,
         },
         always_show_tabline = false,
       },

@@ -34,19 +34,24 @@ return {
 
     local navic = require("nvim-navic")
 
-
-
+    vim.lsp.set_log_level("off")
     local on_attach = function(client, bufnr)
       vim.diagnostic.config({
         virtual_text = false,
         underline = true,
         signs = false,
         update_in_insert = false,
-        -- float = {
-        --   border = 'rounded',
-        --   source = 'always',
-        -- }
       })
+
+      local hover = vim.lsp.buf.hover
+      vim.lsp.buf.hover = function()
+        hover({ border = 'rounded', })
+      end
+
+      -- nvim < 0.11
+      -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+      --   border = "rounded",
+      -- })
 
       if client.server_capabilities.documentSymbolProvider then
         navic.attach(client, bufnr)
@@ -56,7 +61,7 @@ return {
         local group = vim.api.nvim_create_augroup("LSPDocumentHighlight", { clear = false })
         vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
 
-        vim.opt.updatetime = 200
+        vim.opt.updatetime = 300
 
         vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
           buffer = bufnr,
@@ -193,9 +198,9 @@ return {
       }
     })
 
-    lsp["golangci_lint_ls"].setup({
-      filetypes = { 'go', 'gomod' }
-    })
+    -- lsp["golangci_lint_ls"].setup({
+    --   filetypes = { 'go', 'gomod' }
+    -- })
 
     -- auto config
 

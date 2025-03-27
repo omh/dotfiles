@@ -6,7 +6,7 @@ return {
     keys = {
       { "<leader>dd", "<cmd>DiffviewOpen<cr>",                                  desc = "Open diff view against current branch" },
       { "<leader>gl", "<cmd>DiffviewFileHistory %<CR>",                         desc = "Git log for current file" },
-      { "<leader>gL", "<cmd>DiffviewFileHistory<CR>",                           desc = "Git log for repo" },
+      { "<leader>gL", "<cmd>G log<CR>",                                         desc = "Git log for repo" },
       { "<leader>dm", "<cmd>DiffviewOpen origin/HEAD...HEAD --imply-local<cr>", desc = "Open diff view for branch" },
     },
     setup = function()
@@ -58,6 +58,9 @@ return {
           hunk = { "", "" },
           item = { "", "" },
           section = { "", "" },
+        },
+        commit_view = {
+          kind = "floating",
         },
         mappings = {
           popup = {

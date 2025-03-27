@@ -28,6 +28,7 @@
 -- }
 return {
   "ray-x/go.nvim",
+  enabled = true,
   event = { "CmdlineEnter" },
   ft = { "go", 'gomod' },
   build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
@@ -44,6 +45,8 @@ return {
       lsp_inlay_hints = {
         enable = false,
       },
+      lsp_gofumpt = false,
+      lsp_keymaps = false,
       dap_debug = false, -- handled by nvim-dap instead
       luasnip = true,
     })

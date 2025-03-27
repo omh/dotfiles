@@ -60,6 +60,7 @@ return {
   priority = 1000,
   keys = {
     { "<leader>ff", function() require('snacks').picker.smart({ layout = vscode }) end,                   desc = "Find files" },
+    { "<leader>fr", function() require('snacks').picker.recent({ layout = vscode }) end,                  desc = "Recent files" },
     { "<leader>ss", function() require('snacks').picker.grep({ layout = wide, args = { "--trim" } }) end, desc = "Search" },
     {
       "<leader>ss",
@@ -74,7 +75,8 @@ return {
     },
     { "<leader>fe", function() require('snacks').picker.resume() end,     desc = "Resume" },
     { "<leader>se", function() require('snacks').picker.resume() end,     desc = "Resume" },
-    { "<leader>fh", function() require('snacks').picker.highlights() end, desc = "Highlights" },
+    { "<leader>sh", function() require('snacks').picker.highlights() end, desc = "Highlights" },
+    { "<leader>sk", function() require('snacks').picker.keymaps() end,    desc = "Keymaps" },
     {
       "H",
       function()
@@ -133,7 +135,9 @@ return {
     quickfile = { enabled = false },
     gitbrowse = { enabled = false },
     dashboard = { enabled = false },
-    input = { enabled = false },
+    input = {
+      enabled = true,
+    },
     indent = {
       enabled = true,
       indent = {

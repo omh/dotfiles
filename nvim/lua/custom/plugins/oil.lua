@@ -1,12 +1,5 @@
 return {
   {
-    "refractalize/oil-git-status.nvim",
-    dependencies = {
-      "stevearc/oil.nvim",
-    },
-    config = true,
-  },
-  {
     'stevearc/oil.nvim',
     keys = {
       { "-", "<cmd>Oil --float<cr>", desc = "Open file explorer" },
