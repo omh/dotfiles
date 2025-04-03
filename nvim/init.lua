@@ -8,7 +8,7 @@ vim.g.base_branch = 'origin/main'
 vim.cmd [[
   set noshowmode
   set noruler
-  set laststatus=0
+  set laststatus=3
   set noshowcmd
   set cmdheight=1
 
@@ -18,14 +18,32 @@ vim.cmd [[
   set fillchars+=diff:\
 
   set formatoptions-=a
-  set diffopt+=linematch:50,algorithm:histogram
+  set diffopt+=linematch:60,algorithm:histogram,foldcolumn:0
 
   set mousemoveevent
   "let &stc='%s%=%{v:relnum?v:relnum:v:lnum} '
 
-
   set bg=dark
 ]]
+
+if vim.g.neovide then
+  vim.o.guifont = "Victor Mono:h13"
+
+  vim.g.neovide_scroll_animation_length = 0.01
+  vim.g.neovide_theme = 'dark'
+  vim.g.neovide_cursor_animation_length = 0
+  vim.g.neovide_cursor_vfx_mode = ""
+
+  vim.g.neovide_padding_top = 4
+  vim.g.neovide_padding_bottom = 4
+  vim.g.neovide_padding_right = 4
+  vim.g.neovide_padding_left = 4
+
+  vim.g.neovide_floating_shadow = true
+  vim.g.neovide_floating_z_height = 10
+  vim.g.neovide_light_angle_degrees = 45
+  vim.g.neovide_light_radius = 5
+end
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -77,7 +95,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Keep signcolumn on by default
-vim.o.signcolumn = 'auto:1-4'
+vim.o.signcolumn = 'yes:2'
 
 -- Decrease update time
 vim.o.updatetime = 400
@@ -94,6 +112,7 @@ vim.o.showmode = true
 vim.o.splitright = true -- split to the right and move to it
 vim.o.hidden = true
 vim.o.autoindent = true
+vim.o.winborder = 'rounded'
 
 -- Indenting
 vim.o.expandtab = true
@@ -113,7 +132,7 @@ vim.o.foldmethod = "expr"
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldcolumn = '0'
 vim.o.foldtext = ''
-vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldclose:,diff:╱'
+vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldclose:,diff:╱'
 
 -- cursorline only in the current window
 vim.cmd [[
@@ -174,6 +193,107 @@ vim.api.nvim_create_autocmd("FileType", {
     end)
   end,
 })
+
+-- LSP
+vim.keymap.set('n', '<leader>ti', function()
+  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, { desc = 'Toggle inline hints' })
+
+vim.lsp.enable({ 'luals', 'gopls' })
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client:supports_method('textDocument/foldingRange') then
+      local win = vim.api.nvim_get_current_win()
+      vim.wo[win][0].foldmethod = 'expr'
+      vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+    end
+  end,
+})
+vim.api.nvim_create_autocmd('LspDetach', { command = 'setl foldexpr<' })
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('my.lsp', {}),
+  callback = function(args)
+    vim.diagnostic.config({
+      virtual_text = false,
+      virtual_lines = {
+        current_line = true
+      },
+      underline = true,
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = '',
+          [vim.diagnostic.severity.WARN] = '',
+          [vim.diagnostic.severity.INFO] = '',
+          [vim.diagnostic.severity.HINT] = '',
+        }
+      }
+    })
+
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+
+    if client.server_capabilities.documentSymbolProvider then
+      require("nvim-navic").attach(client, args.buf)
+    end
+
+    if client.server_capabilities.documentHighlightProvider then
+      local group = vim.api.nvim_create_augroup("LSPDocumentHighlight", { clear = false })
+      vim.api.nvim_clear_autocmds({ buffer = args.buf, group = group })
+
+      vim.opt.updatetime = 300
+
+      vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+        buffer = args.buf,
+        group = group,
+        callback = function()
+          vim.lsp.buf.document_highlight()
+        end,
+      })
+      vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+        buffer = args.buf,
+        group = group,
+        callback = function()
+          vim.lsp.buf.clear_references()
+        end,
+      })
+    end
+
+    -- Auto-format ("lint") on save.
+    -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
+    if not client:supports_method('textDocument/willSaveWaitUntil')
+        and client:supports_method('textDocument/formatting') then
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
+        buffer = args.buf,
+        callback = function()
+          if vim.bo.filetype == "go" then
+            local params = vim.lsp.util.make_range_params(0, "utf-8")
+            params.context = { only = { "source.organizeImports" } }
+            -- buf_request_sync defaults to a 1000ms timeout. Depending on your
+            -- machine and codebase, you may want longer. Add an additional
+            -- argument after params if you find that you have to write the file
+            -- twice for changes to be saved.
+            -- E.g., vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 3000)
+            local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
+            for cid, res in pairs(result or {}) do
+              for _, r in pairs(res.result or {}) do
+                if r.edit then
+                  local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+                  vim.lsp.util.apply_workspace_edit(r.edit, enc)
+                end
+              end
+            end
+          end
+
+          vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })
+        end,
+      })
+    end
+  end,
+})
+
 -- Keymaps for better default experience
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<esc>', '<CMD> noh <CR>', { desc = "Clear highlights" })
@@ -203,9 +323,9 @@ vim.keymap.set('n', '<leader>ws', [[<Cmd>wincmd s<CR>]], { noremap = true, silen
 
 -- Kill buffers
 vim.keymap.set('n', '<leader>bd', require("snacks").bufdelete.delete,
-  { desc = "Delete buffer without closing the window" })
+  { desc = "Delete buffer" })
 vim.keymap.set('n', '<leader>bD', require("snacks").bufdelete.other,
-  { desc = "Delete other bufferswithout closing the window" })
+  { desc = "Delete other buffers" })
 
 -- Window sizing
 vim.keymap.set('n', "<M-left>", [[<cmd>vertical resize +10<CR>]], { desc = "Grow vertical split" })
@@ -214,15 +334,13 @@ vim.keymap.set('n', "<M-down>", [[<cmd>resize +5<CR>]], { desc = "Grow horisonta
 vim.keymap.set('n', "<M-right>", [[<cmd>vertical resize -10<CR>]], { desc = "Shrink vertical split" })
 
 -- tabs
-vim.keymap.set('n', "tn", '<CMD>tabnew<CR>', { desc = "Open new tab" })
-vim.keymap.set('n', "tc", '<CMD>tabclose<CR>', { desc = "Close tab" })
-vim.keymap.set("n", "th", "<cmd>tabprev<CR>", { desc = "Previous tab" })
-vim.keymap.set("n", "<tab>", "<cmd>tabnext<CR>", { desc = "Next tab" })
-vim.keymap.set("n", "<s-tab>", "<cmd>tabprev<CR>", { desc = "Previous tab" })
-vim.keymap.set("n", "tl", "<cmd>tabnext<CR>", { desc = "Next tab" })
-vim.keymap.set("n", "tj", "<cmd>tabm -1<CR>", { desc = "Move tab left" })
-vim.keymap.set("n", "tk", "<cmd>tabm +1<CR>", { desc = "Move tab right" })
-vim.keymap.set("n", "tr", function()
+vim.keymap.set('n', "<leader><tab><tab>", '<CMD>tabnew<CR>', { desc = "Open new tab" })
+vim.keymap.set('n', "<leader><tab>c", '<CMD>tabclose<CR>', { desc = "Close tab" })
+vim.keymap.set("n", "<leader><tab>h", "<cmd>tabprev<CR>", { desc = "Previous tab" })
+vim.keymap.set("n", "<leader><tab>l", "<cmd>tabnext<CR>", { desc = "Next tab" })
+vim.keymap.set("n", "<leader><tab>j", "<cmd>tabm -1<CR>", { desc = "Move tab left" })
+vim.keymap.set("n", "<leader><tab>k", "<cmd>tabm +1<CR>", { desc = "Move tab right" })
+vim.keymap.set("n", "<leader><tab>r", function()
   local bufname = vim.fn.input("New tab name: ")
   if bufname ~= "" then
     local cmd = ":TabRename " .. bufname
@@ -255,13 +373,11 @@ require('which-key').add {
   { "<leader>l", group = "Language (LSP)", icon = '󰦨' },
   { "<leader>r", group = "Run tests", icon = '󰙨' },
   { "<leader>s", group = "Search | Sessions" },
-  { "<leader>t", group = "Tabs | Toggle" },
+  { "<leader>t", group = "Toggle" },
   { "<leader>v", group = "Vimux", icon = '' },
   { "<leader>w", group = "Workspace | Window" },
   { "<leader>x", group = "Trouble", icon = '' },
   { "<leader>!", group = "", hidden = true },
-  { "<leader>o", group = "Document Symbols", icon = '' },
-  { "<leader>O", group = "Workspace Symbols", icon = '' },
   { "<leader>q", group = "Quit" },
 }
 

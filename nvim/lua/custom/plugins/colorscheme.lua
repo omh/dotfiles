@@ -19,9 +19,6 @@ return {
         group_overrides = {
           ['@type.builtin']                    = { fg = c.vscBlueGreen, bg = 'NONE' },
           ['@lsp.mod.format.go']               = { fg = c.vscLightBlue },
-          -- ['@lsp.type.namespace.go']  = { fg = c.vscOrange, underline = true },
-          -- @lsp.type.namespace.go
-          -- @lsp.type.namespace.go
           LspReferenceText                     = { bg = c.vscDimHighlight },
           LspReferenceRead                     = { bg = c.vscDimHighlight },
           LspReferenceWrite                    = { link = 'PmenuSel' },
@@ -31,26 +28,26 @@ return {
           WinBar                               = { bold = false },
           DimText                              = { fg = c.vscPopupFront },
 
-          DiffChange                           = { bg = c.vscPopupHighlightBlue },
-          DiffText                             = { bg = c.vscDiffGreenLight },
-          DiffDelete                           = { fg = c.vscSplitDark, bg = 'none' },
-          GitSignsDeletePreview                = { bg = c.vscDiffRedLight },
-          diffAdded                            = { fg = c.vscGreen, bg = 'none' },
-          diffChanged                          = { fg = c.vscBlue, bg = 'none' },
-          diffRemoved                          = { fg = c.vscRed, bg = 'none' },
-          NeogitDiffAddHighlight               = { fg = 'none', bg = c.vscDiffGreenLight },
-          NeogitDiffDeleteHighlight            = { fg = 'none', bg = c.vscDiffRedLight },
+          StatusLine                           = { fg = c.vscSplitDark, bg = 'none', strikethrough = true },
+          StatusLineNC                         = { fg = c.vscSplitDark, bg = 'none', strikethrough = true },
+
+          Folded                               = { fg = c.vscYellow, bg = c.vscFoldBackground },
+
+          -- DiffChange                           = { bg = c.vscPopupHighlightBlue },
+          -- DiffText                             = { bg = c.vscDiffGreenLight },
+          -- DiffDelete                           = { fg = c.vscSplitDark, bg = 'none' },
+          -- GitSignsDeletePreview                = { bg = c.vscDiffRedLight },
+          -- diffAdded                            = { fg = c.vscGreen, bg = 'none' },
+          -- diffChanged                          = { fg = c.vscBlue, bg = 'none' },
+          -- diffRemoved                          = { fg = c.vscRed, bg = 'none' },
+          -- NeogitDiffAddHighlight               = { fg = 'none', bg = c.vscDiffGreenLight },
+          -- NeogitDiffDeleteHighlight            = { fg = 'none', bg = c.vscDiffRedLight },
 
           DiffviewFilePanelSelected            = { fg = "#FFFFFF", bg = c.vscPopupHighlightBlue, bold = true },
 
           TabLine                              = { fg = c.vscGitIgnored, bg = 'NONE' },
           TabLineSel                           = { fg = '#FFFFFF', bg = 'NONE' },
           TabLineFill                          = { fg = c.vscSplitDark, bg = 'NONE' },
-
-          StatusLine                           = { fg = c.vscSplitDark, bg = 'none', strikethrough = true },
-          StatusLineNC                         = { fg = c.vscSplitDark, bg = 'none', strikethrough = true },
-
-          DiagnosticUnnecessary                = { undercurl = true, sp = c.vscYellow },
 
           GlanceWinBarFilename                 = { fg = '#FFFFFF' },
           GlanceWinBarFilepath                 = { fg = c.vscPopupFront },
@@ -72,7 +69,6 @@ return {
           SnacksPickerListCursorLine           = { fg = '#ffffff', bg = c.vscPopupHighlightBlue },
           SnacksPickerDir                      = { fg = c.vscGray },
           SnacksPickerCol                      = { fg = c.vscGray, bg = 'NONE' },
-          -- SnacksPickerRow             = { fg = c.vscLineNumber, bg = 'NONE' },
           SnacksPickerTitle                    = { fg = c.vscBlue },
           SnacksPickerInputSearch              = { fg = c.vscBlue },
           SnacksPickerInput                    = { fg = c.vscBlue },

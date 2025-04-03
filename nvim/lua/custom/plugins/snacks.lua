@@ -53,6 +53,16 @@ local wide = {
   },
 }
 
+local gotpl = [[
+package main
+
+import "fmt"
+
+func main() {
+    fmt.Println("Hello")
+}
+]]
+
 return {
   'folke/snacks.nvim',
   lazy = false,
@@ -97,7 +107,7 @@ return {
       desc = "Buffers"
     },
     {
-      "<leader>o",
+      "go",
       function()
         require('snacks').picker.lsp_symbols({
           layout = vscode,
@@ -106,7 +116,7 @@ return {
       desc = "Symbols"
     },
     {
-      "<leader>O",
+      "gO",
       function()
         require('snacks').picker.lsp_workspace_symbols({
           layout = vscode_med,
@@ -114,7 +124,9 @@ return {
       end,
       desc = "Workspace Symbols"
     },
-    -- { "<leader>gb", function() require("snacks").git.blame_line() end, desc = "Git blame for current line" },
+    { "<leader>ng", function() require("snacks").scratch({ ft = "go", template = gotpl }) end, desc = "Scratch pad - Go" },
+    { "<leader>.",  function() require("snacks").scratch() end,                                desc = "Scratch pad - Toggle" },
+    { "<leader>ns", function() require("snacks").scratch.select() end,                         desc = "Scratch pad - list" },
   },
   opts = {
     picker = {
