@@ -9,6 +9,8 @@ return {
   -- readline keybindings for insert/command mode
   { 'tpope/vim-rsi',                 event = "VeryLazy" },
 
+  { 'tpope/vim-unimpaired',          event = "VeryLazy" },
+
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
@@ -62,6 +64,43 @@ return {
     "ovk/endec.nvim",
     event = "VeryLazy",
     opts = {}
+  },
+
+  -- {
+  --   "rachartier/tiny-inline-diagnostic.nvim",
+  --   event = "LspAttach", -- Or `LspAttach`
+  --   priority = 1000,     -- needs to be loaded in first
+  --   config = function()
+  --     require('tiny-inline-diagnostic').setup()
+  --     vim.diagnostic.config({ virtual_text = false })         -- Only if needed in your configuration, if you already have native LSP diagnostics
+  --   end
+  -- },
+
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy", -- Or `LspAttach`
+    priority = 2000,    -- needs to be loaded in first
+    config = function()
+      require('tiny-inline-diagnostic').setup({
+        throttle = 80,
+        show_source = true,
+        enable_on_insert = false,
+      })
+      vim.diagnostic.config({ virtual_text = false }) -- Only if needed in your configuration, if you already have native LSP diagnostics
+    end
+  },
+
+  {
+    'OscarCreator/rsync.nvim',
+    build = 'make',
+    dependencies = 'nvim-lua/plenary.nvim',
+    keys = {
+      { "<leader>ua", "<cmd>RsyncUp<cr>",     desc = "Rsync up all" },
+      { "<leader>uf", "<cmd>RsyncUpFile<cr>", desc = "Rsync up file" },
+    },
+    config = function()
+      require("rsync").setup()
+    end,
   },
 
   -- log inserting

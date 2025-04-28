@@ -1,7 +1,7 @@
 return {
   cmd = { 'gopls' },
   root_markers = { 'go.mod', 'go.sum' },
-  filetypes = { "go", "gomod", "gowork", "gotmpl" },
+  filetypes = { "go", "gomod", "gowork", "gotmpl", "gotexttmpl" },
   settings = {
     gopls = {
       analyses = {
@@ -10,13 +10,13 @@ return {
         unreachable = true
       },
       hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        constantValues = true,
+        functionTypeParameters = true,
         parameterNames = true,
-        -- functionTypeParameters
-        -- constantValues
-        -- compositeLiteralTypes
-        -- compositeLiteralFields
-        -- assignVariableTypes
-        -- rangeVariableTypes
+        rangeVariableTypes = true,
       },
       completeUnimported = true,
       deepCompletion = true,

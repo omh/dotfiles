@@ -27,17 +27,18 @@ return {
 
       local elements = {}
       for element in string.gmatch(path, "[^/]+") do
-        if element == "~" then
-          element = "󰜥 "
-        end
+        -- if element == "~" then
+        --   element = "󰜥 "
+        -- end
 
         table.insert(elements, element)
       end
 
       if self.options.colored then
-        return "%#DimText#" .. table.concat(elements, "%#Comment# > %#DimText#") .. "%#Comment# > "
+        return "%#LualineFolder#󰉖 %#DimText#" ..
+            table.concat(elements, "%#Comment# > %#LualineFolder#󰉖 %#DimText#") .. "%#Comment# > "
       else
-        return table.concat(elements, " > ") .. " > "
+        return "󰉖 " .. table.concat(elements, " > 󰉖 ") .. " > "
       end
     end
 
@@ -53,13 +54,14 @@ return {
     require('lualine').setup {
       options = {
         theme = 'lualine-omh-vscode',
+        -- theme = 'lualine-omh-jellybeans',
         component_separators = { left = "", right = "" },
         section_separators = { left = '', right = '' },
         disabled_filetypes = {
           winbar = { 'trouble', 'dap-repl', 'kulala', 'json' },
         },
         refresh = {
-          winbar = 300,
+          winbar = 100,
         },
         always_show_tabline = false,
       },

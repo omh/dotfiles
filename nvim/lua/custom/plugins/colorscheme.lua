@@ -22,6 +22,7 @@ return {
           LspReferenceText                     = { bg = c.vscDimHighlight },
           LspReferenceRead                     = { bg = c.vscDimHighlight },
           LspReferenceWrite                    = { link = 'PmenuSel' },
+          LspInlayHint                         = { fg = "#969696", bg = '#262626' },
 
           CursorLine                           = { bg = '#282828' },
           -- CursorLineNr                = { link = 'CursorLine' },
@@ -55,6 +56,8 @@ return {
           GlanceBorderTop                      = { fg = c.vscBlue },
           GlancePreviewBorderBottom            = { fg = c.vscBlue },
           GlanceListBorderBottom               = { fg = c.vscBlue },
+
+          LualineFolder                        = { fg = "#677489" },
 
           DapBreakpoint                        = { fg = c.vscPink },
           DapStopped                           = { bg = c.vscPopupHighlightBlue },
@@ -137,6 +140,57 @@ return {
         },
       }
       vim.cmd("colorscheme vscode")
+    end
+  },
+  {
+    "wtfox/jellybeans.nvim",
+    lazy = false,
+    enabled = false,
+    priority = 1000,
+    config = function()
+      require('jellybeans').setup {
+        italics = true,
+        on_highlights = function(hl, c)
+          hl.WinBar                    = { bg = c.background }
+
+          hl.GlanceWinBarFilename      = { fg = c.brandy, bg = c.background }
+          hl.GlanceWinBarFilepath      = { fg = c.brandy, bg = c.background }
+          hl.GlanceListFilepath        = { link = 'GlanceWinBarFilepath' }
+          hl.GlanceBorderTop           = { fg = c.morning_glory }
+          hl.GlancePreviewBorderBottom = { fg = c.morning_glory }
+          hl.GlanceListBorderBottom    = { fg = c.morning_glory }
+
+          hl.NavicIconsFile            = { link = "Directory" }
+          hl.NavicIconsModule          = { link = "@module" }
+          hl.NavicIconsNamespace       = { link = "@module" }
+          hl.NavicIconsPackage         = { link = "@module" }
+          hl.NavicIconsClass           = { link = "Type" }
+          hl.NavicIconsMethod          = { link = "Keyword" }
+          hl.NavicIconsProperty        = { link = "@property" }
+          hl.NavicIconsField           = { link = "@variable.member" }
+          hl.NavicIconsConstructor     = { link = "@constructor" }
+          hl.NavicIconsEnum            = { link = "Type" }
+          hl.NavicIconsInterface       = { link = "Type" }
+          hl.NavicIconsFunction        = { link = "Keyword" }
+          hl.NavicIconsVariable        = { link = "@variable" }
+          hl.NavicIconsConstant        = { link = "Constant" }
+          hl.NavicIconsString          = { link = "String" }
+          hl.NavicIconsNumber          = { link = "Number" }
+          hl.NavicIconsBoolean         = { link = "Boolean" }
+          hl.NavicIconsArray           = { link = "Type" }
+          hl.NavicIconsObject          = { link = "Type" }
+          hl.NavicIconsKey             = { link = "Identifier" }
+          hl.NavicIconsNull            = { link = "Type" }
+          hl.NavicIconsEnumMember      = { link = "Constant" }
+          hl.NavicIconsStruct          = { link = "Structure" }
+          hl.NavicIconsEvent           = { link = "Structure" }
+          hl.NavicIconsOperator        = { link = "Operator" }
+          hl.NavicIconsTypeParameter   = { link = "Type" }
+          hl.NavicText                 = { fg = c.foreground }
+          hl.NavicSeparator            = { link = "Comment" }
+        end,
+      }
+      vim.cmd [[colorscheme jellybeans]]
     end
   },
   -- kanagawa gray

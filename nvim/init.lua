@@ -8,7 +8,7 @@ vim.g.base_branch = 'origin/main'
 vim.cmd [[
   set noshowmode
   set noruler
-  set laststatus=3
+  set laststatus=0
   set noshowcmd
   set cmdheight=1
 
@@ -18,12 +18,18 @@ vim.cmd [[
   set fillchars+=diff:\
 
   set formatoptions-=a
-  set diffopt+=linematch:60,algorithm:histogram,foldcolumn:0
+  set diffopt+=linematch:60,algorithm:histogram,foldcolumn:0,horizontal
+
+  set statusline=\         " hide file name in statusline
+  set fillchars=stl:\      " fill active window's statusline with empty space
+  set fillchars+=stlnc:\   " also fill inactive windows
 
   set mousemoveevent
   "let &stc='%s%=%{v:relnum?v:relnum:v:lnum} '
 
   set bg=dark
+
+  set shell=/bin/bash\ -i
 ]]
 
 if vim.g.neovide then
@@ -218,10 +224,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     vim.diagnostic.config({
       virtual_text = false,
-      virtual_lines = {
-        current_line = true
-      },
-      underline = true,
+      -- virtual_lines = {
+      --   current_line = true
+      -- },
+      -- virtual_lines = false,
+      -- underline = true,
       signs = {
         text = {
           [vim.diagnostic.severity.ERROR] = '',
@@ -293,6 +300,20 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
+
+vim.api.nvim_create_user_command('Google', function(o)
+  -- local escaped = require('socket.url').escape(o.args)
+  local start_line = o.line1
+  local end_line = o.line2
+  local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+  local joined = table.concat(lines, "\n")
+
+  local escaped = vim.uri_encode(joined)
+  local url = ('https://www.google.com/search?q=%s'):format(escaped)
+  vim.ui.open(url)
+end, { range = true, desc = 'just google it' })
+
+-- vim.keymap.set('v', '<leader>gi', 'Google expand("<cword>")'
 
 -- Keymaps for better default experience
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
