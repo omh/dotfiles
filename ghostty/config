@@ -1,25 +1,11 @@
-#theme = "Kanagawa"
-#theme = "Kanagawa Wave"
-theme = "vscode-dark"
-#theme = "Jellybeans"
-#theme = "GitHub-Light-Default"
-
-#background=#141415
-
-#command="/opt/homebrew/bin/tmux attach || /opt/homebrew/bin/tmux"
-#command=/opt/homebrew/bin/tmux new -As0
+theme = "light:vscode-light,dark:vscode-dark"
+#theme = "light:vscode-dark,dark:vscode-dark"
 
 adjust-cell-width=-1
 #adjust-cell-height=-1
 
-#font-family = "Iosevka Term"
-#font-size = 15
 font-family = "Victor Mono"
 font-size = 13
-#font-family = "Fira Code"
-#font-family = "Berkeley Mono Trial"
-#font-size = 13
-
 font-thicken = true
 font-thicken-strength = 50
 
@@ -28,7 +14,7 @@ macos-titlebar-proxy-icon = hidden
 macos-titlebar-style = hidden
 
 window-padding-x = 6
-window-padding-y = 2
+window-padding-y = 4
 window-padding-balance = true
 #window-padding-color = "extend"
 
@@ -40,5 +26,5 @@ macos-icon-screen-color = #000000,#333333
 macos-icon-ghost-color = #ffffff
 
 
-#adjust-underline-position = 1
+adjust-underline-position = 2
 adjust-strikethrough-thickness = 0

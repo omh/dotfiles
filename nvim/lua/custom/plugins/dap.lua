@@ -1,7 +1,7 @@
 return {
   'leoluz/nvim-dap-go',
   ft = 'go',
-  dependencies = { "mfussenegger/nvim-dap", "rcarriga/nvim-dap-ui" },
+  dependencies = { "mfussenegger/nvim-dap", "rcarriga/nvim-dap-ui", "nvim-neotest/nvim-nio" },
   keys = {
     { "<leader>ds", "<cmd>DapNew<cr>",              desc = "Debug: New Session..." },
     { "<leader>dc", "<cmd>DapContinue<cr>",         desc = "Debug: Continue" },

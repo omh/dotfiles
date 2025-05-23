@@ -8,9 +8,9 @@ vim.g.base_branch = 'origin/main'
 vim.cmd [[
   set noshowmode
   set noruler
-  set laststatus=0
+  set laststatus=3
   set noshowcmd
-  set cmdheight=1
+  set cmdheight=0
 
   set statusline=\         " hide file name in statusline
   set fillchars=stl:\      " fill active window's statusline with empty space
@@ -26,8 +26,6 @@ vim.cmd [[
 
   set mousemoveevent
   "let &stc='%s%=%{v:relnum?v:relnum:v:lnum} '
-
-  set bg=dark
 
   set shell=/bin/bash\ -i
 ]]
@@ -81,8 +79,8 @@ require('lazy').setup({
 vim.o.hlsearch = true
 
 -- line numbers
-vim.wo.number = false
-vim.wo.relativenumber = false
+vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -101,7 +99,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Keep signcolumn on by default
-vim.o.signcolumn = 'yes:2'
+vim.o.signcolumn = 'auto:1-3'
 
 -- Decrease update time
 vim.o.updatetime = 400
@@ -204,6 +202,10 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.keymap.set('n', '<leader>ti', function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = 'Toggle inline hints' })
+
+vim.keymap.set('n', 'K', function()
+  vim.lsp.buf.hover({ max_width = 120, max_height = 20 })
+end, { desc = 'LSP Hover' })
 
 vim.lsp.enable({ 'luals', 'gopls' })
 
@@ -394,6 +396,7 @@ require('which-key').add {
   { "<leader>l", group = "Language (LSP)", icon = '󰦨' },
   { "<leader>r", group = "Run tests", icon = '󰙨' },
   { "<leader>s", group = "Search | Sessions" },
+  { "<tab>", group = "Tabs" },
   { "<leader>t", group = "Toggle" },
   { "<leader>v", group = "Vimux", icon = '' },
   { "<leader>w", group = "Workspace | Window" },

@@ -6,9 +6,9 @@ return {
     event = "InsertEnter",
     opts = {
       -- I don't find the panel useful.
-      panel = { enabled = false },
+      panel = { enabled = true },
       suggestion = {
-        enabled = false,
+        enabled = true,
         debounce = 300,
         auto_trigger = true,
         keymap = {

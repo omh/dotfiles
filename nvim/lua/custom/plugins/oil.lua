@@ -54,9 +54,6 @@ return {
           max_width = 80,
           max_height = 30,
         },
-        win_options = {
-          signcolumn = "yes:2",
-        },
       })
     end
   }

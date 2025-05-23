@@ -14,38 +14,33 @@ return {
       zindex = 3,
       height = 25,
       winbar = {
-        enable = true,           -- Available strating from nvim-0.8+
+        enable = true,     -- Available strating from nvim-0.8+
       },
-      preview_win_opts = {       -- Configure preview window options
+      preview_win_opts = { -- Configure preview window options
         number = false,
         wrap = true,
       },
       border = {
-        enable = true,         -- Show window borders. Only horizontal borders allowed
+        enable = true, -- Show window borders. Only horizontal borders allowed
         top_char = '―',
         bottom_char = '―',
       },
       theme = {
-        enable = false,         -- Generate colors based on current colorscheme
+        enable = false, -- Generate colors based on current colorscheme
       },
       hooks = {
-        before_open = function(results, open, jump, _)
-          if #results == 1 then
-            jump(results[1])             -- argument is optional
-          else
-            open(results, jump)
-            -- local preview_win = vim.api.nvim_get_current_win()
-            -- local context_ranges, context_lines = require("treesitter-context.context").get(0, preview_win)
-            -- if not context_ranges or #context_ranges == 0 then
-            --   return
-            -- end
-
-            -- vim.defer_fn(function()
-            --     -- vim.cmd("TSContextEnable")
-            --     -- require("treesitter-context.render").open(0, preview_win, context_ranges, context_lines)
-            -- end, 100)
+        before_open = function(results, open, jump, method)
+          if method == "definitions" then
+            if #results == 1 then
+              return jump(results[1]) -- argument is optional
+            end
+          elseif method == "references" then
+            if #results == 2 then
+              return jump(results[2]) -- argument is optional
+            end
           end
-        end,
+          open(results, jump)
+        end
       }
     })
   end,
