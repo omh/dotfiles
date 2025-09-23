@@ -22,7 +22,7 @@ tmux set -g copy-mode-mark-style bg='#313244',fg='#fab387'
 tmux set -g copy-mode-current-match-style bg='#313244',fg='#f9e2af',bold
 tmux set -g mode-style bg='#313244',fg='#a6e3a1',bold
 tmux set -g popup-style bg=default
-tmux set -g popup-border-style bg=default,fg='#444444'
+tmux set -g popup-border-style bg=default,fg='#569CD6'
 
 tmux set -g window-status-activity-style bg=default,fg='#d4d4d4'
 

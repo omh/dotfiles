@@ -1,22 +1,32 @@
 {
-  "test assert error": {
-    "prefix": "terr",
-    "body": "tests.Assert(t, err, tests.IsNil)",
-    "description": "Snippet for asserting err is nil in tests"
+  "if error": {
+    "prefix": "err",
+    "body": "if err != nil {\n\treturn ${0:err}\n}",
+    "desc": "if err != nil"
   },
-  "test assert true": {
-    "prefix": "ttrue",
-    "body": "tests.Assert(t, ${1:bool}, tests.IsTrue)",
-    "description": "Snippet for asserting var is true in tests"
+  "if error stack": {
+    "prefix": "errs",
+    "body": "if err != nil {\n\treturn errors.WithStack(${1:err})\n}",
+    "desc": "if error stack"
   },
-  "test assert false": {
-    "prefix": "tfalse",
-    "body": "tests.Assert(t, ${1:bool}, tests.IsFalse)",
-    "description": "Snippet for asserting var is false in tests"
+  "sub test": {
+    "prefix": "trun",
+    "body": "t.Run(\"${1:description}\", func(t *testing.T) {\n\t${2}\n}",
+    "desc": "sub test function"
+  },
+  "test require no error": {
+    "prefix": "tnoe",
+    "body": "require.NoError(t, ${1:err})",
+    "desc": "Require err is nil"
   },
   "test assert equals": {
     "prefix": "teq",
-    "body": "tests.Assert(t, ${1:got}, tests.Equals, ${2:want})",
-    "description": "Snippet for asserting got equals want in tests"
+    "body": "assert.Equals(t, ${1:expect}, ${2:got})",
+    "desc": "Assert expect equals got"
+  },
+  "fmt.Println": {
+    "prefix": "pl",
+    "body": "fmt.Println(\"${1}\", ${0})",
+    "desc": "fmt.Println"
   }
 }

@@ -1,25 +1,27 @@
-theme = "light:vscode-light,dark:vscode-dark"
+#theme = "light:vscode-light,dark:vscode-dark"
+theme = "vscode-dark"
 #theme = "light:vscode-dark,dark:vscode-dark"
+#theme = "Kanagawa Wave"
 
-adjust-cell-width=-1
+#adjust-cell-width=-1
 #adjust-cell-height=-1
 
 font-family = "Victor Mono"
 font-size = 13
-font-thicken = true
-font-thicken-strength = 50
+#font-thicken = true
+#font-thicken-strength = 50
 
 
 macos-titlebar-proxy-icon = hidden
 macos-titlebar-style = hidden
 
-window-padding-x = 6
+window-padding-x = 8
 window-padding-y = 4
 window-padding-balance = true
-#window-padding-color = "extend"
+window-padding-color = "extend"
 
-window-colorspace = "display-p3"
-window-title-font-family = "Menlo"
+#window-colorspace = "display-p3"
+window-title-font-family = "Helvetica Bold"
 
 macos-icon = custom-style
 macos-icon-screen-color = #000000,#333333
@@ -28,3 +30,4 @@ macos-icon-ghost-color = #ffffff
 
 adjust-underline-position = 2
 adjust-strikethrough-thickness = 0
+keybind = shift+enter=text:\x1b\r

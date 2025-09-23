@@ -1,0 +1,46 @@
+-- vim.defer_fn(function()
+--   vim.pack.add({
+--     { src = 'https://github.com/rafamadriz/friendly-snippets' },
+--     { src = 'https://github.com/L3MON4D3/LuaSnip' },
+--     { src = 'https://github.com/saghen/blink.cmp',            version = vim.version.range('1.*') },
+--   })
+--   require('luasnip.loaders.from_vscode').lazy_load()
+--   require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
+--   require('blink.cmp').setup({
+--     keymap = {
+--       preset = 'super-tab',
+--       ['<C-j>'] = { 'select_next', 'fallback' },
+--       ['<C-k>'] = { 'select_prev', 'fallback' },
+--     },
+--     appearance = {
+--       kind_icons = {
+--         Copilot = " ",
+--         Text = "",
+--         Method = "",
+--         Function = "",
+--         Constructor = "",
+--         Field = "",
+--         Variable = "",
+--         Class = "",
+--         Interface = "",
+--         Module = "",
+--         Property = "",
+--         Unit = "",
+--         Value = "",
+--         Enum = "",
+--         Keyword = "",
+--         Snippet = "󰦨 ",
+--         Color = "",
+--         File = "",
+--         Reference = "",
+--         Folder = "",
+--         EnumMember = "",
+--         Constant = "",
+--         Struct = "",
+--         Event = "",
+--         Operator = "",
+--         TypeParameter = "",
+--       },
+--     },
+--   })
+-- end, 1000)

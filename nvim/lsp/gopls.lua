@@ -7,7 +7,12 @@ return {
       analyses = {
         unusedparams = true,
         shadow = false,
-        unreachable = true
+        unreachable = true,
+        ST1000 = false, -- disable complaints about package docs
+        ST1020 = false, -- disable complaints about exported docs
+        ST1021 = false,
+        ST1022 = false,
+        ST1003 = false, -- disable complaints about _ in package names
       },
       hints = {
         assignVariableTypes = true,

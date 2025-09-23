@@ -1,424 +1,170 @@
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ','
-vim.o.termguicolors = true
-vim.g.timeoutlen = 500
-vim.g.base_branch = 'origin/main'
+vim.g.mapleader      = ' '                             -- <space> all the way
+vim.g.maplocalleader = ','                             -- local leader
+vim.o.laststatus     = 0                               -- hiden statusline
+vim.o.showcmd        = false                           -- don't show current cmd
+vim.o.cmdheight      = 0                               -- no command line by default
+vim.o.statusline     = " "                             -- no statusline text
+vim.o.winborder      = 'rounded'                       -- roudned border for all popups
+vim.o.shell          = "/bin/bash -i"                  -- make switching in tmux faster
+vim.o.breakindent    = true                            -- indent wrapped lines
+vim.o.expandtab      = true                            -- use the appropriate number of spaces to insert a tab
+vim.o.shiftwidth     = 2                               -- number of columns for one level of indentation
+vim.o.smartindent    = true                            -- indent when starting a new line
+vim.o.autoindent     = true                            -- copy indent from current line when starting new line
+vim.o.tabstop        = 2                               -- how big a tab is
+vim.o.softtabstop    = 2                               -- move to next tab instead of inserting <tab> chars.
+vim.o.mouse          = 'a'                             -- enable mouse mode
+vim.o.clipboard      = 'unnamedplus'                   -- os clipboard
+vim.o.number         = true                            -- show line numbers
+vim.o.relativenumber = true                            -- relative line numberes
+vim.o.scrolloff      = 20                              -- scroll before hitting top/bottom
+vim.o.splitright     = true                            -- split to the right and move to it
+vim.o.title          = true                            -- set window title
+vim.o.cursorline     = true                            -- enable cursorline
+vim.o.foldenable     = false                           -- don't fold by default
+vim.o.foldmethod     = "expr"                          -- use expr to determine folds
+vim.o.foldcolumn     = '0'                             -- don't show the annoying fold dept
+vim.o.foldtext       = ''                              -- use normal highlighting for folded text
+vim.o.ignorecase     = true                            -- case insensitive search
+vim.o.smartcase      = true                            -- unless we start with a capital letter
+vim.o.hlsearch       = true                            -- highlight search as you type
+vim.o.inccommand     = 'nosplit'                       -- show search/replace preview in buffer
+vim.o.undofile       = true                            -- save undo history
+vim.o.hidden         = true                            -- don't discard hidden terminals
+vim.o.completeopt    = 'menuone,nearest,preview,fuzzy' -- better autocomp
+vim.g.showtabline    = 1                               -- show if two or more tabs
+vim.o.pumheight      = 10                              -- Limits completion items to 10
+vim.g.pummaxwidth    = 120                             -- not too wide completion menu.
+vim.o.swapfile       = false                           -- no swap files please
+vim.o.wildmode       = 'noselect:lastused,full'
+vim.o.wildoptions    = 'fuzzy,pum,tagfile'             -- fuzzy cmd line matching
 
+vim.bo.indentexpr    =
+"v:lua.require'nvim-treesitter'.indentexpr()" -- how to indent
+vim.o.foldexpr       =
+"v:lua.vim.treesitter.foldexpr()"             -- how to do folds
+vim.o.completeopt    = 'menuone,noselect,fuzzy'
 
-vim.cmd [[
-  set noshowmode
-  set noruler
-  set laststatus=3
-  set noshowcmd
-  set cmdheight=0
+vim.opt.fillchars    = {
+  eob = " ",
+  diff = "╱",
+  foldopen = "", -- open fold arrow (down)
+  foldclose = ">", -- closed fold arrow (right)
+  foldsep = " ", -- separator
+  fold = " ", -- filler inside foldcolumn
+  msgsep = "━",
+  horiz = "━",
+  horizup = "┻",
+  horizdown = "┳",
+  vert = "┃",
+  vertleft = "┫",
+  vertright = "┣",
+  verthoriz = "╋",
+}
+-- Use fancy disclosure triangles
+vim.o.foldcolumn     = "auto"
 
-  set statusline=\         " hide file name in statusline
-  set fillchars=stl:\      " fill active window's statusline with empty space
-  set fillchars+=stlnc:\   " also fill inactive windows
-  set fillchars+=diff:\
+-- -- use nice color highlighting in the command line
+-- require('vim._extui').enable({ enable = true })
 
-  set formatoptions-=a
-  set diffopt+=linematch:60,algorithm:histogram,foldcolumn:0,horizontal
-
-  set statusline=\         " hide file name in statusline
-  set fillchars=stl:\      " fill active window's statusline with empty space
-  set fillchars+=stlnc:\   " also fill inactive windows
-
-  set mousemoveevent
-  "let &stc='%s%=%{v:relnum?v:relnum:v:lnum} '
-
-  set shell=/bin/bash\ -i
-]]
-
-if vim.g.neovide then
-  vim.o.guifont = "Victor Mono:h13"
-
-  vim.g.neovide_scroll_animation_length = 0.01
-  vim.g.neovide_theme = 'dark'
-  vim.g.neovide_cursor_animation_length = 0
-  vim.g.neovide_cursor_vfx_mode = ""
-
-  vim.g.neovide_padding_top = 4
-  vim.g.neovide_padding_bottom = 4
-  vim.g.neovide_padding_right = 4
-  vim.g.neovide_padding_left = 4
-
-  vim.g.neovide_floating_shadow = true
-  vim.g.neovide_floating_z_height = 10
-  vim.g.neovide_light_angle_degrees = 45
-  vim.g.neovide_light_radius = 5
-end
-
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system {
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
-    lazypath,
-  }
-end
-vim.opt.rtp:prepend(lazypath)
-
--- [[ Configure plugins ]]
-require('lazy').setup({
-  -- require 'kickstart.plugins.debug',
-  { import = 'custom.plugins' },
-}, {
-  rocks = {
-    enabled = false
-  },
-  change_detection = {
-    notify = false, -- get a notification when changes are found
-  },
-})
-
--- Set highlight on search
-vim.o.hlsearch = true
-
--- line numbers
-vim.wo.number = true
-vim.wo.relativenumber = true
-
--- Enable mouse mode
-vim.o.mouse = 'a'
-
--- Sync clipboard between OS and Neovim.
-vim.o.clipboard = 'unnamedplus'
-
--- Enable break indent
-vim.o.breakindent = true
-
--- Save undo history
-vim.o.undofile = true
-
--- Case-insensitive searching UNLESS \C or capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
--- Keep signcolumn on by default
-vim.o.signcolumn = 'auto:1-3'
-
--- Decrease update time
-vim.o.updatetime = 400
-vim.o.timeoutlen = 300
-
--- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menu,menuone,noselect'
-
--- Misc
-vim.o.scrolloff = 20
-vim.o.swapfile = false
-vim.o.showcmd = false
-vim.o.showmode = true
-vim.o.splitright = true -- split to the right and move to it
-vim.o.hidden = true
-vim.o.autoindent = true
-vim.o.winborder = 'rounded'
-
--- Indenting
-vim.o.expandtab = true
-vim.o.shiftwidth = 2
-vim.o.smartindent = true
-vim.o.tabstop = 2
-vim.o.softtabstop = 2
-
--- Searching
-vim.cmd [[
-  let &grepprg = 'rg --vimgrep'
-  let &grepformat = '%f:%l:%c:%m,%f:%l:%m'
-]]
--- Folding
-vim.o.foldenable = false
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.o.foldcolumn = '0'
-vim.o.foldtext = ''
-vim.o.fillchars = 'eob: ,fold: ,foldopen:,foldclose:,diff:╱'
-
--- cursorline only in the current window
-vim.cmd [[
-augroup CursorLine
-  au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  "au VimEnter,WinEnter,BufWinEnter * echo &filetype
-  au WinLeave * setlocal nocursorline
-  au FocusLost * setlocal nocursorline
-  au FocusGained * setlocal cursorline
-  "au FileType TelescopePrompt setlocal nocursorline
-  au FileType snacks_picker_input set nocursorline
-augroup END
-]]
-
-vim.api.nvim_create_autocmd("VimResized", {
-  pattern = "*",
-  callback = function()
-    vim.cmd [[
-      let savetab = tabpagenr()
-      tabdo wincmd =
-      execute 'tabnext' savetab
-    ]]
-  end
-})
---
--- close some filetypes with <q>
-vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("close_with_q", { clear = true }),
-  pattern = {
-    "PlenaryTestPopup",
-    "checkhealth",
-    "dbout",
-    "gitsigns-blame",
-    "grug-far",
-    "help",
-    "lspinfo",
-    "neotest-output",
-    "neotest-output-panel",
-    "neotest-summary",
-    "notify",
-    "qf",
-    "spectre_panel",
-    "startuptime",
-    "tsplayground",
-  },
-  callback = function(event)
-    vim.bo[event.buf].buflisted = false
-    vim.schedule(function()
-      vim.keymap.set("n", "q", function()
-        vim.cmd("close")
-        pcall(vim.api.nvim_buf_delete, event.buf, { force = true })
-      end, {
-        buffer = event.buf,
-        silent = true,
-        desc = "Quit buffer",
-      })
-    end)
-  end,
-})
-
--- LSP
-vim.keymap.set('n', '<leader>ti', function()
-  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-end, { desc = 'Toggle inline hints' })
-
-vim.keymap.set('n', 'K', function()
-  vim.lsp.buf.hover({ max_width = 120, max_height = 20 })
-end, { desc = 'LSP Hover' })
-
-vim.lsp.enable({ 'luals', 'gopls' })
-
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client and client:supports_method('textDocument/foldingRange') then
-      local win = vim.api.nvim_get_current_win()
-      vim.wo[win][0].foldmethod = 'expr'
-      vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
-    end
-  end,
-})
-vim.api.nvim_create_autocmd('LspDetach', { command = 'setl foldexpr<' })
-
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('my.lsp', {}),
-  callback = function(args)
-    vim.diagnostic.config({
-      virtual_text = false,
-      -- virtual_lines = {
-      --   current_line = true
-      -- },
-      -- virtual_lines = false,
-      -- underline = true,
-      signs = {
-        text = {
-          [vim.diagnostic.severity.ERROR] = '',
-          [vim.diagnostic.severity.WARN] = '',
-          [vim.diagnostic.severity.INFO] = '',
-          [vim.diagnostic.severity.HINT] = '',
-        }
-      }
-    })
-
-    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-
-    if client.server_capabilities.documentSymbolProvider then
-      require("nvim-navic").attach(client, args.buf)
-    end
-
-    if client.server_capabilities.documentHighlightProvider then
-      local group = vim.api.nvim_create_augroup("LSPDocumentHighlight", { clear = false })
-      vim.api.nvim_clear_autocmds({ buffer = args.buf, group = group })
-
-      vim.opt.updatetime = 300
-
-      vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-        buffer = args.buf,
-        group = group,
-        callback = function()
-          vim.lsp.buf.document_highlight()
-        end,
-      })
-      vim.api.nvim_create_autocmd({ "CursorMoved" }, {
-        buffer = args.buf,
-        group = group,
-        callback = function()
-          vim.lsp.buf.clear_references()
-        end,
-      })
-    end
-
-    -- Auto-format ("lint") on save.
-    -- Usually not needed if server supports "textDocument/willSaveWaitUntil".
-    if not client:supports_method('textDocument/willSaveWaitUntil')
-        and client:supports_method('textDocument/formatting') then
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
-        buffer = args.buf,
-        callback = function()
-          if vim.bo.filetype == "go" then
-            local params = vim.lsp.util.make_range_params(0, "utf-8")
-            params.context = { only = { "source.organizeImports" } }
-            -- buf_request_sync defaults to a 1000ms timeout. Depending on your
-            -- machine and codebase, you may want longer. Add an additional
-            -- argument after params if you find that you have to write the file
-            -- twice for changes to be saved.
-            -- E.g., vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 3000)
-            local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params)
-            for cid, res in pairs(result or {}) do
-              for _, r in pairs(res.result or {}) do
-                if r.edit then
-                  local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
-                  vim.lsp.util.apply_workspace_edit(r.edit, enc)
-                end
-              end
-            end
-          end
-
-          vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })
-        end,
-      })
-    end
-  end,
-})
-
-vim.api.nvim_create_user_command('Google', function(o)
-  -- local escaped = require('socket.url').escape(o.args)
-  local start_line = o.line1
-  local end_line = o.line2
-  local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
-  local joined = table.concat(lines, "\n")
-
-  local escaped = vim.uri_encode(joined)
-  local url = ('https://www.google.com/search?q=%s'):format(escaped)
-  vim.ui.open(url)
-end, { range = true, desc = 'just google it' })
-
--- vim.keymap.set('v', '<leader>gi', 'Google expand("<cword>")'
-
--- Keymaps for better default experience
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.keymap.set('n', '<esc>', '<CMD> noh <CR>', { desc = "Clear highlights" })
-
-vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = "Page up with cursor in the center" })
-vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = "Page down with cursor in the center" })
-
-vim.keymap.set('n', '<leader>Q', ':qa!<CR>', { silent = true, desc = "Quit now!" })
-vim.keymap.set('n', '<leader>fs', ':w<CR>', { silent = true, desc = "Save file" })
-vim.keymap.set('n', '<leader>q', ':q<CR>', { noremap = true, silent = true, desc = "Close window" })
-vim.keymap.set('x', 'p', 'p:let @+=@0<CR>:let @"=@0<CR>', { silent = true, desc = "Dont copy replaced text" })
-
--- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
-vim.keymap.set('n', 'p', 'p`[v`]=', { desc = "Paste and format" })
-vim.keymap.set('n', 'P', 'P`[v`]=', { desc = "Paste and format" })
-
--- better indenting
-vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
-vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
-
--- Window navigation
-vim.keymap.set('n', '<leader>wv', [[<Cmd>wincmd v<CR>]], { noremap = true, silent = true })
-vim.keymap.set('n', '<leader>ws', [[<Cmd>wincmd s<CR>]], { noremap = true, silent = true })
-
--- Kill buffers
-vim.keymap.set('n', '<leader>bd', require("snacks").bufdelete.delete,
-  { desc = "Delete buffer" })
-vim.keymap.set('n', '<leader>bD', require("snacks").bufdelete.other,
-  { desc = "Delete other buffers" })
-
--- Window sizing
-vim.keymap.set('n', "<M-left>", [[<cmd>vertical resize +10<CR>]], { desc = "Grow vertical split" })
-vim.keymap.set('n', "<M-up>", [[<cmd>resize -5<CR>]], { desc = "Shrink horizontal split" })
-vim.keymap.set('n', "<M-down>", [[<cmd>resize +5<CR>]], { desc = "Grow horisontal split" })
-vim.keymap.set('n', "<M-right>", [[<cmd>vertical resize -10<CR>]], { desc = "Shrink vertical split" })
-
--- tabs
-vim.keymap.set('n', "<leader><tab><tab>", '<CMD>tabnew<CR>', { desc = "Open new tab" })
-vim.keymap.set('n', "<leader><tab>c", '<CMD>tabclose<CR>', { desc = "Close tab" })
-vim.keymap.set("n", "<leader><tab>h", "<cmd>tabprev<CR>", { desc = "Previous tab" })
-vim.keymap.set("n", "<leader><tab>l", "<cmd>tabnext<CR>", { desc = "Next tab" })
-vim.keymap.set("n", "<leader><tab>j", "<cmd>tabm -1<CR>", { desc = "Move tab left" })
-vim.keymap.set("n", "<leader><tab>k", "<cmd>tabm +1<CR>", { desc = "Move tab right" })
-vim.keymap.set("n", "<leader><tab>r", function()
-  local bufname = vim.fn.input("New tab name: ")
-  if bufname ~= "" then
-    local cmd = ":TabRename " .. bufname
-    vim.cmd(cmd)
-  end
-end, { desc = "Rename tab" })
-
-vim.keymap.set('n', '<leader>tn', '<cmd>set number! relativenumber!<cr>', { desc = 'Toggle line numbers' })
-
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
-})
-
--- document existing key chains
-require('which-key').add {
-  { "<leader>b", group = "Buffer" },
-  { "<leader>c", group = "Code" },
-  { "<leader>d", group = "Diff | Debug" },
-  { "<leader>f", group = "File | Find" },
-  { "<leader>g", group = "Git | Commenting" },
-  { "<leader>gg", group = "Github" },
-  { "<leader>h", group = "Hunks" },
-  { "<leader>l", group = "Language (LSP)", icon = '󰦨' },
-  { "<leader>r", group = "Run tests", icon = '󰙨' },
-  { "<leader>s", group = "Search | Sessions" },
-  { "<tab>", group = "Tabs" },
-  { "<leader>t", group = "Toggle" },
-  { "<leader>v", group = "Vimux", icon = '' },
-  { "<leader>w", group = "Workspace | Window" },
-  { "<leader>x", group = "Trouble", icon = '' },
-  { "<leader>!", group = "", hidden = true },
-  { "<leader>q", group = "Quit" },
+vim.opt.listchars    = {
+  nbsp = "␣",
+  tab = "  ",
+  trail = "·",
+}
+vim.opt.diffopt      = {
+  "internal",
+  "filler",
+  "linematch:60",
+  "vertical",
+  "inline:word",
+  "algorithm:histogram",
 }
 
-require('which-key').add({
-  mode = { 'v' },
-  { "<leader>g", group = '[G]it Hunk' },
-})
+require("config.globals")
+require("config.autocmds")
+require("config.lsp")
 
--- vim.opt.titlestring = "[[%f %h%m%r%w %{v:progname} (%{tabpagenr()} of %{tabpagenr('$')})]]"
-vim.opt.titlestring = "%{v:progname} :: %f %h%m%r%w"
-vim.cmd [[
-  if &term == "tmux"
-    set t_ts=^[k
-    set t_fs=^[\
-  endif
-]]
-vim.cmd("set title")
-vim.filetype.add({ extension = { http = 'http' } })
+require("plugins.icons")
+require("plugins.treesitter")
 
--- vim: ts=2 sts=2 sw=2 et
+require("plugins.colorscheme")
+require("plugins.complete")
+require("plugins.dap")
+require("plugins.git")
+-- require("plugins.gofold")
+require("plugins.glance")
+require("plugins.kulala")
+require("plugins.logging")
+require("plugins.mini")
+require("plugins.oil")
+require("plugins.other")
+require("plugins.projectionist")
+require("plugins.quickfix")
+require("plugins.rainbow")
+require("plugins.snacks")
+require("plugins.testing")
+require("plugins.treesitter-context")
+
+require('ui.statusline')
+
+require("config.keys")
+
+
+
+-- nvim <-> tmux: set tmux cwd to current Neovim cwd (for all windows & future ones)
+local function tmux_set_cwd_to_nvim()
+  if not os.getenv("TMUX") then
+    vim.notify("Not inside tmux.", vim.log.levels.WARN)
+    return
+  end
+
+  local cwd = vim.loop.cwd() or vim.fn.getcwd(0, 0)
+  local function sh(cmd)
+    return vim.fn.system(cmd):gsub("%s+$", "")
+  end
+  local function q(s) -- shell-escape with double-quotes
+    return '"' .. tostring(s):gsub('"', '\\"') .. '"'
+  end
+
+  -- find current tmux session name
+  local session = sh([[tmux display-message -p "#S"]])
+  if session == "" then
+    vim.notify("Could not detect tmux session.", vim.log.levels.ERROR)
+    return
+  end
+
+  -- 1) New windows should start in this path
+  -- set session-level default-path (affects new windows/panes in this session)
+  sh(string.format([[tmux set-option -t %s default-path %s]], session, q(cwd)))
+
+  -- also set window-level default-path for all existing windows (belt & suspenders)
+  local wins = sh([[tmux list-windows -t ]] .. session .. [[ -F "#{window_id}"]])
+  for wid in wins:gmatch("[^\n]+") do
+    sh(string.format([[tmux set-window-option -t %s default-path %s]], wid, q(cwd)))
+  end
+
+  -- 2) For existing panes, cd if they look like an interactive shell
+  -- We only touch panes whose current command is a typical shell.
+  local panes = sh([[tmux list-panes -s -F "#{session_name}:#{window_index}.#{pane_index} #{pane_current_command}"]])
+  local is_shell = { bash = true, zsh = true, fish = true, sh = true, ksh = true, nu = true }
+  for line in panes:gmatch("[^\n]+") do
+    local target, cmd = line:match("^(%S+)%s+(%S+)$")
+    if target and cmd and is_shell[cmd] then
+      local cd_cmd
+      if cmd == "fish" then
+        cd_cmd = 'cd ' .. q(cwd)
+      elseif cmd == "nu" then
+        cd_cmd = 'cd ' .. q(cwd)
+      else
+        cd_cmd = 'cd -- ' .. q(cwd)
+      end
+      -- send 'cd <cwd>' and Enter
+      sh(string.format([[tmux send-keys -t %s %s C-m]], target, q(cd_cmd)))
+    end
+  end
+
+  vim.notify("tmux working directory set to: " .. cwd, vim.log.levels.INFO)
+end
+
+vim.api.nvim_create_user_command("TmuxSetCwd", tmux_set_cwd_to_nvim, {})
