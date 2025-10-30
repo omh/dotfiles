@@ -27,6 +27,7 @@ for k, v in pairs(HL) do
 end
 
 local ORDER = {
+  "statuscol_pad",
   "path",
   "breadcrumbs",
   "mod",
@@ -36,7 +37,6 @@ local ORDER = {
   "pad",
   "diag",
   "git",
-  "scrollbar",
   "pad",
 }
 
@@ -58,6 +58,16 @@ local function concat(parts)
   return table.concat(out, " ")
 end
 
+-- status column padding -----------------------------------------
+local function statuscol_padding()
+  local win = api.nvim_get_current_win()
+  local wininfo = vim.fn.getwininfo(win)[1]
+  if not wininfo then return "" end
+
+  -- textoff gives us the exact width of the status column (sign + number + fold columns)
+  return string.rep(" ", wininfo.textoff - 2) .. "%#Constant#%#Normal#"
+end
+
 -- path -----------------------------------------
 local function path_widget(root, fname)
   local file_name = fn.fnamemodify(fname, ":t")
@@ -66,7 +76,7 @@ local function path_widget(root, fname)
   icon, hl = mini_icons.get("file", file_name)
 
   if fname == "" then file_name = "[No Name]" end
-  path = tools.hl_str(hl, icon) .. " " .. file_name
+  path = tools.hl_str(hl, icon) .. " %#Title#" .. file_name
 
   if bo.buftype == "help" then return ICON.file .. path end
 
@@ -78,7 +88,7 @@ local function path_widget(root, fname)
     table.insert(elements, element)
   end
   if #elements >= 1 then
-    dir_path = table.concat(elements, " > ") .. " > "
+    dir_path = table.concat(elements, "%#Comment# > %#Normal#") .. "%#Comment#" .. " > "
   end
 
   local win_w = api.nvim_win_get_width(0)
@@ -89,7 +99,7 @@ local function path_widget(root, fname)
   --   dir_path = ICON.dir .. "" .. dir_path
   -- end
 
-  return dir_path .. path
+  return "%#Normal#" .. dir_path .. path
 end
 
 -- navic breadcrumbs -----------------------------------------
@@ -164,14 +174,6 @@ local function diagnostics_widget()
   return table.concat(diags, " ")
 end
 
--- scrollbar ---------------------------------------------
-local function scrollbar_widget()
-  local cur = api.nvim_win_get_cursor(0)[1]
-  local total = api.nvim_buf_line_count(0)
-  local idx = math.floor((cur - 1) / total * #SBAR) + 1
-  return tools.hl_str("BufferInactive", SBAR[idx]:rep(2))
-end
-
 -- render ---------------------------------------------
 function M.render()
   local fname = api.nvim_buf_get_name(0)
@@ -186,6 +188,7 @@ function M.render()
   local buf = api.nvim_win_get_buf(0)
 
   local parts = {
+    statuscol_pad = statuscol_padding(),
     pad = PAD,
     path = path_widget(root, fname),
     breadcrumbs = breadcrumbs(),
@@ -197,7 +200,6 @@ function M.render()
     ro = get_opt("readonly", { buf = buf }) and ICON.readonly or "",
     sep = SEP,
     diag = diagnostics_widget(),
-    scrollbar = scrollbar_widget(),
   }
 
   return concat(parts)

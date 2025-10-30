@@ -1,0 +1,59 @@
+{
+  "plugins": {
+    "endec.nvim": [],
+    "gitsigns.nvim": [],
+    "glance.nvim": [],
+    "guttermarks.nvim": [],
+    "jellybeans.nvim": {
+      "rev": "28b8088",
+      "src": "https://github.com/WTFox/jellybeans.nvim"
+    },
+    "kulala.nvim": {
+      "rev": "9a9308b",
+      "src": "https://github.com/mistweaverco/kulala.nvim"
+    },
+    "mason.nvim": [],
+    "mini.icons": [],
+    "mini.nvim": {
+      "rev": "ee4a4a4"
+    },
+    "neogit": {
+      "rev": "c6d00913"
+    },
+    "nvim-bqf": [],
+    "nvim-dap": [],
+    "nvim-dap-go": [],
+    "nvim-dap-view": {
+      "rev": "1fe98bc"
+    },
+    "nvim-navic": [],
+    "nvim-treesitter": {
+      "version": "'master'"
+    },
+    "nvim-treesitter-context": {
+      "rev": "ec308c7"
+    },
+    "nvim-treesitter-textobjects": [],
+    "oil.nvim": [],
+    "plenary.nvim": [],
+    "pr.nvim": [],
+    "quicker.nvim": [],
+    "rainbow-delimiters.nvim": {
+      "rev": "b6b3c9e"
+    },
+    "snacks.nvim": {
+      "rev": "6ca5417"
+    },
+    "timber.nvim": [],
+    "tiny-inline-diagnostic.nvim": {
+      "rev": "994c13d"
+    },
+    "tslime.vim": [],
+    "vim-projectionist": [],
+    "vim-rsi": [],
+    "vim-test": [],
+    "vim-tmux-navigator": [],
+    "visual-whitespace.nvim": [],
+    "vscode.nvim": []
+  }
+}

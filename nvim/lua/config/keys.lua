@@ -105,10 +105,10 @@ set("n", "<leader>fe", "<cmd>Pick resume<cr>", { desc = "Resume last picker" })
 set("n", "<leader>fr", function() require('snacks').picker.recent({ layout = _G.vscode }) end,
   { desc = "Find recent files" })
 set("n", "<leader>fs",
-  function() require('snacks').picker.grep({ layout = { preset = 'ivy_split' }, args = { "--trim" } }) end,
+  function() require('snacks').picker.grep({ layout = { preset = 'ivy' }, args = { "--trim" } }) end,
   { desc = "Search files" })
 set("v", "<leader>fs",
-  function() require('snacks').picker.grep_word({ layout = { preset = 'ivy_split' }, args = { "--trim" } }) end,
+  function() require('snacks').picker.grep_word({ layout = { preset = 'ivy' }, args = { "--trim" } }) end,
   { desc = "Search selection" })
 set("n", "<leader>fh",
   function() require('snacks').picker.help({ layout = _G.vscode, pattern = vim.fn.expand("<cword>") }) end,

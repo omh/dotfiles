@@ -1,11 +1,11 @@
 {
   "if error": {
-    "prefix": "err",
+    "prefix": "e",
     "body": "if err != nil {\n\treturn ${0:err}\n}",
     "desc": "if err != nil"
   },
   "if error stack": {
-    "prefix": "errs",
+    "prefix": "es",
     "body": "if err != nil {\n\treturn errors.WithStack(${1:err})\n}",
     "desc": "if error stack"
   },
@@ -28,5 +28,15 @@
     "prefix": "pl",
     "body": "fmt.Println(\"${1}\", ${0})",
     "desc": "fmt.Println"
+  },
+  "for": {
+    "prefix": "for",
+    "body": "for ${1:_}, ${2} := range ${4} {\n\t${5}\n}",
+    "desc": "for range"
+  },
+  "if len": {
+    "prefix": "ifl",
+    "body": "if len(${1}) ${2:> 0} {\n\t${3}\n}",
+    "desc": "if len"
   }
 }

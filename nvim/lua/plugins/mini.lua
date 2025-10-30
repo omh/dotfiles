@@ -10,20 +10,6 @@ vim.defer_fn(function()
   })
   require('mini.icons').tweak_lsp_kind()
   require('mini.jump').setup()
-  require('mini.diff').setup({
-    view = {
-      style = 'sign',
-      signs = { add = '│', change = '│', delete = '│' },
-    },
-    mappings = {
-      -- Go to hunk range in corresponding direction
-      goto_first = '[C',
-      goto_prev = '[c',
-      goto_next = ']c',
-      goto_last = ']C',
-    },
-  })
-
 
   local gen_loader = require('mini.snippets').gen_loader
   require('mini.snippets').setup({
@@ -34,6 +20,18 @@ vim.defer_fn(function()
       gen_loader.from_lang(),
     },
   })
+
+  local make_stop = function()
+    local au_opts = { pattern = '*:n', once = true }
+    au_opts.callback = function()
+      while MiniSnippets.session.get() do
+        MiniSnippets.session.stop()
+      end
+    end
+    vim.api.nvim_create_autocmd('ModeChanged', au_opts)
+  end
+  local opts = { pattern = 'MiniSnippetsSessionStart', callback = make_stop }
+  vim.api.nvim_create_autocmd('User', opts)
 
 
   require('mini.surround').setup()

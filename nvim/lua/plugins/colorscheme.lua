@@ -1,3 +1,18 @@
+-- vim.pack.add({ 'https://github.com/xeind/nightingale.nvim' })
+-- require('nightingale').setup({
+--   commentStyle = { italic = false },
+--   functionStyle = { italic = false },
+--   keywordStyle = { italic = false, bold = true },
+-- })
+-- vim.cmd("colorscheme nightingale")
+
+-- vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
+--   group = vim.api.nvim_create_augroup('Color', {}),
+--   pattern = "*",
+--   callback = function()
+--   end
+-- })
+
 vim.pack.add({ 'https://github.com/Mofiqul/vscode.nvim' })
 vim.cmd("colorscheme vscode")
 
@@ -47,6 +62,8 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
     hl(0, "DapStopped", { bg = c.vscPopupHighlightBlue })
     hl(0, "DapStoppedLine", { bg = c.vscPopupHighlightBlue })
 
+    hl(0, "NeogitFloatBorder", { link = "FloatBorder" })
+
     hl(0, "RainbowDelimiterRed", { fg = c.vscDarkYellow })
     hl(0, "RainbowDelimiterYellow", { fg = c.vscPink })
     hl(0, "RainbowDelimiterBlue", { fg = c.vscBlue })
@@ -74,7 +91,7 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
     hl(0, 'TreesitterContext', { bg = "none" })
     hl(0, 'TreesitterContextBottom', { bg = "none" })
     hl(0, 'TreesitterContextSeparator',
-      { fg = context, bg = "none", strikethrough = true, bold = true })
+      { fg = context, bg = "none", bold = true })
 
 
     hl(0, "NavicIconsFile", { link = "Directory" })
