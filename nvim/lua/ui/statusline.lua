@@ -104,6 +104,11 @@ end
 
 -- navic breadcrumbs -----------------------------------------
 local function breadcrumbs()
+  -- Hide breadcrumbs in inactive windows
+  if vim.wo.winhighlight ~= "" then
+    return ""
+  end
+
   local b = require 'nvim-navic'.get_location()
   if b == "" then
     return b
