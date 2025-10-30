@@ -207,6 +207,24 @@ end
 
 vim.o.winbar = "%{%v:lua.require('ui.statusline').render()%}"
 
+-- Use winhighlight to make inactive windows appear dimmed
+-- This remaps all highlight groups to NonText for inactive windows
+vim.api.nvim_create_augroup("StatuslineInactive", { clear = true })
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+  group = "StatuslineInactive",
+  callback = function()
+    vim.wo.winhighlight = ""
+  end,
+})
+vim.api.nvim_create_autocmd({ "WinLeave" }, {
+  group = "StatuslineInactive",
+  callback = function()
+    -- Remap common highlight groups used in statusline to NonText
+    vim.wo.winhighlight =
+    "DiagnosticOk:NonText,NonText:NonText,Title:NonText,Comment:NonText,Normal:NonText,Directory:NonText,DiagnosticError:NonText,DiagnosticWarn:NonText,DiagnosticInfo:NonText,DiagnosticHint:NonText,GitSignsAdd:NonText,GitSignsChange:NonText,GitSignsDelete:NonText,Constant:NonText"
+  end,
+})
+
 function CustomTabline()
   local tabline = ''
   for i = 1, vim.fn.tabpagenr('$') do
