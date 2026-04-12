@@ -10,7 +10,7 @@ tmux set -g pane-border-style fg='#313131'
 tmux set -g pane-active-border-style fg='#666666'
 
 # are we zoomed into a pane?
-tmux set -g status-left '#[fg=#808080] session: #[fg=#FFFFFF]#S #[fg=#808080]@ #(cd #{pane_current_path}; (git rev-parse --abbrev-ref HEAD; and echo "none"))'
+tmux set -g status-left '#[fg=#808080] #[fg=#C586C0]#S#[fg=#808080] -> #(cd #{pane_current_path}; (git rev-parse --abbrev-ref HEAD; and echo "none"))'
 tmux set -g status-left-length 150
 tmux set -g window-status-current-format "#[fg=#FFFFFF]#I: #W#{?window_zoomed_flag, #[fg=#569CD6]󰊓 ,}"
 tmux set -g window-status-format "#[fg=#808080]#I: #W#{?window_zoomed_flag, 󰊓 ,}"

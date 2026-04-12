@@ -1,3 +1,8 @@
+vim.cmd [[
+    let g:tmux_navigator_disable_when_zoomed = 1
+]]
+
+
 vim.pack.add({
   -- hjkl navigation with tmux
   'https://github.com/christoomey/vim-tmux-navigator',
@@ -11,8 +16,6 @@ vim.pack.add({
   'https://github.com/ovk/endec.nvim',
   -- better diagnostics
   'https://github.com/rachartier/tiny-inline-diagnostic.nvim',
-  -- mason - for installing LSPs
-  'https://github.com/williamboman/mason.nvim',
   -- show hidden characters when selecting
   'https://github.com/mcauley-penney/visual-whitespace.nvim',
   -- view pr in browser
@@ -21,7 +24,6 @@ vim.pack.add({
 
 vim.defer_fn(function()
   require("guttermarks").setup()
-  require("mason").setup()
   require("tiny-inline-diagnostic").setup()
   require("pr").setup()
   require("nvim-navic").setup({

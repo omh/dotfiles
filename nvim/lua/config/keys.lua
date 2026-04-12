@@ -72,6 +72,11 @@ set("n", "<leader>ggc", function() require('snacks').gitbrowse.get_url() end, { 
 set("x", "<leader>ggo", function() require('snacks').gitbrowse() end, { desc = "Open selection on github" })
 set("x", "<leader>ggc", function() require('snacks').gitbrowse.get_url() end, { desc = "Copy selection's GitHub URL" })
 
+-- Markdown
+set("n", "<leader>mps", "<cmd>MarkdownPreview<cr>", { desc = "Markdown: Start preview" })
+set("n", "<leader>mpS", "<cmd>MarkdownPreviewStop<cr>", { desc = "Markdown: Stop preview" })
+set("n", "<leader>mpr", "<cmd>MarkdownPreviewRefresh<cr>", { desc = "Markdown: Refresh preview" })
+
 -- Projectionist
 set('n', '<leader>fa', '<cmd>A<CR>', { desc = 'Alternate file' })
 
@@ -88,6 +93,9 @@ set("n", "<leader>kO",
     vim.cmd("e ~/code/http/" .. dir .. ".http")
   end,
   { desc = "Kulala in current window" })
+set("n", "<leader>ke", function()
+  require('kulala').set_selected_env()
+end, { desc = "Change Kulala env" })
 
 -- Testing
 set('n', '<leader>rr', '<cmd>TestLast<CR>', { desc = 'Run previous test' })
@@ -116,12 +124,22 @@ set("n", "<leader>fh",
 set("n", "H", function() require('snacks').picker.buffers({ layout = _G.vscode }) end, { desc = "Buffers" })
 set("n", "<leader>fk", function() require('snacks').picker.keymaps() end, { desc = "Search keymaps" })
 set("n", "<leader>fH", function() require('snacks').picker.highlights() end, { desc = "Search highlights" })
+set("n", "<leader>fg", function() require('snacks').picker.git_status({ layout = _G.ivy50 }) end,
+  { desc = "Git status in snacks" })
 
--- LSP (Glance/Snacks)
-set("n", "grr", "<cmd>Glance references<cr>", { desc = "Show references" })
-set("n", "gri", "<cmd>Glance implementations<cr>", { desc = "Show implementations" })
-set("n", "gd", "<cmd>Glance definitions<cr>", { desc = "Show definitions" })
-set("n", "grt", "<cmd>Glance type_definitions<cr>", { desc = "Show type definitions" })
+-- LSP (Snacks)
+set("n", "grr", function()
+  require('snacks').picker.lsp_references({ layout = _G.med_preview })
+end, { desc = "Show references" })
+set("n", "gri", function()
+  require('snacks').picker.lsp_implementations({ layout = _G.med_preview })
+end, { desc = "Show implementations" })
+set("n", "gd", function()
+  require('snacks').picker.lsp_definitions({ layout = _G.med_preview })
+end, { desc = "Show definitions" })
+set("n", "grt", function()
+  require('snacks').picker.lsp_type_definitions({ layout = _G.med_preview })
+end, { desc = "Show type definitions" })
 set("n", "go", function() require('snacks').picker.lsp_symbols({ layout = _G.vscode }) end, { desc = "Symbols" })
 set("n", "gO", function() require('snacks').picker.lsp_workspace_symbols({ layout = _G.vscode_med }) end,
   { desc = "Workspace symbols" })

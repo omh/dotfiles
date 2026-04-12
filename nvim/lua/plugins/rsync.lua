@@ -1,7 +1,9 @@
 vim.pack.add({
-  { src = 'https://github.com/OscarCreator/rsync.nvim' },
   { src = 'https://github.com/nvim-lua/plenary.nvim' },
+  { src = 'https://github.com/OscarCreator/rsync.nvim' },
 })
+
+require("rsync").setup()
 
 -- {
 --   'OscarCreator/rsync.nvim',

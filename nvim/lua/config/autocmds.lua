@@ -66,6 +66,37 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
+
+    vim.keymap.set('n', '<leader>gf', function()
+      -- get the LSP client attached to this buffer (prefer gopls)
+      -- local client = (vim.lsp.get_clients { bufnr = 0, name = "gopls" }[1])
+      --     or (vim.lsp.get_clients { bufnr = 0 }[1])
+      local enc = (client and client.offset_encoding) or "utf-16" -- sensible fallback
+
+      -- NOTE: Neovim 0.11+ needs the position_encoding here
+      local params = vim.lsp.util.make_range_params(0, enc)
+      params.context = { only = { "refactor.rewrite.fillStruct" } }
+
+      vim.lsp.buf_request(0, "textDocument/codeAction", params, function(err, result, ctx)
+        if err then
+          vim.notify("codeAction error: " .. tostring(err), vim.log.levels.ERROR)
+          return
+        end
+        local c = vim.lsp.get_client_by_id(ctx.client_id)
+        for _, r in ipairs(result or {}) do
+          if r.kind == "refactor.rewrite.fillStruct" then
+            if r.edit then
+              vim.lsp.util.apply_workspace_edit(r.edit, c.offset_encoding)
+            elseif r.command then
+              vim.lsp.buf.execute_command(r.command)
+            end
+            return
+          end
+        end
+        vim.notify("No fillStruct action available here", vim.log.levels.INFO)
+      end)
+    end, { buffer = 0, silent = true })
+
     -- attach navic for breadcrumps
     if client.server_capabilities.documentSymbolProvider then
       require("nvim-navic").attach(client, args.buf)

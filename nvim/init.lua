@@ -26,6 +26,7 @@ vim.o.foldenable     = false                           -- don't fold by default
 vim.o.foldmethod     = "expr"                          -- use expr to determine folds
 vim.o.foldcolumn     = '0'                             -- don't show the annoying fold dept
 vim.o.foldtext       = ''                              -- use normal highlighting for folded text
+vim.o.signcolumn     = 'auto:1-5'                      -- use up to 5 signs
 vim.o.ignorecase     = true                            -- case insensitive search
 vim.o.smartcase      = true                            -- unless we start with a capital letter
 vim.o.hlsearch       = true                            -- highlight search as you type
@@ -41,10 +42,6 @@ vim.o.swapfile       = false                           -- no swap files please
 vim.o.wildmode       = 'noselect:lastused,full'
 vim.o.wildoptions    = 'fuzzy,pum,tagfile'             -- fuzzy cmd line matching
 
-vim.bo.indentexpr    =
-"v:lua.require'nvim-treesitter'.indentexpr()" -- how to indent
-vim.o.foldexpr       =
-"v:lua.vim.treesitter.foldexpr()"             -- how to do folds
 vim.o.completeopt    = 'menuone,noselect,fuzzy'
 
 vim.opt.fillchars    = {
@@ -54,27 +51,27 @@ vim.opt.fillchars    = {
   foldclose = ">", -- closed fold arrow (right)
   foldsep = " ", -- separator
   fold = " ", -- filler inside foldcolumn
-  msgsep = "━",
-  horiz = "━",
-  horizup = "┻",
-  horizdown = "┳",
-  vert = "┃",
-  vertleft = "┫",
-  vertright = "┣",
-  verthoriz = "╋",
+  -- msgsep = "━",
+  -- horiz = "━",
+  -- horizup = "┻",
+  -- horizdown = "┳",
+  -- vert = "┃",
+  -- vertleft = "┫",
+  -- vertright = "┣",
+  -- verthoriz = "╋",
 }
--- Use fancy disclosure triangles
-vim.o.foldcolumn     = "auto"
 
--- -- use nice color highlighting in the command line
--- require('vim._extui').enable({ enable = true })
+-- use nice color highlighting in the command line
+require('vim._core.ui2').enable({
+  enable = true
+})
 
-vim.opt.listchars    = {
+vim.opt.listchars = {
   nbsp = "␣",
   tab = "  ",
   trail = "·",
 }
-vim.opt.diffopt      = {
+vim.opt.diffopt   = {
   "internal",
   "filler",
   "linematch:60",
@@ -86,26 +83,29 @@ vim.opt.diffopt      = {
 require("config.globals")
 require("config.autocmds")
 require("config.lsp")
-
 require("plugins.icons")
 require("plugins.treesitter")
 
 require("plugins.colorscheme")
 require("plugins.dap")
 require("plugins.git")
-require("plugins.glance")
+-- require("plugins.gofold")
 require("plugins.kulala")
 require("plugins.logging")
+require("plugins.markdown")
 require("plugins.mini")
 require("plugins.oil")
 require("plugins.other")
 require("plugins.projectionist")
 require("plugins.quickfix")
 require("plugins.rainbow")
+require("plugins.rsync")
 require("plugins.snacks")
 require("plugins.testing")
 require("plugins.treesitter-context")
 
 require('ui.statusline')
-
 require("config.keys")
+
+-- vim.bo.indentexpr    = "v:lua.require'nvim-treesitter'.indentexpr()" -- how to indent
+-- vim.o.foldexpr       = "v:lua.vim.treesitter.foldexpr()"             -- how to do folds

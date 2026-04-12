@@ -154,9 +154,18 @@ end
 
 -- diagnostics ---------------------------------------------
 local function diagnostics_widget()
-  if not tools.diagnostics_available() then return "" end
-  local diag_count = vim.diagnostic.count(0)
   local diags = {}
+
+  local bufnr = 0
+
+  if not vim.diagnostic.is_enabled({ bufnr = bufnr }) then
+    return ""
+  end
+
+  local diag_count = vim.diagnostic.count(bufnr)
+  if not diag_count or vim.tbl_isempty(diag_count) then
+    return ""
+  end
 
   if diag_count[vim.diagnostic.severity.ERROR] then
     table.insert(diags, ICON.error .. "" .. tools.hl_str("DiagnosticError", diag_count[vim.diagnostic.severity.ERROR]))

@@ -42,9 +42,27 @@ vim.defer_fn(function()
         input = {
           keys = {
             ["<Esc>"] = { "close", mode = { "n", "i" } },
+            -- ["<C-Q>"] = { "qflist_append", mode = { "n", "i" } },
           }
-        }
-      }
+        },
+        list = {
+          keys = {
+            ["<C-Q>"] = "qflist_append",
+          },
+        },
+      },
+      actions = {
+        qflist_append = function(picker)
+          local sel = picker:selected()
+          local items = #sel > 0 and sel or picker:items()
+
+          picker:close()
+
+          -- append to existing quickfix list instead of replacing it
+          vim.fn.setqflist({}, "a", { items = items })
+          vim.cmd.copen()
+        end,
+      },
     },
   })
 end, 200)
@@ -84,5 +102,23 @@ _G.vscode_med = {
     { win = "input",   height = 1,          border = "bottom" },
     { win = "list",    border = "none" },
     { win = "preview", title = "{preview}", border = "none",  height = 0.45 },
+  },
+}
+
+_G.med_preview = {
+  preview = 'bottom',
+  layout = {
+    backdrop = false,
+    width = 0.60,
+    min_width = 140,
+    height = 0.80,
+    min_height = 40,
+    border = "rounded",
+    box = "vertical",
+    title = "{title} {live} {flags}",
+
+    { win = "input",   height = 1,          border = "bottom" },
+    { win = "list",    border = "none" },
+    { win = "preview", title = "{preview}", border = "top",   height = 0.65 },
   },
 }

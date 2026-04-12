@@ -1,15 +1,29 @@
--- vim.pack.add({ 'https://github.com/xeind/nightingale.nvim' })
--- require('nightingale').setup({
---   commentStyle = { italic = false },
---   functionStyle = { italic = false },
---   keywordStyle = { italic = false, bold = true },
--- })
--- vim.cmd("colorscheme nightingale")
-
+-- vim.pack.add({ 'https://github.com/rebelot/kanagawa.nvim' })
 -- vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
 --   group = vim.api.nvim_create_augroup('Color', {}),
 --   pattern = "*",
 --   callback = function()
+--     require('kanagawa').setup({
+--       colors = {
+--         theme = {
+--           all = {
+--             ui = {
+--               bg_gutter = "none"
+--             }
+--           }
+--         }
+--       },
+--       overrides = function(colors)
+--         local theme = colors.theme
+--         return {
+--           Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add `blend = vim.o.pumblend` to enable transparency
+--           PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+--           PmenuSbar = { bg = theme.ui.bg_m1 },
+--           PmenuThumb = { bg = theme.ui.bg_p2 },
+--         }
+--       end,
+--     })
+--     vim.cmd("colorscheme kanagawa-dragon")
 --   end
 -- })
 
@@ -93,6 +107,10 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
     hl(0, 'TreesitterContextSeparator',
       { fg = context, bg = "none", bold = true })
 
+
+    hl(0, 'GlanceBorderTop', { fg = c.vscBlue, strikethrough = true, blend = 0 })
+    hl(0, 'GlancePreviewBorderBottom', { link = 'GlanceBorderTop' })
+    hl(0, 'GlanceListBorderBottom', { link = 'GlanceBorderTop' })
 
     hl(0, "NavicIconsFile", { link = "Directory" })
     hl(0, "NavicIconsModule", { link = "@module" })
