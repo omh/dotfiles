@@ -65,7 +65,8 @@ set("n", "-", function() require('oil').toggle_float() end, { desc = "Open paren
 set("n", "<leader>gB", function() require('gitsigns').blame() end, { desc = "Git blame file" })
 set("n", "<leader>ggv", function() require('pr').view() end, { desc = "View PR in browser" })
 
-set("n", "<leader>gs", function() require('neogit').open({ kind = "floating" }) end, { desc = "Git status" })
+set("n", "<leader>gs", function() require('neogit').open({ kind = "tab" }) end, { desc = "Git status" })
+set("n", "<leader>gdb", "<cmd>CodeDiff main...", { desc = "Diff branch" })
 set("n", "<leader>ggp", "<cmd>!gh pr view --web <cr>", { desc = "Open current pr in browser" })
 set("n", "<leader>ggo", function() require('snacks').gitbrowse() end, { desc = "Open file on github" })
 set("n", "<leader>ggc", function() require('snacks').gitbrowse.get_url() end, { desc = "Copy file's GitHub URL" })
@@ -124,6 +125,7 @@ set("n", "<leader>fh",
 set("n", "H", function() require('snacks').picker.buffers({ layout = _G.vscode }) end, { desc = "Buffers" })
 set("n", "<leader>fk", function() require('snacks').picker.keymaps() end, { desc = "Search keymaps" })
 set("n", "<leader>fH", function() require('snacks').picker.highlights() end, { desc = "Search highlights" })
+set("n", "<leader>fm", function() require('snacks').picker.marks({ layout = _G.vscode }) end, { desc = "Marks" })
 set("n", "<leader>fg", function() require('snacks').picker.git_status({ layout = _G.ivy50 }) end,
   { desc = "Git status in snacks" })
 

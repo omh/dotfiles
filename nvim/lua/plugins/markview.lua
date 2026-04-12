@@ -1,2 +1,0 @@
-
-'nvim.lua.plugins.markdown'

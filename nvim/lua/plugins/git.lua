@@ -2,10 +2,16 @@ vim.defer_fn(function()
   vim.pack.add({
     { src = 'https://github.com/nvim-lua/plenary.nvim' },
     { src = 'https://github.com/lewis6991/gitsigns.nvim' },
+    { src = 'https://github.com/esmuellert/codediff.nvim' },
     { src = 'https://github.com/NeogitOrg/neogit' },
   })
 
+  require("codediff").setup()
+
   require('neogit').setup {
+    treesitter_diff_highlight = true,
+    word_diff_highlight = true,
+
     graph_style = "kitty",
     commit_view = {
       kind = "floating",
@@ -21,8 +27,10 @@ vim.defer_fn(function()
       }
     },
     integrations = {
-      snacks = true
-    }
+      snacks = true,
+      diffview = false,
+      codediff = true,
+    },
   }
 
   require('gitsigns').setup {

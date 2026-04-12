@@ -2,7 +2,6 @@ vim.cmd [[
     let g:tmux_navigator_disable_when_zoomed = 1
 ]]
 
-
 vim.pack.add({
   -- hjkl navigation with tmux
   'https://github.com/christoomey/vim-tmux-navigator',
@@ -16,8 +15,6 @@ vim.pack.add({
   'https://github.com/ovk/endec.nvim',
   -- better diagnostics
   'https://github.com/rachartier/tiny-inline-diagnostic.nvim',
-  -- show hidden characters when selecting
-  'https://github.com/mcauley-penney/visual-whitespace.nvim',
   -- view pr in browser
   'https://github.com/fredrikaverpil/pr.nvim',
 })
