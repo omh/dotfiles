@@ -1,71 +1,69 @@
-vim.defer_fn(function()
-  vim.pack.add({
-    { src = 'https://github.com/folke/snacks.nvim' },
-  })
+vim.pack.add({
+  { src = 'https://github.com/folke/snacks.nvim' },
+})
 
-  require('snacks').setup({
-    input = {
-      enabled = true,
-    },
+require('snacks').setup({
+  input = {
+    enabled = true,
+  },
+  indent = {
+    enabled = true,
     indent = {
-      enabled = true,
-      indent = {
-        enabled = true, -- enable indent guides
-        only_current = true,
-        hl = 'SnacksIndent',
-      },
-      animate = {
-        duration = {
-          step = 25,   -- ms per step
-          total = 200, -- maximum duration
-        },
-      },
-      scope = {
-        enabled = true,
-      },
-      chunk = {
-        enabled = false,
-        only_current = true,
+      enabled = true,   -- enable indent guides
+      only_current = true,
+      hl = 'SnacksIndent',
+    },
+    animate = {
+      duration = {
+        step = 25,     -- ms per step
+        total = 200,   -- maximum duration
       },
     },
-    notifier = {
+    scope = {
       enabled = true,
     },
-    picker = {
-      formatters = {
-        file = {
-          filename_first = true,
-          truncate = 80
-        },
-      },
-      win = {
-        input = {
-          keys = {
-            ["<Esc>"] = { "close", mode = { "n", "i" } },
-            -- ["<C-Q>"] = { "qflist_append", mode = { "n", "i" } },
-          }
-        },
-        list = {
-          keys = {
-            ["<C-Q>"] = "qflist_append",
-          },
-        },
-      },
-      actions = {
-        qflist_append = function(picker)
-          local sel = picker:selected()
-          local items = #sel > 0 and sel or picker:items()
-
-          picker:close()
-
-          -- append to existing quickfix list instead of replacing it
-          vim.fn.setqflist({}, "a", { items = items })
-          vim.cmd.copen()
-        end,
+    chunk = {
+      enabled = false,
+      only_current = true,
+    },
+  },
+  notifier = {
+    enabled = true,
+  },
+  picker = {
+    formatters = {
+      file = {
+        filename_first = true,
+        truncate = 80
       },
     },
-  })
-end, 200)
+    win = {
+      input = {
+        keys = {
+          ["<Esc>"] = { "close", mode = { "n", "i" } },
+          -- ["<C-Q>"] = { "qflist_append", mode = { "n", "i" } },
+        }
+      },
+      list = {
+        keys = {
+          ["<C-Q>"] = "qflist_append",
+        },
+      },
+    },
+    actions = {
+      qflist_append = function(picker)
+        local sel = picker:selected()
+        local items = #sel > 0 and sel or picker:items()
+
+        picker:close()
+
+        -- append to existing quickfix list instead of replacing it
+        vim.fn.setqflist({}, "a", { items = items })
+        vim.cmd.copen()
+      end,
+    },
+  },
+})
 
 _G.vscode = {
   preview = false,

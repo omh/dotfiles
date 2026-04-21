@@ -57,6 +57,7 @@ set('n', '<leader>dr', '<cmd>DapRerun<cr>', { desc = 'Rerun debug session' })
 set('n', '<leader>dx', '<cmd>DapTerminate<cr>', { desc = 'End debug session' })
 set('n', '<leader>db', '<cmd>DapToggleBreakpoint<cr>', { desc = 'Toggle breakpoint' })
 set('n', '<leader>du', '<cmd>DapViewOpen<cr>', { desc = 'DapView toggle' })
+set('n', '<leader>df', function() require("dap.ui.widgets").hover() end, { desc = 'Hover' })
 
 -- Oil
 set("n", "-", function() require('oil').toggle_float() end, { desc = "Open parent directory" })
@@ -66,7 +67,7 @@ set("n", "<leader>gB", function() require('gitsigns').blame() end, { desc = "Git
 set("n", "<leader>ggv", function() require('pr').view() end, { desc = "View PR in browser" })
 
 set("n", "<leader>gs", function() require('neogit').open({ kind = "tab" }) end, { desc = "Git status" })
-set("n", "<leader>gdb", "<cmd>CodeDiff main...", { desc = "Diff branch" })
+set("n", "<leader>gdb", "<cmd>CodeDiff main...<cr>", { desc = "Diff branch" })
 set("n", "<leader>ggp", "<cmd>!gh pr view --web <cr>", { desc = "Open current pr in browser" })
 set("n", "<leader>ggo", function() require('snacks').gitbrowse() end, { desc = "Open file on github" })
 set("n", "<leader>ggc", function() require('snacks').gitbrowse.get_url() end, { desc = "Copy file's GitHub URL" })

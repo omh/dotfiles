@@ -2,11 +2,11 @@ vim.defer_fn(function()
   vim.pack.add({
     { src = 'https://github.com/nvim-lua/plenary.nvim' },
     { src = 'https://github.com/lewis6991/gitsigns.nvim' },
-    { src = 'https://github.com/esmuellert/codediff.nvim' },
+    -- { src = 'https://github.com/esmuellert/codediff.nvim' },
     { src = 'https://github.com/NeogitOrg/neogit' },
   })
 
-  require("codediff").setup()
+  -- require("codediff").setup()
 
   require('neogit').setup {
     treesitter_diff_highlight = true,
