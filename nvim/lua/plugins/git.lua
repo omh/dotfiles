@@ -14,7 +14,7 @@ vim.defer_fn(function()
 
     graph_style = "kitty",
     commit_view = {
-      kind = "floating",
+      kind = "tab",
     },
     commit_editor = {
       kind = "floating",
