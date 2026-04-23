@@ -17,7 +17,7 @@ vim.defer_fn(function()
       kind = "tab",
     },
     commit_editor = {
-      kind = "floating",
+      kind = "tab",
       show_staged_diff = true,
     },
     mappings = {
