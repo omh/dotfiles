@@ -25,11 +25,10 @@ vim.api.nvim_create_autocmd("VimResized", {
 vim.cmd [[
 augroup CursorLine
   au!
-  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au VimEnter,WinEnter,BufWinEnter * if &ft !~# '^snacks' | setlocal cursorline | endif
   au WinLeave * setlocal nocursorline
   au FocusLost * setlocal nocursorline
-  au FocusGained * setlocal cursorline
-  au FileType snacks_picker_input set nocursorline
+  au FocusGained * if &ft !~# '^snacks' | setlocal cursorline | endif
 augroup END
 ]]
 
