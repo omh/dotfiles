@@ -1,109 +1,127 @@
-vim.defer_fn(function()
-  vim.pack.add({
-    { src = 'https://github.com/nvim-lua/plenary.nvim' },
-    { src = 'https://github.com/lewis6991/gitsigns.nvim' },
-    -- { src = 'https://github.com/esmuellert/codediff.nvim' },
-    { src = 'https://github.com/NeogitOrg/neogit' },
-  })
-
-  -- require("codediff").setup()
-
-  require('neogit').setup {
-    treesitter_diff_highlight = true,
-    word_diff_highlight = true,
-
-    graph_style = "kitty",
-    commit_view = {
-      kind = "tab",
-    },
-    commit_editor = {
-      kind = "tab",
-      show_staged_diff = true,
-    },
-    mappings = {
-      popup = {
-        ["p"] = "PushPopup",
-        ["P"] = "PullPopup",
-      }
-    },
-    integrations = {
-      snacks = true,
-      diffview = false,
-      codediff = true,
-    },
+vim.g.diffs = {
+  integrations = {
+    fugitive = true,
+    neogit = true,
+    -- neojj = true,
+    -- gitsigns = true,
   }
+}
+vim.pack.add({
+  { src = 'https://github.com/nvim-lua/plenary.nvim' },
+  { src = 'https://github.com/lewis6991/gitsigns.nvim' },
+  { src = 'https://github.com/tpope/vim-fugitive' },
+  -- { src = 'https://github.com/esmuellert/codediff.nvim' },
+  { src = 'https://github.com/barrettruth/diffs.nvim' },
+  { src = 'https://github.com/NeogitOrg/neogit' },
+})
 
-  require('gitsigns').setup {
-    signs = {
-      add          = { text = '│' },
-      change       = { text = '│' },
-      delete       = { text = '_' },
-      topdelete    = { text = '‾' },
-      changedelete = { text = '~' },
-      untracked    = { text = '┆' },
-    },
-    on_attach = function(bufnr)
-      local gitsigns = require('gitsigns')
+vim.g.diffs = {
+  integrations = {
+    fugitive = true,
+    neogit = true,
+    -- neojj = true,
+    -- gitsigns = true,
+  }
+}
+-- require('diffs').setup({})
 
-      local function map(mode, l, r, opts)
-        opts = opts or {}
-        opts.buffer = bufnr
-        vim.keymap.set(mode, l, r, opts)
-      end
+-- require("codediff").setup()
 
-      -- Navigation
-      map('n', ']c', function()
-        if vim.wo.diff then
-          vim.cmd.normal({ ']c', bang = true })
-        else
-          gitsigns.nav_hunk('next')
-        end
-      end)
+require('neogit').setup {
+  treesitter_diff_highlight = true,
+  word_diff_highlight = true,
 
-      map('n', '[c', function()
-        if vim.wo.diff then
-          vim.cmd.normal({ '[c', bang = true })
-        else
-          gitsigns.nav_hunk('prev')
-        end
-      end)
+  graph_style = "kitty",
+  commit_view = {
+    kind = "tab",
+  },
+  commit_editor = {
+    kind = "tab",
+    show_staged_diff = true,
+  },
+  mappings = {
+    popup = {
+      ["p"] = "PushPopup",
+      ["P"] = "PullPopup",
+    }
+  },
+  integrations = {
+    snacks = true,
+    diffview = false,
+    codediff = true,
+  },
+}
 
-      -- Actions
-      map('n', '<leader>hs', gitsigns.stage_hunk)
-      map('n', '<leader>hr', gitsigns.reset_hunk)
+require('gitsigns').setup {
+  signs = {
+    add          = { text = '│' },
+    change       = { text = '│' },
+    delete       = { text = '_' },
+    topdelete    = { text = '‾' },
+    changedelete = { text = '~' },
+    untracked    = { text = '┆' },
+  },
+  on_attach = function(bufnr)
+    local gitsigns = require('gitsigns')
 
-      map('v', '<leader>hs', function()
-        gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-      end)
-
-      map('v', '<leader>hr', function()
-        gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-      end)
-
-      map('n', '<leader>hS', gitsigns.stage_buffer)
-      map('n', '<leader>hR', gitsigns.reset_buffer)
-      map('n', '<leader>hp', gitsigns.preview_hunk)
-      map('n', '<leader>hi', gitsigns.preview_hunk_inline)
-
-      map('n', '<leader>hb', function()
-        gitsigns.blame_line({ full = true })
-      end)
-
-      map('n', '<leader>hd', gitsigns.diffthis)
-
-      map('n', '<leader>hD', function()
-        gitsigns.diffthis('~')
-      end)
-
-      map('n', '<leader>hQ', function() gitsigns.setqflist('all') end)
-      map('n', '<leader>hq', gitsigns.setqflist)
-
-      -- Toggles
-      map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
-      map('n', '<leader>tw', gitsigns.toggle_word_diff)
-
-      -- Text object
-      map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
     end
-  }
-end, 400)
+
+    -- Navigation
+    map('n', ']c', function()
+      if vim.wo.diff then
+        vim.cmd.normal({ ']c', bang = true })
+      else
+        gitsigns.nav_hunk('next')
+      end
+    end)
+
+    map('n', '[c', function()
+      if vim.wo.diff then
+        vim.cmd.normal({ '[c', bang = true })
+      else
+        gitsigns.nav_hunk('prev')
+      end
+    end)
+
+    -- Actions
+    map('n', '<leader>hs', gitsigns.stage_hunk)
+    map('n', '<leader>hr', gitsigns.reset_hunk)
+
+    map('v', '<leader>hs', function()
+      gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+    end)
+
+    map('v', '<leader>hr', function()
+      gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+    end)
+
+    map('n', '<leader>hS', gitsigns.stage_buffer)
+    map('n', '<leader>hR', gitsigns.reset_buffer)
+    map('n', '<leader>hp', gitsigns.preview_hunk)
+    map('n', '<leader>hi', gitsigns.preview_hunk_inline)
+
+    map('n', '<leader>hb', function()
+      gitsigns.blame_line({ full = true })
+    end)
+
+    map('n', '<leader>hd', gitsigns.diffthis)
+
+    map('n', '<leader>hD', function()
+      gitsigns.diffthis('~')
+    end)
+
+    map('n', '<leader>hQ', function() gitsigns.setqflist('all') end)
+    map('n', '<leader>hq', gitsigns.setqflist)
+
+    -- Toggles
+    map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
+    map('n', '<leader>tw', gitsigns.toggle_word_diff)
+
+    -- Text object
+    map({ 'o', 'x' }, 'ih', gitsigns.select_hunk)
+  end
+}

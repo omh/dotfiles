@@ -6,17 +6,18 @@ require('snacks').setup({
   input = {
     enabled = true,
   },
+  dim = { enabled = false },
   indent = {
     enabled = true,
     indent = {
-      enabled = true,   -- enable indent guides
+      enabled = true, -- enable indent guides
       only_current = true,
       hl = 'SnacksIndent',
     },
     animate = {
       duration = {
-        step = 25,     -- ms per step
-        total = 200,   -- maximum duration
+        step = 25,   -- ms per step
+        total = 200, -- maximum duration
       },
     },
     scope = {
