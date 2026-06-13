@@ -3,6 +3,9 @@ local set = vim.keymap.set
 -- General maps
 set('n', '<esc>', '<CMD> noh <CR>', { desc = "Clear highlights" })
 set('n', '<leader>q', ':q<CR>', { desc = "Close window" })
+set('n', '<leader>qe', function()
+  vim.diagnostic.setqflist({ severity = vim.diagnostic.severity.ERROR })
+end, { desc = "Errors to quickfix" })
 set('n', '<leader>Q', ':qa!<CR>', { desc = "Quit now!" })
 
 -- Buffers

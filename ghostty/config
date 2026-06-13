@@ -3,14 +3,14 @@ theme = "vscode-dark"
 #theme = "light:vscode-dark,dark:vscode-dark"
 #theme = "Kanagawa Wave"
 
-#adjust-cell-width=
+adjust-cell-width=1
 #adjust-cell-height=-1
 #adjust-font-baseline=1
 
 font-family = "Victor Mono"
 font-size = 13
 font-thicken = true
-font-thicken-strength = 100
+font-thicken-strength = 50
 
 
 macos-titlebar-proxy-icon = hidden
@@ -30,6 +30,9 @@ macos-icon-ghost-color = #ffffff
 
 #background-opacity = 0.99
 
+mouse-hide-while-typing = true
+cursor-click-to-move = true
+cursor-opacity = 0.8
 
 #adjust-underline-position = 2
 #adjust-strikethrough-thickness = 0
