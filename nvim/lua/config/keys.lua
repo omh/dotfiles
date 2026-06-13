@@ -66,10 +66,12 @@ set('n', '<leader>df', function() require("dap.ui.widgets").hover() end, { desc 
 set("n", "-", function() require('oil').toggle_float() end, { desc = "Open parent directory" })
 
 -- Git
-set("n", "<leader>gB", function() require('gitsigns').blame() end, { desc = "Git blame file" })
+set("n", "<leader>gB", "<cmd>G blame<cr>", { desc = "Git blame file" })
 set("n", "<leader>ggv", function() require('pr').view() end, { desc = "View PR in browser" })
 
-set("n", "<leader>gs", function() require('neogit').open({ kind = "tab" }) end, { desc = "Git status" })
+set("n", "<leader>gs", "<cmd>G<cr>", { desc = "Git status" })
+set("n", "<leader>gp", "<cmd>G push<cr>", { desc = "Git push" })
+set("n", "<leader>gP", "<cmd>G push --force-with-lease<cr>", { desc = "Git push force" })
 set("n", "<leader>gdb", "<cmd>CodeDiff main...<cr>", { desc = "Diff branch" })
 set("n", "<leader>ggp", "<cmd>!gh pr view --web <cr>", { desc = "Open current pr in browser" })
 set("n", "<leader>ggo", function() require('snacks').gitbrowse() end, { desc = "Open file on github" })

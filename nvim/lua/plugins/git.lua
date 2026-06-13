@@ -1,18 +1,15 @@
 vim.g.diffs = {
   integrations = {
     fugitive = true,
-    neogit = true,
+    -- neogit = true,
     -- neojj = true,
     -- gitsigns = true,
   }
 }
 vim.pack.add({
-  { src = 'https://github.com/nvim-lua/plenary.nvim' },
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
   { src = 'https://github.com/tpope/vim-fugitive' },
-  -- { src = 'https://github.com/esmuellert/codediff.nvim' },
   { src = 'https://github.com/barrettruth/diffs.nvim' },
-  { src = 'https://github.com/NeogitOrg/neogit' },
 })
 
 vim.g.diffs = {
@@ -23,34 +20,40 @@ vim.g.diffs = {
     -- gitsigns = true,
   }
 }
--- require('diffs').setup({})
 
--- require("codediff").setup()
+-- close on q
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "fugitiveblame", "fugitive" },
+  callback = function()
+    vim.api.nvim_buf_set_keymap(0, 'n', 'q', 'gq', { silent = true })
+    vim.api.nvim_buf_set_keymap(0, 'n', '<tab>', '=', { silent = true })
+  end
+})
 
-require('neogit').setup {
-  treesitter_diff_highlight = true,
-  word_diff_highlight = true,
-
-  graph_style = "kitty",
-  commit_view = {
-    kind = "tab",
-  },
-  commit_editor = {
-    kind = "tab",
-    show_staged_diff = true,
-  },
-  mappings = {
-    popup = {
-      ["p"] = "PushPopup",
-      ["P"] = "PullPopup",
-    }
-  },
-  integrations = {
-    snacks = true,
-    diffview = false,
-    codediff = true,
-  },
-}
+-- require('neogit').setup {
+--   treesitter_diff_highlight = true,
+--   word_diff_highlight = true,
+--
+--   graph_style = "kitty",
+--   commit_view = {
+--     kind = "tab",
+--   },
+--   commit_editor = {
+--     kind = "tab",
+--     show_staged_diff = true,
+--   },
+--   mappings = {
+--     popup = {
+--       ["p"] = "PushPopup",
+--       ["P"] = "PullPopup",
+--     }
+--   },
+--   integrations = {
+--     snacks = true,
+--     diffview = false,
+--     codediff = true,
+--   },
+-- }
 
 require('gitsigns').setup {
   signs = {
