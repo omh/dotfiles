@@ -13,6 +13,7 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
     local context = "#000000"
     local popupBg = "#343434"
     local folded = "#242429"
+    local tablineBg = "#0c0c0c"
 
     if vim.o.background == 'light' then
       cursor = c.vscCursorDarkDark
@@ -36,9 +37,10 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
     hl(0, "PmenuSel", { fg = "#ffffff", bg = c.vscSelection })
     hl(0, "StatusLine", { fg = c.vscSplitDark, bg = 'none', strikethrough = true })
     hl(0, "StatusLineNC", { fg = c.vscSplitDark, bg = 'none', strikethrough = true })
-    -- hl(0, "TabLine", { fg = c.vscGitIgnored, bg = "NONE" })
-    -- hl(0, "TabLineSel", { fg = "#FFFFFF", bg = "NONE" })
-    -- hl(0, "TabLineFill", { fg = c.vscSplitDark, bg = "NONE" })
+    hl(0, "TabLine", { fg = c.vscGitIgnored, bg = tablineBg })
+    hl(0, "TabLineSel", { fg = "#FFFFFF", bg = c.vscBack, bold = true })
+    hl(0, "TabLineTabSel", { fg = "#FFFFFF", bg = tablineBg, bold = true })
+    hl(0, "TabLineFill", { bg = tablineBg })
     -- hl(0, "VisualNonText", { fg = number, bg = c.vscSelection })
     hl(0, "WinBar", { bg = 'none' })
     hl(0, "WinBarNC", { bg = 'none' })
@@ -124,3 +126,28 @@ vim.api.nvim_create_autocmd({ "ColorScheme", "VimEnter" }, {
     hl(0, "DapStoppedLine", { bg = c.vscPopupHighlightBlue })
   end
 })
+
+-- vim.pack.add({
+--   {
+--     src = "https://github.com/rose-pine/neovim",
+--     name = "rose-pine",
+--   },
+-- })
+-- require("rose-pine").setup({
+--   dim_inactive_windows = false,
+--   styles = {
+--     italic = false,
+--   },
+--   highlight_groups = {
+--     WinBar = { fg = "subtle", bg = "none", inherit = false },
+--     WinBarNC = { fg = "muted", bg = "none", inherit = false },
+--     StatusLine = { fg = "subtle", bg = "none", strikethrough = true, inherit = false },
+--     StatusLineNC = { fg = "muted", bg = "none", strikethrough = true, inherit = false },
+--
+--     TreesitterContext = { bg = "base", inherit = false },
+--     TreesitterContextBottom = { bg = "base", inherit = false },
+--     TreesitterContextLineNumber = { bg = "base", inherit = false },
+--     TreesitterContextSeparator = { fg = "overlay", bg = "base", bold = false, inherit = false }
+--   },
+-- })
+-- vim.cmd("colorscheme rose-pine")
